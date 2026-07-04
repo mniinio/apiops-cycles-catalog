@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import {
+  copyFileSync,
   existsSync,
   mkdirSync,
   readFileSync,
@@ -15,8 +16,10 @@ const sourceRoot =
   path.join(root, "work", "apiops-cycles-method-data");
 const methodRoot = path.join(sourceRoot, "src", "data", "method");
 const canvasRoot = path.join(sourceRoot, "src", "data", "canvas");
+const assetRoot = path.join(sourceRoot, "src", "assets");
 const appDataRoot = path.join(root, "app", "data");
 const publicDataRoot = path.join(root, "public", "data");
+const publicAssetRoot = path.join(root, "public", "assets");
 const locales = ["en", "fi", "fr", "de", "pt"];
 const methodEngine = await import(pathToFileURL(path.join(sourceRoot, "src", "lib", "method-engine.js")));
 
@@ -162,6 +165,13 @@ function writeJson(relativePath, value, { publish = false } = {}) {
     mkdirSync(path.dirname(publicPath), { recursive: true });
     writeFileSync(publicPath, `${JSON.stringify(value, null, 2)}\n`);
   }
+}
+
+function copyPublicAsset(name) {
+  const sourcePath = path.join(assetRoot, name);
+  if (!existsSync(sourcePath)) return;
+  mkdirSync(publicAssetRoot, { recursive: true });
+  copyFileSync(sourcePath, path.join(publicAssetRoot, name));
 }
 
 function readLabels(locale) {
@@ -576,6 +586,8 @@ function validate() {
 validate();
 mkdirSync(appDataRoot, { recursive: true });
 mkdirSync(publicDataRoot, { recursive: true });
+copyPublicAsset("apiops-cycles-logo-dark.svg");
+copyPublicAsset("apiops-cycles-logo-white.svg");
 writeJson("method-catalog.json", catalog, { publish: true });
 writeJson("stakeholder-guides.json", stakeholderGuides, { publish: true });
 writeJson("canvas-manifest.json", canvasManifest, { publish: true });

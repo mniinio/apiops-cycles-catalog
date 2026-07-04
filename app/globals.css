@@ -114,6 +114,12 @@ a {
   width: 34px;
 }
 
+.brand__logo {
+  height: 38px;
+  object-fit: contain;
+  width: 38px;
+}
+
 .topbar__controls {
   align-items: center;
   display: flex;
@@ -436,6 +442,11 @@ code {
   font-size: 10px;
 }
 
+.metro-support-label {
+  font-size: 8px;
+  font-weight: 750;
+}
+
 .metro-instructions {
   fill: var(--muted);
   font-size: 12px;
@@ -482,9 +493,7 @@ code {
 }
 
 .metro-brand {
-  fill: #9aacd0;
-  font-size: 16px;
-  font-weight: 800;
+  opacity: 0.45;
 }
 
 .map-detail {
@@ -531,6 +540,33 @@ ul {
   border-left: 3px solid var(--blue);
   margin: 0;
   padding: 8px 10px;
+}
+
+.template-card--grouped {
+  gap: 14px;
+}
+
+.template-formats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.template-format-head {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.template-format-head strong {
+  color: var(--accent);
+}
+
+.template-format-head button {
+  min-height: 32px;
+  padding: 6px 9px;
 }
 
 .resource-actions {
@@ -714,7 +750,8 @@ pre {
 
   .role-grid,
   .resource-grid,
-  .data-links {
+  .data-links,
+  .template-formats {
     grid-template-columns: 1fr;
   }
 

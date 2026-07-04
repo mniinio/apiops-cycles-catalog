@@ -197,14 +197,18 @@ function safeRole(roleId: string, roles: RoleGuide[]) {
 
 function templateUse(template: ExportTemplate) {
   const isQuestionTemplate = template.id.includes("integration");
-  const isConfluence = template.format === "confluence-wiki";
   return {
-    label: isQuestionTemplate ? "Question template" : "Cycle reference",
+    key: isQuestionTemplate ? "questions" : "cycle",
+    label: isQuestionTemplate ? "Question template" : "Cycle documentation",
+    title: isQuestionTemplate ? "Question template to fill in" : "Cycle reference to publish",
     copy: isQuestionTemplate
       ? "Use this when you want to gather answers and evidence before choosing an integration or API design path."
       : "Use this when you want to document the selected cycle, stations, route, and method guidance.",
-    target: isConfluence ? "Paste into a Confluence page that accepts Confluence wiki markup." : "Use in Markdown docs, Git repositories, or static documentation sites.",
   };
+}
+
+function shortStationName(title: string) {
+  return title.split(" - ")[0].split(" – ")[0].trim();
 }
 
 function normalizeNotes(value: unknown): StickyNotes {
@@ -254,12 +258,15 @@ function MetroMap({
   const center = { x: 456, y: 318 };
   const coreRadius = 118;
   const coreStations = cycles[0]?.stations ?? [];
+  const selectedCycle = cycles.find((cycle) => cycle.id === selectedCycleId) ?? cycles[0];
   const stationById = new Map(stations.map((station) => [station.id, station]));
   const corePoints = coreStations.map((station, index) => {
     const angle = -90 + (360 / coreStations.length) * index;
     const radians = (angle * Math.PI) / 180;
+    const selectedCycleStation = selectedCycle?.stations.find((item) => item.id === station.id);
     return {
       ...station,
+      displayTitle: shortStationName(selectedCycleStation?.title ?? station.baseTitle),
       x: center.x + coreRadius * Math.cos(radians),
       y: center.y + coreRadius * Math.sin(radians),
     };
@@ -288,8 +295,8 @@ function MetroMap({
       return {
         id: stationId,
         index: 0,
-        title: stationById.get(stationId)?.title ?? stationId,
-        baseTitle: stationById.get(stationId)?.title ?? stationId,
+        title: shortStationName(stationById.get(stationId)?.title ?? stationId),
+        baseTitle: shortStationName(stationById.get(stationId)?.title ?? stationId),
         description: stationById.get(stationId)?.description ?? "",
         resources: [],
         x: Math.max(70, Math.min(width - 70, lastCore.x + vector.x * branchIndex)),
@@ -326,7 +333,7 @@ function MetroMap({
         </text>
       ))}
       <text x="32" y="38" className="metro-instructions">
-        Click any station dot to navigate. Use the legend to switch cycle route.
+        Click any station dot to navigate. Use the cycle selector to switch route.
       </text>
       {linePoints.map((line) => (
         <g key={line.id}>
@@ -352,9 +359,7 @@ function MetroMap({
             >
               <title>{point.baseTitle}</title>
               <circle cx={point.x} cy={point.y} r="6" className={point.id === selectedStationId ? "metro-support-node metro-support-node--active" : "metro-support-node"} />
-              {point.id === selectedStationId ? (
-                <text x={point.x + 10} y={point.y + 4} className="metro-support-label">{point.baseTitle}</text>
-              ) : null}
+              <text x={point.x + 10} y={point.y + 4} className="metro-support-label">{point.baseTitle}</text>
             </g>
           ))}
         </g>
@@ -390,12 +395,18 @@ function MetroMap({
             {point.index}
           </text>
           <text x={point.x} y={point.y + (point.y > center.y ? 38 : -26)} textAnchor="middle" className="metro-label">
-            {point.baseTitle}
+            {point.displayTitle}
           </text>
         </g>
       ))}
-      <text x={center.x} y={center.y - 6} textAnchor="middle" className="metro-brand">apiops</text>
-      <text x={center.x} y={center.y + 14} textAnchor="middle" className="metro-brand">cycles</text>
+      <image
+        href="/assets/apiops-cycles-logo-dark.svg"
+        x={center.x - 30}
+        y={center.y - 30}
+        width="60"
+        height="60"
+        className="metro-brand"
+      />
     </svg>
   );
 }
@@ -644,6 +655,29 @@ export default function CatalogExplorer({
 
   const rolePrompts = promptData.filter((prompt) => prompt.roleId === role.id);
   const roleTemplates = templateData.filter((template) => template.roleId === role.id);
+  const templateGroups = useMemo(() => {
+    const groups = new Map<
+      string,
+      {
+        key: string;
+        label: string;
+        title: string;
+        copy: string;
+        markdown?: ExportTemplate;
+        confluence?: ExportTemplate;
+      }
+    >();
+    for (const template of roleTemplates) {
+      const use = templateUse(template);
+      const group = groups.get(use.key) ?? { ...use };
+      if (template.format === "confluence-wiki") group.confluence = template;
+      else group.markdown = template;
+      groups.set(use.key, group);
+    }
+    return ["cycle", "questions"]
+      .map((key) => groups.get(key))
+      .filter((group): group is NonNullable<typeof group> => Boolean(group));
+  }, [roleTemplates]);
   const selectedCanvas = canvasData[canvasId] ?? canvasData[role.canvases[0]?.id] ?? Object.values(canvasData)[0];
   const externalCanvasUrl = process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL
     ? `${process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL.replace(/\/$/, "")}/${selectedCanvas.id}`
@@ -675,7 +709,7 @@ export default function CatalogExplorer({
       <header className="hero">
         <nav className="topbar" aria-label="Primary">
           <a className="brand" href={locale === "en" ? "/" : `/${locale}`}>
-            <span className="brand__mark">AC</span>
+            <img className="brand__logo" src="/assets/apiops-cycles-logo-dark.svg" alt="" />
             <span>APIOps Cycles</span>
           </a>
           <div className="topbar__controls">
@@ -892,25 +926,38 @@ export default function CatalogExplorer({
               <p className="section-kicker">Use with Confluence and Markdown</p>
               <h2>Export-ready templates</h2>
               <p className="helper-text">
-                Cycle reference templates document the selected method route and stations. Question templates are working pages for collecting answers, evidence, and decisions. Choose Markdown for docs repositories and static sites; choose Confluence-wiki for Confluence pages that accept wiki markup.
+                Choose the purpose first, then copy the format that matches the destination. Markdown is for docs repositories and static sites. Confluence-wiki is for Confluence pages that accept wiki markup.
               </p>
               <div className="template-grid">
-                {roleTemplates.map((template) => {
-                  const use = templateUse(template);
-                  return (
-                    <section key={template.id} className="template-card">
+                {templateGroups.map((group) => (
+                    <section key={group.key} className="template-card template-card--grouped">
                       <div className="template-card__meta">
-                        <span>{use.label}</span>
-                        <span>{template.format}</span>
+                        <span>{group.label}</span>
                       </div>
-                      <h3>{template.title}</h3>
-                      <p>{use.copy}</p>
-                      <p className="template-target">{use.target}</p>
-                      <pre>{template.body}</pre>
-                      <button type="button" onClick={() => copyText(template.body)}>Copy template</button>
+                      <h3>{group.title}</h3>
+                      <p>{group.copy}</p>
+                      <div className="template-formats">
+                        {group.markdown ? (
+                          <section>
+                            <div className="template-format-head">
+                              <strong>Markdown</strong>
+                              <button type="button" onClick={() => copyText(group.markdown?.body ?? "")}>Copy Markdown</button>
+                            </div>
+                            <pre>{group.markdown.body}</pre>
+                          </section>
+                        ) : null}
+                        {group.confluence ? (
+                          <section>
+                            <div className="template-format-head">
+                              <strong>Confluence-wiki</strong>
+                              <button type="button" onClick={() => copyText(group.confluence?.body ?? "")}>Copy Confluence-wiki</button>
+                            </div>
+                            <pre>{group.confluence.body}</pre>
+                          </section>
+                        ) : null}
+                      </div>
                     </section>
-                  );
-                })}
+                ))}
               </div>
             </article>
           ) : null}
