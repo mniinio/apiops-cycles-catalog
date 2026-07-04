@@ -404,12 +404,12 @@ code {
 }
 
 .metro-map {
-  aspect-ratio: 11 / 7;
+  aspect-ratio: 25 / 19;
   width: 100%;
 }
 
 .metro-zone {
-  opacity: 0.22;
+  opacity: 0.28;
   stroke: none;
 }
 
@@ -432,7 +432,8 @@ code {
 .metro-zone-label,
 .metro-support-label,
 .metro-label,
-.metro-legend text {
+.metro-legend text,
+.metro-line-legend text {
   fill: #071640;
   font-size: 13px;
   font-weight: 800;
@@ -443,8 +444,12 @@ code {
 }
 
 .metro-support-label {
-  font-size: 8px;
-  font-weight: 750;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.metro-zone-title-bg {
+  fill: rgba(255, 255, 255, 0.88);
 }
 
 .metro-instructions {
@@ -455,7 +460,8 @@ code {
 
 .metro-route,
 .metro-legend,
-.metro-station {
+.metro-station,
+.metro-line-legend {
   cursor: pointer;
 }
 
@@ -494,6 +500,24 @@ code {
 
 .metro-brand {
   opacity: 0.45;
+}
+
+.metro-core-label rect {
+  fill: rgba(255, 255, 255, 0.95);
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.metro-core-label text {
+  fill: currentColor;
+  font-size: 12px;
+  font-weight: 850;
+  pointer-events: none;
+}
+
+.metro-line-legend text {
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .map-detail {

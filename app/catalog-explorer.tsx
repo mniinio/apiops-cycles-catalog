@@ -211,6 +211,23 @@ function shortStationName(title: string) {
   return title.split(" - ")[0].split(" – ")[0].trim();
 }
 
+function wrapMapLabel(label: string, maxLength = 18) {
+  const words = label.split(/\s+/);
+  const lines: string[] = [];
+  let current = "";
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (next.length > maxLength && current) {
+      lines.push(current);
+      current = word;
+    } else {
+      current = next;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.slice(0, 3);
+}
+
 function normalizeNotes(value: unknown): StickyNotes {
   if (!value || typeof value !== "object") return {};
   return Object.fromEntries(
@@ -253,45 +270,85 @@ function MetroMap({
   onSelectCycle: (id: string) => void;
   onSelectStation: (id: string) => void;
 }) {
-  const width = 960;
-  const height = 620;
-  const center = { x: 456, y: 318 };
-  const coreRadius = 118;
+  const width = 1000;
+  const height = 760;
+  const center = { x: 470, y: 375 };
   const coreStations = cycles[0]?.stations ?? [];
   const selectedCycle = cycles.find((cycle) => cycle.id === selectedCycleId) ?? cycles[0];
   const stationById = new Map(stations.map((station) => [station.id, station]));
+  const coreCoordinates: Record<string, { x: number; y: number }> = {
+    "api-product-strategy": { x: 480, y: 288 },
+    "api-consumer-experience": { x: 555, y: 330 },
+    "api-platform-architecture": { x: 575, y: 430 },
+    "api-design": { x: 515, y: 520 },
+    "api-delivery": { x: 430, y: 520 },
+    "api-audit": { x: 365, y: 430 },
+    "api-publishing": { x: 345, y: 330 },
+    "monitoring-and-improving": { x: 420, y: 300 },
+  };
+  const supportCoordinates: Record<string, { x: number; y: number; dx?: number; dy?: number; anchor?: "start" | "end" }> = {
+    "ecosystem-vision": { x: 300, y: 42, dx: 12, dy: 4 },
+    "competitive-analysis": { x: 320, y: 92, dx: 12, dy: 4 },
+    "business-goals": { x: 340, y: 145, dx: 12, dy: 4 },
+    "market-insights": { x: 360, y: 202, dx: 12, dy: 4 },
+    "user-experience": { x: 382, y: 252, dx: 12, dy: 4 },
+    "scalable-infrastructure": { x: 650, y: 415, dx: 12, dy: 4 },
+    "legal-and-compliance": { x: 700, y: 448, dx: 12, dy: 4 },
+    "security-and-privacy": { x: 750, y: 478, dx: 12, dy: 4 },
+    "design-standards": { x: 805, y: 508, dx: 12, dy: 4 },
+    "vendor-management": { x: 860, y: 540, dx: 12, dy: 4 },
+    "contract-design": { x: 408, y: 575, dx: 12, dy: 4 },
+    development: { x: 380, y: 638, dx: 12, dy: 4 },
+    "ci-cd": { x: 350, y: 692, dx: 12, dy: 4 },
+    "test-automation": { x: 318, y: 730, dx: 12, dy: 4 },
+    "release-management": { x: 285, y: 752, dx: 12, dy: -6 },
+    "service-agreements": { x: 260, y: 362, dx: 12, dy: 4 },
+    "api-consumer-adoption": { x: 205, y: 338, dx: 12, dy: 4 },
+    "api-promotion": { x: 150, y: 308, dx: 12, dy: 4 },
+    "partner-integration": { x: 95, y: 278, dx: 12, dy: 4 },
+    "api-mindset": { x: 535, y: 250, dx: 12, dy: 4 },
+    "roles-and-responsibilities": { x: 580, y: 210, dx: 12, dy: 4 },
+    upskilling: { x: 625, y: 170, dx: 12, dy: 4 },
+    "operating-guidelines": { x: 670, y: 130, dx: 12, dy: 4 },
+    "portfolio-management": { x: 715, y: 92, dx: 12, dy: 4 },
+    "budget-and-resource-management": { x: 760, y: 52, dx: 12, dy: 4 },
+  };
+  const labelBoxes = {
+    strategic: { x: 386, y: 10, width: 108, height: 34, label: "Strategic" },
+    governance: { x: 548, y: 245, width: 124, height: 34, label: "Governance" },
+    consumer: { x: 290, y: 322, width: 118, height: 34, label: "Consumer" },
+    technical: { x: 650, y: 635, width: 110, height: 34, label: "Technical" },
+  };
+  const lineLegend = lines.map((line, index) => ({ ...line, x: 100, y: 600 + index * 26 }));
+  const coreLabelOffsets: Record<string, { dx: number; dy: number }> = {
+    "api-product-strategy": { dx: 70, dy: -2 },
+    "api-consumer-experience": { dx: 105, dy: 0 },
+    "api-platform-architecture": { dx: 116, dy: 18 },
+    "api-design": { dx: 86, dy: 22 },
+    "api-delivery": { dx: 0, dy: 60 },
+    "api-audit": { dx: -95, dy: 22 },
+    "api-publishing": { dx: -100, dy: 0 },
+    "monitoring-and-improving": { dx: -88, dy: -28 },
+  };
   const corePoints = coreStations.map((station, index) => {
-    const angle = -90 + (360 / coreStations.length) * index;
-    const radians = (angle * Math.PI) / 180;
     const selectedCycleStation = selectedCycle?.stations.find((item) => item.id === station.id);
+    const coordinates = coreCoordinates[station.id] ?? { x: center.x, y: center.y };
     return {
       ...station,
       displayTitle: shortStationName(selectedCycleStation?.title ?? station.baseTitle),
-      x: center.x + coreRadius * Math.cos(radians),
-      y: center.y + coreRadius * Math.sin(radians),
+      x: coordinates.x,
+      y: coordinates.y,
     };
   });
   const corePointById = new Map(corePoints.map((point) => [point.id, point]));
-  const branchVectors: Record<string, { x: number; y: number }> = {
-    "business-opportunities-line": { x: -24, y: -48 },
-    "platform-architecture-line": { x: 48, y: 22 },
-    "delivery-line": { x: -34, y: 44 },
-    "publishing-and-adoption-line": { x: -54, y: 30 },
-    "operating-model-line": { x: 42, y: -34 },
-  };
 
   const linePoints = lines.map((line) => {
-    const vector = branchVectors[line.id] ?? { x: 36, y: 24 };
-    let lastCore = corePointById.get(line.stations.find((id) => corePointById.has(id)) ?? "") ?? corePoints[0];
-    let branchIndex = 0;
     const points = line.stations.map((stationId) => {
       const corePoint = corePointById.get(stationId);
       if (corePoint) {
-        lastCore = corePoint;
-        branchIndex = 0;
         return { ...corePoint, support: false };
       }
-      branchIndex += 1;
+      const fixedPoint = supportCoordinates[stationId] ?? { x: center.x, y: center.y };
       return {
         id: stationId,
         index: 0,
@@ -299,8 +356,11 @@ function MetroMap({
         baseTitle: shortStationName(stationById.get(stationId)?.title ?? stationId),
         description: stationById.get(stationId)?.description ?? "",
         resources: [],
-        x: Math.max(70, Math.min(width - 70, lastCore.x + vector.x * branchIndex)),
-        y: Math.max(60, Math.min(height - 70, lastCore.y + vector.y * branchIndex)),
+        x: fixedPoint.x,
+        y: fixedPoint.y,
+        dx: fixedPoint.dx ?? 12,
+        dy: fixedPoint.dy ?? 4,
+        anchor: fixedPoint.anchor ?? "start",
         support: true,
       };
     });
@@ -323,14 +383,17 @@ function MetroMap({
 
   return (
     <svg className="metro-map" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="APIOps Cycles metro map">
-      <ellipse cx="480" cy="314" rx="352" ry="240" className="metro-zone metro-zone--governance" />
-      <ellipse cx="308" cy="132" rx="170" ry="94" className="metro-zone metro-zone--strategic" />
-      <ellipse cx="214" cy="392" rx="158" ry="92" className="metro-zone metro-zone--consumer" />
-      <ellipse cx="470" cy="508" rx="188" ry="92" className="metro-zone metro-zone--technical" />
-      {["Governance", "Strategic", "Consumer", "Technical"].map((label, index) => (
-        <text key={label} x={[704, 300, 154, 506][index]} y={[146, 88, 336, 486][index]} className="metro-zone-label">
-          {label}
-        </text>
+      <ellipse cx="510" cy="355" rx="420" ry="330" className="metro-zone metro-zone--governance" />
+      <ellipse cx="360" cy="98" rx="190" ry="140" className="metro-zone metro-zone--strategic" />
+      <ellipse cx="268" cy="340" rx="270" ry="100" className="metro-zone metro-zone--consumer" />
+      <ellipse cx="555" cy="650" rx="325" ry="205" className="metro-zone metro-zone--technical" />
+      {Object.entries(labelBoxes).map(([id, box]) => (
+        <g key={id}>
+          <rect x={box.x} y={box.y} width={box.width} height={box.height} rx="6" className="metro-zone-title-bg" />
+          <text x={box.x + box.width / 2} y={box.y + 22} textAnchor="middle" className="metro-zone-label">
+            {box.label}
+          </text>
+        </g>
       ))}
       <text x="32" y="38" className="metro-instructions">
         Click any station dot to navigate. Use the cycle selector to switch route.
@@ -359,7 +422,7 @@ function MetroMap({
             >
               <title>{point.baseTitle}</title>
               <circle cx={point.x} cy={point.y} r="6" className={point.id === selectedStationId ? "metro-support-node metro-support-node--active" : "metro-support-node"} />
-              <text x={point.x + 10} y={point.y + 4} className="metro-support-label">{point.baseTitle}</text>
+              <text x={point.x + point.dx} y={point.y + point.dy} textAnchor={point.anchor} className="metro-support-label">{point.baseTitle}</text>
             </g>
           ))}
         </g>
@@ -394,9 +457,24 @@ function MetroMap({
           <text x={point.x} y={point.y + 4} textAnchor="middle" className={point.id === selectedStationId ? "metro-node-number metro-node-number--active" : "metro-node-number"}>
             {point.index}
           </text>
-          <text x={point.x} y={point.y + (point.y > center.y ? 38 : -26)} textAnchor="middle" className="metro-label">
-            {point.displayTitle}
-          </text>
+          {(() => {
+            const lines = wrapMapLabel(point.displayTitle);
+            const offset = coreLabelOffsets[point.id] ?? { dx: 0, dy: point.y > center.y ? 48 : -42 };
+            const boxWidth = Math.max(92, Math.max(...lines.map((line) => line.length)) * 7 + 24);
+            const boxHeight = lines.length * 14 + 16;
+            const boxX = point.x + offset.dx - boxWidth / 2;
+            const boxY = point.y + offset.dy - boxHeight / 2;
+            return (
+              <g className="metro-core-label" style={{ color: colors[selectedCycleId] ?? "#164e63" }}>
+                <rect x={boxX} y={boxY} width={boxWidth} height={boxHeight} rx="8" />
+                {lines.map((line, lineIndex) => (
+                  <text key={line} x={point.x + offset.dx} y={boxY + 18 + lineIndex * 14} textAnchor="middle">
+                    {line}
+                  </text>
+                ))}
+              </g>
+            );
+          })()}
         </g>
       ))}
       <image
@@ -407,6 +485,14 @@ function MetroMap({
         height="60"
         className="metro-brand"
       />
+      <g className="metro-line-legend">
+        {lineLegend.map((line) => (
+          <g key={line.id} transform={`translate(${line.x} ${line.y})`}>
+            <rect x="0" y="-12" width="18" height="18" fill={line.color} />
+            <text x="30" y="2">{line.title}</text>
+          </g>
+        ))}
+      </g>
     </svg>
   );
 }
