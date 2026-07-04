@@ -271,73 +271,58 @@ function MetroMap({
   onSelectStation: (id: string) => void;
 }) {
   const width = 1000;
-  const height = 760;
-  const center = { x: 470, y: 375 };
+  const height = 1000;
+  const center = { x: 500, y: 500 };
+  const coreRadius = 125;
   const coreStations = cycles[0]?.stations ?? [];
   const selectedCycle = cycles.find((cycle) => cycle.id === selectedCycleId) ?? cycles[0];
   const stationById = new Map(stations.map((station) => [station.id, station]));
-  const coreCoordinates: Record<string, { x: number; y: number }> = {
-    "api-product-strategy": { x: 480, y: 288 },
-    "api-consumer-experience": { x: 555, y: 330 },
-    "api-platform-architecture": { x: 575, y: 430 },
-    "api-design": { x: 515, y: 520 },
-    "api-delivery": { x: 430, y: 520 },
-    "api-audit": { x: 365, y: 430 },
-    "api-publishing": { x: 345, y: 330 },
-    "monitoring-and-improving": { x: 420, y: 300 },
-  };
   const supportCoordinates: Record<string, { x: number; y: number; dx?: number; dy?: number; anchor?: "start" | "end" }> = {
-    "ecosystem-vision": { x: 300, y: 42, dx: 12, dy: 4 },
-    "competitive-analysis": { x: 320, y: 92, dx: 12, dy: 4 },
-    "business-goals": { x: 340, y: 145, dx: 12, dy: 4 },
-    "market-insights": { x: 360, y: 202, dx: 12, dy: 4 },
-    "user-experience": { x: 382, y: 252, dx: 12, dy: 4 },
-    "scalable-infrastructure": { x: 650, y: 415, dx: 12, dy: 4 },
-    "legal-and-compliance": { x: 700, y: 448, dx: 12, dy: 4 },
-    "security-and-privacy": { x: 750, y: 478, dx: 12, dy: 4 },
-    "design-standards": { x: 805, y: 508, dx: 12, dy: 4 },
-    "vendor-management": { x: 860, y: 540, dx: 12, dy: 4 },
-    "contract-design": { x: 408, y: 575, dx: 12, dy: 4 },
-    development: { x: 380, y: 638, dx: 12, dy: 4 },
-    "ci-cd": { x: 350, y: 692, dx: 12, dy: 4 },
-    "test-automation": { x: 318, y: 730, dx: 12, dy: 4 },
-    "release-management": { x: 285, y: 752, dx: 12, dy: -6 },
-    "service-agreements": { x: 260, y: 362, dx: 12, dy: 4 },
-    "api-consumer-adoption": { x: 205, y: 338, dx: 12, dy: 4 },
-    "api-promotion": { x: 150, y: 308, dx: 12, dy: 4 },
-    "partner-integration": { x: 95, y: 278, dx: 12, dy: 4 },
-    "api-mindset": { x: 535, y: 250, dx: 12, dy: 4 },
-    "roles-and-responsibilities": { x: 580, y: 210, dx: 12, dy: 4 },
-    upskilling: { x: 625, y: 170, dx: 12, dy: 4 },
-    "operating-guidelines": { x: 670, y: 130, dx: 12, dy: 4 },
-    "portfolio-management": { x: 715, y: 92, dx: 12, dy: 4 },
-    "budget-and-resource-management": { x: 760, y: 52, dx: 12, dy: 4 },
+    "ecosystem-vision": { x: 330, y: 42, dx: 12, dy: 4 },
+    "competitive-analysis": { x: 355, y: 92, dx: 12, dy: 4 },
+    "business-goals": { x: 380, y: 160, dx: 12, dy: 4 },
+    "market-insights": { x: 405, y: 230, dx: 12, dy: 4 },
+    "user-experience": { x: 430, y: 300, dx: 12, dy: 4 },
+    "scalable-infrastructure": { x: 700, y: 505, dx: 12, dy: 4 },
+    "legal-and-compliance": { x: 755, y: 535, dx: 12, dy: 4 },
+    "security-and-privacy": { x: 810, y: 568, dx: 12, dy: 4 },
+    "design-standards": { x: 865, y: 602, dx: 12, dy: 4 },
+    "vendor-management": { x: 925, y: 640, dx: 12, dy: 4 },
+    "contract-design": { x: 475, y: 690, dx: 12, dy: 4 },
+    development: { x: 445, y: 760, dx: 12, dy: 4 },
+    "ci-cd": { x: 415, y: 830, dx: 12, dy: 4 },
+    "test-automation": { x: 385, y: 900, dx: 12, dy: 4 },
+    "release-management": { x: 355, y: 960, dx: 12, dy: -6 },
+    "service-agreements": { x: 302, y: 480, dx: 12, dy: 4 },
+    "api-consumer-adoption": { x: 238, y: 445, dx: 12, dy: 4 },
+    "api-promotion": { x: 172, y: 410, dx: 12, dy: 4 },
+    "partner-integration": { x: 106, y: 375, dx: 12, dy: 4 },
+    "api-mindset": { x: 560, y: 320, dx: 12, dy: 4 },
+    "roles-and-responsibilities": { x: 620, y: 265, dx: 12, dy: 4 },
+    upskilling: { x: 680, y: 210, dx: 12, dy: 4 },
+    "operating-guidelines": { x: 740, y: 155, dx: 12, dy: 4 },
+    "portfolio-management": { x: 800, y: 100, dx: 12, dy: 4 },
+    "budget-and-resource-management": { x: 860, y: 45, dx: 12, dy: 4 },
   };
   const labelBoxes = {
-    strategic: { x: 386, y: 10, width: 108, height: 34, label: "Strategic" },
-    governance: { x: 548, y: 245, width: 124, height: 34, label: "Governance" },
-    consumer: { x: 290, y: 322, width: 118, height: 34, label: "Consumer" },
-    technical: { x: 650, y: 635, width: 110, height: 34, label: "Technical" },
+    strategic: { x: 420, y: 6, width: 108, height: 34, label: "Strategic" },
+    governance: { x: 640, y: 296, width: 124, height: 34, label: "Governance" },
+    consumer: { x: 275, y: 386, width: 118, height: 34, label: "Consumer" },
+    technical: { x: 720, y: 806, width: 110, height: 34, label: "Technical" },
   };
-  const lineLegend = lines.map((line, index) => ({ ...line, x: 100, y: 600 + index * 26 }));
-  const coreLabelOffsets: Record<string, { dx: number; dy: number }> = {
-    "api-product-strategy": { dx: 70, dy: -2 },
-    "api-consumer-experience": { dx: 105, dy: 0 },
-    "api-platform-architecture": { dx: 116, dy: 18 },
-    "api-design": { dx: 86, dy: 22 },
-    "api-delivery": { dx: 0, dy: 60 },
-    "api-audit": { dx: -95, dy: 22 },
-    "api-publishing": { dx: -100, dy: 0 },
-    "monitoring-and-improving": { dx: -88, dy: -28 },
-  };
+  const lineLegend = lines.map((line, index) => ({ ...line, x: 105, y: 760 + index * 28 }));
   const corePoints = coreStations.map((station, index) => {
     const selectedCycleStation = selectedCycle?.stations.find((item) => item.id === station.id);
-    const coordinates = coreCoordinates[station.id] ?? { x: center.x, y: center.y };
+    const angle = -90 + (360 / coreStations.length) * index;
+    const radians = (angle * Math.PI) / 180;
     return {
       ...station,
       displayTitle: shortStationName(selectedCycleStation?.title ?? station.baseTitle),
-      x: coordinates.x,
-      y: coordinates.y,
+      angle,
+      labelX: center.x + (coreRadius + 92) * Math.cos(radians),
+      labelY: center.y + (coreRadius + 92) * Math.sin(radians),
+      x: center.x + coreRadius * Math.cos(radians),
+      y: center.y + coreRadius * Math.sin(radians),
     };
   });
   const corePointById = new Map(corePoints.map((point) => [point.id, point]));
@@ -383,10 +368,10 @@ function MetroMap({
 
   return (
     <svg className="metro-map" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="APIOps Cycles metro map">
-      <ellipse cx="510" cy="355" rx="420" ry="330" className="metro-zone metro-zone--governance" />
-      <ellipse cx="360" cy="98" rx="190" ry="140" className="metro-zone metro-zone--strategic" />
-      <ellipse cx="268" cy="340" rx="270" ry="100" className="metro-zone metro-zone--consumer" />
-      <ellipse cx="555" cy="650" rx="325" ry="205" className="metro-zone metro-zone--technical" />
+      <circle cx="500" cy="500" r="445" className="metro-zone metro-zone--governance" />
+      <ellipse cx="390" cy="112" rx="205" ry="150" className="metro-zone metro-zone--strategic" />
+      <ellipse cx="275" cy="430" rx="285" ry="112" className="metro-zone metro-zone--consumer" />
+      <ellipse cx="605" cy="790" rx="345" ry="215" className="metro-zone metro-zone--technical" />
       {Object.entries(labelBoxes).map(([id, box]) => (
         <g key={id}>
           <rect x={box.x} y={box.y} width={box.width} height={box.height} rx="6" className="metro-zone-title-bg" />
@@ -459,16 +444,15 @@ function MetroMap({
           </text>
           {(() => {
             const lines = wrapMapLabel(point.displayTitle);
-            const offset = coreLabelOffsets[point.id] ?? { dx: 0, dy: point.y > center.y ? 48 : -42 };
             const boxWidth = Math.max(92, Math.max(...lines.map((line) => line.length)) * 7 + 24);
             const boxHeight = lines.length * 14 + 16;
-            const boxX = point.x + offset.dx - boxWidth / 2;
-            const boxY = point.y + offset.dy - boxHeight / 2;
+            const boxX = point.labelX - boxWidth / 2;
+            const boxY = point.labelY - boxHeight / 2;
             return (
               <g className="metro-core-label" style={{ color: colors[selectedCycleId] ?? "#164e63" }}>
                 <rect x={boxX} y={boxY} width={boxWidth} height={boxHeight} rx="8" />
                 {lines.map((line, lineIndex) => (
-                  <text key={line} x={point.x + offset.dx} y={boxY + 18 + lineIndex * 14} textAnchor="middle">
+                  <text key={line} x={point.labelX} y={boxY + 18 + lineIndex * 14} textAnchor="middle">
                     {line}
                   </text>
                 ))}

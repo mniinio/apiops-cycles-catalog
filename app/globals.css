@@ -404,7 +404,7 @@ code {
 }
 
 .metro-map {
-  aspect-ratio: 25 / 19;
+  aspect-ratio: 1;
   width: 100%;
 }
 
