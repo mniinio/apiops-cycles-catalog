@@ -61,9 +61,12 @@ a {
 .site-shell {
   min-height: 100vh;
   background:
+    linear-gradient(90deg, rgba(109, 43, 160, 0.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0, 105, 192, 0.04) 1px, transparent 1px),
     radial-gradient(circle at 12% 10%, rgba(47, 154, 72, 0.15), transparent 28rem),
     radial-gradient(circle at 88% 16%, rgba(0, 143, 159, 0.13), transparent 30rem),
     linear-gradient(180deg, #f8fbff 0%, #edf4fc 100%);
+  background-size: 44px 44px, 44px 44px, auto, auto, auto;
 }
 
 .hero,
@@ -276,7 +279,20 @@ code {
   gap: 7px;
   min-height: 112px;
   padding: 15px;
+  position: relative;
   text-align: left;
+}
+
+.role-card::before {
+  background: linear-gradient(180deg, var(--green), var(--teal), var(--accent));
+  border-radius: 999px;
+  content: "";
+  height: calc(100% - 28px);
+  left: 0;
+  opacity: 0.75;
+  position: absolute;
+  top: 14px;
+  width: 4px;
 }
 
 .role-card.is-active,
@@ -405,6 +421,9 @@ code {
 
 .metro-map {
   aspect-ratio: 1;
+  display: block;
+  margin: 0 auto;
+  max-height: min(92vh, 1080px);
   width: 100%;
 }
 
@@ -527,6 +546,47 @@ code {
   grid-template-columns: minmax(0, 1fr) minmax(260px, 0.7fr);
   margin-top: 14px;
   padding-top: 16px;
+}
+
+.collaboration-brief {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.collaboration-brief section {
+  background:
+    linear-gradient(90deg, rgba(109, 43, 160, 0.08), transparent 48%),
+    #ffffff;
+  border: 1px solid #dbe5f6;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  min-height: 180px;
+  padding: 14px;
+}
+
+.collaboration-brief section > span {
+  color: var(--foreground);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.collaboration-brief ul {
+  display: grid;
+  gap: 6px;
+}
+
+.collaboration-brief li {
+  font-size: 0.9rem;
+}
+
+.chips--compact span {
+  font-size: 0.78rem;
+  padding: 6px 9px;
 }
 
 ul {
@@ -749,6 +809,7 @@ pre {
   .split,
   .detail-columns,
   .prompt-grid,
+  .collaboration-brief,
   .template-grid {
     grid-template-columns: 1fr;
   }

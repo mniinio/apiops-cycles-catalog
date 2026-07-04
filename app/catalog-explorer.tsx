@@ -228,6 +228,10 @@ function wrapMapLabel(label: string, maxLength = 18) {
   return lines.slice(0, 3);
 }
 
+function uniqueText(items: Array<string | undefined | null>) {
+  return Array.from(new Set(items.map((item) => item?.trim()).filter((item): item is string => Boolean(item))));
+}
+
 function normalizeNotes(value: unknown): StickyNotes {
   if (!value || typeof value !== "object") return {};
   return Object.fromEntries(
@@ -274,6 +278,7 @@ function MetroMap({
   const height = 1000;
   const center = { x: 500, y: 500 };
   const coreRadius = 125;
+  const coreLabelRadius = 156;
   const coreStations = cycles[0]?.stations ?? [];
   const selectedCycle = cycles.find((cycle) => cycle.id === selectedCycleId) ?? cycles[0];
   const stationById = new Map(stations.map((station) => [station.id, station]));
@@ -319,8 +324,8 @@ function MetroMap({
       ...station,
       displayTitle: shortStationName(selectedCycleStation?.title ?? station.baseTitle),
       angle,
-      labelX: center.x + (coreRadius + 92) * Math.cos(radians),
-      labelY: center.y + (coreRadius + 92) * Math.sin(radians),
+      labelX: center.x + coreLabelRadius * Math.cos(radians),
+      labelY: center.y + coreLabelRadius * Math.sin(radians),
       x: center.x + coreRadius * Math.cos(radians),
       y: center.y + coreRadius * Math.sin(radians),
     };
@@ -752,6 +757,19 @@ export default function CatalogExplorer({
   const externalCanvasUrl = process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL
     ? `${process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL.replace(/\/$/, "")}/${selectedCanvas.id}`
     : selectedCanvas.canvasCreatorUrl;
+  const participantChips = uniqueText([role.title, ...selectedCycle.audiences]).slice(0, 6);
+  const discussionItems = uniqueText([
+    ...role.decisions,
+    ...stationDetail.steps.map((step) => step.text),
+    stationDetail.whyItMatters,
+  ]).slice(0, 5);
+  const outputItems = uniqueText([...role.outputs, ...stationDetail.outcomes, ...stationDetail.evidence]).slice(0, 5);
+  const nextActions = uniqueText([
+    selectedStationResources[0]?.canvasId ? `Open ${selectedStationResources[0].title}` : selectedStationResources[0]?.title,
+    role.canvases[0]?.title ? `Fill ${role.canvases[0].title}` : undefined,
+    rolePrompts[0]?.title ? `Use AI prompt: ${rolePrompts[0].title}` : undefined,
+    "Capture decisions, owners, and the next station to visit",
+  ]).slice(0, 4);
 
   function selectRole(nextRoleId: string) {
     const nextRole = safeRole(nextRoleId, roleData);
@@ -803,12 +821,12 @@ export default function CatalogExplorer({
         </nav>
         <section className="hero__grid">
           <div>
-            <p className="eyebrow">Guided method adoption for real stakeholder work</p>
-            <h1>APIOps Cycles for every role, route, and toolchain.</h1>
+            <p className="eyebrow">Interactive transit map for collaborative decision-making</p>
+            <h1>Find the right APIOps route, station, people, and next action.</h1>
             <p className="hero__lead">
-              Start from a stakeholder role, move through the right productization cycle,
-              fill method canvases with local sticky notes, and export AI, Markdown, and
-              Confluence-ready guidance from the same static method data.
+              Choose the work you are trying to accomplish, follow the productization route,
+              and open each station to see who to involve, what to discuss, what to produce,
+              and what to do next.
             </p>
             <div className="hero__actions" aria-label="Catalog summary">
               <span>{roleData.length} roles</span>
@@ -828,8 +846,9 @@ export default function CatalogExplorer({
 
       <section className="role-section" aria-label="Choose your role">
         <div className="section-head">
-          <p className="section-kicker">Choose your role</p>
-          <h2>Start with the job this stakeholder needs to get done</h2>
+          <p className="section-kicker">Route planner</p>
+          <h2>What are you trying to accomplish today?</h2>
+          <p className="helper-text">Pick a stakeholder path and the map highlights the route, station conversations, outputs, and next actions.</p>
         </div>
         <div className="role-grid">
           {roleData.map((item) => (
@@ -970,6 +989,26 @@ export default function CatalogExplorer({
                     </button>
                   ))}
                 </div>
+              </div>
+              <div className="collaboration-brief" aria-label="Station collaboration brief">
+                <section>
+                  <span>Who do I need to involve?</span>
+                  <div className="chips chips--compact">
+                    {participantChips.map((participant) => <span key={participant}>{participant}</span>)}
+                  </div>
+                </section>
+                <section>
+                  <span>What should we discuss?</span>
+                  <ul>{discussionItems.map((item) => <li key={item}>{item}</li>)}</ul>
+                </section>
+                <section>
+                  <span>What should we produce?</span>
+                  <ul>{outputItems.map((item) => <li key={item}>{item}</li>)}</ul>
+                </section>
+                <section>
+                  <span>What do we do next?</span>
+                  <ul>{nextActions.map((item) => <li key={item}>{item}</li>)}</ul>
+                </section>
               </div>
             </article>
           ) : null}
