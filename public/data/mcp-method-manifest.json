@@ -1,0 +1,95 @@
+{
+  "source": {
+    "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
+    "branch": "codex/integration-design-extension",
+    "commit": "8f6a705b5e8a44b51361cec6ceed21d0ef23b1b6"
+  },
+  "version": 1,
+  "description": "Static APIOps Cycles manifest for a future MCP server.",
+  "dataFiles": [
+    "/data/method-catalog.json",
+    "/data/stakeholder-guides.json",
+    "/data/canvas-manifest.json",
+    "/data/prompt-packs.json",
+    "/data/export-templates.json"
+  ],
+  "tools": [
+    "list_cycles",
+    "get_cycle",
+    "get_station",
+    "get_canvas",
+    "suggest_next_step",
+    "generate_prompt",
+    "render_export"
+  ],
+  "identifiers": {
+    "cycles": [
+      "capability-productization-cycle",
+      "api-productization-cycle",
+      "integration-productization-cycle",
+      "automation-cycle"
+    ],
+    "stations": [
+      "api-product-strategy",
+      "user-experience",
+      "api-consumer-experience",
+      "market-insights",
+      "api-platform-architecture",
+      "business-goals",
+      "api-design",
+      "competitive-analysis",
+      "api-delivery",
+      "ecosystem-vision",
+      "api-audit",
+      "scalable-infrastructure",
+      "api-publishing",
+      "legal-and-compliance",
+      "monitoring-and-improving",
+      "security-and-privacy",
+      "design-standards",
+      "vendor-management",
+      "contract-design",
+      "development",
+      "ci-cd",
+      "test-automation",
+      "release-management",
+      "service-agreements",
+      "api-consumer-adoption",
+      "api-promotion",
+      "partner-integration",
+      "api-mindset",
+      "roles-and-responsibilities",
+      "upskilling",
+      "operating-guidelines",
+      "portfolio-management",
+      "budget-and-resource-management"
+    ],
+    "canvases": [
+      "apiBusinessModelCanvas",
+      "apiValuePropositionCanvas",
+      "businessImpactCanvas",
+      "capacityCanvas",
+      "customerJourneyCanvas",
+      "domainCanvas",
+      "eventCanvas",
+      "interactionCanvas",
+      "locationsCanvas",
+      "restCanvas",
+      "graphqlCanvas",
+      "capabilityValuePropositionCanvas",
+      "capabilityBusinessModelCanvas",
+      "consumerExperienceRequirementsCanvas"
+    ],
+    "roles": [
+      "executives",
+      "enterprise-architects",
+      "capability-owners",
+      "api-product-owners",
+      "api-designers",
+      "api-platform-teams",
+      "integration-architects",
+      "automation-owners",
+      "ai-facilitators"
+    ]
+  }
+}

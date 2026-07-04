@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CatalogPage from "./catalog-page";
 
 export const metadata: Metadata = {
+  title: "Stakeholder-Guided APIOps Cycles Method",
   alternates: {
     canonical: "/",
     languages: {

@@ -1,0 +1,1287 @@
+{
+  "source": {
+    "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
+    "branch": "codex/integration-design-extension",
+    "commit": "8f6a705b5e8a44b51361cec6ceed21d0ef23b1b6"
+  },
+  "locales": [
+    "en",
+    "fi",
+    "fr",
+    "de",
+    "pt"
+  ],
+  "defaultLocale": "en",
+  "translations": {
+    "en": [
+      {
+        "id": "executives:facilitate-station",
+        "roleId": "executives",
+        "title": "Facilitate a station for Executives and top management",
+        "mode": "facilitate-station",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Strategy, Architecture & Platform Decisions, Monitoring & Improvement\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "executives:fill-canvas",
+        "roleId": "executives",
+        "title": "Fill a recommended canvas for Executives and top management",
+        "mode": "fill-canvas",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Strategy, Architecture & Platform Decisions, Monitoring & Improvement\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "executives:review-output",
+        "roleId": "executives",
+        "title": "Review method output for Executives and top management",
+        "mode": "review-output",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Strategy, Architecture & Platform Decisions, Monitoring & Improvement\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "executives:next-actions",
+        "roleId": "executives",
+        "title": "Generate next actions for Executives and top management",
+        "mode": "next-actions",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Strategy, Architecture & Platform Decisions, Monitoring & Improvement\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "enterprise-architects:facilitate-station",
+        "roleId": "enterprise-architects",
+        "title": "Facilitate a station for Enterprise and solution architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "enterprise-architects:fill-canvas",
+        "roleId": "enterprise-architects",
+        "title": "Fill a recommended canvas for Enterprise and solution architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "enterprise-architects:review-output",
+        "roleId": "enterprise-architects",
+        "title": "Review method output for Enterprise and solution architects",
+        "mode": "review-output",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "enterprise-architects:next-actions",
+        "roleId": "enterprise-architects",
+        "title": "Generate next actions for Enterprise and solution architects",
+        "mode": "next-actions",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "capability-owners:facilitate-station",
+        "roleId": "capability-owners",
+        "title": "Facilitate a station for Capability owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Publishing & Enablement\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "capability-owners:fill-canvas",
+        "roleId": "capability-owners",
+        "title": "Fill a recommended canvas for Capability owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Publishing & Enablement\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "capability-owners:review-output",
+        "roleId": "capability-owners",
+        "title": "Review method output for Capability owners",
+        "mode": "review-output",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Publishing & Enablement\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "capability-owners:next-actions",
+        "roleId": "capability-owners",
+        "title": "Generate next actions for Capability owners",
+        "mode": "next-actions",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Publishing & Enablement\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-product-owners:facilitate-station",
+        "roleId": "api-product-owners",
+        "title": "Facilitate a station for API product owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Publishing & Enablement, Monitoring & Improvement\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-product-owners:fill-canvas",
+        "roleId": "api-product-owners",
+        "title": "Fill a recommended canvas for API product owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Publishing & Enablement, Monitoring & Improvement\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-product-owners:review-output",
+        "roleId": "api-product-owners",
+        "title": "Review method output for API product owners",
+        "mode": "review-output",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Publishing & Enablement, Monitoring & Improvement\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-product-owners:next-actions",
+        "roleId": "api-product-owners",
+        "title": "Generate next actions for API product owners",
+        "mode": "next-actions",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Publishing & Enablement, Monitoring & Improvement\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-designers:facilitate-station",
+        "roleId": "api-designers",
+        "title": "Facilitate a station for API designers",
+        "mode": "facilitate-station",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-designers:fill-canvas",
+        "roleId": "api-designers",
+        "title": "Fill a recommended canvas for API designers",
+        "mode": "fill-canvas",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-designers:review-output",
+        "roleId": "api-designers",
+        "title": "Review method output for API designers",
+        "mode": "review-output",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-designers:next-actions",
+        "roleId": "api-designers",
+        "title": "Generate next actions for API designers",
+        "mode": "next-actions",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-platform-teams:facilitate-station",
+        "roleId": "api-platform-teams",
+        "title": "Facilitate a station for API platform teams",
+        "mode": "facilitate-station",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-platform-teams:fill-canvas",
+        "roleId": "api-platform-teams",
+        "title": "Fill a recommended canvas for API platform teams",
+        "mode": "fill-canvas",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-platform-teams:review-output",
+        "roleId": "api-platform-teams",
+        "title": "Review method output for API platform teams",
+        "mode": "review-output",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-platform-teams:next-actions",
+        "roleId": "api-platform-teams",
+        "title": "Generate next actions for API platform teams",
+        "mode": "next-actions",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "integration-architects:facilitate-station",
+        "roleId": "integration-architects",
+        "title": "Facilitate a station for Integration architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "integration-architects:fill-canvas",
+        "roleId": "integration-architects",
+        "title": "Fill a recommended canvas for Integration architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "integration-architects:review-output",
+        "roleId": "integration-architects",
+        "title": "Review method output for Integration architects",
+        "mode": "review-output",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "integration-architects:next-actions",
+        "roleId": "integration-architects",
+        "title": "Generate next actions for Integration architects",
+        "mode": "next-actions",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "automation-owners:facilitate-station",
+        "roleId": "automation-owners",
+        "title": "Facilitate a station for Automation and process owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "automation-owners:fill-canvas",
+        "roleId": "automation-owners",
+        "title": "Fill a recommended canvas for Automation and process owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "automation-owners:review-output",
+        "roleId": "automation-owners",
+        "title": "Review method output for Automation and process owners",
+        "mode": "review-output",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "automation-owners:next-actions",
+        "roleId": "automation-owners",
+        "title": "Generate next actions for Automation and process owners",
+        "mode": "next-actions",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "ai-facilitators:facilitate-station",
+        "roleId": "ai-facilitators",
+        "title": "Facilitate a station for AI assistants and method facilitators",
+        "mode": "facilitate-station",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "ai-facilitators:fill-canvas",
+        "roleId": "ai-facilitators",
+        "title": "Fill a recommended canvas for AI assistants and method facilitators",
+        "mode": "fill-canvas",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "ai-facilitators:review-output",
+        "roleId": "ai-facilitators",
+        "title": "Review method output for AI assistants and method facilitators",
+        "mode": "review-output",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "ai-facilitators:next-actions",
+        "roleId": "ai-facilitators",
+        "title": "Generate next actions for AI assistants and method facilitators",
+        "mode": "next-actions",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Quality & Readiness Assurance\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      }
+    ],
+    "fi": [
+      {
+        "id": "executives:facilitate-station",
+        "roleId": "executives",
+        "title": "Facilitate a station for Executives and top management",
+        "mode": "facilitate-station",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-alustan arkkitehtuuri, Seuranta ja parantaminen - API-arvoa varten\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "executives:fill-canvas",
+        "roleId": "executives",
+        "title": "Fill a recommended canvas for Executives and top management",
+        "mode": "fill-canvas",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-alustan arkkitehtuuri, Seuranta ja parantaminen - API-arvoa varten\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "executives:review-output",
+        "roleId": "executives",
+        "title": "Review method output for Executives and top management",
+        "mode": "review-output",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-alustan arkkitehtuuri, Seuranta ja parantaminen - API-arvoa varten\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "executives:next-actions",
+        "roleId": "executives",
+        "title": "Generate next actions for Executives and top management",
+        "mode": "next-actions",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-alustan arkkitehtuuri, Seuranta ja parantaminen - API-arvoa varten\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "enterprise-architects:facilitate-station",
+        "roleId": "enterprise-architects",
+        "title": "Facilitate a station for Enterprise and solution architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: API-alustan arkkitehtuuri, API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "enterprise-architects:fill-canvas",
+        "roleId": "enterprise-architects",
+        "title": "Fill a recommended canvas for Enterprise and solution architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: API-alustan arkkitehtuuri, API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "enterprise-architects:review-output",
+        "roleId": "enterprise-architects",
+        "title": "Review method output for Enterprise and solution architects",
+        "mode": "review-output",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: API-alustan arkkitehtuuri, API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "enterprise-architects:next-actions",
+        "roleId": "enterprise-architects",
+        "title": "Generate next actions for Enterprise and solution architects",
+        "mode": "next-actions",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: API-alustan arkkitehtuuri, API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "capability-owners:facilitate-station",
+        "roleId": "capability-owners",
+        "title": "Facilitate a station for Capability owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-julkaiseminen - Julkaise APIt luotettavasti\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "capability-owners:fill-canvas",
+        "roleId": "capability-owners",
+        "title": "Fill a recommended canvas for Capability owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-julkaiseminen - Julkaise APIt luotettavasti\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "capability-owners:review-output",
+        "roleId": "capability-owners",
+        "title": "Review method output for Capability owners",
+        "mode": "review-output",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-julkaiseminen - Julkaise APIt luotettavasti\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "capability-owners:next-actions",
+        "roleId": "capability-owners",
+        "title": "Generate next actions for Capability owners",
+        "mode": "next-actions",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-julkaiseminen - Julkaise APIt luotettavasti\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-product-owners:facilitate-station",
+        "roleId": "api-product-owners",
+        "title": "Facilitate a station for API product owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-julkaiseminen - Julkaise APIt luotettavasti, Seuranta ja parantaminen - API-arvoa varten\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-product-owners:fill-canvas",
+        "roleId": "api-product-owners",
+        "title": "Fill a recommended canvas for API product owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-julkaiseminen - Julkaise APIt luotettavasti, Seuranta ja parantaminen - API-arvoa varten\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-product-owners:review-output",
+        "roleId": "api-product-owners",
+        "title": "Review method output for API product owners",
+        "mode": "review-output",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-julkaiseminen - Julkaise APIt luotettavasti, Seuranta ja parantaminen - API-arvoa varten\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-product-owners:next-actions",
+        "roleId": "api-product-owners",
+        "title": "Generate next actions for API product owners",
+        "mode": "next-actions",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-julkaiseminen - Julkaise APIt luotettavasti, Seuranta ja parantaminen - API-arvoa varten\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-designers:facilitate-station",
+        "roleId": "api-designers",
+        "title": "Facilitate a station for API designers",
+        "mode": "facilitate-station",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-designers:fill-canvas",
+        "roleId": "api-designers",
+        "title": "Fill a recommended canvas for API designers",
+        "mode": "fill-canvas",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-designers:review-output",
+        "roleId": "api-designers",
+        "title": "Review method output for API designers",
+        "mode": "review-output",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-designers:next-actions",
+        "roleId": "api-designers",
+        "title": "Generate next actions for API designers",
+        "mode": "next-actions",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-platform-teams:facilitate-station",
+        "roleId": "api-platform-teams",
+        "title": "Facilitate a station for API platform teams",
+        "mode": "facilitate-station",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: API-alustan arkkitehtuuri, API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi, API-julkaiseminen - Julkaise APIt luotettavasti\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-platform-teams:fill-canvas",
+        "roleId": "api-platform-teams",
+        "title": "Fill a recommended canvas for API platform teams",
+        "mode": "fill-canvas",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: API-alustan arkkitehtuuri, API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi, API-julkaiseminen - Julkaise APIt luotettavasti\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-platform-teams:review-output",
+        "roleId": "api-platform-teams",
+        "title": "Review method output for API platform teams",
+        "mode": "review-output",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: API-alustan arkkitehtuuri, API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi, API-julkaiseminen - Julkaise APIt luotettavasti\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-platform-teams:next-actions",
+        "roleId": "api-platform-teams",
+        "title": "Generate next actions for API platform teams",
+        "mode": "next-actions",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: API-alustan arkkitehtuuri, API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi, API-julkaiseminen - Julkaise APIt luotettavasti\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "integration-architects:facilitate-station",
+        "roleId": "integration-architects",
+        "title": "Facilitate a station for Integration architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-alustan arkkitehtuuri, API-design - Suunnittele arvoa tuottavia rajapintoja, API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "integration-architects:fill-canvas",
+        "roleId": "integration-architects",
+        "title": "Fill a recommended canvas for Integration architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-alustan arkkitehtuuri, API-design - Suunnittele arvoa tuottavia rajapintoja, API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "integration-architects:review-output",
+        "roleId": "integration-architects",
+        "title": "Review method output for Integration architects",
+        "mode": "review-output",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-alustan arkkitehtuuri, API-design - Suunnittele arvoa tuottavia rajapintoja, API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "integration-architects:next-actions",
+        "roleId": "integration-architects",
+        "title": "Generate next actions for Integration architects",
+        "mode": "next-actions",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-alustan arkkitehtuuri, API-design - Suunnittele arvoa tuottavia rajapintoja, API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "automation-owners:facilitate-station",
+        "roleId": "automation-owners",
+        "title": "Facilitate a station for Automation and process owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "automation-owners:fill-canvas",
+        "roleId": "automation-owners",
+        "title": "Fill a recommended canvas for Automation and process owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "automation-owners:review-output",
+        "roleId": "automation-owners",
+        "title": "Review method output for Automation and process owners",
+        "mode": "review-output",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "automation-owners:next-actions",
+        "roleId": "automation-owners",
+        "title": "Generate next actions for Automation and process owners",
+        "mode": "next-actions",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "ai-facilitators:facilitate-station",
+        "roleId": "ai-facilitators",
+        "title": "Facilitate a station for AI assistants and method facilitators",
+        "mode": "facilitate-station",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "ai-facilitators:fill-canvas",
+        "roleId": "ai-facilitators",
+        "title": "Fill a recommended canvas for AI assistants and method facilitators",
+        "mode": "fill-canvas",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "ai-facilitators:review-output",
+        "roleId": "ai-facilitators",
+        "title": "Review method output for AI assistants and method facilitators",
+        "mode": "review-output",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "ai-facilitators:next-actions",
+        "roleId": "ai-facilitators",
+        "title": "Generate next actions for AI assistants and method facilitators",
+        "mode": "next-actions",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: API-tuotestrategia - Tee rajapinnoista strategisia tuotteita, API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten., API-design - Suunnittele arvoa tuottavia rajapintoja, API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      }
+    ],
+    "fr": [
+      {
+        "id": "executives:facilitate-station",
+        "roleId": "executives",
+        "title": "Facilitate a station for Executives and top management",
+        "mode": "facilitate-station",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Suivi et amélioration - pour la valeur de l'API\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "executives:fill-canvas",
+        "roleId": "executives",
+        "title": "Fill a recommended canvas for Executives and top management",
+        "mode": "fill-canvas",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Suivi et amélioration - pour la valeur de l'API\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "executives:review-output",
+        "roleId": "executives",
+        "title": "Review method output for Executives and top management",
+        "mode": "review-output",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Suivi et amélioration - pour la valeur de l'API\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "executives:next-actions",
+        "roleId": "executives",
+        "title": "Generate next actions for Executives and top management",
+        "mode": "next-actions",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Suivi et amélioration - pour la valeur de l'API\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "enterprise-architects:facilitate-station",
+        "roleId": "enterprise-architects",
+        "title": "Facilitate a station for Enterprise and solution architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "enterprise-architects:fill-canvas",
+        "roleId": "enterprise-architects",
+        "title": "Fill a recommended canvas for Enterprise and solution architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "enterprise-architects:review-output",
+        "roleId": "enterprise-architects",
+        "title": "Review method output for Enterprise and solution architects",
+        "mode": "review-output",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "enterprise-architects:next-actions",
+        "roleId": "enterprise-architects",
+        "title": "Generate next actions for Enterprise and solution architects",
+        "mode": "next-actions",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "capability-owners:facilitate-station",
+        "roleId": "capability-owners",
+        "title": "Facilitate a station for Capability owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Publication d'API - Publier des API en toute confiance\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "capability-owners:fill-canvas",
+        "roleId": "capability-owners",
+        "title": "Fill a recommended canvas for Capability owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Publication d'API - Publier des API en toute confiance\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "capability-owners:review-output",
+        "roleId": "capability-owners",
+        "title": "Review method output for Capability owners",
+        "mode": "review-output",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Publication d'API - Publier des API en toute confiance\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "capability-owners:next-actions",
+        "roleId": "capability-owners",
+        "title": "Generate next actions for Capability owners",
+        "mode": "next-actions",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Publication d'API - Publier des API en toute confiance\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-product-owners:facilitate-station",
+        "roleId": "api-product-owners",
+        "title": "Facilitate a station for API product owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Publication d'API - Publier des API en toute confiance, Suivi et amélioration - pour la valeur de l'API\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-product-owners:fill-canvas",
+        "roleId": "api-product-owners",
+        "title": "Fill a recommended canvas for API product owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Publication d'API - Publier des API en toute confiance, Suivi et amélioration - pour la valeur de l'API\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-product-owners:review-output",
+        "roleId": "api-product-owners",
+        "title": "Review method output for API product owners",
+        "mode": "review-output",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Publication d'API - Publier des API en toute confiance, Suivi et amélioration - pour la valeur de l'API\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-product-owners:next-actions",
+        "roleId": "api-product-owners",
+        "title": "Generate next actions for API product owners",
+        "mode": "next-actions",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Publication d'API - Publier des API en toute confiance, Suivi et amélioration - pour la valeur de l'API\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-designers:facilitate-station",
+        "roleId": "api-designers",
+        "title": "Facilitate a station for API designers",
+        "mode": "facilitate-station",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-designers:fill-canvas",
+        "roleId": "api-designers",
+        "title": "Fill a recommended canvas for API designers",
+        "mode": "fill-canvas",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-designers:review-output",
+        "roleId": "api-designers",
+        "title": "Review method output for API designers",
+        "mode": "review-output",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-designers:next-actions",
+        "roleId": "api-designers",
+        "title": "Generate next actions for API designers",
+        "mode": "next-actions",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-platform-teams:facilitate-station",
+        "roleId": "api-platform-teams",
+        "title": "Facilitate a station for API platform teams",
+        "mode": "facilitate-station",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Livraison d'API - Fournir des API sécurisées et fiables, Audit API - Audit de conformité et de qualité des API, Publication d'API - Publier des API en toute confiance\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-platform-teams:fill-canvas",
+        "roleId": "api-platform-teams",
+        "title": "Fill a recommended canvas for API platform teams",
+        "mode": "fill-canvas",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Livraison d'API - Fournir des API sécurisées et fiables, Audit API - Audit de conformité et de qualité des API, Publication d'API - Publier des API en toute confiance\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-platform-teams:review-output",
+        "roleId": "api-platform-teams",
+        "title": "Review method output for API platform teams",
+        "mode": "review-output",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Livraison d'API - Fournir des API sécurisées et fiables, Audit API - Audit de conformité et de qualité des API, Publication d'API - Publier des API en toute confiance\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-platform-teams:next-actions",
+        "roleId": "api-platform-teams",
+        "title": "Generate next actions for API platform teams",
+        "mode": "next-actions",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Livraison d'API - Fournir des API sécurisées et fiables, Audit API - Audit de conformité et de qualité des API, Publication d'API - Publier des API en toute confiance\nCanvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "integration-architects:facilitate-station",
+        "roleId": "integration-architects",
+        "title": "Facilitate a station for Integration architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Conception d'API - Concevoir des API qui apportent de la valeur, Livraison d'API - Fournir des API sécurisées et fiables\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "integration-architects:fill-canvas",
+        "roleId": "integration-architects",
+        "title": "Fill a recommended canvas for Integration architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Conception d'API - Concevoir des API qui apportent de la valeur, Livraison d'API - Fournir des API sécurisées et fiables\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "integration-architects:review-output",
+        "roleId": "integration-architects",
+        "title": "Review method output for Integration architects",
+        "mode": "review-output",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Conception d'API - Concevoir des API qui apportent de la valeur, Livraison d'API - Fournir des API sécurisées et fiables\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "integration-architects:next-actions",
+        "roleId": "integration-architects",
+        "title": "Generate next actions for Integration architects",
+        "mode": "next-actions",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation, Conception d'API - Concevoir des API qui apportent de la valeur, Livraison d'API - Fournir des API sécurisées et fiables\nCanvases: Consumer Experience Requirements Canvas, Locations Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "automation-owners:facilitate-station",
+        "roleId": "automation-owners",
+        "title": "Facilitate a station for Automation and process owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "automation-owners:fill-canvas",
+        "roleId": "automation-owners",
+        "title": "Fill a recommended canvas for Automation and process owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "automation-owners:review-output",
+        "roleId": "automation-owners",
+        "title": "Review method output for Automation and process owners",
+        "mode": "review-output",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "automation-owners:next-actions",
+        "roleId": "automation-owners",
+        "title": "Generate next actions for Automation and process owners",
+        "mode": "next-actions",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "ai-facilitators:facilitate-station",
+        "roleId": "ai-facilitators",
+        "title": "Facilitate a station for AI assistants and method facilitators",
+        "mode": "facilitate-station",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "ai-facilitators:fill-canvas",
+        "roleId": "ai-facilitators",
+        "title": "Fill a recommended canvas for AI assistants and method facilitators",
+        "mode": "fill-canvas",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "ai-facilitators:review-output",
+        "roleId": "ai-facilitators",
+        "title": "Review method output for AI assistants and method facilitators",
+        "mode": "review-output",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "ai-facilitators:next-actions",
+        "roleId": "ai-facilitators",
+        "title": "Generate next actions for AI assistants and method facilitators",
+        "mode": "next-actions",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Stratégie produit API - Transformer les API en produits stratégiques, API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API, Conception d'API - Concevoir des API qui apportent de la valeur, Audit API - Audit de conformité et de qualité des API\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      }
+    ],
+    "de": [
+      {
+        "id": "executives:facilitate-station",
+        "roleId": "executives",
+        "title": "Facilitate a station for Executives and top management",
+        "mode": "facilitate-station",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, Überwachen und Verbessern - für den API-Wert\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "executives:fill-canvas",
+        "roleId": "executives",
+        "title": "Fill a recommended canvas for Executives and top management",
+        "mode": "fill-canvas",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, Überwachen und Verbessern - für den API-Wert\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "executives:review-output",
+        "roleId": "executives",
+        "title": "Review method output for Executives and top management",
+        "mode": "review-output",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, Überwachen und Verbessern - für den API-Wert\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "executives:next-actions",
+        "roleId": "executives",
+        "title": "Generate next actions for Executives and top management",
+        "mode": "next-actions",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, Überwachen und Verbessern - für den API-Wert\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "enterprise-architects:facilitate-station",
+        "roleId": "enterprise-architects",
+        "title": "Facilitate a station for Enterprise and solution architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "enterprise-architects:fill-canvas",
+        "roleId": "enterprise-architects",
+        "title": "Fill a recommended canvas for Enterprise and solution architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "enterprise-architects:review-output",
+        "roleId": "enterprise-architects",
+        "title": "Review method output for Enterprise and solution architects",
+        "mode": "review-output",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "enterprise-architects:next-actions",
+        "roleId": "enterprise-architects",
+        "title": "Generate next actions for Enterprise and solution architects",
+        "mode": "next-actions",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "capability-owners:facilitate-station",
+        "roleId": "capability-owners",
+        "title": "Facilitate a station for Capability owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "capability-owners:fill-canvas",
+        "roleId": "capability-owners",
+        "title": "Fill a recommended canvas for Capability owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "capability-owners:review-output",
+        "roleId": "capability-owners",
+        "title": "Review method output for Capability owners",
+        "mode": "review-output",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "capability-owners:next-actions",
+        "roleId": "capability-owners",
+        "title": "Generate next actions for Capability owners",
+        "mode": "next-actions",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-product-owners:facilitate-station",
+        "roleId": "api-product-owners",
+        "title": "Facilitate a station for API product owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht, Überwachen und Verbessern - für den API-Wert\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-product-owners:fill-canvas",
+        "roleId": "api-product-owners",
+        "title": "Fill a recommended canvas for API product owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht, Überwachen und Verbessern - für den API-Wert\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-product-owners:review-output",
+        "roleId": "api-product-owners",
+        "title": "Review method output for API product owners",
+        "mode": "review-output",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht, Überwachen und Verbessern - für den API-Wert\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-product-owners:next-actions",
+        "roleId": "api-product-owners",
+        "title": "Generate next actions for API product owners",
+        "mode": "next-actions",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht, Überwachen und Verbessern - für den API-Wert\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-designers:facilitate-station",
+        "roleId": "api-designers",
+        "title": "Facilitate a station for API designers",
+        "mode": "facilitate-station",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-designers:fill-canvas",
+        "roleId": "api-designers",
+        "title": "Fill a recommended canvas for API designers",
+        "mode": "fill-canvas",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-designers:review-output",
+        "roleId": "api-designers",
+        "title": "Review method output for API designers",
+        "mode": "review-output",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-designers:next-actions",
+        "roleId": "api-designers",
+        "title": "Generate next actions for API designers",
+        "mode": "next-actions",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-platform-teams:facilitate-station",
+        "roleId": "api-platform-teams",
+        "title": "Facilitate a station for API platform teams",
+        "mode": "facilitate-station",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs, API-Audit - Prüfung von APIs auf Konformität und Qualität, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-platform-teams:fill-canvas",
+        "roleId": "api-platform-teams",
+        "title": "Fill a recommended canvas for API platform teams",
+        "mode": "fill-canvas",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs, API-Audit - Prüfung von APIs auf Konformität und Qualität, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-platform-teams:review-output",
+        "roleId": "api-platform-teams",
+        "title": "Review method output for API platform teams",
+        "mode": "review-output",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs, API-Audit - Prüfung von APIs auf Konformität und Qualität, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-platform-teams:next-actions",
+        "roleId": "api-platform-teams",
+        "title": "Generate next actions for API platform teams",
+        "mode": "next-actions",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs, API-Audit - Prüfung von APIs auf Konformität und Qualität, API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "integration-architects:facilitate-station",
+        "roleId": "integration-architects",
+        "title": "Facilitate a station for Integration architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs\nCanvases: Consumer Experience Requirements Canvas, Location Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "integration-architects:fill-canvas",
+        "roleId": "integration-architects",
+        "title": "Fill a recommended canvas for Integration architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs\nCanvases: Consumer Experience Requirements Canvas, Location Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "integration-architects:review-output",
+        "roleId": "integration-architects",
+        "title": "Review method output for Integration architects",
+        "mode": "review-output",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs\nCanvases: Consumer Experience Requirements Canvas, Location Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "integration-architects:next-actions",
+        "roleId": "integration-architects",
+        "title": "Generate next actions for Integration architects",
+        "mode": "next-actions",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs\nCanvases: Consumer Experience Requirements Canvas, Location Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "automation-owners:facilitate-station",
+        "roleId": "automation-owners",
+        "title": "Facilitate a station for Automation and process owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "automation-owners:fill-canvas",
+        "roleId": "automation-owners",
+        "title": "Fill a recommended canvas for Automation and process owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "automation-owners:review-output",
+        "roleId": "automation-owners",
+        "title": "Review method output for Automation and process owners",
+        "mode": "review-output",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "automation-owners:next-actions",
+        "roleId": "automation-owners",
+        "title": "Generate next actions for Automation and process owners",
+        "mode": "next-actions",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "ai-facilitators:facilitate-station",
+        "roleId": "ai-facilitators",
+        "title": "Facilitate a station for AI assistants and method facilitators",
+        "mode": "facilitate-station",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "ai-facilitators:fill-canvas",
+        "roleId": "ai-facilitators",
+        "title": "Fill a recommended canvas for AI assistants and method facilitators",
+        "mode": "fill-canvas",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "ai-facilitators:review-output",
+        "roleId": "ai-facilitators",
+        "title": "Review method output for AI assistants and method facilitators",
+        "mode": "review-output",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "ai-facilitators:next-actions",
+        "roleId": "ai-facilitators",
+        "title": "Generate next actions for AI assistants and method facilitators",
+        "mode": "next-actions",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: API-Produktstrategie - APIs in strategische Produkte verwandeln, API Consumer Experience - Design für die echten Benutzer Ihrer API, API-Design - Entwerfen Sie APIs, die Wert liefern, API-Audit - Prüfung von APIs auf Konformität und Qualität\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      }
+    ],
+    "pt": [
+      {
+        "id": "executives:facilitate-station",
+        "roleId": "executives",
+        "title": "Facilitate a station for Executives and top management",
+        "mode": "facilitate-station",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Monitorização e melhoria - para valor API\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "executives:fill-canvas",
+        "roleId": "executives",
+        "title": "Fill a recommended canvas for Executives and top management",
+        "mode": "fill-canvas",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Monitorização e melhoria - para valor API\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "executives:review-output",
+        "roleId": "executives",
+        "title": "Review method output for Executives and top management",
+        "mode": "review-output",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Monitorização e melhoria - para valor API\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "executives:next-actions",
+        "roleId": "executives",
+        "title": "Generate next actions for Executives and top management",
+        "mode": "next-actions",
+        "prompt": "Role: Executives and top management\nCycles: Capability Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Monitorização e melhoria - para valor API\nCanvases: Capability Value Proposition Canvas, Capability Business Model Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "enterprise-architects:facilitate-station",
+        "roleId": "enterprise-architects",
+        "title": "Facilitate a station for Enterprise and solution architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "enterprise-architects:fill-canvas",
+        "roleId": "enterprise-architects",
+        "title": "Fill a recommended canvas for Enterprise and solution architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "enterprise-architects:review-output",
+        "roleId": "enterprise-architects",
+        "title": "Review method output for Enterprise and solution architects",
+        "mode": "review-output",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "enterprise-architects:next-actions",
+        "roleId": "enterprise-architects",
+        "title": "Generate next actions for Enterprise and solution architects",
+        "mode": "next-actions",
+        "prompt": "Role: Enterprise and solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "capability-owners:facilitate-station",
+        "roleId": "capability-owners",
+        "title": "Facilitate a station for Capability owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Publicação de API - Publique APIs com confiança\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "capability-owners:fill-canvas",
+        "roleId": "capability-owners",
+        "title": "Fill a recommended canvas for Capability owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Publicação de API - Publique APIs com confiança\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "capability-owners:review-output",
+        "roleId": "capability-owners",
+        "title": "Review method output for Capability owners",
+        "mode": "review-output",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Publicação de API - Publique APIs com confiança\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "capability-owners:next-actions",
+        "roleId": "capability-owners",
+        "title": "Generate next actions for Capability owners",
+        "mode": "next-actions",
+        "prompt": "Role: Capability owners\nCycles: Capability Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Publicação de API - Publique APIs com confiança\nCanvases: Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-product-owners:facilitate-station",
+        "roleId": "api-product-owners",
+        "title": "Facilitate a station for API product owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Publicação de API - Publique APIs com confiança, Monitorização e melhoria - para valor API\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-product-owners:fill-canvas",
+        "roleId": "api-product-owners",
+        "title": "Fill a recommended canvas for API product owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Publicação de API - Publique APIs com confiança, Monitorização e melhoria - para valor API\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-product-owners:review-output",
+        "roleId": "api-product-owners",
+        "title": "Review method output for API product owners",
+        "mode": "review-output",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Publicação de API - Publique APIs com confiança, Monitorização e melhoria - para valor API\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-product-owners:next-actions",
+        "roleId": "api-product-owners",
+        "title": "Generate next actions for API product owners",
+        "mode": "next-actions",
+        "prompt": "Role: API product owners\nCycles: API Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Publicação de API - Publique APIs com confiança, Monitorização e melhoria - para valor API\nCanvases: Customer Journey Canvas, API Value Proposition Canvas, API Business Model Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-designers:facilitate-station",
+        "roleId": "api-designers",
+        "title": "Facilitate a station for API designers",
+        "mode": "facilitate-station",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-designers:fill-canvas",
+        "roleId": "api-designers",
+        "title": "Fill a recommended canvas for API designers",
+        "mode": "fill-canvas",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-designers:review-output",
+        "roleId": "api-designers",
+        "title": "Review method output for API designers",
+        "mode": "review-output",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-designers:next-actions",
+        "roleId": "api-designers",
+        "title": "Generate next actions for API designers",
+        "mode": "next-actions",
+        "prompt": "Role: API designers\nCycles: API Productization Cycle\nStations: Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Domain Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "api-platform-teams:facilitate-station",
+        "roleId": "api-platform-teams",
+        "title": "Facilitate a station for API platform teams",
+        "mode": "facilitate-station",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Entrega da API - Fornecer APIs seguras e fiáveis, Auditoria de API - Auditoria de APIs para conformidade e qualidade, Publicação de API - Publique APIs com confiança\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "api-platform-teams:fill-canvas",
+        "roleId": "api-platform-teams",
+        "title": "Fill a recommended canvas for API platform teams",
+        "mode": "fill-canvas",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Entrega da API - Fornecer APIs seguras e fiáveis, Auditoria de API - Auditoria de APIs para conformidade e qualidade, Publicação de API - Publique APIs com confiança\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "api-platform-teams:review-output",
+        "roleId": "api-platform-teams",
+        "title": "Review method output for API platform teams",
+        "mode": "review-output",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Entrega da API - Fornecer APIs seguras e fiáveis, Auditoria de API - Auditoria de APIs para conformidade e qualidade, Publicação de API - Publique APIs com confiança\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "api-platform-teams:next-actions",
+        "roleId": "api-platform-teams",
+        "title": "Generate next actions for API platform teams",
+        "mode": "next-actions",
+        "prompt": "Role: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Entrega da API - Fornecer APIs seguras e fiáveis, Auditoria de API - Auditoria de APIs para conformidade e qualidade, Publicação de API - Publique APIs com confiança\nCanvases: Business Impact Canvas, Location Canvas, Capacity Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "integration-architects:facilitate-station",
+        "roleId": "integration-architects",
+        "title": "Facilitate a station for Integration architects",
+        "mode": "facilitate-station",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Conceção da API - Conceber APIs que proporcionem valor, Entrega da API - Fornecer APIs seguras e fiáveis\nCanvases: Consumer Experience Requirements Canvas, Location Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "integration-architects:fill-canvas",
+        "roleId": "integration-architects",
+        "title": "Fill a recommended canvas for Integration architects",
+        "mode": "fill-canvas",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Conceção da API - Conceber APIs que proporcionem valor, Entrega da API - Fornecer APIs seguras e fiáveis\nCanvases: Consumer Experience Requirements Canvas, Location Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "integration-architects:review-output",
+        "roleId": "integration-architects",
+        "title": "Review method output for Integration architects",
+        "mode": "review-output",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Conceção da API - Conceber APIs que proporcionem valor, Entrega da API - Fornecer APIs seguras e fiáveis\nCanvases: Consumer Experience Requirements Canvas, Location Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "integration-architects:next-actions",
+        "roleId": "integration-architects",
+        "title": "Generate next actions for Integration architects",
+        "mode": "next-actions",
+        "prompt": "Role: Integration architects\nCycles: Integration Productization Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização, Conceção da API - Conceber APIs que proporcionem valor, Entrega da API - Fornecer APIs seguras e fiáveis\nCanvases: Consumer Experience Requirements Canvas, Location Canvas, Capacity Canvas, Event Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "automation-owners:facilitate-station",
+        "roleId": "automation-owners",
+        "title": "Facilitate a station for Automation and process owners",
+        "mode": "facilitate-station",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "automation-owners:fill-canvas",
+        "roleId": "automation-owners",
+        "title": "Fill a recommended canvas for Automation and process owners",
+        "mode": "fill-canvas",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "automation-owners:review-output",
+        "roleId": "automation-owners",
+        "title": "Review method output for Automation and process owners",
+        "mode": "review-output",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "automation-owners:next-actions",
+        "roleId": "automation-owners",
+        "title": "Generate next actions for Automation and process owners",
+        "mode": "next-actions",
+        "prompt": "Role: Automation and process owners\nCycles: Automation Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Customer Journey Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "ai-facilitators:facilitate-station",
+        "roleId": "ai-facilitators",
+        "title": "Facilitate a station for AI assistants and method facilitators",
+        "mode": "facilitate-station",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log."
+      },
+      {
+        "id": "ai-facilitators:fill-canvas",
+        "roleId": "ai-facilitators",
+        "title": "Fill a recommended canvas for AI assistants and method facilitators",
+        "mode": "fill-canvas",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions."
+      },
+      {
+        "id": "ai-facilitators:review-output",
+        "roleId": "ai-facilitators",
+        "title": "Review method output for AI assistants and method facilitators",
+        "mode": "review-output",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station."
+      },
+      {
+        "id": "ai-facilitators:next-actions",
+        "roleId": "ai-facilitators",
+        "title": "Generate next actions for AI assistants and method facilitators",
+        "mode": "next-actions",
+        "prompt": "Role: AI assistants and method facilitators\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Estratégia de produtos API - Transforme APIs em produtos estratégicos, Experiência do consumidor da API - Design para os utilizadores reais da sua API, Conceção da API - Conceber APIs que proporcionem valor, Auditoria de API - Auditoria de APIs para conformidade e qualidade\nCanvases: Customer Journey Canvas, Domain Canvas, Interaction Canvas, Consumer Experience Requirements Canvas\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence."
+      }
+    ]
+  }
+}

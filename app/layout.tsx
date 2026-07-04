@@ -7,12 +7,15 @@ export const metadata: Metadata = {
     template: "%s | APIOps Cycles",
   },
   description:
-    "A static, localizable knowledge catalog for APIOps Cycles method content, productization cycles, shared stations, canvases, criteria, and resources.",
+    "A static, localizable APIOps Cycles method site with stakeholder guides, AI prompt packs, canvas workspaces, Confluence exports, and method data surfaces.",
   keywords: [
     "APIOps Cycles",
     "API productization",
     "integration productization",
     "knowledge catalog",
+    "AI prompts",
+    "Confluence templates",
+    "canvas workspace",
     "API design",
     "capability productization",
   ],
@@ -23,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "APIOps Cycles Knowledge Catalog",
     description:
-      "Explore productization cycles, lifecycle stations, canvases, guidelines, and resources from the APIOps Cycles method data.",
+      "Explore role-guided APIOps Cycles paths, method canvases, AI prompt packs, exports, and static method data.",
     type: "website",
   },
 };

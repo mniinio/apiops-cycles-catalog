@@ -1,0 +1,657 @@
+{
+  "source": {
+    "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
+    "branch": "codex/integration-design-extension",
+    "commit": "8f6a705b5e8a44b51361cec6ceed21d0ef23b1b6"
+  },
+  "locales": [
+    "en",
+    "fi",
+    "fr",
+    "de",
+    "pt"
+  ],
+  "defaultLocale": "en",
+  "translations": {
+    "en": [
+      {
+        "id": "executives:markdown-summary",
+        "roleId": "executives",
+        "format": "markdown",
+        "title": "Executives and top management method summary",
+        "body": "# Executives and top management APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- Strategy\n- Architecture & Platform Decisions\n- Monitoring & Improvement\n\n## Canvases\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "executives:confluence-page",
+        "roleId": "executives",
+        "format": "confluence-markdown",
+        "title": "Executives and top management Confluence page",
+        "body": "# Executives and top management Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Executives and top management.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Canvas notes\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "enterprise-architects:markdown-summary",
+        "roleId": "enterprise-architects",
+        "format": "markdown",
+        "title": "Enterprise and solution architects method summary",
+        "body": "# Enterprise and solution architects APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- Architecture & Platform Decisions\n- Solution & Interface Design\n- Quality & Readiness Assurance\n\n## Canvases\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "enterprise-architects:confluence-page",
+        "roleId": "enterprise-architects",
+        "format": "confluence-markdown",
+        "title": "Enterprise and solution architects Confluence page",
+        "body": "# Enterprise and solution architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Enterprise and solution architects.\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Canvas notes\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "capability-owners:markdown-summary",
+        "roleId": "capability-owners",
+        "format": "markdown",
+        "title": "Capability owners method summary",
+        "body": "# Capability owners APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- Strategy\n- Consumer Requirements & Onboarding\n- Publishing & Enablement\n\n## Canvases\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Decisions to document\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "capability-owners:confluence-page",
+        "roleId": "capability-owners",
+        "format": "confluence-markdown",
+        "title": "Capability owners Confluence page",
+        "body": "# Capability owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Capability owners.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Canvas notes\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-product-owners:markdown-summary",
+        "roleId": "api-product-owners",
+        "format": "markdown",
+        "title": "API product owners method summary",
+        "body": "# API product owners APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- Strategy\n- Consumer Requirements & Onboarding\n- Publishing & Enablement\n- Monitoring & Improvement\n\n## Canvases\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-product-owners:confluence-page",
+        "roleId": "api-product-owners",
+        "format": "confluence-markdown",
+        "title": "API product owners Confluence page",
+        "body": "# API product owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API product owners.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Canvas notes\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-designers:markdown-summary",
+        "roleId": "api-designers",
+        "format": "markdown",
+        "title": "API designers method summary",
+        "body": "# API designers APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- Solution & Interface Design\n- Quality & Readiness Assurance\n\n## Canvases\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Decisions to document\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-designers:confluence-page",
+        "roleId": "api-designers",
+        "format": "confluence-markdown",
+        "title": "API designers Confluence page",
+        "body": "# API designers Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API designers.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Canvas notes\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-platform-teams:markdown-summary",
+        "roleId": "api-platform-teams",
+        "format": "markdown",
+        "title": "API platform teams method summary",
+        "body": "# API platform teams APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- Architecture & Platform Decisions\n- Delivery & Operations\n- Quality & Readiness Assurance\n- Publishing & Enablement\n\n## Canvases\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n\n## Decisions to document\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-platform-teams:confluence-page",
+        "roleId": "api-platform-teams",
+        "format": "confluence-markdown",
+        "title": "API platform teams Confluence page",
+        "body": "# API platform teams Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API platform teams.\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Canvas notes\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "integration-architects:markdown-summary",
+        "roleId": "integration-architects",
+        "format": "markdown",
+        "title": "Integration architects method summary",
+        "body": "# Integration architects APIOps Cycles Summary\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Key stations\n- Strategy\n- Architecture & Platform Decisions\n- Solution & Interface Design\n- Delivery & Operations\n\n## Canvases\n- Consumer Experience Requirements Canvas\n- Locations Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "integration-architects:confluence-page",
+        "roleId": "integration-architects",
+        "format": "confluence-markdown",
+        "title": "Integration architects Confluence page",
+        "body": "# Integration architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Integration architects.\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Decisions\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Canvas notes\n- Consumer Experience Requirements Canvas\n- Locations Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "automation-owners:markdown-summary",
+        "roleId": "automation-owners",
+        "format": "markdown",
+        "title": "Automation and process owners method summary",
+        "body": "# Automation and process owners APIOps Cycles Summary\n\n## Recommended cycles\n- Automation Cycle\n\n## Key stations\n- Strategy\n- Consumer Requirements & Onboarding\n- Solution & Interface Design\n- Quality & Readiness Assurance\n\n## Canvases\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "automation-owners:confluence-page",
+        "roleId": "automation-owners",
+        "format": "confluence-markdown",
+        "title": "Automation and process owners Confluence page",
+        "body": "# Automation and process owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Automation and process owners.\n\n## Recommended cycles\n- Automation Cycle\n\n## Decisions\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Canvas notes\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "ai-facilitators:markdown-summary",
+        "roleId": "ai-facilitators",
+        "format": "markdown",
+        "title": "AI assistants and method facilitators method summary",
+        "body": "# AI assistants and method facilitators APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Key stations\n- Strategy\n- Consumer Requirements & Onboarding\n- Solution & Interface Design\n- Quality & Readiness Assurance\n\n## Canvases\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "ai-facilitators:confluence-page",
+        "roleId": "ai-facilitators",
+        "format": "confluence-markdown",
+        "title": "AI assistants and method facilitators Confluence page",
+        "body": "# AI assistants and method facilitators Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for AI assistants and method facilitators.\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Decisions\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Canvas notes\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      }
+    ],
+    "fi": [
+      {
+        "id": "executives:markdown-summary",
+        "roleId": "executives",
+        "format": "markdown",
+        "title": "Executives and top management method summary",
+        "body": "# Executives and top management APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- API-tuotestrategia - Tee rajapinnoista strategisia tuotteita\n- API-alustan arkkitehtuuri\n- Seuranta ja parantaminen - API-arvoa varten\n\n## Canvases\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "executives:confluence-page",
+        "roleId": "executives",
+        "format": "confluence-markdown",
+        "title": "Executives and top management Confluence page",
+        "body": "# Executives and top management Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Executives and top management.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Canvas notes\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "enterprise-architects:markdown-summary",
+        "roleId": "enterprise-architects",
+        "format": "markdown",
+        "title": "Enterprise and solution architects method summary",
+        "body": "# Enterprise and solution architects APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- API-alustan arkkitehtuuri\n- API-design - Suunnittele arvoa tuottavia rajapintoja\n- API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\n\n## Canvases\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "enterprise-architects:confluence-page",
+        "roleId": "enterprise-architects",
+        "format": "confluence-markdown",
+        "title": "Enterprise and solution architects Confluence page",
+        "body": "# Enterprise and solution architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Enterprise and solution architects.\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Canvas notes\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "capability-owners:markdown-summary",
+        "roleId": "capability-owners",
+        "format": "markdown",
+        "title": "Capability owners method summary",
+        "body": "# Capability owners APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- API-tuotestrategia - Tee rajapinnoista strategisia tuotteita\n- API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten.\n- API-julkaiseminen - Julkaise APIt luotettavasti\n\n## Canvases\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Decisions to document\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "capability-owners:confluence-page",
+        "roleId": "capability-owners",
+        "format": "confluence-markdown",
+        "title": "Capability owners Confluence page",
+        "body": "# Capability owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Capability owners.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Canvas notes\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-product-owners:markdown-summary",
+        "roleId": "api-product-owners",
+        "format": "markdown",
+        "title": "API product owners method summary",
+        "body": "# API product owners APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- API-tuotestrategia - Tee rajapinnoista strategisia tuotteita\n- API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten.\n- API-julkaiseminen - Julkaise APIt luotettavasti\n- Seuranta ja parantaminen - API-arvoa varten\n\n## Canvases\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-product-owners:confluence-page",
+        "roleId": "api-product-owners",
+        "format": "confluence-markdown",
+        "title": "API product owners Confluence page",
+        "body": "# API product owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API product owners.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Canvas notes\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-designers:markdown-summary",
+        "roleId": "api-designers",
+        "format": "markdown",
+        "title": "API designers method summary",
+        "body": "# API designers APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- API-design - Suunnittele arvoa tuottavia rajapintoja\n- API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\n\n## Canvases\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Decisions to document\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-designers:confluence-page",
+        "roleId": "api-designers",
+        "format": "confluence-markdown",
+        "title": "API designers Confluence page",
+        "body": "# API designers Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API designers.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Canvas notes\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-platform-teams:markdown-summary",
+        "roleId": "api-platform-teams",
+        "format": "markdown",
+        "title": "API platform teams method summary",
+        "body": "# API platform teams APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- API-alustan arkkitehtuuri\n- API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat\n- API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\n- API-julkaiseminen - Julkaise APIt luotettavasti\n\n## Canvases\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n\n## Decisions to document\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-platform-teams:confluence-page",
+        "roleId": "api-platform-teams",
+        "format": "confluence-markdown",
+        "title": "API platform teams Confluence page",
+        "body": "# API platform teams Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API platform teams.\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Canvas notes\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "integration-architects:markdown-summary",
+        "roleId": "integration-architects",
+        "format": "markdown",
+        "title": "Integration architects method summary",
+        "body": "# Integration architects APIOps Cycles Summary\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Key stations\n- API-tuotestrategia - Tee rajapinnoista strategisia tuotteita\n- API-alustan arkkitehtuuri\n- API-design - Suunnittele arvoa tuottavia rajapintoja\n- API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat\n\n## Canvases\n- Consumer Experience Requirements Canvas\n- Locations Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "integration-architects:confluence-page",
+        "roleId": "integration-architects",
+        "format": "confluence-markdown",
+        "title": "Integration architects Confluence page",
+        "body": "# Integration architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Integration architects.\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Decisions\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Canvas notes\n- Consumer Experience Requirements Canvas\n- Locations Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "automation-owners:markdown-summary",
+        "roleId": "automation-owners",
+        "format": "markdown",
+        "title": "Automation and process owners method summary",
+        "body": "# Automation and process owners APIOps Cycles Summary\n\n## Recommended cycles\n- Automation Cycle\n\n## Key stations\n- API-tuotestrategia - Tee rajapinnoista strategisia tuotteita\n- API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten.\n- API-design - Suunnittele arvoa tuottavia rajapintoja\n- API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\n\n## Canvases\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "automation-owners:confluence-page",
+        "roleId": "automation-owners",
+        "format": "confluence-markdown",
+        "title": "Automation and process owners Confluence page",
+        "body": "# Automation and process owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Automation and process owners.\n\n## Recommended cycles\n- Automation Cycle\n\n## Decisions\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Canvas notes\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "ai-facilitators:markdown-summary",
+        "roleId": "ai-facilitators",
+        "format": "markdown",
+        "title": "AI assistants and method facilitators method summary",
+        "body": "# AI assistants and method facilitators APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Key stations\n- API-tuotestrategia - Tee rajapinnoista strategisia tuotteita\n- API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten.\n- API-design - Suunnittele arvoa tuottavia rajapintoja\n- API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi\n\n## Canvases\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "ai-facilitators:confluence-page",
+        "roleId": "ai-facilitators",
+        "format": "confluence-markdown",
+        "title": "AI assistants and method facilitators Confluence page",
+        "body": "# AI assistants and method facilitators Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for AI assistants and method facilitators.\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Decisions\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Canvas notes\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      }
+    ],
+    "fr": [
+      {
+        "id": "executives:markdown-summary",
+        "roleId": "executives",
+        "format": "markdown",
+        "title": "Executives and top management method summary",
+        "body": "# Executives and top management APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- Stratégie produit API - Transformer les API en produits stratégiques\n- Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation\n- Suivi et amélioration - pour la valeur de l'API\n\n## Canvases\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "executives:confluence-page",
+        "roleId": "executives",
+        "format": "confluence-markdown",
+        "title": "Executives and top management Confluence page",
+        "body": "# Executives and top management Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Executives and top management.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Canvas notes\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "enterprise-architects:markdown-summary",
+        "roleId": "enterprise-architects",
+        "format": "markdown",
+        "title": "Enterprise and solution architects method summary",
+        "body": "# Enterprise and solution architects APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation\n- Conception d'API - Concevoir des API qui apportent de la valeur\n- Audit API - Audit de conformité et de qualité des API\n\n## Canvases\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "enterprise-architects:confluence-page",
+        "roleId": "enterprise-architects",
+        "format": "confluence-markdown",
+        "title": "Enterprise and solution architects Confluence page",
+        "body": "# Enterprise and solution architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Enterprise and solution architects.\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Canvas notes\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "capability-owners:markdown-summary",
+        "roleId": "capability-owners",
+        "format": "markdown",
+        "title": "Capability owners method summary",
+        "body": "# Capability owners APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- Stratégie produit API - Transformer les API en produits stratégiques\n- API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API\n- Publication d'API - Publier des API en toute confiance\n\n## Canvases\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Decisions to document\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "capability-owners:confluence-page",
+        "roleId": "capability-owners",
+        "format": "confluence-markdown",
+        "title": "Capability owners Confluence page",
+        "body": "# Capability owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Capability owners.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Canvas notes\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-product-owners:markdown-summary",
+        "roleId": "api-product-owners",
+        "format": "markdown",
+        "title": "API product owners method summary",
+        "body": "# API product owners APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- Stratégie produit API - Transformer les API en produits stratégiques\n- API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API\n- Publication d'API - Publier des API en toute confiance\n- Suivi et amélioration - pour la valeur de l'API\n\n## Canvases\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-product-owners:confluence-page",
+        "roleId": "api-product-owners",
+        "format": "confluence-markdown",
+        "title": "API product owners Confluence page",
+        "body": "# API product owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API product owners.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Canvas notes\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-designers:markdown-summary",
+        "roleId": "api-designers",
+        "format": "markdown",
+        "title": "API designers method summary",
+        "body": "# API designers APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- Conception d'API - Concevoir des API qui apportent de la valeur\n- Audit API - Audit de conformité et de qualité des API\n\n## Canvases\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Decisions to document\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-designers:confluence-page",
+        "roleId": "api-designers",
+        "format": "confluence-markdown",
+        "title": "API designers Confluence page",
+        "body": "# API designers Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API designers.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Canvas notes\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-platform-teams:markdown-summary",
+        "roleId": "api-platform-teams",
+        "format": "markdown",
+        "title": "API platform teams method summary",
+        "body": "# API platform teams APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation\n- Livraison d'API - Fournir des API sécurisées et fiables\n- Audit API - Audit de conformité et de qualité des API\n- Publication d'API - Publier des API en toute confiance\n\n## Canvases\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n\n## Decisions to document\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-platform-teams:confluence-page",
+        "roleId": "api-platform-teams",
+        "format": "confluence-markdown",
+        "title": "API platform teams Confluence page",
+        "body": "# API platform teams Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API platform teams.\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Canvas notes\n- Business Impact Canvas\n- Locations Canvas\n- Capacity Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "integration-architects:markdown-summary",
+        "roleId": "integration-architects",
+        "format": "markdown",
+        "title": "Integration architects method summary",
+        "body": "# Integration architects APIOps Cycles Summary\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Key stations\n- Stratégie produit API - Transformer les API en produits stratégiques\n- Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation\n- Conception d'API - Concevoir des API qui apportent de la valeur\n- Livraison d'API - Fournir des API sécurisées et fiables\n\n## Canvases\n- Consumer Experience Requirements Canvas\n- Locations Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "integration-architects:confluence-page",
+        "roleId": "integration-architects",
+        "format": "confluence-markdown",
+        "title": "Integration architects Confluence page",
+        "body": "# Integration architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Integration architects.\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Decisions\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Canvas notes\n- Consumer Experience Requirements Canvas\n- Locations Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "automation-owners:markdown-summary",
+        "roleId": "automation-owners",
+        "format": "markdown",
+        "title": "Automation and process owners method summary",
+        "body": "# Automation and process owners APIOps Cycles Summary\n\n## Recommended cycles\n- Automation Cycle\n\n## Key stations\n- Stratégie produit API - Transformer les API en produits stratégiques\n- API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API\n- Conception d'API - Concevoir des API qui apportent de la valeur\n- Audit API - Audit de conformité et de qualité des API\n\n## Canvases\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "automation-owners:confluence-page",
+        "roleId": "automation-owners",
+        "format": "confluence-markdown",
+        "title": "Automation and process owners Confluence page",
+        "body": "# Automation and process owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Automation and process owners.\n\n## Recommended cycles\n- Automation Cycle\n\n## Decisions\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Canvas notes\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "ai-facilitators:markdown-summary",
+        "roleId": "ai-facilitators",
+        "format": "markdown",
+        "title": "AI assistants and method facilitators method summary",
+        "body": "# AI assistants and method facilitators APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Key stations\n- Stratégie produit API - Transformer les API en produits stratégiques\n- API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API\n- Conception d'API - Concevoir des API qui apportent de la valeur\n- Audit API - Audit de conformité et de qualité des API\n\n## Canvases\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "ai-facilitators:confluence-page",
+        "roleId": "ai-facilitators",
+        "format": "confluence-markdown",
+        "title": "AI assistants and method facilitators Confluence page",
+        "body": "# AI assistants and method facilitators Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for AI assistants and method facilitators.\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Decisions\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Canvas notes\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      }
+    ],
+    "de": [
+      {
+        "id": "executives:markdown-summary",
+        "roleId": "executives",
+        "format": "markdown",
+        "title": "Executives and top management method summary",
+        "body": "# Executives and top management APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- API-Produktstrategie - APIs in strategische Produkte verwandeln\n- API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung\n- Überwachen und Verbessern - für den API-Wert\n\n## Canvases\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "executives:confluence-page",
+        "roleId": "executives",
+        "format": "confluence-markdown",
+        "title": "Executives and top management Confluence page",
+        "body": "# Executives and top management Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Executives and top management.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Canvas notes\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "enterprise-architects:markdown-summary",
+        "roleId": "enterprise-architects",
+        "format": "markdown",
+        "title": "Enterprise and solution architects method summary",
+        "body": "# Enterprise and solution architects APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung\n- API-Design - Entwerfen Sie APIs, die Wert liefern\n- API-Audit - Prüfung von APIs auf Konformität und Qualität\n\n## Canvases\n- Business Impact Canvas\n- Location Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "enterprise-architects:confluence-page",
+        "roleId": "enterprise-architects",
+        "format": "confluence-markdown",
+        "title": "Enterprise and solution architects Confluence page",
+        "body": "# Enterprise and solution architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Enterprise and solution architects.\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Canvas notes\n- Business Impact Canvas\n- Location Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "capability-owners:markdown-summary",
+        "roleId": "capability-owners",
+        "format": "markdown",
+        "title": "Capability owners method summary",
+        "body": "# Capability owners APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- API-Produktstrategie - APIs in strategische Produkte verwandeln\n- API Consumer Experience - Design für die echten Benutzer Ihrer API\n- API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\n\n## Canvases\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Decisions to document\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "capability-owners:confluence-page",
+        "roleId": "capability-owners",
+        "format": "confluence-markdown",
+        "title": "Capability owners Confluence page",
+        "body": "# Capability owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Capability owners.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Canvas notes\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-product-owners:markdown-summary",
+        "roleId": "api-product-owners",
+        "format": "markdown",
+        "title": "API product owners method summary",
+        "body": "# API product owners APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- API-Produktstrategie - APIs in strategische Produkte verwandeln\n- API Consumer Experience - Design für die echten Benutzer Ihrer API\n- API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\n- Überwachen und Verbessern - für den API-Wert\n\n## Canvases\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-product-owners:confluence-page",
+        "roleId": "api-product-owners",
+        "format": "confluence-markdown",
+        "title": "API product owners Confluence page",
+        "body": "# API product owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API product owners.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Canvas notes\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-designers:markdown-summary",
+        "roleId": "api-designers",
+        "format": "markdown",
+        "title": "API designers method summary",
+        "body": "# API designers APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- API-Design - Entwerfen Sie APIs, die Wert liefern\n- API-Audit - Prüfung von APIs auf Konformität und Qualität\n\n## Canvases\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Decisions to document\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-designers:confluence-page",
+        "roleId": "api-designers",
+        "format": "confluence-markdown",
+        "title": "API designers Confluence page",
+        "body": "# API designers Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API designers.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Canvas notes\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-platform-teams:markdown-summary",
+        "roleId": "api-platform-teams",
+        "format": "markdown",
+        "title": "API platform teams method summary",
+        "body": "# API platform teams APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung\n- API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs\n- API-Audit - Prüfung von APIs auf Konformität und Qualität\n- API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht\n\n## Canvases\n- Business Impact Canvas\n- Location Canvas\n- Capacity Canvas\n\n## Decisions to document\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-platform-teams:confluence-page",
+        "roleId": "api-platform-teams",
+        "format": "confluence-markdown",
+        "title": "API platform teams Confluence page",
+        "body": "# API platform teams Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API platform teams.\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Canvas notes\n- Business Impact Canvas\n- Location Canvas\n- Capacity Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "integration-architects:markdown-summary",
+        "roleId": "integration-architects",
+        "format": "markdown",
+        "title": "Integration architects method summary",
+        "body": "# Integration architects APIOps Cycles Summary\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Key stations\n- API-Produktstrategie - APIs in strategische Produkte verwandeln\n- API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung\n- API-Design - Entwerfen Sie APIs, die Wert liefern\n- API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs\n\n## Canvases\n- Consumer Experience Requirements Canvas\n- Location Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "integration-architects:confluence-page",
+        "roleId": "integration-architects",
+        "format": "confluence-markdown",
+        "title": "Integration architects Confluence page",
+        "body": "# Integration architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Integration architects.\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Decisions\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Canvas notes\n- Consumer Experience Requirements Canvas\n- Location Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "automation-owners:markdown-summary",
+        "roleId": "automation-owners",
+        "format": "markdown",
+        "title": "Automation and process owners method summary",
+        "body": "# Automation and process owners APIOps Cycles Summary\n\n## Recommended cycles\n- Automation Cycle\n\n## Key stations\n- API-Produktstrategie - APIs in strategische Produkte verwandeln\n- API Consumer Experience - Design für die echten Benutzer Ihrer API\n- API-Design - Entwerfen Sie APIs, die Wert liefern\n- API-Audit - Prüfung von APIs auf Konformität und Qualität\n\n## Canvases\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "automation-owners:confluence-page",
+        "roleId": "automation-owners",
+        "format": "confluence-markdown",
+        "title": "Automation and process owners Confluence page",
+        "body": "# Automation and process owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Automation and process owners.\n\n## Recommended cycles\n- Automation Cycle\n\n## Decisions\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Canvas notes\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "ai-facilitators:markdown-summary",
+        "roleId": "ai-facilitators",
+        "format": "markdown",
+        "title": "AI assistants and method facilitators method summary",
+        "body": "# AI assistants and method facilitators APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Key stations\n- API-Produktstrategie - APIs in strategische Produkte verwandeln\n- API Consumer Experience - Design für die echten Benutzer Ihrer API\n- API-Design - Entwerfen Sie APIs, die Wert liefern\n- API-Audit - Prüfung von APIs auf Konformität und Qualität\n\n## Canvases\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "ai-facilitators:confluence-page",
+        "roleId": "ai-facilitators",
+        "format": "confluence-markdown",
+        "title": "AI assistants and method facilitators Confluence page",
+        "body": "# AI assistants and method facilitators Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for AI assistants and method facilitators.\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Decisions\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Canvas notes\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      }
+    ],
+    "pt": [
+      {
+        "id": "executives:markdown-summary",
+        "roleId": "executives",
+        "format": "markdown",
+        "title": "Executives and top management method summary",
+        "body": "# Executives and top management APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- Estratégia de produtos API - Transforme APIs em produtos estratégicos\n- Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização\n- Monitorização e melhoria - para valor API\n\n## Canvases\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "executives:confluence-page",
+        "roleId": "executives",
+        "format": "confluence-markdown",
+        "title": "Executives and top management Confluence page",
+        "body": "# Executives and top management Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Executives and top management.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Which reusable capabilities deserve investment?\n- What business outcomes, risks, and benefits justify the work?\n- Which governance evidence is needed before scaling?\n\n## Canvas notes\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "enterprise-architects:markdown-summary",
+        "roleId": "enterprise-architects",
+        "format": "markdown",
+        "title": "Enterprise and solution architects method summary",
+        "body": "# Enterprise and solution architects APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização\n- Conceção da API - Conceber APIs que proporcionem valor\n- Auditoria de API - Auditoria de APIs para conformidade e qualidade\n\n## Canvases\n- Business Impact Canvas\n- Location Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "enterprise-architects:confluence-page",
+        "roleId": "enterprise-architects",
+        "format": "confluence-markdown",
+        "title": "Enterprise and solution architects Confluence page",
+        "body": "# Enterprise and solution architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Enterprise and solution architects.\n\n## Recommended cycles\n- Capability Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?\n- Which constraints drive platform and integration choices?\n- What evidence supports the architecture decision?\n\n## Canvas notes\n- Business Impact Canvas\n- Location Canvas\n- Capacity Canvas\n- Domain Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "capability-owners:markdown-summary",
+        "roleId": "capability-owners",
+        "format": "markdown",
+        "title": "Capability owners method summary",
+        "body": "# Capability owners APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Key stations\n- Estratégia de produtos API - Transforme APIs em produtos estratégicos\n- Experiência do consumidor da API - Design para os utilizadores reais da sua API\n- Publicação de API - Publique APIs com confiança\n\n## Canvases\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Decisions to document\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "capability-owners:confluence-page",
+        "roleId": "capability-owners",
+        "format": "confluence-markdown",
+        "title": "Capability owners Confluence page",
+        "body": "# Capability owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Capability owners.\n\n## Recommended cycles\n- Capability Productization Cycle\n\n## Decisions\n- Who consumes this capability and what outcome do they need?\n- What should be reusable across teams or partners?\n- How will consumers discover, request, and get support?\n\n## Canvas notes\n- Customer Journey Canvas\n- Capability Value Proposition Canvas\n- Capability Business Model Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-product-owners:markdown-summary",
+        "roleId": "api-product-owners",
+        "format": "markdown",
+        "title": "API product owners method summary",
+        "body": "# API product owners APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- Estratégia de produtos API - Transforme APIs em produtos estratégicos\n- Experiência do consumidor da API - Design para os utilizadores reais da sua API\n- Publicação de API - Publique APIs com confiança\n- Monitorização e melhoria - para valor API\n\n## Canvases\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-product-owners:confluence-page",
+        "roleId": "api-product-owners",
+        "format": "confluence-markdown",
+        "title": "API product owners Confluence page",
+        "body": "# API product owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API product owners.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Who are the API consumers and what value do they need?\n- What onboarding, service, and support promises are realistic?\n- How will adoption and value be measured?\n\n## Canvas notes\n- Customer Journey Canvas\n- API Value Proposition Canvas\n- API Business Model Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-designers:markdown-summary",
+        "roleId": "api-designers",
+        "format": "markdown",
+        "title": "API designers method summary",
+        "body": "# API designers APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n\n## Key stations\n- Conceção da API - Conceber APIs que proporcionem valor\n- Auditoria de API - Auditoria de APIs para conformidade e qualidade\n\n## Canvases\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Decisions to document\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-designers:confluence-page",
+        "roleId": "api-designers",
+        "format": "confluence-markdown",
+        "title": "API designers Confluence page",
+        "body": "# API designers Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API designers.\n\n## Recommended cycles\n- API Productization Cycle\n\n## Decisions\n- Which interaction style fits each consumer task?\n- Which domain objects, operations, events, and schemas are needed?\n- Is the contract consistent, secure, and reviewable?\n\n## Canvas notes\n- Domain Canvas\n- Interaction Canvas\n- REST Canvas\n- Event Canvas\n- GraphQL Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "api-platform-teams:markdown-summary",
+        "roleId": "api-platform-teams",
+        "format": "markdown",
+        "title": "API platform teams method summary",
+        "body": "# API platform teams APIOps Cycles Summary\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Key stations\n- Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização\n- Entrega da API - Fornecer APIs seguras e fiáveis\n- Auditoria de API - Auditoria de APIs para conformidade e qualidade\n- Publicação de API - Publique APIs com confiança\n\n## Canvases\n- Business Impact Canvas\n- Location Canvas\n- Capacity Canvas\n\n## Decisions to document\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "api-platform-teams:confluence-page",
+        "roleId": "api-platform-teams",
+        "format": "confluence-markdown",
+        "title": "API platform teams Confluence page",
+        "body": "# API platform teams Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for API platform teams.\n\n## Recommended cycles\n- API Productization Cycle\n- Integration Productization Cycle\n\n## Decisions\n- Which platform capabilities must be available?\n- Which delivery and audit controls are mandatory?\n- How should teams publish and operate reusable products?\n\n## Canvas notes\n- Business Impact Canvas\n- Location Canvas\n- Capacity Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "integration-architects:markdown-summary",
+        "roleId": "integration-architects",
+        "format": "markdown",
+        "title": "Integration architects method summary",
+        "body": "# Integration architects APIOps Cycles Summary\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Key stations\n- Estratégia de produtos API - Transforme APIs em produtos estratégicos\n- Arquitetura da plataforma API - Arquitetar APIs para escalabilidade e reutilização\n- Conceção da API - Conceber APIs que proporcionem valor\n- Entrega da API - Fornecer APIs seguras e fiáveis\n\n## Canvases\n- Consumer Experience Requirements Canvas\n- Location Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Decisions to document\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "integration-architects:confluence-page",
+        "roleId": "integration-architects",
+        "format": "confluence-markdown",
+        "title": "Integration architects Confluence page",
+        "body": "# Integration architects Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Integration architects.\n\n## Recommended cycles\n- Integration Productization Cycle\n\n## Decisions\n- Which integration pattern fits the consumer and producer constraints?\n- How are payloads, timing, ownership, and recovery handled?\n- How will the capability be operated and reused?\n\n## Canvas notes\n- Consumer Experience Requirements Canvas\n- Location Canvas\n- Capacity Canvas\n- Event Canvas\n- Interaction Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "automation-owners:markdown-summary",
+        "roleId": "automation-owners",
+        "format": "markdown",
+        "title": "Automation and process owners method summary",
+        "body": "# Automation and process owners APIOps Cycles Summary\n\n## Recommended cycles\n- Automation Cycle\n\n## Key stations\n- Estratégia de produtos API - Transforme APIs em produtos estratégicos\n- Experiência do consumidor da API - Design para os utilizadores reais da sua API\n- Conceção da API - Conceber APIs que proporcionem valor\n- Auditoria de API - Auditoria de APIs para conformidade e qualidade\n\n## Canvases\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Decisions to document\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "automation-owners:confluence-page",
+        "roleId": "automation-owners",
+        "format": "confluence-markdown",
+        "title": "Automation and process owners Confluence page",
+        "body": "# Automation and process owners Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for Automation and process owners.\n\n## Recommended cycles\n- Automation Cycle\n\n## Decisions\n- Which process outcomes should be automated?\n- Where are exceptions, handoffs, and human approvals needed?\n- Which controls prove the automation is ready?\n\n## Canvas notes\n- Customer Journey Canvas\n- Consumer Experience Requirements Canvas\n- Interaction Canvas\n- Business Impact Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      },
+      {
+        "id": "ai-facilitators:markdown-summary",
+        "roleId": "ai-facilitators",
+        "format": "markdown",
+        "title": "AI assistants and method facilitators method summary",
+        "body": "# AI assistants and method facilitators APIOps Cycles Summary\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Key stations\n- Estratégia de produtos API - Transforme APIs em produtos estratégicos\n- Experiência do consumidor da API - Design para os utilizadores reais da sua API\n- Conceção da API - Conceber APIs que proporcionem valor\n- Auditoria de API - Auditoria de APIs para conformidade e qualidade\n\n## Canvases\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Decisions to document\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Evidence and notes\n- \n"
+      },
+      {
+        "id": "ai-facilitators:confluence-page",
+        "roleId": "ai-facilitators",
+        "format": "confluence-markdown",
+        "title": "AI assistants and method facilitators Confluence page",
+        "body": "# AI assistants and method facilitators Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for AI assistants and method facilitators.\n\n## Recommended cycles\n- Capability Productization Cycle\n- API Productization Cycle\n- Integration Productization Cycle\n- Automation Cycle\n\n## Decisions\n- Which prompt should guide the next conversation?\n- Which canvas captures current evidence best?\n- What should be exported for Confluence, Markdown, or MCP use?\n\n## Canvas notes\n- Customer Journey Canvas\n- Domain Canvas\n- Interaction Canvas\n- Consumer Experience Requirements Canvas\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n"
+      }
+    ]
+  }
+}
