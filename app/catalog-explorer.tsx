@@ -102,7 +102,6 @@ type StickyNote = {
   content: string;
   size: number;
   color: string;
-  position?: { x: number; y: number };
 };
 
 type CanvasExportSection = {
@@ -180,8 +179,8 @@ const colors: Record<string, string> = {
 };
 
 const viewLabels = {
-  guide: "Role guide",
   map: "Metro map",
+  guide: "Role guide",
   ai: "Use with AI",
   confluence: "Confluence",
   canvases: "Canvases",
@@ -194,6 +193,18 @@ function compact(text: string, max = 150) {
 
 function safeRole(roleId: string, roles: RoleGuide[]) {
   return roles.find((role) => role.id === roleId) ?? roles[0];
+}
+
+function templateUse(template: ExportTemplate) {
+  const isQuestionTemplate = template.id.includes("integration");
+  const isConfluence = template.format === "confluence-wiki";
+  return {
+    label: isQuestionTemplate ? "Question template" : "Cycle reference",
+    copy: isQuestionTemplate
+      ? "Use this when you want to gather answers and evidence before choosing an integration or API design path."
+      : "Use this when you want to document the selected cycle, stations, route, and method guidance.",
+    target: isConfluence ? "Paste into a Confluence page that accepts Confluence wiki markup." : "Use in Markdown docs, Git repositories, or static documentation sites.",
+  };
 }
 
 function normalizeNotes(value: unknown): StickyNotes {
@@ -211,7 +222,6 @@ function normalizeNotes(value: unknown): StickyNotes {
                   content: typed.content,
                   size: Number(typed.size ?? 80),
                   color: /^#[0-9A-Fa-f]{6}$/.test(typed.color ?? "") ? typed.color : "#FFF399",
-                  position: typed.position,
                 };
               }
               return null;
@@ -316,7 +326,7 @@ function MetroMap({
         </text>
       ))}
       <text x="32" y="38" className="metro-instructions">
-        Click a station to update details. Click a cycle in the legend to switch route.
+        Click any station dot to navigate. Use the legend to switch cycle route.
       </text>
       {linePoints.map((line) => (
         <g key={line.id}>
@@ -340,8 +350,11 @@ function MetroMap({
                 if (event.key === "Enter" || event.key === " ") onSelectStation(point.id);
               }}
             >
+              <title>{point.baseTitle}</title>
               <circle cx={point.x} cy={point.y} r="6" className={point.id === selectedStationId ? "metro-support-node metro-support-node--active" : "metro-support-node"} />
-              <text x={point.x + 10} y={point.y + 4} className="metro-support-label">{point.baseTitle}</text>
+              {point.id === selectedStationId ? (
+                <text x={point.x + 10} y={point.y + 4} className="metro-support-label">{point.baseTitle}</text>
+              ) : null}
             </g>
           ))}
         </g>
@@ -371,6 +384,7 @@ function MetroMap({
             if (event.key === "Enter" || event.key === " ") onSelectStation(point.id);
           }}
         >
+          <title>{point.baseTitle}</title>
           <circle cx={point.x} cy={point.y} r="14" className={point.id === selectedStationId ? "metro-node metro-node--active" : "metro-node"} />
           <text x={point.x} y={point.y + 4} textAnchor="middle" className={point.id === selectedStationId ? "metro-node-number metro-node-number--active" : "metro-node-number"}>
             {point.index}
@@ -382,14 +396,6 @@ function MetroMap({
       ))}
       <text x={center.x} y={center.y - 6} textAnchor="middle" className="metro-brand">apiops</text>
       <text x={center.x} y={center.y + 14} textAnchor="middle" className="metro-brand">cycles</text>
-      <g transform="translate(642 438)">
-        {cycles.map((cycle, index) => (
-          <g key={cycle.id} transform={`translate(0 ${index * 25})`} onClick={() => onSelectCycle(cycle.id)} className="metro-legend">
-            <line x1="0" y1="0" x2="32" y2="0" stroke={colors[cycle.id] ?? "#164e63"} strokeWidth="7" strokeLinecap="round" />
-            <text x="44" y="4">{cycle.title}</text>
-          </g>
-        ))}
-      </g>
     </svg>
   );
 }
@@ -430,10 +436,6 @@ function CanvasWorkspace({
             content: next,
             size: 80,
             color: section.defaultNoteColor,
-            position: {
-              x: 24 + (sectionNotes.length % 3) * 92,
-              y: 72 + Math.floor(sectionNotes.length / 3) * 80,
-            },
           },
         ],
       };
@@ -458,7 +460,11 @@ function CanvasWorkspace({
       },
       sections: canvas.sections.map((section) => ({
         sectionId: section.id,
-        stickyNotes: notes[section.id] ?? [],
+        stickyNotes: (notes[section.id] ?? []).map((note) => ({
+          content: note.content,
+          size: note.size,
+          color: note.color,
+        })),
       })),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
@@ -618,7 +624,7 @@ export default function CatalogExplorer({
       baseTitle: stationDetail.title,
       resources: selectedStationResources,
     };
-  const [view, setView] = useState<keyof typeof viewLabels>("guide");
+  const [view, setView] = useState<keyof typeof viewLabels>("map");
   const [query, setQuery] = useState("");
   const [canvasId, setCanvasId] = useState(role.canvases[0]?.id ?? Object.keys(canvasData)[0]);
 
@@ -731,7 +737,7 @@ export default function CatalogExplorer({
         </div>
       </section>
 
-      <section className="workbench">
+      <section className={view === "map" ? "workbench workbench--map" : "workbench"}>
         <aside className="guide-panel">
           <p className="section-kicker">Guided path</p>
           <h2>{role.title}</h2>
@@ -815,6 +821,28 @@ export default function CatalogExplorer({
 
           {view === "map" ? (
             <article className="panel panel--map">
+              <div className="panel__head map-head">
+                <div>
+                  <p className="section-kicker">Metro map navigation</p>
+                  <h2>{selectedCycle.title}</h2>
+                  <p>
+                    Start from the shared eight-station route. Supporting branch dots are clickable and open details below the map.
+                  </p>
+                </div>
+                <div className="cycle-pills" aria-label="Select cycle">
+                  {data.cycles.map((cycle) => (
+                    <button
+                      key={cycle.id}
+                      type="button"
+                      className={cycle.id === cycleId ? "is-active" : ""}
+                      onClick={() => setCycleId(cycle.id)}
+                    >
+                      <span style={{ backgroundColor: colors[cycle.id] ?? "#164e63" }} />
+                      {cycle.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <MetroMap
                 cycles={data.cycles}
                 lines={data.lines}
@@ -863,15 +891,26 @@ export default function CatalogExplorer({
             <article className="panel">
               <p className="section-kicker">Use with Confluence and Markdown</p>
               <h2>Export-ready templates</h2>
+              <p className="helper-text">
+                Cycle reference templates document the selected method route and stations. Question templates are working pages for collecting answers, evidence, and decisions. Choose Markdown for docs repositories and static sites; choose Confluence-wiki for Confluence pages that accept wiki markup.
+              </p>
               <div className="template-grid">
-                {roleTemplates.map((template) => (
-                  <section key={template.id} className="template-card">
-                    <span>{template.format}</span>
-                    <h3>{template.title}</h3>
-                    <pre>{template.body}</pre>
-                    <button type="button" onClick={() => copyText(template.body)}>Copy template</button>
-                  </section>
-                ))}
+                {roleTemplates.map((template) => {
+                  const use = templateUse(template);
+                  return (
+                    <section key={template.id} className="template-card">
+                      <div className="template-card__meta">
+                        <span>{use.label}</span>
+                        <span>{template.format}</span>
+                      </div>
+                      <h3>{template.title}</h3>
+                      <p>{use.copy}</p>
+                      <p className="template-target">{use.target}</p>
+                      <pre>{template.body}</pre>
+                      <button type="button" onClick={() => copyText(template.body)}>Copy template</button>
+                    </section>
+                  );
+                })}
               </div>
             </article>
           ) : null}
