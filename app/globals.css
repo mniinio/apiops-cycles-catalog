@@ -120,10 +120,14 @@ a {
   gap: 14px;
 }
 
-.topbar__controls a {
+.topbar__controls a,
+.topbar__controls button {
+  background: transparent;
+  border: 0;
   color: var(--muted);
   font-size: 0.95rem;
   font-weight: 750;
+  padding: 0;
   text-decoration: none;
 }
 
@@ -378,7 +382,7 @@ code {
 }
 
 .metro-zone-label,
-.metro-spoke-label,
+.metro-support-label,
 .metro-label,
 .metro-legend text {
   fill: #071640;
@@ -390,17 +394,32 @@ code {
   font-size: 10px;
 }
 
+.metro-instructions {
+  fill: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
 .metro-route,
 .metro-legend,
 .metro-station {
   cursor: pointer;
 }
 
-.metro-small-node,
+.metro-support-node,
 .metro-node {
   fill: #ffffff;
   stroke: #071640;
   stroke-width: 3;
+}
+
+.metro-support-node {
+  stroke-width: 2;
+}
+
+.metro-support-node--active {
+  fill: var(--accent);
+  stroke: var(--accent);
 }
 
 .metro-node--active {
@@ -425,6 +444,15 @@ code {
   font-weight: 800;
 }
 
+.map-detail {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.7fr);
+  margin-top: 14px;
+  padding-top: 16px;
+}
+
 ul {
   margin: 0;
   padding-left: 18px;
@@ -440,6 +468,29 @@ ul {
   gap: 10px;
   min-height: 170px;
   padding: 16px;
+}
+
+.resource-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.resource-actions button {
+  background: #f8fbff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--foreground);
+  display: grid;
+  gap: 3px;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.resource-actions button span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+  text-transform: uppercase;
 }
 
 .prompt-card span,

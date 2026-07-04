@@ -12,7 +12,7 @@
     "pt"
   ],
   "defaultLocale": "en",
-  "generatedAt": "2026-07-04T08:47:16.115Z",
+  "generatedAt": "2026-07-04T09:25:38.605Z",
   "translations": {
     "en": {
       "cycles": [
@@ -2413,6 +2413,107 @@
                 }
               ]
             }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "id": "business-opportunities-line",
+          "slug": "business-opportunities-line",
+          "title": "Business Opportunities Line",
+          "description": "Focuses on identifying and shaping business opportunities as reusable digital capabilities.",
+          "color": "#26b309",
+          "order": 1,
+          "stations": [
+            "monitoring-and-improving",
+            "api-product-strategy",
+            "user-experience",
+            "market-insights",
+            "business-goals",
+            "competitive-analysis",
+            "ecosystem-vision"
+          ]
+        },
+        {
+          "id": "platform-architecture-line",
+          "slug": "platform-architecture-line",
+          "title": "Platform Architecture Line",
+          "description": "Covers architecture and platform decisions for reusable capabilities across delivery styles.",
+          "color": "#933469",
+          "order": 2,
+          "stations": [
+            "api-product-strategy",
+            "api-consumer-experience",
+            "api-platform-architecture",
+            "scalable-infrastructure",
+            "legal-and-compliance",
+            "security-and-privacy",
+            "design-standards",
+            "vendor-management"
+          ]
+        },
+        {
+          "id": "api-design-line",
+          "slug": "api-design-line",
+          "title": "Design Line",
+          "description": "Focuses on solution and interface design principles that can be used across APIs, integrations, automations, data products, and other delivery styles.",
+          "color": "#db9b0c",
+          "order": 3,
+          "stations": [
+            "api-platform-architecture",
+            "api-design",
+            "api-delivery",
+            "api-audit"
+          ]
+        },
+        {
+          "id": "delivery-line",
+          "slug": "delivery-line",
+          "title": "Delivery Line",
+          "description": "Covers delivery and operational practices for reusable capabilities across implementation styles.",
+          "color": "#db9b0c",
+          "order": 4,
+          "stations": [
+            "api-delivery",
+            "contract-design",
+            "development",
+            "ci-cd",
+            "test-automation",
+            "release-management"
+          ]
+        },
+        {
+          "id": "publishing-and-adoption-line",
+          "slug": "publishing-and-adoption-line",
+          "title": "Publishing and Adoption Line",
+          "description": "Focuses on publishing reusable capabilities and enabling adoption by consumers.",
+          "color": "#17C6E9",
+          "order": 5,
+          "stations": [
+            "api-audit",
+            "api-publishing",
+            "monitoring-and-improving",
+            "service-agreements",
+            "api-consumer-adoption",
+            "api-promotion",
+            "partner-integration"
+          ]
+        },
+        {
+          "id": "operating-model-line",
+          "slug": "operating-model-line",
+          "title": "Operating Model Line",
+          "description": "Covers the operating model for reusable capability management and governance.",
+          "color": "#1a3987",
+          "order": 6,
+          "stations": [
+            "api-product-strategy",
+            "api-mindset",
+            "roles-and-responsibilities",
+            "upskilling",
+            "operating-guidelines",
+            "portfolio-management",
+            "budget-and-resource-management"
           ]
         }
       ],
@@ -7058,6 +7159,107 @@
           ]
         }
       ],
+      "lines": [
+        {
+          "id": "business-opportunities-line",
+          "slug": "business-opportunities-line",
+          "title": "Liiketoimintamahdollisuudet linja",
+          "description": "Keskittyy tunnistamaan ja hyödyntämään liiketoimintamahdollisuuksia sovellusrajapintojen avulla.",
+          "color": "#26b309",
+          "order": 1,
+          "stations": [
+            "monitoring-and-improving",
+            "api-product-strategy",
+            "user-experience",
+            "market-insights",
+            "business-goals",
+            "competitive-analysis",
+            "ecosystem-vision"
+          ]
+        },
+        {
+          "id": "platform-architecture-line",
+          "slug": "platform-architecture-line",
+          "title": "Alusta-arkkitehtuurilinja",
+          "description": "Kattaa API-alustojen arkkitehtuurinäkökohtia.",
+          "color": "#933469",
+          "order": 2,
+          "stations": [
+            "api-product-strategy",
+            "api-consumer-experience",
+            "api-platform-architecture",
+            "scalable-infrastructure",
+            "legal-and-compliance",
+            "security-and-privacy",
+            "design-standards",
+            "vendor-management"
+          ]
+        },
+        {
+          "id": "api-design-line",
+          "slug": "api-design-line",
+          "title": "API-suunnittelulinja",
+          "description": "Keskittyy APIen suunnitteluperiaatteisiin ja -käytäntöihin.",
+          "color": "#db9b0c",
+          "order": 3,
+          "stations": [
+            "api-platform-architecture",
+            "api-design",
+            "api-delivery",
+            "api-audit"
+          ]
+        },
+        {
+          "id": "delivery-line",
+          "slug": "delivery-line",
+          "title": "Toimituslinja",
+          "description": "Kattaa APIen toimitusprosessit ja -käytännöt.",
+          "color": "#db9b0c",
+          "order": 4,
+          "stations": [
+            "api-delivery",
+            "contract-design",
+            "development",
+            "ci-cd",
+            "test-automation",
+            "release-management"
+          ]
+        },
+        {
+          "id": "publishing-and-adoption-line",
+          "slug": "publishing-and-adoption-line",
+          "title": "Julkaisu- ja hyväksymislinja",
+          "description": "Keskittyy API-rajapintojen julkaisemiseen ja sen varmistamiseen, että kuluttajat hyväksyvät ne.",
+          "color": "#17C6E9",
+          "order": 5,
+          "stations": [
+            "api-audit",
+            "api-publishing",
+            "monitoring-and-improving",
+            "service-agreements",
+            "api-consumer-adoption",
+            "api-promotion",
+            "partner-integration"
+          ]
+        },
+        {
+          "id": "operating-model-line",
+          "slug": "operating-model-line",
+          "title": "Toimintamalli Line",
+          "description": "Kattaa API-hallinnan ja -hallinnan toimintamallin.",
+          "color": "#1a3987",
+          "order": 6,
+          "stations": [
+            "api-product-strategy",
+            "api-mindset",
+            "roles-and-responsibilities",
+            "upskilling",
+            "operating-guidelines",
+            "portfolio-management",
+            "budget-and-resource-management"
+          ]
+        }
+      ],
       "stations": [
         {
           "id": "api-product-strategy",
@@ -11697,6 +11899,107 @@
                 }
               ]
             }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "id": "business-opportunities-line",
+          "slug": "business-opportunities-line",
+          "title": "Ligne sur les opportunités d'affaires",
+          "description": "L'accent est mis sur l'identification et l'exploitation des opportunités commerciales grâce aux API.",
+          "color": "#26b309",
+          "order": 1,
+          "stations": [
+            "monitoring-and-improving",
+            "api-product-strategy",
+            "user-experience",
+            "market-insights",
+            "business-goals",
+            "competitive-analysis",
+            "ecosystem-vision"
+          ]
+        },
+        {
+          "id": "platform-architecture-line",
+          "slug": "platform-architecture-line",
+          "title": "Ligne d'architecture de la plateforme",
+          "description": "Couvre les aspects architecturaux des plateformes API.",
+          "color": "#933469",
+          "order": 2,
+          "stations": [
+            "api-product-strategy",
+            "api-consumer-experience",
+            "api-platform-architecture",
+            "scalable-infrastructure",
+            "legal-and-compliance",
+            "security-and-privacy",
+            "design-standards",
+            "vendor-management"
+          ]
+        },
+        {
+          "id": "api-design-line",
+          "slug": "api-design-line",
+          "title": "Ligne de conception de l'API",
+          "description": "Se concentre sur les principes et les pratiques de conception des API.",
+          "color": "#db9b0c",
+          "order": 3,
+          "stations": [
+            "api-platform-architecture",
+            "api-design",
+            "api-delivery",
+            "api-audit"
+          ]
+        },
+        {
+          "id": "delivery-line",
+          "slug": "delivery-line",
+          "title": "Ligne de livraison",
+          "description": "Couvre les processus et pratiques de livraison des API.",
+          "color": "#db9b0c",
+          "order": 4,
+          "stations": [
+            "api-delivery",
+            "contract-design",
+            "development",
+            "ci-cd",
+            "test-automation",
+            "release-management"
+          ]
+        },
+        {
+          "id": "publishing-and-adoption-line",
+          "slug": "publishing-and-adoption-line",
+          "title": "Ligne d'édition et d'adoption",
+          "description": "Se concentre sur la publication d'API et sur leur adoption par les consommateurs.",
+          "color": "#17C6E9",
+          "order": 5,
+          "stations": [
+            "api-audit",
+            "api-publishing",
+            "monitoring-and-improving",
+            "service-agreements",
+            "api-consumer-adoption",
+            "api-promotion",
+            "partner-integration"
+          ]
+        },
+        {
+          "id": "operating-model-line",
+          "slug": "operating-model-line",
+          "title": "Ligne de modèle opérationnel",
+          "description": "Couvre le modèle d'exploitation pour la gestion et la gouvernance des API.",
+          "color": "#1a3987",
+          "order": 6,
+          "stations": [
+            "api-product-strategy",
+            "api-mindset",
+            "roles-and-responsibilities",
+            "upskilling",
+            "operating-guidelines",
+            "portfolio-management",
+            "budget-and-resource-management"
           ]
         }
       ],
@@ -16342,6 +16645,107 @@
           ]
         }
       ],
+      "lines": [
+        {
+          "id": "business-opportunities-line",
+          "slug": "business-opportunities-line",
+          "title": "Geschäftsmöglichkeiten Linie",
+          "description": "Konzentriert sich auf die Identifizierung und Nutzung von Geschäftsmöglichkeiten durch APIs.",
+          "color": "#26b309",
+          "order": 1,
+          "stations": [
+            "monitoring-and-improving",
+            "api-product-strategy",
+            "user-experience",
+            "market-insights",
+            "business-goals",
+            "competitive-analysis",
+            "ecosystem-vision"
+          ]
+        },
+        {
+          "id": "platform-architecture-line",
+          "slug": "platform-architecture-line",
+          "title": "Plattform Architektur Linie",
+          "description": "Behandelt die architektonischen Aspekte von API-Plattformen.",
+          "color": "#933469",
+          "order": 2,
+          "stations": [
+            "api-product-strategy",
+            "api-consumer-experience",
+            "api-platform-architecture",
+            "scalable-infrastructure",
+            "legal-and-compliance",
+            "security-and-privacy",
+            "design-standards",
+            "vendor-management"
+          ]
+        },
+        {
+          "id": "api-design-line",
+          "slug": "api-design-line",
+          "title": "API-Entwurfslinie",
+          "description": "Konzentriert sich auf die Designprinzipien und -praktiken für APIs.",
+          "color": "#db9b0c",
+          "order": 3,
+          "stations": [
+            "api-platform-architecture",
+            "api-design",
+            "api-delivery",
+            "api-audit"
+          ]
+        },
+        {
+          "id": "delivery-line",
+          "slug": "delivery-line",
+          "title": "Bereitstellungslinie",
+          "description": "Behandelt die Bereitstellungsprozesse und -praktiken für APIs.",
+          "color": "#db9b0c",
+          "order": 4,
+          "stations": [
+            "api-delivery",
+            "contract-design",
+            "development",
+            "ci-cd",
+            "test-automation",
+            "release-management"
+          ]
+        },
+        {
+          "id": "publishing-and-adoption-line",
+          "slug": "publishing-and-adoption-line",
+          "title": "Veröffentlichungs- und Adoptionslinie",
+          "description": "Der Schwerpunkt liegt auf der Veröffentlichung von APIs und der Gewährleistung ihrer Annahme durch die Verbraucher.",
+          "color": "#17C6E9",
+          "order": 5,
+          "stations": [
+            "api-audit",
+            "api-publishing",
+            "monitoring-and-improving",
+            "service-agreements",
+            "api-consumer-adoption",
+            "api-promotion",
+            "partner-integration"
+          ]
+        },
+        {
+          "id": "operating-model-line",
+          "slug": "operating-model-line",
+          "title": "Betriebsmodell Linie",
+          "description": "Deckt das Betriebsmodell für die API-Verwaltung und -Governance ab.",
+          "color": "#1a3987",
+          "order": 6,
+          "stations": [
+            "api-product-strategy",
+            "api-mindset",
+            "roles-and-responsibilities",
+            "upskilling",
+            "operating-guidelines",
+            "portfolio-management",
+            "budget-and-resource-management"
+          ]
+        }
+      ],
       "stations": [
         {
           "id": "api-product-strategy",
@@ -20981,6 +21385,107 @@
                 }
               ]
             }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "id": "business-opportunities-line",
+          "slug": "business-opportunities-line",
+          "title": "Linha oportunidades de negócio",
+          "description": "Centra-se na identificação e aproveitamento de oportunidades de negócio através de APIs.",
+          "color": "#26b309",
+          "order": 1,
+          "stations": [
+            "monitoring-and-improving",
+            "api-product-strategy",
+            "user-experience",
+            "market-insights",
+            "business-goals",
+            "competitive-analysis",
+            "ecosystem-vision"
+          ]
+        },
+        {
+          "id": "platform-architecture-line",
+          "slug": "platform-architecture-line",
+          "title": "Linha de arquitetura da plataforma",
+          "description": "Abrange os aspectos arquitecturais das plataformas API.",
+          "color": "#933469",
+          "order": 2,
+          "stations": [
+            "api-product-strategy",
+            "api-consumer-experience",
+            "api-platform-architecture",
+            "scalable-infrastructure",
+            "legal-and-compliance",
+            "security-and-privacy",
+            "design-standards",
+            "vendor-management"
+          ]
+        },
+        {
+          "id": "api-design-line",
+          "slug": "api-design-line",
+          "title": "Linha de conceção API",
+          "description": "Centra-se nos princípios e práticas de conceção de APIs.",
+          "color": "#db9b0c",
+          "order": 3,
+          "stations": [
+            "api-platform-architecture",
+            "api-design",
+            "api-delivery",
+            "api-audit"
+          ]
+        },
+        {
+          "id": "delivery-line",
+          "slug": "delivery-line",
+          "title": "Linha de entrega",
+          "description": "Abrange os processos e práticas de entrega de APIs.",
+          "color": "#db9b0c",
+          "order": 4,
+          "stations": [
+            "api-delivery",
+            "contract-design",
+            "development",
+            "ci-cd",
+            "test-automation",
+            "release-management"
+          ]
+        },
+        {
+          "id": "publishing-and-adoption-line",
+          "slug": "publishing-and-adoption-line",
+          "title": "Linha de publicação e adoção",
+          "description": "Centra-se na publicação de APIs e na garantia da sua adoção pelos consumidores.",
+          "color": "#17C6E9",
+          "order": 5,
+          "stations": [
+            "api-audit",
+            "api-publishing",
+            "monitoring-and-improving",
+            "service-agreements",
+            "api-consumer-adoption",
+            "api-promotion",
+            "partner-integration"
+          ]
+        },
+        {
+          "id": "operating-model-line",
+          "slug": "operating-model-line",
+          "title": "Linha de modelo operacional",
+          "description": "Abrange o modelo operacional para gestão e governação de API.",
+          "color": "#1a3987",
+          "order": 6,
+          "stations": [
+            "api-product-strategy",
+            "api-mindset",
+            "roles-and-responsibilities",
+            "upskilling",
+            "operating-guidelines",
+            "portfolio-management",
+            "budget-and-resource-management"
           ]
         }
       ],

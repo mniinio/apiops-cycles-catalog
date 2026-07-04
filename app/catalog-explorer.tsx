@@ -32,6 +32,16 @@ type Cycle = {
   stations: CycleStation[];
 };
 
+type MetroLine = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  color: string;
+  order: number;
+  stations: string[];
+};
+
 type Station = {
   id: string;
   title: string;
@@ -47,6 +57,7 @@ type Station = {
 
 type Translation = {
   cycles: Cycle[];
+  lines: MetroLine[];
   stations: Station[];
   resources: Resource[];
 };
@@ -83,6 +94,33 @@ type CanvasSection = {
   gridPosition: { column: number; row: number; colSpan: number; rowSpan: number };
   fillOrder: number;
   highlight: boolean;
+  defaultNoteColor: string;
+  defaultNoteIntent: string;
+};
+
+type StickyNote = {
+  content: string;
+  size: number;
+  color: string;
+  position?: { x: number; y: number };
+};
+
+type CanvasExportSection = {
+  sectionId: string;
+  stickyNotes: StickyNote[];
+};
+
+type CanvasExport = {
+  templateId: string;
+  locale: string;
+  metadata: {
+    source: string;
+    license: string;
+    authors: string[];
+    website: string;
+    date?: string;
+  };
+  sections: CanvasExportSection[];
 };
 
 type CanvasDefinition = {
@@ -91,6 +129,8 @@ type CanvasDefinition = {
   purpose: string;
   howToUse: string;
   layout: { columns: number; rows: number };
+  canvasCreatorUrl: string;
+  importExportTemplate: CanvasExport;
   sections: CanvasSection[];
 };
 
@@ -122,7 +162,7 @@ type ExportData = {
   translations: Record<string, ExportTemplate[]>;
 };
 
-type StickyNotes = Record<string, string[]>;
+type StickyNotes = Record<string, StickyNote[]>;
 
 const localeNames: Record<string, string> = {
   en: "English",
@@ -156,24 +196,55 @@ function safeRole(roleId: string, roles: RoleGuide[]) {
   return roles.find((role) => role.id === roleId) ?? roles[0];
 }
 
+function normalizeNotes(value: unknown): StickyNotes {
+  if (!value || typeof value !== "object") return {};
+  return Object.fromEntries(
+    Object.entries(value as Record<string, unknown>).map(([sectionId, sectionNotes]) => [
+      sectionId,
+      Array.isArray(sectionNotes)
+        ? sectionNotes
+            .map((note) => {
+              if (typeof note === "string") return { content: note, size: 80, color: "#FFF399" };
+              if (note && typeof note === "object" && typeof (note as StickyNote).content === "string") {
+                const typed = note as StickyNote;
+                return {
+                  content: typed.content,
+                  size: Number(typed.size ?? 80),
+                  color: /^#[0-9A-Fa-f]{6}$/.test(typed.color ?? "") ? typed.color : "#FFF399",
+                  position: typed.position,
+                };
+              }
+              return null;
+            })
+            .filter(Boolean)
+        : [],
+    ]),
+  ) as StickyNotes;
+}
+
 function MetroMap({
   cycles,
+  lines,
+  stations,
   selectedCycleId,
   selectedStationId,
   onSelectCycle,
   onSelectStation,
 }: {
   cycles: Cycle[];
+  lines: MetroLine[];
+  stations: Station[];
   selectedCycleId: string;
   selectedStationId: string;
   onSelectCycle: (id: string) => void;
   onSelectStation: (id: string) => void;
 }) {
-  const width = 880;
-  const height = 560;
-  const center = { x: 430, y: 286 };
-  const coreRadius = 128;
+  const width = 960;
+  const height = 620;
+  const center = { x: 456, y: 318 };
+  const coreRadius = 118;
   const coreStations = cycles[0]?.stations ?? [];
+  const stationById = new Map(stations.map((station) => [station.id, station]));
   const corePoints = coreStations.map((station, index) => {
     const angle = -90 + (360 / coreStations.length) * index;
     const radians = (angle * Math.PI) / 180;
@@ -183,9 +254,44 @@ function MetroMap({
       y: center.y + coreRadius * Math.sin(radians),
     };
   });
+  const corePointById = new Map(corePoints.map((point) => [point.id, point]));
+  const branchVectors: Record<string, { x: number; y: number }> = {
+    "business-opportunities-line": { x: -24, y: -48 },
+    "platform-architecture-line": { x: 48, y: 22 },
+    "delivery-line": { x: -34, y: 44 },
+    "publishing-and-adoption-line": { x: -54, y: 30 },
+    "operating-model-line": { x: 42, y: -34 },
+  };
+
+  const linePoints = lines.map((line) => {
+    const vector = branchVectors[line.id] ?? { x: 36, y: 24 };
+    let lastCore = corePointById.get(line.stations.find((id) => corePointById.has(id)) ?? "") ?? corePoints[0];
+    let branchIndex = 0;
+    const points = line.stations.map((stationId) => {
+      const corePoint = corePointById.get(stationId);
+      if (corePoint) {
+        lastCore = corePoint;
+        branchIndex = 0;
+        return { ...corePoint, support: false };
+      }
+      branchIndex += 1;
+      return {
+        id: stationId,
+        index: 0,
+        title: stationById.get(stationId)?.title ?? stationId,
+        baseTitle: stationById.get(stationId)?.title ?? stationId,
+        description: stationById.get(stationId)?.description ?? "",
+        resources: [],
+        x: Math.max(70, Math.min(width - 70, lastCore.x + vector.x * branchIndex)),
+        y: Math.max(60, Math.min(height - 70, lastCore.y + vector.y * branchIndex)),
+        support: true,
+      };
+    });
+    return { ...line, points };
+  });
 
   const paths = cycles.map((cycle, cycleIndex) => {
-    const offset = (cycleIndex - 1.4) * 9;
+    const offset = (cycleIndex - 1.4) * 7;
     const points = cycle.stations
       .map((station) => corePoints.find((point) => point.id === station.id))
       .filter(Boolean)
@@ -198,29 +304,46 @@ function MetroMap({
     };
   });
 
-  const spokes = [
-    { id: "strategic", label: "Strategic", x1: 300, y1: 182, x2: 244, y2: 48, color: "#31a354" },
-    { id: "governance", label: "Governance", x1: 536, y1: 214, x2: 704, y2: 120, color: "#1a3987" },
-    { id: "technical", label: "Technical", x1: 420, y1: 414, x2: 322, y2: 520, color: "#ffc647" },
-    { id: "consumer", label: "Consumer", x1: 296, y1: 334, x2: 126, y2: 384, color: "#17c6e9" },
-  ];
-
   return (
     <svg className="metro-map" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="APIOps Cycles metro map">
-      <ellipse cx="428" cy="284" rx="340" ry="246" className="metro-zone metro-zone--governance" />
-      <ellipse cx="300" cy="120" rx="170" ry="96" className="metro-zone metro-zone--strategic" />
-      <ellipse cx="192" cy="362" rx="156" ry="96" className="metro-zone metro-zone--consumer" />
-      <ellipse cx="462" cy="488" rx="184" ry="116" className="metro-zone metro-zone--technical" />
+      <ellipse cx="480" cy="314" rx="352" ry="240" className="metro-zone metro-zone--governance" />
+      <ellipse cx="308" cy="132" rx="170" ry="94" className="metro-zone metro-zone--strategic" />
+      <ellipse cx="214" cy="392" rx="158" ry="92" className="metro-zone metro-zone--consumer" />
+      <ellipse cx="470" cy="508" rx="188" ry="92" className="metro-zone metro-zone--technical" />
       {["Governance", "Strategic", "Consumer", "Technical"].map((label, index) => (
-        <text key={label} x={[688, 290, 142, 498][index]} y={[132, 76, 306, 456][index]} className="metro-zone-label">
+        <text key={label} x={[704, 300, 154, 506][index]} y={[146, 88, 336, 486][index]} className="metro-zone-label">
           {label}
         </text>
       ))}
-      {spokes.map((spoke) => (
-        <g key={spoke.id}>
-          <line x1={spoke.x1} y1={spoke.y1} x2={spoke.x2} y2={spoke.y2} stroke={spoke.color} strokeWidth="6" strokeLinecap="round" />
-          <circle cx={spoke.x2} cy={spoke.y2} r="6" className="metro-small-node" />
-          <text x={spoke.x2 + 10} y={spoke.y2 + 4} className="metro-spoke-label">{spoke.label}</text>
+      <text x="32" y="38" className="metro-instructions">
+        Click a station to update details. Click a cycle in the legend to switch route.
+      </text>
+      {linePoints.map((line) => (
+        <g key={line.id}>
+          <polyline
+            points={line.points.map((point) => `${point.x},${point.y}`).join(" ")}
+            fill="none"
+            stroke={line.color}
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.7"
+          />
+          {line.points.filter((point) => point.support).map((point) => (
+            <g
+              key={`${line.id}-${point.id}`}
+              role="button"
+              tabIndex={0}
+              className="metro-station"
+              onClick={() => onSelectStation(point.id)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") onSelectStation(point.id);
+              }}
+            >
+              <circle cx={point.x} cy={point.y} r="6" className={point.id === selectedStationId ? "metro-support-node metro-support-node--active" : "metro-support-node"} />
+              <text x={point.x + 10} y={point.y + 4} className="metro-support-label">{point.baseTitle}</text>
+            </g>
+          ))}
         </g>
       ))}
       {paths.map((path) => (
@@ -259,7 +382,7 @@ function MetroMap({
       ))}
       <text x={center.x} y={center.y - 6} textAnchor="middle" className="metro-brand">apiops</text>
       <text x={center.x} y={center.y + 14} textAnchor="middle" className="metro-brand">cycles</text>
-      <g transform="translate(620 416)">
+      <g transform="translate(642 438)">
         {cycles.map((cycle, index) => (
           <g key={cycle.id} transform={`translate(0 ${index * 25})`} onClick={() => onSelectCycle(cycle.id)} className="metro-legend">
             <line x1="0" y1="0" x2="32" y2="0" stroke={colors[cycle.id] ?? "#164e63"} strokeWidth="7" strokeLinecap="round" />
@@ -274,9 +397,11 @@ function MetroMap({
 function CanvasWorkspace({
   canvas,
   role,
+  locale,
 }: {
   canvas: CanvasDefinition;
   role: RoleGuide;
+  locale: string;
 }) {
   const storageKey = `apiops-canvas:${role.id}:${canvas.id}`;
   const [notes, setNotes] = useState<StickyNotes>({});
@@ -285,20 +410,34 @@ function CanvasWorkspace({
 
   useEffect(() => {
     const stored = window.localStorage.getItem(storageKey);
-    if (stored) setNotes(JSON.parse(stored));
+    if (stored) setNotes(normalizeNotes(JSON.parse(stored)));
   }, [storageKey]);
 
   useEffect(() => {
     window.localStorage.setItem(storageKey, JSON.stringify(notes));
   }, [notes, storageKey]);
 
-  function addNote(sectionId: string, text: string) {
+  function addNote(section: CanvasSection, text: string) {
     const next = text.trim();
     if (!next) return;
-    setNotes((current) => ({
-      ...current,
-      [sectionId]: [...(current[sectionId] ?? []), next],
-    }));
+    setNotes((current) => {
+      const sectionNotes = current[section.id] ?? [];
+      return {
+        ...current,
+        [section.id]: [
+          ...sectionNotes,
+          {
+            content: next,
+            size: 80,
+            color: section.defaultNoteColor,
+            position: {
+              x: 24 + (sectionNotes.length % 3) * 92,
+              y: 72 + Math.floor(sectionNotes.length / 3) * 80,
+            },
+          },
+        ],
+      };
+    });
   }
 
   function removeNote(sectionId: string, index: number) {
@@ -309,16 +448,23 @@ function CanvasWorkspace({
   }
 
   function exportJson() {
-    const payload = {
-      roleId: role.id,
-      canvasId: canvas.id,
-      exportedAt: new Date().toISOString(),
-      notes,
+    const template = canvas.importExportTemplate;
+    const payload: CanvasExport = {
+      ...template,
+      locale,
+      metadata: {
+        ...template.metadata,
+        date: new Date().toISOString(),
+      },
+      sections: canvas.sections.map((section) => ({
+        sectionId: section.id,
+        stickyNotes: notes[section.id] ?? [],
+      })),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `${role.id}-${canvas.id}.json`;
+    link.download = `${template.templateId || canvas.id}_${locale}.json`;
     link.click();
     URL.revokeObjectURL(link.href);
     setStatus("Canvas JSON exported.");
@@ -328,7 +474,7 @@ function CanvasWorkspace({
     return `# ${canvas.title}\n\nRole: ${role.title}\n\n${canvas.sections
       .map((section) => {
         const sectionNotes = notes[section.id] ?? [];
-        return `## ${section.title}\n${sectionNotes.length ? sectionNotes.map((note) => `- ${note}`).join("\n") : "- "}`;
+        return `## ${section.title}\n${sectionNotes.length ? sectionNotes.map((note) => `- ${note.content}`).join("\n") : "- "}`;
       })
       .join("\n\n")}\n`;
   }
@@ -341,8 +487,14 @@ function CanvasWorkspace({
   async function importJson(file: File) {
     const text = await file.text();
     const payload = JSON.parse(text);
-    if (!payload.notes || typeof payload.notes !== "object") throw new Error("Invalid canvas export");
-    setNotes(payload.notes);
+    if (payload.templateId && payload.templateId !== canvas.importExportTemplate.templateId) {
+      throw new Error(`This file is for ${payload.templateId}, not ${canvas.importExportTemplate.templateId}.`);
+    }
+    if (!Array.isArray(payload.sections)) throw new Error("Invalid canvas import/export template");
+    const importedNotes = Object.fromEntries(
+      payload.sections.map((section: CanvasExportSection) => [section.sectionId, section.stickyNotes ?? []]),
+    );
+    setNotes(normalizeNotes(importedNotes));
     setStatus("Canvas JSON imported.");
   }
 
@@ -392,8 +544,14 @@ function CanvasWorkspace({
             <p>{section.description}</p>
             <div className="sticky-notes">
               {(notes[section.id] ?? []).map((note, index) => (
-                <button key={`${note}-${index}`} type="button" onClick={() => removeNote(section.id, index)} title="Remove note">
-                  {note}
+                <button
+                  key={`${note.content}-${index}`}
+                  type="button"
+                  onClick={() => removeNote(section.id, index)}
+                  title="Remove note"
+                  style={{ backgroundColor: note.color }}
+                >
+                  {note.content}
                 </button>
               ))}
             </div>
@@ -401,7 +559,7 @@ function CanvasWorkspace({
               onSubmit={(event) => {
                 event.preventDefault();
                 const input = event.currentTarget.elements.namedItem("note") as HTMLInputElement;
-                addNote(section.id, input.value);
+                addNote(section, input.value);
                 input.value = "";
               }}
             >
@@ -441,11 +599,25 @@ export default function CatalogExplorer({
   const [cycleId, setCycleId] = useState(role.cycles[0]?.id ?? data.cycles[0].id);
   const selectedCycle = data.cycles.find((cycle) => cycle.id === cycleId) ?? data.cycles[0];
   const [stationId, setStationId] = useState(role.stations[0]?.id ?? selectedCycle.stations[0].id);
-  const selectedStation =
-    selectedCycle.stations.find((station) => station.id === stationId) ??
-    selectedCycle.stations[0];
+  const selectedCycleStation = selectedCycle.stations.find((station) => station.id === stationId);
   const stationDetail =
-    data.stations.find((station) => station.id === selectedStation.id) ?? data.stations[0];
+    data.stations.find((station) => station.id === stationId) ??
+    data.stations.find((station) => station.id === selectedCycle.stations[0]?.id) ??
+    data.stations[0];
+  const stationStepResourceIds = new Set(stationDetail.steps.map((step) => step.resourceId).filter(Boolean));
+  const selectedStationResources =
+    selectedCycleStation?.resources.length
+      ? selectedCycleStation.resources
+      : data.resources.filter((resource) => stationStepResourceIds.has(resource.id));
+  const selectedStation: CycleStation =
+    selectedCycleStation ?? {
+      index: 0,
+      id: stationDetail.id,
+      title: stationDetail.title,
+      description: stationDetail.description,
+      baseTitle: stationDetail.title,
+      resources: selectedStationResources,
+    };
   const [view, setView] = useState<keyof typeof viewLabels>("guide");
   const [query, setQuery] = useState("");
   const [canvasId, setCanvasId] = useState(role.canvases[0]?.id ?? Object.keys(canvasData)[0]);
@@ -458,19 +630,18 @@ export default function CatalogExplorer({
   }, [locale, roleData, data.cycles, data.stations, canvasData, roleId]);
 
   const filteredResources = useMemo(() => {
-    const roleResourceIds = new Set(role.recommendedResources.map((resource) => resource.id));
-    const stationResourceIds = new Set(selectedStation.resources.map((resource) => resource.id));
     const needle = query.trim().toLowerCase();
-    return data.resources
+    return selectedStationResources
       .filter((resource) => !needle || [resource.title, resource.description, resource.category].join(" ").toLowerCase().includes(needle))
-      .sort((a, b) => Number(roleResourceIds.has(b.id)) - Number(roleResourceIds.has(a.id)) || Number(stationResourceIds.has(b.id)) - Number(stationResourceIds.has(a.id)))
       .slice(0, 24);
-  }, [data.resources, query, role.recommendedResources, selectedStation.resources]);
+  }, [query, selectedStationResources]);
 
   const rolePrompts = promptData.filter((prompt) => prompt.roleId === role.id);
   const roleTemplates = templateData.filter((template) => template.roleId === role.id);
   const selectedCanvas = canvasData[canvasId] ?? canvasData[role.canvases[0]?.id] ?? Object.values(canvasData)[0];
-  const externalCanvasBase = process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL;
+  const externalCanvasUrl = process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL
+    ? `${process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL.replace(/\/$/, "")}/${selectedCanvas.id}`
+    : selectedCanvas.canvasCreatorUrl;
 
   function selectRole(nextRoleId: string) {
     const nextRole = safeRole(nextRoleId, roleData);
@@ -484,6 +655,15 @@ export default function CatalogExplorer({
     await navigator.clipboard.writeText(text);
   }
 
+  function openResource(resource: Resource) {
+    if (resource.canvasId) {
+      setCanvasId(resource.canvasId);
+      setView("canvases");
+      return;
+    }
+    setQuery(resource.title);
+  }
+
   return (
     <main className="site-shell">
       <header className="hero">
@@ -493,8 +673,8 @@ export default function CatalogExplorer({
             <span>APIOps Cycles</span>
           </a>
           <div className="topbar__controls">
-            <a href="#workflows">Workflows</a>
-            <a href="#method-data">Data</a>
+            <button type="button" onClick={() => setView("ai")}>Workflows</button>
+            <button type="button" onClick={() => setView("data")}>Data</button>
             <label className="sr-only" htmlFor="locale">Language</label>
             <select
               id="locale"
@@ -611,7 +791,18 @@ export default function CatalogExplorer({
                   </section>
                   <section>
                     <h3>Resources</h3>
-                    <ul>{selectedStation.resources.slice(0, 6).map((resource) => <li key={resource.id}>{resource.title}</li>)}</ul>
+                    {selectedStationResources.length ? (
+                      <div className="resource-actions">
+                        {selectedStationResources.slice(0, 6).map((resource) => (
+                          <button key={resource.id} type="button" onClick={() => openResource(resource)}>
+                            <strong>{resource.title}</strong>
+                            <span>{resource.canvasId ? "Open canvas" : resource.category}</span>
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="helper-text">No station-specific resources are listed for this route.</p>
+                    )}
                   </section>
                   <section>
                     <h3>Evidence</h3>
@@ -624,7 +815,30 @@ export default function CatalogExplorer({
 
           {view === "map" ? (
             <article className="panel panel--map">
-              <MetroMap cycles={data.cycles} selectedCycleId={cycleId} selectedStationId={stationId} onSelectCycle={setCycleId} onSelectStation={setStationId} />
+              <MetroMap
+                cycles={data.cycles}
+                lines={data.lines}
+                stations={data.stations}
+                selectedCycleId={cycleId}
+                selectedStationId={stationId}
+                onSelectCycle={setCycleId}
+                onSelectStation={setStationId}
+              />
+              <div className="map-detail">
+                <div>
+                  <p className="section-kicker">Selected station</p>
+                  <h2>{stationDetail.title}</h2>
+                  <p>{stationDetail.description}</p>
+                </div>
+                <div className="resource-actions">
+                  {selectedStationResources.slice(0, 4).map((resource) => (
+                    <button key={resource.id} type="button" onClick={() => openResource(resource)}>
+                      <strong>{resource.title}</strong>
+                      <span>{resource.canvasId ? "Open canvas" : resource.category}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </article>
           ) : null}
 
@@ -675,14 +889,14 @@ export default function CatalogExplorer({
                   ))}
                 </select>
               </div>
-              {externalCanvasBase ? (
-                <a className="external-link" href={`${externalCanvasBase.replace(/\/$/, "")}/${selectedCanvas.id}`} target="_blank" rel="noreferrer">
-                  Open in external canvas renderer
+              {externalCanvasUrl ? (
+                <a className="external-link" href={externalCanvasUrl} target="_blank" rel="noreferrer">
+                  Open in CanvasCreator
                 </a>
               ) : (
                 <p className="helper-text">No external canvas renderer is configured, so this page uses the built-in local workspace.</p>
               )}
-              <CanvasWorkspace canvas={selectedCanvas} role={role} />
+              <CanvasWorkspace canvas={selectedCanvas} role={role} locale={locale} />
             </article>
           ) : null}
 
@@ -712,9 +926,9 @@ export default function CatalogExplorer({
         <div className="panel__head">
           <div>
             <p className="section-kicker">Expert catalog</p>
-            <h2>Search all resources</h2>
+            <h2>Station resources</h2>
           </div>
-          <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search resources" aria-label="Search resources" />
+          <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search this station" aria-label="Search station resources" />
         </div>
         <div className="resource-grid">
           {filteredResources.map((resource) => (
@@ -722,9 +936,12 @@ export default function CatalogExplorer({
               <span>{resource.category}</span>
               <h3>{resource.title}</h3>
               <p>{compact(resource.description, 165)}</p>
-              {resource.canvasId ? <button type="button" onClick={() => { setView("canvases"); setCanvasId(resource.canvasId ?? canvasId); }}>Open canvas</button> : null}
+              <button type="button" onClick={() => openResource(resource)}>
+                {resource.canvasId ? "Open canvas" : "Use resource"}
+              </button>
             </article>
           ))}
+          {!filteredResources.length ? <p className="helper-text">No resources match this station filter.</p> : null}
         </div>
       </section>
     </main>

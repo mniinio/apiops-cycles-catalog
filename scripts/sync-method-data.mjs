@@ -7,6 +7,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 const root = process.cwd();
 const sourceRoot =
@@ -17,6 +18,7 @@ const canvasRoot = path.join(sourceRoot, "src", "data", "canvas");
 const appDataRoot = path.join(root, "app", "data");
 const publicDataRoot = path.join(root, "public", "data");
 const locales = ["en", "fi", "fr", "de", "pt"];
+const methodEngine = await import(pathToFileURL(path.join(sourceRoot, "src", "lib", "method-engine.js")));
 
 const roleDefinitions = [
   {
@@ -185,6 +187,7 @@ const cyclesRaw = readJson(path.join(methodRoot, "cycles.json")).cycles.items;
 const stationsRaw = readJson(path.join(methodRoot, "stations.json"));
 const resourcesRaw = readJson(path.join(methodRoot, "resources.json")).resources;
 const criteriaRaw = readJson(path.join(methodRoot, "criteria.json")).criteria ?? [];
+const linesRaw = readJson(path.join(methodRoot, "lines.json")).lines.items ?? [];
 const integrationExtension = readJson(path.join(methodRoot, "integration-extension.json"));
 const canvasDataRaw = readJson(path.join(canvasRoot, "canvasData.json"));
 const canvasLabelsRaw = readJson(path.join(canvasRoot, "localizedData.json"));
@@ -228,6 +231,18 @@ function translateResource(locale, resource) {
     steps: translateList(locale, resource.how_it_works?.steps),
     canvasId: resource.canvas ?? null,
     draft: resource.draft === "true" || resource.daft === "true",
+  };
+}
+
+function translateLine(locale, line) {
+  return {
+    id: line.id,
+    slug: line.slug,
+    title: t(locale, line.title),
+    description: t(locale, line.description),
+    color: line.color,
+    order: Number(line.order ?? 999),
+    stations: line.stations ?? [],
   };
 }
 
@@ -287,6 +302,8 @@ function canvasTitle(locale, canvasId) {
 
 function translateCanvas(locale, canvasId, canvas) {
   const labels = canvasLabelsRaw[locale]?.[canvasId] ?? canvasLabelsRaw.en?.[canvasId] ?? {};
+  const metadata = methodEngine.buildCanvasMetadata(canvasId, locale);
+  const metadataSections = new Map(metadata.sections.map((section) => [section.id, section]));
   return {
     id: canvasId,
     title: labels.title ?? canvasId,
@@ -294,9 +311,12 @@ function translateCanvas(locale, canvasId, canvas) {
     howToUse: labels.howToUse ?? "",
     layout: canvas.layout,
     metadata: canvas.metadata,
+    canvasCreatorUrl: methodEngine.getCanvasCreatorUrl(canvasId, locale),
+    importExportTemplate: methodEngine.buildCanvasTemplate(canvasId, locale),
     sections: canvas.sections
       .map((section) => {
         const sectionLabels = labels.sections?.[section.id] ?? {};
+        const metadataSection = metadataSections.get(section.id);
         return {
           id: section.id,
           title: sectionLabels.section ?? section.id,
@@ -305,6 +325,8 @@ function translateCanvas(locale, canvasId, canvas) {
           fillOrder: section.fillOrder,
           highlight: Boolean(section.highlight),
           journeySteps: Boolean(section.journeySteps),
+          defaultNoteColor: metadataSection?.defaultNoteColor ?? "#FFF399",
+          defaultNoteIntent: metadataSection?.defaultNoteIntent ?? "default",
         };
       })
       .sort((a, b) => Number(a.fillOrder ?? 999) - Number(b.fillOrder ?? 999)),
@@ -394,24 +416,35 @@ function promptPacks(locale) {
 function exportTemplates(locale) {
   return roleDefinitions.flatMap((role) => {
     const guide = roleGuide(locale, role);
-    const cycles = guide.cycles.map((cycle) => `- ${cycle.title}`).join("\n");
-    const stations = guide.stations.map((station) => `- ${station.title}`).join("\n");
-    const canvases = guide.canvases.map((canvas) => `- ${canvas.title}`).join("\n");
-    const decisions = guide.decisions.map((decision) => `- ${decision}`).join("\n");
+    const cycleId = guide.cycles[0]?.id ?? "capability-productization-cycle";
     return [
       {
         id: `${role.id}:markdown-summary`,
         roleId: role.id,
         format: "markdown",
-        title: `${guide.title} method summary`,
-        body: `# ${guide.title} APIOps Cycles Summary\n\n## Recommended cycles\n${cycles}\n\n## Key stations\n${stations}\n\n## Canvases\n${canvases}\n\n## Decisions to document\n${decisions}\n\n## Evidence and notes\n- \n`,
+        title: `${guide.title} cycle Markdown`,
+        body: methodEngine.renderCycleMarkdown({ cycle: cycleId, locale }),
       },
       {
         id: `${role.id}:confluence-page`,
         roleId: role.id,
-        format: "confluence-markdown",
-        title: `${guide.title} Confluence page`,
-        body: `# ${guide.title} Method Work\n\n## Context\nUse this page to capture APIOps Cycles evidence for ${guide.title}.\n\n## Recommended cycles\n${cycles}\n\n## Decisions\n${decisions}\n\n## Canvas notes\n${canvases}\n\n## Actions\n| Action | Owner | Due | Status |\n| --- | --- | --- | --- |\n|  |  |  |  |\n`,
+        format: "confluence-wiki",
+        title: `${guide.title} cycle Confluence wiki`,
+        body: methodEngine.renderCycleConfluenceWiki({ cycle: cycleId, locale }),
+      },
+      {
+        id: `${role.id}:integration-markdown`,
+        roleId: role.id,
+        format: "markdown",
+        title: `${guide.title} integration design Markdown`,
+        body: methodEngine.renderIntegrationDesignMarkdown({ locale }),
+      },
+      {
+        id: `${role.id}:integration-confluence-wiki`,
+        roleId: role.id,
+        format: "confluence-wiki",
+        title: `${guide.title} integration design Confluence wiki`,
+        body: methodEngine.renderIntegrationDesignConfluenceWiki({ locale }),
       },
     ];
   });
@@ -442,6 +475,9 @@ const catalog = {
       locale,
       {
         cycles: cyclesRaw.map((cycle) => translateCycle(locale, cycle)),
+        lines: linesRaw
+          .map((line) => translateLine(locale, line))
+          .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title)),
         stations: stationsRawList.map((station) => translateStation(locale, station)),
         resources: resourcesRaw
           .map((resource) => translateResource(locale, resource))
