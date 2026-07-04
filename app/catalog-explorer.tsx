@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 
 type Resource = {
   id: string;
@@ -852,7 +852,13 @@ export default function CatalogExplorer({
         </div>
         <div className="role-grid">
           {roleData.map((item) => (
-            <button key={item.id} type="button" className={item.id === role.id ? "role-card is-active" : "role-card"} onClick={() => selectRole(item.id)}>
+            <button
+              key={item.id}
+              type="button"
+              className={item.id === role.id ? "role-card is-active" : "role-card"}
+              style={{ "--route-color": colors[item.cycles[0]?.id] ?? "#6d2ba0" } as CSSProperties}
+              onClick={() => selectRole(item.id)}
+            >
               <strong>{item.title}</strong>
               <span>{item.summary}</span>
             </button>
@@ -943,7 +949,7 @@ export default function CatalogExplorer({
           ) : null}
 
           {view === "map" ? (
-            <article className="panel panel--map">
+            <article className="panel panel--map" style={{ "--route-color": colors[cycleId] ?? "#6d2ba0" } as CSSProperties}>
               <div className="panel__head map-head">
                 <div>
                   <p className="section-kicker">Metro map navigation</p>
@@ -992,20 +998,24 @@ export default function CatalogExplorer({
               </div>
               <div className="collaboration-brief" aria-label="Station collaboration brief">
                 <section>
+                  <small>People</small>
                   <span>Who do I need to involve?</span>
                   <div className="chips chips--compact">
                     {participantChips.map((participant) => <span key={participant}>{participant}</span>)}
                   </div>
                 </section>
                 <section>
+                  <small>Conversation</small>
                   <span>What should we discuss?</span>
                   <ul>{discussionItems.map((item) => <li key={item}>{item}</li>)}</ul>
                 </section>
                 <section>
+                  <small>Outputs</small>
                   <span>What should we produce?</span>
                   <ul>{outputItems.map((item) => <li key={item}>{item}</li>)}</ul>
                 </section>
                 <section>
+                  <small>Next stop</small>
                   <span>What do we do next?</span>
                   <ul>{nextActions.map((item) => <li key={item}>{item}</li>)}</ul>
                 </section>
@@ -1120,8 +1130,8 @@ export default function CatalogExplorer({
       <section className="catalog-section">
         <div className="panel__head">
           <div>
-            <p className="section-kicker">Expert catalog</p>
-            <h2>Station resources</h2>
+            <p className="section-kicker">Resources for this station</p>
+            <h2>{shortStationName(stationDetail.title)}</h2>
           </div>
           <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search this station" aria-label="Search station resources" />
         </div>
@@ -1130,6 +1140,7 @@ export default function CatalogExplorer({
             <article key={resource.id} className="resource-card">
               <span>{resource.category}</span>
               <h3>{resource.title}</h3>
+              <strong className="resource-purpose">Helps answer: {shortStationName(stationDetail.title)}</strong>
               <p>{compact(resource.description, 165)}</p>
               <button type="button" onClick={() => openResource(resource)}>
                 {resource.canvasId ? "Open canvas" : "Use resource"}
