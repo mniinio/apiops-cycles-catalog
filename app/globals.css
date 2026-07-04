@@ -89,6 +89,261 @@ a {
     linear-gradient(180deg, #fbfdff 0%, #f3f7fd 100%);
 }
 
+.app-header {
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--panel-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.app-header .topbar {
+  margin-bottom: 0;
+  min-height: 64px;
+  padding-inline: clamp(14px, 3vw, 34px);
+}
+
+.route-control,
+.map-stage,
+.station-workspace,
+.catalog-section {
+  margin: 0 auto;
+  max-width: 1800px;
+  padding-inline: clamp(14px, 2vw, 30px);
+}
+
+.route-control {
+  align-items: end;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  box-shadow: var(--panel-shadow-soft);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(210px, 1.1fr) minmax(220px, 1.1fr) minmax(180px, 0.8fr) minmax(360px, 2fr);
+  margin-top: 16px;
+  padding-block: 14px;
+  position: sticky;
+  top: 72px;
+  z-index: 15;
+}
+
+.route-control label {
+  display: grid;
+  gap: 6px;
+}
+
+.route-control label > span {
+  color: #2f3d63;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.route-control select {
+  min-height: 42px;
+}
+
+.mode-buttons {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.mode-buttons button,
+.workspace-nav button {
+  background: #f8fbff;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  color: var(--foreground);
+  font-size: 0.82rem;
+  font-weight: 800;
+  min-height: 42px;
+  padding: 8px 10px;
+}
+
+.mode-buttons button.is-active,
+.workspace-nav button.is-active {
+  background: #fbf7ff;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 2px rgba(109, 43, 160, 0.14);
+  color: var(--accent);
+}
+
+.map-stage {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1.55fr) minmax(360px, 0.85fr);
+  padding-block: 12px;
+}
+
+.map-card,
+.station-summary,
+.station-workspace,
+.workspace-panel,
+.workspace-utility {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  box-shadow: var(--panel-shadow-soft);
+}
+
+.map-card {
+  border-top: 4px solid var(--route-color, var(--accent));
+  overflow: hidden;
+  padding: clamp(14px, 1.4vw, 20px);
+}
+
+.map-card .metro-map {
+  max-height: min(66vh, 780px);
+}
+
+.station-summary {
+  display: grid;
+  gap: 16px;
+  padding: clamp(18px, 2vw, 28px);
+}
+
+.station-summary__head {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+}
+
+.station-number {
+  align-items: center;
+  background: #dcfce7;
+  border: 3px solid #22c55e;
+  border-radius: 999px;
+  color: #137333;
+  display: inline-flex;
+  font-weight: 900;
+  height: 48px;
+  justify-content: center;
+  min-width: 48px;
+}
+
+.you-are-here {
+  background: #e9f9ee;
+  border-radius: 999px;
+  color: #14863b;
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 850;
+  margin-bottom: 5px;
+  padding: 4px 9px;
+}
+
+.station-summary h2 {
+  margin-bottom: 0;
+}
+
+.station-summary section {
+  border-top: 1px solid #edf2fb;
+  padding-top: 13px;
+}
+
+.related-list {
+  display: grid;
+  gap: 8px;
+}
+
+.related-list button {
+  background: #f8fbff;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  color: var(--foreground);
+  font-weight: 780;
+  padding: 10px;
+  text-align: left;
+}
+
+.station-workspace {
+  align-items: start;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 230px minmax(0, 1fr) 270px;
+  margin-top: 0;
+  padding-block: 22px;
+}
+
+.workspace-nav {
+  border-right: 1px solid var(--panel-border);
+  display: grid;
+  gap: 10px;
+  padding-right: 18px;
+  position: sticky;
+  top: 160px;
+}
+
+.workspace-nav h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.workspace-nav button {
+  text-align: left;
+}
+
+.workspace-route-cards {
+  border-top: 1px solid var(--panel-border);
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 14px;
+}
+
+.workspace-route-cards .role-card {
+  min-height: 44px;
+  padding-block: 10px;
+}
+
+.workspace-main {
+  min-width: 0;
+}
+
+.workspace-panel {
+  padding: clamp(18px, 2vw, 26px);
+}
+
+.workspace-panel--technical {
+  box-shadow: none;
+}
+
+.workspace-utility {
+  background: #f8fbff;
+  box-shadow: none;
+  display: grid;
+  gap: 18px;
+  padding: 18px;
+  position: sticky;
+  top: 160px;
+}
+
+.workspace-utility section + section {
+  border-top: 1px solid var(--panel-border);
+  padding-top: 14px;
+}
+
+.people-grid,
+.workflow-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.person-card {
+  background: #ffffff;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+}
+
+.person-card p {
+  margin-bottom: 0;
+}
+
 .hero,
 .role-section,
 .workbench,
@@ -872,6 +1127,20 @@ pre {
   width: 100%;
 }
 
+.canvas-section form {
+  display: grid;
+  gap: 8px;
+}
+
+.canvas-section form button {
+  background: #fff;
+  border: 1px dashed currentColor;
+  border-radius: 8px;
+  color: var(--accent);
+  font-weight: 800;
+  min-height: 34px;
+}
+
 .external-link {
   display: inline-flex;
   width: fit-content;
@@ -909,16 +1178,37 @@ pre {
 @media (max-width: 1180px) {
   .hero__grid,
   .workbench,
+  .route-control,
+  .map-stage,
+  .station-workspace,
   .split,
   .detail-columns,
   .prompt-grid,
   .collaboration-brief,
-  .template-grid {
+  .template-grid,
+  .people-grid,
+  .workflow-grid {
     grid-template-columns: 1fr;
   }
 
-  .guide-panel {
+  .guide-panel,
+  .workspace-nav,
+  .workspace-utility,
+  .route-control {
     position: static;
+  }
+
+  .workspace-nav {
+    border-right: 0;
+    border-bottom: 1px solid var(--panel-border);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-bottom: 16px;
+    padding-right: 0;
+  }
+
+  .workspace-nav h2,
+  .workspace-route-cards {
+    grid-column: 1 / -1;
   }
 
   .role-grid,
@@ -937,6 +1227,10 @@ pre {
 
   .metro-map {
     min-width: 760px;
+  }
+
+  .mode-buttons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -968,6 +1262,18 @@ pre {
     grid-template-columns: 1fr;
   }
 
+  .mode-buttons,
+  .workspace-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .route-control,
+  .map-stage,
+  .station-workspace,
+  .catalog-section {
+    padding-inline: 10px;
+  }
+
   h1 {
     font-size: 2rem;
   }
@@ -990,5 +1296,11 @@ pre {
 
   .source-panel {
     display: none;
+  }
+
+  .station-summary,
+  .workspace-panel,
+  .workspace-utility {
+    padding: 14px;
   }
 }

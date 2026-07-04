@@ -656,6 +656,7 @@ function CanvasWorkspace({
               }}
             >
               <input name="note" placeholder="Add sticky note" aria-label={`Add note to ${section.title}`} />
+              <button type="submit">Add {section.defaultNoteIntent || "note"}</button>
             </form>
           </article>
         ))}
@@ -770,6 +771,13 @@ export default function CatalogExplorer({
     rolePrompts[0]?.title ? `Use AI prompt: ${rolePrompts[0].title}` : undefined,
     "Capture decisions, owners, and the next station to visit",
   ]).slice(0, 4);
+  const modeKeys = Object.keys(viewLabels) as Array<keyof typeof viewLabels>;
+  const aiWorkflowLabels = [
+    "Facilitate station discussion",
+    "Fill recommended canvas",
+    "Review outputs",
+    "Decide next action",
+  ];
 
   function selectRole(nextRoleId: string) {
     const nextRole = safeRole(nextRoleId, roleData);
@@ -794,7 +802,7 @@ export default function CatalogExplorer({
 
   return (
     <main className="site-shell">
-      <header className="hero">
+      <header className="app-header">
         <nav className="topbar" aria-label="Primary">
           <a className="brand" href={locale === "en" ? "/" : `/${locale}`}>
             <img className="brand__logo" src="/assets/apiops-cycles-logo-dark.svg" alt="" />
@@ -819,183 +827,130 @@ export default function CatalogExplorer({
             </select>
           </div>
         </nav>
-        <section className="hero__grid">
-          <div>
-            <p className="eyebrow">Interactive transit map for collaborative decision-making</p>
-            <h1>Find the right APIOps route, station, people, and next action.</h1>
-            <p className="hero__lead">
-              Choose the work you are trying to accomplish, follow the productization route,
-              and open each station to see who to involve, what to discuss, what to produce,
-              and what to do next.
-            </p>
-            <div className="hero__actions" aria-label="Catalog summary">
-              <span>{roleData.length} roles</span>
-              <span>{data.cycles.length} cycles</span>
-              <span>{Object.keys(canvasData).length} canvases</span>
-              <span>{catalog.locales.length} languages</span>
-            </div>
-          </div>
-          <aside className="source-panel" aria-label="Source data">
-            <strong>Source dependency</strong>
-            <span>apiops-cycles-method-data</span>
-            <span>{catalog.source.branch}</span>
-            <code>{catalog.source.commit.slice(0, 12)}</code>
-          </aside>
-        </section>
       </header>
 
-      <section className="role-section" aria-label="Choose your role">
-        <div className="section-head">
-          <p className="section-kicker">Route planner</p>
-          <h2>What are you trying to accomplish today?</h2>
-          <p className="helper-text">Pick a stakeholder path and the map highlights the route, station conversations, outputs, and next actions.</p>
-        </div>
-        <div className="role-grid">
-          {roleData.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className={item.id === role.id ? "role-card is-active" : "role-card"}
-              style={{ "--route-color": colors[item.cycles[0]?.id] ?? "#6d2ba0" } as CSSProperties}
-              onClick={() => selectRole(item.id)}
-            >
-              <strong>{item.title}</strong>
-              <span>{item.summary}</span>
+      <section className="route-control" aria-label="Route controls">
+        <label>
+          <span>Current route</span>
+          <select value={role.id} onChange={(event) => selectRole(event.target.value)}>
+            {roleData.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
+          </select>
+        </label>
+        <label>
+          <span>Recommended cycle</span>
+          <select value={cycleId} onChange={(event) => setCycleId(event.target.value)}>
+            {data.cycles.map((cycle) => <option key={cycle.id} value={cycle.id}>{cycle.title}</option>)}
+          </select>
+        </label>
+        <label>
+          <span>Current station</span>
+          <select value={stationId} onChange={(event) => setStationId(event.target.value)}>
+            {selectedCycle.stations.map((station) => (
+              <option key={station.id} value={station.id}>{shortStationName(station.title)}</option>
+            ))}
+          </select>
+        </label>
+        <div className="mode-buttons" aria-label="Workspace modes">
+          {modeKeys.map((key) => (
+            <button key={key} type="button" className={view === key ? "is-active" : ""} onClick={() => setView(key)}>
+              {viewLabels[key]}
             </button>
           ))}
         </div>
       </section>
 
-      <section className={view === "map" ? "workbench workbench--map" : "workbench"}>
-        <aside className="guide-panel">
-          <p className="section-kicker">Guided path</p>
-          <h2>{role.title}</h2>
-          <p>{role.summary}</p>
-          <div className="tabs" aria-label="Workflow views">
-            {(Object.keys(viewLabels) as Array<keyof typeof viewLabels>).map((key) => (
-              <button key={key} type="button" className={view === key ? "is-active" : ""} onClick={() => setView(key)}>
-                {viewLabels[key]}
-              </button>
-            ))}
+      <section className="map-stage">
+        <article className="map-card" style={{ "--route-color": colors[cycleId] ?? "#6d2ba0" } as CSSProperties}>
+          <div className="panel__head map-head">
+            <div>
+              <p className="section-kicker">Your route on the map</p>
+              <h2>{selectedCycle.title}</h2>
+              <p>Click a station to change the selected workspace. The highlighted route shows the current cycle.</p>
+            </div>
+            <div className="cycle-pills" aria-label="Select cycle">
+              {data.cycles.map((cycle) => (
+                <button
+                  key={cycle.id}
+                  type="button"
+                  className={cycle.id === cycleId ? "is-active" : ""}
+                  onClick={() => setCycleId(cycle.id)}
+                >
+                  <span style={{ backgroundColor: colors[cycle.id] ?? "#164e63" }} />
+                  {cycle.title}
+                </button>
+              ))}
+            </div>
           </div>
+          <MetroMap
+            cycles={data.cycles}
+            lines={data.lines}
+            stations={data.stations}
+            selectedCycleId={cycleId}
+            selectedStationId={stationId}
+            onSelectCycle={setCycleId}
+            onSelectStation={setStationId}
+          />
+        </article>
+
+        <aside className="station-summary">
+          <div className="station-summary__head">
+            <span className="station-number">{selectedStation.index || stationDetail.lifecycleStage || "•"}</span>
+            <div>
+              <p className="you-are-here">You are here</p>
+              <h2>{shortStationName(stationDetail.title)}</h2>
+            </div>
+          </div>
+          <p>{stationDetail.description}</p>
           <section>
-            <h3>Key decisions</h3>
-            <ul>
-              {role.decisions.map((decision) => <li key={decision}>{decision}</li>)}
-            </ul>
+            <h3>Key questions</h3>
+            <ul>{discussionItems.slice(0, 4).map((item) => <li key={item}>{item}</li>)}</ul>
           </section>
           <section>
-            <h3>Expected outputs</h3>
-            <div className="chips">
-              {role.outputs.map((output) => <span key={output}>{output}</span>)}
+            <h3>Recommended next action</h3>
+            <p>{nextActions[0] ?? "Capture the decision and choose the next station."}</p>
+          </section>
+          <section>
+            <h3>Related canvases</h3>
+            <div className="related-list">
+              {role.canvases.slice(0, 4).map((canvas) => (
+                <button key={canvas.id} type="button" onClick={() => { setCanvasId(canvas.id); setView("canvases"); }}>
+                  {canvas.title}
+                </button>
+              ))}
             </div>
           </section>
         </aside>
+      </section>
 
-        <section className="main-panel">
-          {view === "guide" ? (
-            <div className="panel-stack">
-              <div className="split">
-                <article className="panel">
-                  <p className="section-kicker">Recommended cycles</p>
-                  {role.cycles.map((cycle) => (
-                    <button key={cycle.id} type="button" className={cycle.id === cycleId ? "list-choice is-active" : "list-choice"} onClick={() => setCycleId(cycle.id)}>
-                      <strong>{cycle.title}</strong>
-                      <span>{cycle.description}</span>
-                    </button>
-                  ))}
-                </article>
-                <article className="panel">
-                  <p className="section-kicker">Relevant stations</p>
-                  {role.stations.map((station) => (
-                    <button key={station.id} type="button" className={station.id === stationId ? "list-choice is-active" : "list-choice"} onClick={() => setStationId(station.id)}>
-                      <strong>{station.title}</strong>
-                      <span>{compact(station.description, 110)}</span>
-                    </button>
-                  ))}
-                </article>
-              </div>
-              <article className="panel station-detail">
-                <p className="section-kicker">Station detail</p>
-                <h2>{selectedStation.title}</h2>
-                <p>{selectedStation.description || stationDetail.description}</p>
-                <div className="detail-columns">
-                  <section>
-                    <h3>Typical outcomes</h3>
-                    <ul>{stationDetail.outcomes.slice(0, 4).map((item) => <li key={item}>{item}</li>)}</ul>
-                  </section>
-                  <section>
-                    <h3>Resources</h3>
-                    {selectedStationResources.length ? (
-                      <div className="resource-actions">
-                        {selectedStationResources.slice(0, 6).map((resource) => (
-                          <button key={resource.id} type="button" onClick={() => openResource(resource)}>
-                            <strong>{resource.title}</strong>
-                            <span>{resource.canvasId ? "Open canvas" : resource.category}</span>
-                          </button>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="helper-text">No station-specific resources are listed for this route.</p>
-                    )}
-                  </section>
-                  <section>
-                    <h3>Evidence</h3>
-                    <ul>{stationDetail.evidence.slice(0, 5).map((item) => <li key={item}>{item}</li>)}</ul>
-                  </section>
-                </div>
-              </article>
-            </div>
-          ) : null}
+      <section className="station-workspace">
+        <aside className="workspace-nav">
+          <h2>Station workspace</h2>
+          {modeKeys.map((key) => (
+            <button key={key} type="button" className={view === key ? "is-active" : ""} onClick={() => setView(key)}>
+              {viewLabels[key]}
+            </button>
+          ))}
+          <div className="workspace-route-cards">
+            <p className="section-kicker">Guided paths</p>
+            {roleData.slice(0, 5).map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={item.id === role.id ? "role-card is-active" : "role-card"}
+                style={{ "--route-color": colors[item.cycles[0]?.id] ?? "#6d2ba0" } as CSSProperties}
+                onClick={() => selectRole(item.id)}
+              >
+                <strong>{item.title}</strong>
+              </button>
+            ))}
+          </div>
+        </aside>
 
+        <section className="workspace-main">
           {view === "map" ? (
-            <article className="panel panel--map" style={{ "--route-color": colors[cycleId] ?? "#6d2ba0" } as CSSProperties}>
-              <div className="panel__head map-head">
-                <div>
-                  <p className="section-kicker">Metro map navigation</p>
-                  <h2>{selectedCycle.title}</h2>
-                  <p>
-                    Start from the shared eight-station route. Supporting branch dots are clickable and open details below the map.
-                  </p>
-                </div>
-                <div className="cycle-pills" aria-label="Select cycle">
-                  {data.cycles.map((cycle) => (
-                    <button
-                      key={cycle.id}
-                      type="button"
-                      className={cycle.id === cycleId ? "is-active" : ""}
-                      onClick={() => setCycleId(cycle.id)}
-                    >
-                      <span style={{ backgroundColor: colors[cycle.id] ?? "#164e63" }} />
-                      {cycle.title}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <MetroMap
-                cycles={data.cycles}
-                lines={data.lines}
-                stations={data.stations}
-                selectedCycleId={cycleId}
-                selectedStationId={stationId}
-                onSelectCycle={setCycleId}
-                onSelectStation={setStationId}
-              />
-              <div className="map-detail">
-                <div>
-                  <p className="section-kicker">Selected station</p>
-                  <h2>{stationDetail.title}</h2>
-                  <p>{stationDetail.description}</p>
-                </div>
-                <div className="resource-actions">
-                  {selectedStationResources.slice(0, 4).map((resource) => (
-                    <button key={resource.id} type="button" onClick={() => openResource(resource)}>
-                      <strong>{resource.title}</strong>
-                      <span>{resource.canvasId ? "Open canvas" : resource.category}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+            <article className="workspace-panel">
+              <p className="section-kicker">Overview</p>
+              <h2>{shortStationName(stationDetail.title)} workspace</h2>
               <div className="collaboration-brief" aria-label="Station collaboration brief">
                 <section>
                   <small>People</small>
@@ -1023,15 +978,33 @@ export default function CatalogExplorer({
             </article>
           ) : null}
 
+          {view === "guide" ? (
+            <article className="workspace-panel">
+              <p className="section-kicker">People to involve</p>
+              <h2>Role guide for {shortStationName(stationDetail.title)}</h2>
+              <div className="people-grid">
+                {roleData.slice(0, 6).map((item) => (
+                  <section key={item.id} className="person-card">
+                    <h3>{item.title}</h3>
+                    <p><strong>Why they matter:</strong> {item.summary}</p>
+                    <p><strong>What to ask:</strong> {item.decisions[0] ?? discussionItems[0]}</p>
+                    <p><strong>What they produce:</strong> {item.outputs[0] ?? outputItems[0]}</p>
+                  </section>
+                ))}
+              </div>
+            </article>
+          ) : null}
+
           {view === "ai" ? (
-            <article className="panel" id="workflows">
+            <article className="workspace-panel" id="workflows">
               <p className="section-kicker">Use with AI</p>
-              <h2>Prompt packs for {role.title}</h2>
-              <div className="prompt-grid">
-                {rolePrompts.map((prompt) => (
+              <h2>AI workflow for {shortStationName(stationDetail.title)}</h2>
+              <div className="workflow-grid">
+                {rolePrompts.slice(0, 4).map((prompt, index) => (
                   <section key={prompt.id} className="prompt-card">
-                    <span>{prompt.mode}</span>
+                    <span>{index + 1}. {aiWorkflowLabels[index] ?? prompt.mode}</span>
                     <h3>{prompt.title}</h3>
+                    <p><strong>Purpose:</strong> {prompt.mode}</p>
                     <pre>{prompt.prompt}</pre>
                     <button type="button" onClick={() => copyText(prompt.prompt)}>Copy prompt</button>
                   </section>
@@ -1041,9 +1014,9 @@ export default function CatalogExplorer({
           ) : null}
 
           {view === "confluence" ? (
-            <article className="panel">
-              <p className="section-kicker">Use with Confluence and Markdown</p>
-              <h2>Export-ready templates</h2>
+            <article className="workspace-panel">
+              <p className="section-kicker">Confluence export</p>
+              <h2>Publishing templates</h2>
               <p className="helper-text">
                 Choose the purpose first, then copy the format that matches the destination. Markdown is for docs repositories and static sites. Confluence-wiki is for Confluence pages that accept wiki markup.
               </p>
@@ -1082,11 +1055,11 @@ export default function CatalogExplorer({
           ) : null}
 
           {view === "canvases" ? (
-            <article className="panel">
+            <article className="workspace-panel">
               <div className="panel__head">
                 <div>
                   <p className="section-kicker">Use with canvases</p>
-                  <h2>Fill sticky notes locally</h2>
+                  <h2>{selectedCanvas.title || "Capability Value Proposition Canvas"}</h2>
                 </div>
                 <select value={canvasId} onChange={(event) => setCanvasId(event.target.value)} aria-label="Select canvas">
                   {role.canvases.map((canvas) => (
@@ -1106,7 +1079,7 @@ export default function CatalogExplorer({
           ) : null}
 
           {view === "data" ? (
-            <article className="panel" id="method-data">
+            <article className="workspace-panel workspace-panel--technical" id="method-data">
               <p className="section-kicker">Method data</p>
               <h2>Static integration surfaces</h2>
               <p>These JSON files are published with the site and can be consumed by future MCP tools, documentation generators, or external canvas renderers.</p>
@@ -1125,6 +1098,27 @@ export default function CatalogExplorer({
             </article>
           ) : null}
         </section>
+
+        <aside className="workspace-utility">
+          <section>
+            <h3>Facilitation tips</h3>
+            <p>Start with outcomes, then confirm evidence, owners, and the next station before choosing templates or canvases.</p>
+          </section>
+          <section>
+            <h3>People to involve</h3>
+            <div className="chips chips--compact">
+              {participantChips.map((participant) => <span key={participant}>{participant}</span>)}
+            </div>
+          </section>
+          <section>
+            <h3>Quick actions</h3>
+            <div className="resource-actions">
+              <button type="button" onClick={() => setView("canvases")}>Open canvas</button>
+              <button type="button" onClick={() => setView("ai")}>Use AI prompts</button>
+              <button type="button" onClick={() => setView("confluence")}>Prepare export</button>
+            </div>
+          </section>
+        </aside>
       </section>
 
       <section className="catalog-section">
