@@ -859,7 +859,9 @@ export default function CatalogExplorer({
         </div>
       </section>
 
-      <section className="map-stage">
+      <section className={view === "map" ? "main-workspace main-workspace--map" : "main-workspace"}>
+        <section className="workspace-main">
+        {view === "map" ? (
         <article className="map-card" style={{ "--route-color": colors[cycleId] ?? "#6d2ba0" } as CSSProperties}>
           <div className="panel__head map-head">
             <div>
@@ -891,8 +893,130 @@ export default function CatalogExplorer({
             onSelectStation={setStationId}
           />
         </article>
+        ) : null}
 
-        <aside className="station-summary">
+          {view === "guide" ? (
+            <article className="workspace-panel">
+              <p className="section-kicker">People to involve</p>
+              <h2>Role guide for {shortStationName(stationDetail.title)}</h2>
+              <div className="people-grid">
+                {roleData.slice(0, 6).map((item) => (
+                  <section key={item.id} className="person-card">
+                    <h3>{item.title}</h3>
+                    <p><strong>Why they matter:</strong> {item.summary}</p>
+                    <p><strong>What to ask:</strong> {item.decisions[0] ?? discussionItems[0]}</p>
+                    <p><strong>What they produce:</strong> {item.outputs[0] ?? outputItems[0]}</p>
+                  </section>
+                ))}
+              </div>
+            </article>
+          ) : null}
+
+          {view === "ai" ? (
+            <article className="workspace-panel" id="workflows">
+              <p className="section-kicker">Use with AI</p>
+              <h2>AI workflow for {shortStationName(stationDetail.title)}</h2>
+              <div className="workflow-grid">
+                {rolePrompts.slice(0, 4).map((prompt, index) => (
+                  <section key={prompt.id} className="prompt-card">
+                    <span>{index + 1}. {aiWorkflowLabels[index] ?? prompt.mode}</span>
+                    <h3>{prompt.title}</h3>
+                    <p><strong>Purpose:</strong> {prompt.mode}</p>
+                    <pre>{prompt.prompt}</pre>
+                    <button type="button" onClick={() => copyText(prompt.prompt)}>Copy prompt</button>
+                  </section>
+                ))}
+              </div>
+            </article>
+          ) : null}
+
+          {view === "confluence" ? (
+            <article className="workspace-panel">
+              <p className="section-kicker">Confluence export</p>
+              <h2>Publishing templates</h2>
+              <p className="helper-text">
+                Choose the purpose first, then copy the format that matches the destination. Markdown is for docs repositories and static sites. Confluence-wiki is for Confluence pages that accept wiki markup.
+              </p>
+              <div className="template-grid">
+                {templateGroups.map((group) => (
+                    <section key={group.key} className="template-card template-card--grouped">
+                      <div className="template-card__meta">
+                        <span>{group.label}</span>
+                      </div>
+                      <h3>{group.title}</h3>
+                      <p>{group.copy}</p>
+                      <div className="template-formats">
+                        {group.markdown ? (
+                          <section>
+                            <div className="template-format-head">
+                              <strong>Markdown</strong>
+                              <button type="button" onClick={() => copyText(group.markdown?.body ?? "")}>Copy Markdown</button>
+                            </div>
+                            <pre>{group.markdown.body}</pre>
+                          </section>
+                        ) : null}
+                        {group.confluence ? (
+                          <section>
+                            <div className="template-format-head">
+                              <strong>Confluence-wiki</strong>
+                              <button type="button" onClick={() => copyText(group.confluence?.body ?? "")}>Copy Confluence-wiki</button>
+                            </div>
+                            <pre>{group.confluence.body}</pre>
+                          </section>
+                        ) : null}
+                      </div>
+                    </section>
+                ))}
+              </div>
+            </article>
+          ) : null}
+
+          {view === "canvases" ? (
+            <article className="workspace-panel">
+              <div className="panel__head">
+                <div>
+                  <p className="section-kicker">Use with canvases</p>
+                  <h2>{selectedCanvas.title || "Capability Value Proposition Canvas"}</h2>
+                </div>
+                <select value={canvasId} onChange={(event) => setCanvasId(event.target.value)} aria-label="Select canvas">
+                  {role.canvases.map((canvas) => (
+                    <option key={canvas.id} value={canvas.id}>{canvas.title}</option>
+                  ))}
+                </select>
+              </div>
+              {externalCanvasUrl ? (
+                <a className="external-link" href={externalCanvasUrl} target="_blank" rel="noreferrer">
+                  Open in CanvasCreator
+                </a>
+              ) : (
+                <p className="helper-text">No external canvas renderer is configured, so this page uses the built-in local workspace.</p>
+              )}
+              <CanvasWorkspace canvas={selectedCanvas} role={role} locale={locale} />
+            </article>
+          ) : null}
+
+          {view === "data" ? (
+            <article className="workspace-panel workspace-panel--technical" id="method-data">
+              <p className="section-kicker">Method data</p>
+              <h2>Static integration surfaces</h2>
+              <p>These JSON files are published with the site and can be consumed by future MCP tools, documentation generators, or external canvas renderers.</p>
+              <div className="data-links">
+                {[
+                  "method-catalog.json",
+                  "stakeholder-guides.json",
+                  "canvas-manifest.json",
+                  "prompt-packs.json",
+                  "export-templates.json",
+                  "mcp-method-manifest.json",
+                ].map((file) => (
+                  <a key={file} href={`/data/${file}`}>{`/data/${file}`}</a>
+                ))}
+              </div>
+            </article>
+          ) : null}
+        </section>
+
+        <aside className={view === "map" ? "station-summary" : "context-panel"}>
           <div className="station-summary__head">
             <span className="station-number">{selectedStation.index || stationDetail.lifecycleStage || "•"}</span>
             <div>
@@ -919,10 +1043,32 @@ export default function CatalogExplorer({
               ))}
             </div>
           </section>
+          {view !== "map" ? (
+            <>
+              <section>
+                <h3>{view === "data" ? "Technical notes" : "People to involve"}</h3>
+                {view === "data" ? (
+                  <p>All workspace views consume static JSON under <code>/data</code>. No database or server-side persistence is introduced.</p>
+                ) : (
+                  <div className="chips chips--compact">
+                    {participantChips.map((participant) => <span key={participant}>{participant}</span>)}
+                  </div>
+                )}
+              </section>
+              <section>
+                <h3>{view === "confluence" ? "Export actions" : view === "canvases" ? "Canvas actions" : "Quick actions"}</h3>
+                <div className="resource-actions">
+                  <button type="button" onClick={() => setView("canvases")}>{view === "canvases" ? "Continue canvas" : "Open canvas"}</button>
+                  <button type="button" onClick={() => setView("ai")}>Use AI prompts</button>
+                  <button type="button" onClick={() => setView("confluence")}>Prepare export</button>
+                </div>
+              </section>
+            </>
+          ) : null}
         </aside>
       </section>
 
-      <section className="station-workspace">
+      <section className="station-workspace station-workspace--legacy" hidden>
         <aside className="workspace-nav">
           <h2>Station workspace</h2>
           {modeKeys.map((key) => (

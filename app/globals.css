@@ -104,7 +104,7 @@ a {
 }
 
 .route-control,
-.map-stage,
+.main-workspace,
 .station-workspace,
 .catalog-section {
   margin: 0 auto;
@@ -169,15 +169,20 @@ a {
   color: var(--accent);
 }
 
-.map-stage {
+.main-workspace {
   display: grid;
   gap: 12px;
   grid-template-columns: minmax(0, 1.55fr) minmax(360px, 0.85fr);
   padding-block: 12px;
 }
 
+.main-workspace--map {
+  grid-template-columns: minmax(0, 1.55fr) minmax(360px, 0.85fr);
+}
+
 .map-card,
 .station-summary,
+.context-panel,
 .station-workspace,
 .workspace-panel,
 .workspace-utility {
@@ -201,6 +206,14 @@ a {
   display: grid;
   gap: 16px;
   padding: clamp(18px, 2vw, 28px);
+}
+
+.context-panel {
+  background: #f8fbff;
+  box-shadow: none;
+  display: grid;
+  gap: 14px;
+  padding: clamp(16px, 1.6vw, 22px);
 }
 
 .station-summary__head {
@@ -240,6 +253,15 @@ a {
 .station-summary section {
   border-top: 1px solid #edf2fb;
   padding-top: 13px;
+}
+
+.context-panel section {
+  border-top: 1px solid #e7eef9;
+  padding-top: 12px;
+}
+
+.station-workspace--legacy {
+  display: none;
 }
 
 .related-list {
@@ -1179,7 +1201,7 @@ pre {
   .hero__grid,
   .workbench,
   .route-control,
-  .map-stage,
+  .main-workspace,
   .station-workspace,
   .split,
   .detail-columns,
@@ -1268,7 +1290,7 @@ pre {
   }
 
   .route-control,
-  .map-stage,
+  .main-workspace,
   .station-workspace,
   .catalog-section {
     padding-inline: 10px;
