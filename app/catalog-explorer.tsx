@@ -1000,17 +1000,10 @@ export default function CatalogExplorer({
       id: stakeholder.id,
       title: stakeholder.title,
       summary: stakeholder.description || profile?.summary || "",
-      decisions: [
-        stakeholder.involvement ? `${stakeholder.title} is ${stakeholder.involvement} for this station.` : "",
-        ...(ownedResources.length ? [`Owns answers for: ${ownedResources.join(", ")}`] : []),
-        ...stationQuestions,
-      ].filter(Boolean),
-      outputs: uniqueText([
-        ...ownedResources,
-        ...(stationDetail.outcomes ?? []),
-        ...(stationDetail.evidence ?? []),
-      ]),
       involvement: stakeholder.involvement,
+      responsibilities: uniqueText(ownedResources),
+      responsibilityLabel: uniqueText(ownedResources).join(", "),
+      roleLabel: stakeholder.involvement ? methodLabels[`stakeholder.involvement.${stakeholder.involvement}`] ?? stakeholder.involvement : "",
     };
   });
   const canvasResources = selectedStationResources.filter((resource) => resource.canvasId);
@@ -1242,17 +1235,17 @@ ${prompt.prompt}`;
               <h2>Role guide for {stationTitle}</h2>
               <div className="role-table" role="table" aria-label={`Role guide for ${stationTitle}`}>
                 <div className="role-table__row role-table__row--head" role="row">
-                  <span role="columnheader">Role</span>
+                  <span role="columnheader">Stakeholder</span>
                   <span role="columnheader">Why they matter</span>
-                  <span role="columnheader">What to ask</span>
-                  <span role="columnheader">What they produce</span>
+                  <span role="columnheader">Role</span>
+                  <span role="columnheader">Responsibilities</span>
                 </div>
                 {roleGuideRows.slice(0, 8).map((item) => (
                   <div key={item.id} className={item.id === role.id ? "role-table__row is-active" : "role-table__row"} role="row" id={`role-${item.id}`}>
                     <strong role="cell">{item.title}</strong>
                     <span role="cell">{item.summary}</span>
-                    <span role="cell">{stationQuestions[0] ?? item.decisions[0] ?? discussionItems[0]}</span>
-                    <span role="cell">{stationDetail.outcomes[0] ?? stationDetail.evidence[0] ?? item.outputs[0] ?? outputItems[0]}</span>
+                    <span role="cell">{item.roleLabel}</span>
+                    <span role="cell">{item.responsibilityLabel || "No specific resource ownership"}</span>
                   </div>
                 ))}
               </div>
