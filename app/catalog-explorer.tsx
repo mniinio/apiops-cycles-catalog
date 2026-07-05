@@ -249,12 +249,16 @@ const fallbackLabels: Record<string, string> = {
   "nav.workflows": "Workflows",
   "nav.data": "Data",
   "nav.language": "Language",
+  "nav.primary": "Primary",
   "nav.licensing": "Licensing",
   "nav.github": "GitHub",
   "nav.community": "Community",
   "controls.currentRoute": "Current route",
   "controls.recommendedCycle": "Recommended cycle",
   "controls.currentStation": "Current station",
+  "controls.routeControls": "Route controls",
+  "controls.workspaceModes": "Workspace modes",
+  "controls.selectCycle": "Select cycle",
   "views.map": "Metro map",
   "views.guide": "Role guide",
   "views.canvases": "Resources",
@@ -265,9 +269,14 @@ const fallbackLabels: Record<string, string> = {
   "map.instructions": "Click a station to change the selected workspace. The highlighted route shows the current cycle.",
   "map.linesTitle": "Metro lines",
   "map.linesDescription": "Lines show decision tracks across the shared APIOps backbone. Cycles show the journey for a goal.",
+  "map.instructionsSvg": "Click any station dot to navigate. Use the cycle selector to switch route.",
+  "map.ariaLabel": "APIOps Cycles metro map",
+  "map.zoneStrategic": "Strategic",
+  "map.zoneGovernance": "Governance",
+  "map.zoneConsumer": "Consumer",
+  "map.zoneTechnical": "Technical",
   "station.youAreHere": "You are here",
   "station.keyQuestions": "Key questions",
-  "station.nextAction": "Recommended next action",
   "station.whereNext": "Where can I go next?",
   "station.before": "Before this station",
   "station.ready": "Ready to leave when",
@@ -278,20 +287,88 @@ const fallbackLabels: Record<string, string> = {
   "station.relatedCanvases": "Related canvases",
   "station.relatedResources": "Related resources",
   "station.people": "People to involve",
+  "station.noEntryCriteria": "No entry criteria listed.",
+  "station.noExitCriteria": "No exit criteria listed.",
+  "station.noLineTransitions": "No line transitions are listed for this station.",
+  "role.kicker": "People to involve",
+  "role.titlePrefix": "Role guide for",
+  "role.columnStakeholder": "Stakeholder",
+  "role.columnWhy": "Why they matter",
+  "role.columnRole": "Role",
+  "role.columnResponsibilities": "Responsibilities",
+  "role.noResponsibilities": "No specific resource ownership",
   "resources.emptyCanvases": "No canvas resources are directly linked to this station.",
   "resources.emptyOther": "No additional resources are directly linked to this station.",
+  "resources.kicker": "Resources",
+  "resources.titlePrefix": "Resources for",
+  "resources.helper": "Select a station resource from the details panel. Canvas resources open the local sticky-note workspace; other resources open guidance, examples, or checklists here.",
+  "resources.select": "Select resource",
+  "resources.emptySelect": "No station resources",
+  "resources.emptyStation": "No resources are directly linked to this station in the selected cycle.",
+  "resources.noExternalRenderer": "No external canvas renderer is configured, so this page uses the built-in local workspace.",
+  "resources.useWithAi": "Use station resources with AI",
+  "resources.useWithAiHelp": "Open Resources, select a canvas or guidance item, then copy its Markdown or JSON into your AI conversation.",
+  "resources.helpsAnswer": "Helps answer",
+  "resources.expectedOutcomes": "Expected outcomes",
+  "resources.howToUse": "How to use it",
+  "resources.sourceContent": "Source content",
+  "resources.source": "Source",
+  "resources.details": "details",
   "canvas.localWorkspace": "Local canvas workspace",
   "canvas.exportMarkdown": "Export Markdown",
   "canvas.exportJson": "Export JSON",
   "canvas.importJson": "Import JSON",
-  "canvas.exportSvg": "Export SVG",
-  "canvas.exportPng": "Export PNG",
-  "canvas.exportPdf": "Export PDF",
-  "canvas.exportUnavailable": "Configure NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL to export styled SVG, PNG, or PDF with CanvasCreator.",
   "canvas.openCreator": "Open in CanvasCreator",
   "canvas.markdownExported": "Canvas Markdown exported.",
   "canvas.jsonExported": "Canvas JSON exported.",
   "canvas.jsonImported": "Canvas JSON imported.",
+  "canvas.invalidImport": "Invalid canvas import/export template",
+  "canvas.removeNote": "Remove note",
+  "canvas.addStickyNote": "Add sticky note",
+  "category_canvas": "Canvas",
+  "category_guideline": "Guideline",
+  "category_checklist": "Checklist",
+  "ai.kicker": "Use with AI",
+  "ai.titlePrefix": "AI assistance for",
+  "ai.helper": "Use AI to facilitate the station conversation, work through the selected Resources, and turn canvas notes or resource findings into next actions.",
+  "ai.facilitate": "Facilitate station discussion",
+  "ai.nextAction": "Decide next action",
+  "ai.facilitateTitlePrefix": "Facilitate",
+  "ai.nextActionTitlePrefix": "Next actions for",
+  "ai.purpose": "Purpose",
+  "ai.copyPrompt": "Copy prompt",
+  "ai.promptContext": "Selected APIOps Cycles context",
+  "ai.promptRoute": "Route",
+  "ai.promptCycle": "Cycle",
+  "ai.promptStation": "Station",
+  "ai.promptStationPurpose": "Station purpose",
+  "ai.promptResources": "Station resources",
+  "ai.promptCanvases": "Station canvases",
+  "confluence.kicker": "Confluence export",
+  "confluence.title": "Publishing templates",
+  "confluence.helper": "Choose the purpose first, then copy the format that matches the destination. Markdown is for docs repositories and static sites. Confluence-wiki is for Confluence pages that accept wiki markup.",
+  "confluence.cycleTemplate": "Cycle documentation",
+  "confluence.cycleTemplateTitle": "Cycle reference to publish",
+  "confluence.cycleTemplateHelp": "Use this when you want to document the selected cycle, stations, route, and method guidance.",
+  "confluence.questionTemplate": "Question template",
+  "confluence.questionTemplateTitle": "Question template to fill in",
+  "confluence.questionTemplateHelp": "Use this when you want to gather answers and evidence before choosing an integration or API design path.",
+  "confluence.markdown": "Markdown",
+  "confluence.confluenceWiki": "Confluence-wiki",
+  "confluence.copyMarkdown": "Copy Markdown",
+  "confluence.copyConfluenceWiki": "Copy Confluence-wiki",
+  "confluence.cycleExport": "Cycle export",
+  "confluence.audience": "Intended audience",
+  "confluence.formatGuidance": "Format guidance",
+  "confluence.formatGuidanceText": "Use Markdown for docs repositories and static sites. Use Confluence-wiki for Confluence pages that accept wiki markup.",
+  "data.kicker": "Method data",
+  "data.title": "Static integration surfaces",
+  "data.helper": "These JSON files are published with the site and can be consumed by future MCP tools, documentation generators, or external canvas renderers.",
+  "data.panelHelper": "All workspace views consume generated JSON under /data. No database or server-side persistence is introduced.",
+  "data.sourceDependency": "Source dependency",
+  "data.branch": "Branch",
+  "data.localeSafe": "Locale-safe",
+  "data.localeSafeText": "Default locale is {defaultLocale}; published locales are {locales}.",
   "partners.kicker": "Community and partners",
   "partners.title": "Built with the APIOps Cycles community",
   "partners.description": "APIOps Cycles is an open method. Partners help develop, use, and teach it with teams around the world.",
@@ -308,15 +385,15 @@ function safeRole(roleId: string, roles: RouteProfile[]) {
   return roles.find((role) => role.id === roleId) ?? roles[0];
 }
 
-function templateUse(template: ExportTemplate) {
+function templateUse(template: ExportTemplate, labels: Record<string, string>) {
   const isQuestionTemplate = template.id.includes("integration");
   return {
     key: isQuestionTemplate ? "questions" : "cycle",
-    label: isQuestionTemplate ? "Question template" : "Cycle documentation",
-    title: isQuestionTemplate ? "Question template to fill in" : "Cycle reference to publish",
+    label: isQuestionTemplate ? labels["confluence.questionTemplate"] : labels["confluence.cycleTemplate"],
+    title: isQuestionTemplate ? labels["confluence.questionTemplateTitle"] : labels["confluence.cycleTemplateTitle"],
     copy: isQuestionTemplate
-      ? "Use this when you want to gather answers and evidence before choosing an integration or API design path."
-      : "Use this when you want to document the selected cycle, stations, route, and method guidance.",
+      ? labels["confluence.questionTemplateHelp"]
+      : labels["confluence.cycleTemplateHelp"],
   };
 }
 
@@ -397,6 +474,7 @@ function MetroMap({
   selectedStationId,
   onSelectCycle,
   onSelectStation,
+  uiLabels,
 }: {
   cycles: Cycle[];
   lines: MetroLine[];
@@ -405,6 +483,7 @@ function MetroMap({
   selectedStationId: string;
   onSelectCycle: (id: string) => void;
   onSelectStation: (id: string) => void;
+  uiLabels: Record<string, string>;
 }) {
   const width = 1000;
   const height = 1000;
@@ -442,10 +521,10 @@ function MetroMap({
     "budget-and-resource-management": { x: 860, y: 45, dx: 12, dy: 4 },
   };
   const labelBoxes = {
-    strategic: { x: 420, y: 6, width: 108, height: 34, label: "Strategic" },
-    governance: { x: 640, y: 296, width: 124, height: 34, label: "Governance" },
-    consumer: { x: 275, y: 386, width: 118, height: 34, label: "Consumer" },
-    technical: { x: 720, y: 806, width: 110, height: 34, label: "Technical" },
+    strategic: { x: 420, y: 6, width: 108, height: 34, label: uiLabels["map.zoneStrategic"] },
+    governance: { x: 640, y: 296, width: 124, height: 34, label: uiLabels["map.zoneGovernance"] },
+    consumer: { x: 275, y: 386, width: 118, height: 34, label: uiLabels["map.zoneConsumer"] },
+    technical: { x: 720, y: 806, width: 110, height: 34, label: uiLabels["map.zoneTechnical"] },
   };
   const lineLegend = lines.map((line, index) => ({ ...line, x: 105, y: 760 + index * 28 }));
   const corePoints = coreStations.map((station, index) => {
@@ -504,7 +583,7 @@ function MetroMap({
   });
 
   return (
-    <svg className="metro-map" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="APIOps Cycles metro map">
+    <svg className="metro-map" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={uiLabels["map.ariaLabel"]}>
       <circle cx="500" cy="500" r="445" className="metro-zone metro-zone--governance" />
       <ellipse cx="390" cy="112" rx="205" ry="150" className="metro-zone metro-zone--strategic" />
       <ellipse cx="275" cy="430" rx="285" ry="112" className="metro-zone metro-zone--consumer" />
@@ -518,7 +597,7 @@ function MetroMap({
         </g>
       ))}
       <text x="32" y="38" className="metro-instructions">
-        Click any station dot to navigate. Use the cycle selector to switch route.
+        {uiLabels["map.instructionsSvg"]}
       </text>
       {linePoints.map((line) => (
         <g key={line.id}>
@@ -723,7 +802,7 @@ function CanvasWorkspace({
     if (payload.templateId && payload.templateId !== canvas.importExportTemplate.templateId) {
       throw new Error(`This file is for ${payload.templateId}, not ${canvas.importExportTemplate.templateId}.`);
     }
-    if (!Array.isArray(payload.sections)) throw new Error("Invalid canvas import/export template");
+    if (!Array.isArray(payload.sections)) throw new Error(labels["canvas.invalidImport"] ?? fallbackLabels["canvas.invalidImport"]);
     const importedNotes = Object.fromEntries(
       payload.sections.map((section: CanvasExportSection) => [section.sectionId, section.stickyNotes ?? []]),
     );
@@ -784,7 +863,7 @@ function CanvasWorkspace({
                   key={`${note.content}-${index}`}
                   type="button"
                   onClick={() => removeNote(section.id, index)}
-                  title="Remove note"
+                  title={labels["canvas.removeNote"] ?? fallbackLabels["canvas.removeNote"]}
                   style={{ backgroundColor: note.color }}
                 >
                   {note.content}
@@ -799,8 +878,8 @@ function CanvasWorkspace({
                 input.value = "";
               }}
             >
-              <input name="note" placeholder="Add sticky note" aria-label={`Add note to ${section.title}`} />
-              <button type="submit">Add {section.defaultNoteIntent || "note"}</button>
+              <input name="note" placeholder={labels["canvas.addStickyNote"] ?? fallbackLabels["canvas.addStickyNote"]} aria-label={`${labels["canvas.addStickyNote"] ?? fallbackLabels["canvas.addStickyNote"]}: ${section.title}`} />
+              <button type="submit">{labels["canvas.addStickyNote"] ?? fallbackLabels["canvas.addStickyNote"]}</button>
             </form>
           </article>
         ))}
@@ -813,39 +892,41 @@ function CanvasWorkspace({
 function ResourceDetail({
   resource,
   stationTitle,
+  labels,
 }: {
   resource: Resource;
   stationTitle: string;
+  labels: Record<string, string>;
 }) {
   return (
-    <section className="resource-detail" aria-label={`${resource.title} details`}>
+    <section className="resource-detail" aria-label={`${resource.title} ${labels["resources.details"]}`}>
       <div>
-        <p className="section-kicker">{resource.category}</p>
+        <p className="section-kicker">{categoryLabel({}, labels, resource.category)}</p>
         <h3>{resource.title}</h3>
-        <strong className="resource-purpose">Helps answer: {stationTitle}</strong>
+        <strong className="resource-purpose">{labels["resources.helpsAnswer"] ?? "Helps answer"}: {stationTitle}</strong>
       </div>
       <p>{resource.description}</p>
       {resource.outcomes.length ? (
         <section>
-          <h4>Expected outcomes</h4>
+          <h4>{labels["resources.expectedOutcomes"] ?? "Expected outcomes"}</h4>
           <ul>{resource.outcomes.map((item) => <li key={item}>{item}</li>)}</ul>
         </section>
       ) : null}
       {resource.steps.length ? (
         <section>
-          <h4>How to use it</h4>
+          <h4>{labels["resources.howToUse"] ?? "How to use it"}</h4>
           <ol>{resource.steps.map((item) => <li key={item}>{item}</li>)}</ol>
         </section>
       ) : null}
       {resource.contentMarkdown ? (
         <section>
-          <h4>Source content</h4>
+          <h4>{labels["resources.sourceContent"] ?? "Source content"}</h4>
           <pre>{resource.contentMarkdown}</pre>
         </section>
       ) : null}
       {resource.sourcePath || resource.sourceUrl ? (
         <p className="helper-text">
-          Source: {resource.sourceUrl ? <a href={resource.sourceUrl}>{resource.sourceUrl}</a> : <code>{resource.sourcePath}</code>}
+          {labels["resources.source"] ?? "Source"}: {resource.sourceUrl ? <a href={resource.sourceUrl}>{resource.sourceUrl}</a> : <code>{resource.sourcePath}</code>}
         </p>
       ) : null}
     </section>
@@ -947,7 +1028,7 @@ export default function CatalogExplorer({
       }
     >();
     for (const template of roleTemplates) {
-      const use = templateUse(template);
+      const use = templateUse(template, localizedLabels);
       const group = groups.get(use.key) ?? { ...use };
       if (template.format === "confluence-wiki") group.confluence = template;
       else group.markdown = template;
@@ -1026,11 +1107,6 @@ export default function CatalogExplorer({
     ? `${process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL.replace(/\/$/, "")}/${selectedCanvas.id}`
     : selectedCanvas.canvasCreatorUrl;
   const discussionItems = stationQuestions;
-  const outputItems = uniqueText([...role.outputs, ...stationDetail.outcomes, ...stationDetail.evidence]).slice(0, 5);
-  const nextActions = uniqueText([
-    lineNavigation[0]?.adjacent[0]?.title ? `${lineNavigation[0].adjacent[0].direction}: ${lineNavigation[0].adjacent[0].title}` : undefined,
-    "Capture decisions, owners, and the next station to visit",
-  ]).slice(0, 4);
   const modeKeys = viewKeys;
   const primaryAiPrompts = rolePrompts.filter((prompt) => ["facilitate-station", "next-actions"].includes(prompt.mode)).slice(0, 2);
 
@@ -1106,13 +1182,13 @@ export default function CatalogExplorer({
   function promptFor(prompt: PromptPack) {
     const resources = selectedStationResources.map((resource) => resource.title).join(", ") || "";
     const canvasList = canvasResources.map((resource) => resource.title).join(", ") || "";
-    return `Selected APIOps Cycles context
-Route: ${role.title}
-Cycle: ${selectedCycle.title}
-Station: ${stationTitle}
-Station purpose: ${stationDescription}
-Station resources: ${resources}
-Station canvases: ${canvasList}
+    return `${localizedLabels["ai.promptContext"]}
+${localizedLabels["ai.promptRoute"]}: ${role.title}
+${localizedLabels["ai.promptCycle"]}: ${selectedCycle.title}
+${localizedLabels["ai.promptStation"]}: ${stationTitle}
+${localizedLabels["ai.promptStationPurpose"]}: ${stationDescription}
+${localizedLabels["ai.promptResources"]}: ${resources}
+${localizedLabels["ai.promptCanvases"]}: ${canvasList}
 
 ${prompt.prompt}`;
   }
@@ -1130,7 +1206,7 @@ ${prompt.prompt}`;
   return (
     <main className="site-shell">
       <header className="app-header">
-        <nav className="topbar" aria-label="Primary">
+        <nav className="topbar" aria-label={localizedLabels["nav.primary"]}>
           <a className="brand" href={locale === "en" ? "/" : `/${locale}`}>
             <img className="brand__logo" src="/assets/apiops-cycles-logo-dark.svg" alt="" />
             <span>APIOps Cycles</span>
@@ -1159,7 +1235,7 @@ ${prompt.prompt}`;
         </nav>
       </header>
 
-      <section className="route-control" aria-label="Route controls">
+      <section className="route-control" aria-label={localizedLabels["controls.routeControls"]}>
         <label>
           <span>{localizedLabels["controls.currentRoute"]}</span>
           <select value={role.id} onChange={(event) => selectRole(event.target.value)}>
@@ -1180,7 +1256,7 @@ ${prompt.prompt}`;
             ))}
           </select>
         </label>
-        <div className="mode-buttons" aria-label="Workspace modes">
+        <div className="mode-buttons" aria-label={localizedLabels["controls.workspaceModes"]}>
           {modeKeys.map((key) => (
             <button key={key} type="button" className={view === key ? "is-active" : ""} onClick={() => setView(key)}>
               {localizedLabels[`views.${key}`]}
@@ -1199,7 +1275,7 @@ ${prompt.prompt}`;
               <h2>{selectedCycle.title}</h2>
               <p>{localizedLabels["map.instructions"]}</p>
             </div>
-            <div className="cycle-pills" aria-label="Select cycle">
+            <div className="cycle-pills" aria-label={localizedLabels["controls.selectCycle"]}>
               {data.cycles.map((cycle) => (
                 <button
                   key={cycle.id}
@@ -1221,6 +1297,7 @@ ${prompt.prompt}`;
             selectedStationId={stationId}
             onSelectCycle={selectCycle}
             onSelectStation={selectStation}
+            uiLabels={localizedLabels}
           />
           <section className="line-guide" aria-label={localizedLabels["map.linesTitle"]}>
             <div>
@@ -1241,21 +1318,21 @@ ${prompt.prompt}`;
 
           {view === "guide" ? (
             <article className="workspace-panel">
-              <p className="section-kicker">People to involve</p>
-              <h2>Role guide for {stationTitle}</h2>
+              <p className="section-kicker">{localizedLabels["role.kicker"]}</p>
+              <h2>{localizedLabels["role.titlePrefix"]} {stationTitle}</h2>
               <div className="role-table" role="table" aria-label={`Role guide for ${stationTitle}`}>
                 <div className="role-table__row role-table__row--head" role="row">
-                  <span role="columnheader">Stakeholder</span>
-                  <span role="columnheader">Why they matter</span>
-                  <span role="columnheader">Role</span>
-                  <span role="columnheader">Responsibilities</span>
+                  <span role="columnheader">{localizedLabels["role.columnStakeholder"]}</span>
+                  <span role="columnheader">{localizedLabels["role.columnWhy"]}</span>
+                  <span role="columnheader">{localizedLabels["role.columnRole"]}</span>
+                  <span role="columnheader">{localizedLabels["role.columnResponsibilities"]}</span>
                 </div>
                 {roleGuideRows.slice(0, 8).map((item) => (
                   <div key={item.id} className={item.id === role.id ? "role-table__row is-active" : "role-table__row"} role="row" id={`role-${item.id}`}>
                     <strong role="cell">{item.title}</strong>
                     <span role="cell">{item.summary}</span>
                     <span role="cell">{item.roleLabel}</span>
-                    <span role="cell">{item.responsibilityLabel || "No specific resource ownership"}</span>
+                    <span role="cell">{item.responsibilityLabel || localizedLabels["role.noResponsibilities"]}</span>
                   </div>
                 ))}
               </div>
@@ -1266,15 +1343,15 @@ ${prompt.prompt}`;
             <article className="workspace-panel">
               <div className="panel__head">
                 <div>
-                  <p className="section-kicker">Resources</p>
-                  <h2>{activeResource?.title ?? `Resources for ${stationTitle}`}</h2>
-                  <p className="helper-text">Select a station resource from the details panel. Canvas resources open the local sticky-note workspace; other resources open guidance, examples, or checklists here.</p>
+                  <p className="section-kicker">{localizedLabels["resources.kicker"]}</p>
+                  <h2>{activeResource?.title ?? `${localizedLabels["resources.titlePrefix"]} ${stationTitle}`}</h2>
+                  <p className="helper-text">{localizedLabels["resources.helper"]}</p>
                 </div>
                 <select value={activeResource?.id ?? ""} onChange={(event) => {
                   const nextResource = selectedStationResources.find((resource) => resource.id === event.target.value);
                   if (nextResource) openResource(nextResource);
-                }} aria-label="Select resource">
-                  {!selectedStationResources.length ? <option value="">No station resources</option> : null}
+                }} aria-label={localizedLabels["resources.select"]}>
+                  {!selectedStationResources.length ? <option value="">{localizedLabels["resources.emptySelect"]}</option> : null}
                   {selectedStationResources.map((resource) => (
                     <option key={resource.id} value={resource.id}>{resource.title}</option>
                   ))}
@@ -1287,38 +1364,38 @@ ${prompt.prompt}`;
                       {localizedLabels["canvas.openCreator"]}
                     </a>
                   ) : (
-                    <p className="helper-text">No external canvas renderer is configured, so this page uses the built-in local workspace.</p>
+                    <p className="helper-text">{localizedLabels["resources.noExternalRenderer"]}</p>
                   )}
                   <CanvasWorkspace canvas={selectedCanvas} role={role} locale={locale} labels={localizedLabels} canvasRendererBaseUrl={process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL} />
                 </>
               ) : activeResource ? (
-                <ResourceDetail resource={activeResource} stationTitle={stationTitle} />
+                <ResourceDetail resource={activeResource} stationTitle={stationTitle} labels={localizedLabels} />
               ) : (
-                <p className="helper-text">No resources are directly linked to this station in the selected cycle.</p>
+                <p className="helper-text">{localizedLabels["resources.emptyStation"]}</p>
               )}
             </article>
           ) : null}
 
           {view === "ai" ? (
             <article className="workspace-panel" id="workflows">
-              <p className="section-kicker">Use with AI</p>
-              <h2>AI assistance for {stationTitle}</h2>
-              <p className="helper-text">Use AI to facilitate the station conversation, work through the selected Resources, and turn canvas notes or resource findings into next actions.</p>
+              <p className="section-kicker">{localizedLabels["ai.kicker"]}</p>
+              <h2>{localizedLabels["ai.titlePrefix"]} {stationTitle}</h2>
+              <p className="helper-text">{localizedLabels["ai.helper"]}</p>
               <div className="workflow-grid workflow-grid--focused">
                 {primaryAiPrompts.map((prompt, index) => (
                   <section key={prompt.id} className="prompt-card">
-                    <span>{index + 1}. {prompt.mode === "facilitate-station" ? "Facilitate station discussion" : "Decide next action"}</span>
-                    <h3>{prompt.mode === "facilitate-station" ? `Facilitate ${stationTitle}` : `Next actions for ${stationTitle}`}</h3>
-                    <p><strong>Purpose:</strong> {prompt.mode}</p>
+                    <span>{index + 1}. {prompt.mode === "facilitate-station" ? localizedLabels["ai.facilitate"] : localizedLabels["ai.nextAction"]}</span>
+                    <h3>{prompt.mode === "facilitate-station" ? `${localizedLabels["ai.facilitateTitlePrefix"]} ${stationTitle}` : `${localizedLabels["ai.nextActionTitlePrefix"]} ${stationTitle}`}</h3>
+                    <p><strong>{localizedLabels["ai.purpose"]}:</strong> {prompt.mode}</p>
                     <pre>{promptFor(prompt)}</pre>
-                    <button type="button" onClick={() => copyText(promptFor(prompt))}>Copy prompt</button>
+                    <button type="button" onClick={() => copyText(promptFor(prompt))}>{localizedLabels["ai.copyPrompt"]}</button>
                   </section>
                 ))}
               </div>
               <div className="resource-actions resource-actions--inline">
                 <button type="button" onClick={() => setView("canvases")}>
-                  Use station resources with AI
-                  <span>Open Resources, select a canvas or guidance item, then copy its Markdown or JSON into your AI conversation.</span>
+                  {localizedLabels["resources.useWithAi"]}
+                  <span>{localizedLabels["resources.useWithAiHelp"]}</span>
                 </button>
               </div>
             </article>
@@ -1326,10 +1403,10 @@ ${prompt.prompt}`;
 
           {view === "confluence" ? (
             <article className="workspace-panel">
-              <p className="section-kicker">Confluence export</p>
-              <h2>Publishing templates</h2>
+              <p className="section-kicker">{localizedLabels["confluence.kicker"]}</p>
+              <h2>{localizedLabels["confluence.title"]}</h2>
               <p className="helper-text">
-                Choose the purpose first, then copy the format that matches the destination. Markdown is for docs repositories and static sites. Confluence-wiki is for Confluence pages that accept wiki markup.
+                {localizedLabels["confluence.helper"]}
               </p>
               <div className="template-grid">
                 {templateGroups.map((group) => (
@@ -1343,8 +1420,8 @@ ${prompt.prompt}`;
                         {group.markdown ? (
                           <section>
                             <div className="template-format-head">
-                              <strong>Markdown</strong>
-                              <button type="button" onClick={() => copyText(group.markdown?.body ?? "")}>Copy Markdown</button>
+                              <strong>{localizedLabels["confluence.markdown"]}</strong>
+                              <button type="button" onClick={() => copyText(group.markdown?.body ?? "")}>{localizedLabels["confluence.copyMarkdown"]}</button>
                             </div>
                             <pre>{group.markdown.body}</pre>
                           </section>
@@ -1352,8 +1429,8 @@ ${prompt.prompt}`;
                         {group.confluence ? (
                           <section>
                             <div className="template-format-head">
-                              <strong>Confluence-wiki</strong>
-                              <button type="button" onClick={() => copyText(group.confluence?.body ?? "")}>Copy Confluence-wiki</button>
+                              <strong>{localizedLabels["confluence.confluenceWiki"]}</strong>
+                              <button type="button" onClick={() => copyText(group.confluence?.body ?? "")}>{localizedLabels["confluence.copyConfluenceWiki"]}</button>
                             </div>
                             <pre>{group.confluence.body}</pre>
                           </section>
@@ -1367,9 +1444,9 @@ ${prompt.prompt}`;
 
           {view === "data" ? (
             <article className="workspace-panel workspace-panel--technical" id="method-data">
-              <p className="section-kicker">Method data</p>
-              <h2>Static integration surfaces</h2>
-              <p>These JSON files are published with the site and can be consumed by future MCP tools, documentation generators, or external canvas renderers.</p>
+              <p className="section-kicker">{localizedLabels["data.kicker"]}</p>
+              <h2>{localizedLabels["data.title"]}</h2>
+              <p>{localizedLabels["data.helper"]}</p>
               <div className="data-links">
                 {[
                   "method-catalog.json",
@@ -1389,36 +1466,36 @@ ${prompt.prompt}`;
           {view === "confluence" ? (
             <>
               <div>
-                <p className="section-kicker">Cycle export</p>
+                <p className="section-kicker">{localizedLabels["confluence.cycleExport"]}</p>
                 <h2>{selectedCycle.title}</h2>
               </div>
               <p>{selectedCycle.description}</p>
               <section>
-                <h3>Intended audience</h3>
+                <h3>{localizedLabels["confluence.audience"]}</h3>
                 <div className="chips chips--compact">
                   {uniqueText([role.title, ...selectedCycle.audiences]).map((participant) => <span key={participant}>{participant}</span>)}
                 </div>
               </section>
               <section>
-                <h3>Format guidance</h3>
-                <p>Use Markdown for docs repositories and static sites. Use Confluence-wiki for Confluence pages that accept wiki markup.</p>
+                <h3>{localizedLabels["confluence.formatGuidance"]}</h3>
+                <p>{localizedLabels["confluence.formatGuidanceText"]}</p>
               </section>
             </>
           ) : view === "data" ? (
             <>
               <div>
-                <p className="section-kicker">Method data</p>
-                <h2>Static integration surfaces</h2>
+                <p className="section-kicker">{localizedLabels["data.kicker"]}</p>
+                <h2>{localizedLabels["data.title"]}</h2>
               </div>
-              <p>All workspace views consume generated JSON under <code>/data</code>. No database or server-side persistence is introduced.</p>
+              <p>{localizedLabels["data.panelHelper"]}</p>
               <section>
-                <h3>Source dependency</h3>
+                <h3>{localizedLabels["data.sourceDependency"]}</h3>
                 <p><code>{catalog.source.repository}</code></p>
-                <p>Branch: <code>{catalog.source.branch}</code></p>
+                <p>{localizedLabels["data.branch"]}: <code>{catalog.source.branch}</code></p>
               </section>
               <section>
-                <h3>Locale-safe</h3>
-                <p>Default locale is <code>{catalog.defaultLocale}</code>; published locales are {catalog.locales.join(", ")}.</p>
+                <h3>{localizedLabels["data.localeSafe"]}</h3>
+                <p>{localizedLabels["data.localeSafeText"].replace("{defaultLocale}", catalog.defaultLocale).replace("{locales}", catalog.locales.join(", "))}</p>
               </section>
             </>
           ) : (
@@ -1446,7 +1523,7 @@ ${prompt.prompt}`;
                   <span>{criterion.title}</span>
                 </li>
               ))}
-              {!beforeCriteria.length ? <li>{selectedCycle.entryCriteria.join(", ") || "No entry criteria listed."}</li> : null}
+              {!beforeCriteria.length ? <li>{selectedCycle.entryCriteria.join(", ") || localizedLabels["station.noEntryCriteria"]}</li> : null}
             </ul>
           </section>
           <section>
@@ -1458,7 +1535,7 @@ ${prompt.prompt}`;
                   <span>{criterion.title}</span>
                 </li>
               ))}
-              {!readyCriteria.length ? <li>{selectedCycle.exitCriteria.join(", ") || "No exit criteria listed."}</li> : null}
+              {!readyCriteria.length ? <li>{selectedCycle.exitCriteria.join(", ") || localizedLabels["station.noExitCriteria"]}</li> : null}
             </ul>
           </section>
           <section>
@@ -1511,7 +1588,7 @@ ${prompt.prompt}`;
                       </div>
                     </article>
                   ))}
-                  {!lineNavigation.length ? <p className="helper-text">No line transitions are listed for this station.</p> : null}
+                  {!lineNavigation.length ? <p className="helper-text">{localizedLabels["station.noLineTransitions"]}</p> : null}
                 </div>
               </section>
             </>
