@@ -3,6 +3,8 @@ import canvasManifest from "./data/canvas-manifest.json";
 import exportTemplates from "./data/export-templates.json";
 import promptPacks from "./data/prompt-packs.json";
 import stakeholderGuides from "./data/stakeholder-guides.json";
+import siteLabels from "./data/site-labels.json";
+import partners from "./data/partners.json";
 import CatalogExplorer from "./catalog-explorer";
 
 const supportedLocales = catalog.locales;
@@ -14,24 +16,32 @@ export function normalizeLocale(locale?: string) {
 export function CatalogJsonLd({ locale }: { locale: string }) {
   const data = catalog.translations[normalizeLocale(locale)];
   const roles = stakeholderGuides.translations[normalizeLocale(locale)];
+  const prefix = locale === "en" ? "" : `/${locale}`;
   const items = [
     ...roles.map((role, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: role.title,
       description: role.summary,
-      url: `/${locale === "en" ? "" : locale}`,
+      url: `${prefix}/roles/${role.id}`,
     })),
     ...data.cycles.map((cycle, index) => ({
       "@type": "ListItem",
       position: roles.length + index + 1,
       name: cycle.title,
       description: cycle.description,
-      url: `/${locale === "en" ? "" : locale}`,
+      url: `${prefix}/cycles/${cycle.slug}`,
+    })),
+    ...data.stations.map((station, index) => ({
+      "@type": "ListItem",
+      position: roles.length + data.cycles.length + index + 1,
+      name: station.title,
+      description: station.description,
+      url: `${prefix}/stations/${station.id}`,
     })),
     ...data.resources.slice(0, 40).map((resource, index) => ({
       "@type": "ListItem",
-      position: roles.length + data.cycles.length + index + 1,
+      position: roles.length + data.cycles.length + data.stations.length + index + 1,
       name: resource.title,
       description: resource.description,
     })),
@@ -54,7 +64,15 @@ export function CatalogJsonLd({ locale }: { locale: string }) {
   );
 }
 
-export default function CatalogPage({ locale = "en" }: { locale?: string }) {
+export default function CatalogPage({
+  locale = "en",
+  initialCycleId,
+  initialStationId,
+}: {
+  locale?: string;
+  initialCycleId?: string;
+  initialStationId?: string;
+}) {
   const normalized = normalizeLocale(locale);
 
   return (
@@ -66,7 +84,11 @@ export default function CatalogPage({ locale = "en" }: { locale?: string }) {
         canvases={canvasManifest}
         prompts={promptPacks}
         exportsData={exportTemplates}
+        labels={siteLabels}
+        partners={partners}
         initialLocale={normalized}
+        initialCycleId={initialCycleId}
+        initialStationId={initialStationId}
       />
     </>
   );

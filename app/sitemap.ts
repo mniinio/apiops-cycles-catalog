@@ -26,5 +26,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(catalog.generatedAt),
     })),
   );
-  return [...localizedHomes, ...roleEntries];
+  const cycleEntries = catalog.locales.flatMap((locale) =>
+    catalog.translations[locale].cycles.map((cycle) => ({
+      url:
+        locale === "en"
+          ? `${baseUrl}/cycles/${cycle.slug}`
+          : `${baseUrl}/${locale}/cycles/${cycle.slug}`,
+      lastModified: new Date(catalog.generatedAt),
+    })),
+  );
+  const stationEntries = catalog.locales.flatMap((locale) =>
+    catalog.translations[locale].stations.map((station) => ({
+      url:
+        locale === "en"
+          ? `${baseUrl}/stations/${station.id}`
+          : `${baseUrl}/${locale}/stations/${station.id}`,
+      lastModified: new Date(catalog.generatedAt),
+    })),
+  );
+  return [...localizedHomes, ...roleEntries, ...cycleEntries, ...stationEntries];
 }

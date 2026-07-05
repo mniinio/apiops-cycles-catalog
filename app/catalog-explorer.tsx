@@ -8,9 +8,19 @@ type Resource = {
   title: string;
   description: string;
   category: string;
+  icon?: string;
   outcomes: string[];
   steps: string[];
   canvasId?: string | null;
+  sourcePath?: string | null;
+  sourceUrl?: string | null;
+  contentMarkdown?: string | null;
+};
+
+type Criterion = {
+  id: string;
+  title: string;
+  description: string;
 };
 
 type CycleStation = {
@@ -29,6 +39,10 @@ type Cycle = {
   description: string;
   purpose: string;
   audiences: string[];
+  entryCriteria: string[];
+  exitCriteria: string[];
+  entryCriteriaDetails: Criterion[];
+  exitCriteriaDetails: Criterion[];
   stations: CycleStation[];
 };
 
@@ -37,6 +51,7 @@ type MetroLine = {
   slug: string;
   title: string;
   description: string;
+  icon?: string;
   color: string;
   order: number;
   stations: string[];
@@ -44,6 +59,7 @@ type MetroLine = {
 
 type Station = {
   id: string;
+  icon: string;
   title: string;
   description: string;
   whyItMatters: string;
@@ -52,6 +68,9 @@ type Station = {
   lifecycleStage: string;
   outcomes: string[];
   steps: { text: string; resourceId?: string; resourceTitle?: string; canvasId?: string | null }[];
+  questions: string[];
+  criteria: string[];
+  criteriaDetails: Criterion[];
   evidence: string[];
 };
 
@@ -67,6 +86,21 @@ type Catalog = {
   locales: string[];
   defaultLocale: string;
   translations: Record<string, Translation>;
+};
+
+type LabelData = {
+  translations: Record<string, Record<string, string>>;
+};
+
+type Partner = {
+  title: string;
+  href: string;
+  logo: string;
+  description: string;
+};
+
+type PartnerData = {
+  items: Partner[];
 };
 
 type RoleGuide = {
@@ -178,14 +212,65 @@ const colors: Record<string, string> = {
   "automation-cycle": "#0097a7",
 };
 
-const viewLabels = {
-  map: "Metro map",
-  guide: "Role guide",
-  ai: "Use with AI",
-  confluence: "Confluence",
-  canvases: "Canvases",
-  data: "Method data",
-} as const;
+const viewKeys = ["map", "guide", "canvases", "ai", "confluence", "data"] as const;
+type ViewKey = (typeof viewKeys)[number];
+
+const fallbackLabels: Record<string, string> = {
+  "nav.workflows": "Workflows",
+  "nav.data": "Data",
+  "nav.language": "Language",
+  "nav.licensing": "Licensing",
+  "nav.github": "GitHub",
+  "nav.community": "Community",
+  "controls.currentRoute": "Current route",
+  "controls.recommendedCycle": "Recommended cycle",
+  "controls.currentStation": "Current station",
+  "views.map": "Metro map",
+  "views.guide": "Role guide",
+  "views.canvases": "Resources",
+  "views.ai": "Use with AI",
+  "views.confluence": "Confluence",
+  "views.data": "Method data",
+  "map.kicker": "Your route on the map",
+  "map.instructions": "Click a station to change the selected workspace. The highlighted route shows the current cycle.",
+  "map.linesTitle": "Metro lines",
+  "map.linesDescription": "Lines show decision tracks across the shared APIOps backbone. Cycles show the journey for a goal.",
+  "station.youAreHere": "You are here",
+  "station.keyQuestions": "Key questions",
+  "station.nextAction": "Recommended next action",
+  "station.whereNext": "Where can I go next?",
+  "station.before": "Before this station",
+  "station.ready": "Ready to leave when",
+  "station.previous": "Previous",
+  "station.next": "Next",
+  "station.coreStation": "Core station",
+  "station.subStation": "Sub-station",
+  "category_canvas": "Canvas",
+  "category_guideline": "Guideline",
+  "station.relatedCanvases": "Related canvases",
+  "station.relatedResources": "Related resources",
+  "station.people": "People to involve",
+  "resources.emptyCanvases": "No canvas resources are directly linked to this station.",
+  "resources.emptyOther": "No additional resources are directly linked to this station.",
+  "canvas.localWorkspace": "Local canvas workspace",
+  "canvas.exportMarkdown": "Export Markdown",
+  "canvas.exportJson": "Export JSON",
+  "canvas.importJson": "Import JSON",
+  "canvas.exportSvg": "Export SVG",
+  "canvas.exportPng": "Export PNG",
+  "canvas.exportPdf": "Export PDF",
+  "canvas.exportUnavailable": "Configure NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL to export styled SVG, PNG, or PDF with CanvasCreator.",
+  "canvas.openCreator": "Open in CanvasCreator",
+  "canvas.markdownExported": "Canvas Markdown exported.",
+  "canvas.jsonExported": "Canvas JSON exported.",
+  "canvas.jsonImported": "Canvas JSON imported.",
+  "partners.kicker": "Community and partners",
+  "partners.title": "Built with the APIOps Cycles community",
+  "partners.description": "APIOps Cycles is an open method. Partners help develop, use, and teach it with teams around the world.",
+  "footer.license": "Licensed under CC-BY-SA 4.0.",
+  "footer.github": "GitHub repository",
+  "footer.community": "Community events and joining",
+};
 
 function compact(text: string, max = 150) {
   return text.length > max ? `${text.slice(0, max - 1).trim()}...` : text;
@@ -230,6 +315,16 @@ function wrapMapLabel(label: string, maxLength = 18) {
 
 function uniqueText(items: Array<string | undefined | null>) {
   return Array.from(new Set(items.map((item) => item?.trim()).filter((item): item is string => Boolean(item))));
+}
+
+function publicIconPath(icon?: string) {
+  if (icon === "check-box-outline" || icon === "check-circle") return `/icons/${icon}.svg`;
+  return "";
+}
+
+function categoryLabel(labels: Record<string, string>, category: string) {
+  const key = `category_${category}`;
+  return labels[key] ?? category;
 }
 
 function normalizeNotes(value: unknown): StickyNotes {
@@ -322,7 +417,7 @@ function MetroMap({
     const radians = (angle * Math.PI) / 180;
     return {
       ...station,
-      displayTitle: shortStationName(selectedCycleStation?.title ?? station.baseTitle),
+      displayTitle: selectedCycleStation?.title ?? station.baseTitle,
       angle,
       labelX: center.x + coreLabelRadius * Math.cos(radians),
       labelY: center.y + coreLabelRadius * Math.sin(radians),
@@ -412,7 +507,7 @@ function MetroMap({
             >
               <title>{point.baseTitle}</title>
               <circle cx={point.x} cy={point.y} r="6" className={point.id === selectedStationId ? "metro-support-node metro-support-node--active" : "metro-support-node"} />
-              <text x={point.x + point.dx} y={point.y + point.dy} textAnchor={point.anchor} className="metro-support-label">{point.baseTitle}</text>
+              <text x={point.x + point.dx} y={point.y + point.dy} textAnchor={point.anchor} dominantBaseline="middle" className="metro-support-label">{point.baseTitle}</text>
             </g>
           ))}
         </g>
@@ -490,10 +585,14 @@ function CanvasWorkspace({
   canvas,
   role,
   locale,
+  labels,
+  canvasRendererBaseUrl,
 }: {
   canvas: CanvasDefinition;
   role: RoleGuide;
   locale: string;
+  labels: Record<string, string>;
+  canvasRendererBaseUrl?: string;
 }) {
   const storageKey = `apiops-canvas:${role.id}:${canvas.id}`;
   const [notes, setNotes] = useState<StickyNotes>({});
@@ -559,21 +658,26 @@ function CanvasWorkspace({
     link.download = `${template.templateId || canvas.id}_${locale}.json`;
     link.click();
     URL.revokeObjectURL(link.href);
-    setStatus("Canvas JSON exported.");
+    setStatus(labels["canvas.jsonExported"] ?? fallbackLabels["canvas.jsonExported"]);
   }
 
   function markdown() {
-    return `# ${canvas.title}\n\nRole: ${role.title}\n\n${canvas.sections
+    return `# ${canvas.title}\n\n${canvas.purpose}\n\n${canvas.howToUse ? `${canvas.howToUse}\n\n` : ""}Role: ${role.title}\n\n${canvas.sections
       .map((section) => {
         const sectionNotes = notes[section.id] ?? [];
-        return `## ${section.title}\n${sectionNotes.length ? sectionNotes.map((note) => `- ${note.content}`).join("\n") : "- "}`;
+        return `## ${section.title}\n\n${section.description}\n\n${sectionNotes.length ? sectionNotes.map((note) => `- ${note.content}`).join("\n") : "- "}`;
       })
       .join("\n\n")}\n`;
   }
 
-  async function copyMarkdown() {
-    await navigator.clipboard.writeText(markdown());
-    setStatus("Markdown copied.");
+  function exportMarkdown() {
+    const blob = new Blob([markdown()], { type: "text/markdown" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${canvas.id}_${locale}.md`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    setStatus(labels["canvas.markdownExported"] ?? fallbackLabels["canvas.markdownExported"]);
   }
 
   async function importJson(file: File) {
@@ -587,21 +691,24 @@ function CanvasWorkspace({
       payload.sections.map((section: CanvasExportSection) => [section.sectionId, section.stickyNotes ?? []]),
     );
     setNotes(normalizeNotes(importedNotes));
-    setStatus("Canvas JSON imported.");
+    setStatus(labels["canvas.jsonImported"] ?? fallbackLabels["canvas.jsonImported"]);
   }
 
   return (
     <section className="workspace">
       <div className="workspace__head">
         <div>
-          <p className="section-kicker">Local canvas workspace</p>
+          <p className="section-kicker">{labels["canvas.localWorkspace"] ?? fallbackLabels["canvas.localWorkspace"]}</p>
           <h2>{canvas.title}</h2>
           <p>{canvas.purpose}</p>
         </div>
         <div className="toolbar">
-          <button type="button" onClick={copyMarkdown}>Copy Markdown</button>
-          <button type="button" onClick={exportJson}>Export JSON</button>
-          <button type="button" onClick={() => importRef.current?.click()}>Import JSON</button>
+          <button type="button" onClick={exportMarkdown}>{labels["canvas.exportMarkdown"] ?? fallbackLabels["canvas.exportMarkdown"]}</button>
+          <button type="button" onClick={exportJson}>{labels["canvas.exportJson"] ?? fallbackLabels["canvas.exportJson"]}</button>
+          <button type="button" onClick={() => importRef.current?.click()}>{labels["canvas.importJson"] ?? fallbackLabels["canvas.importJson"]}</button>
+          <a className="button-link" href={canvasRendererBaseUrl ? `${canvasRendererBaseUrl.replace(/\/$/, "")}/${canvas.id}` : canvas.canvasCreatorUrl} target="_blank" rel="noreferrer">
+            SVG / PNG / PDF in CanvasCreator
+          </a>
           <input
             ref={importRef}
             hidden
@@ -666,20 +773,70 @@ function CanvasWorkspace({
   );
 }
 
+function ResourceDetail({
+  resource,
+  stationTitle,
+}: {
+  resource: Resource;
+  stationTitle: string;
+}) {
+  return (
+    <section className="resource-detail" aria-label={`${resource.title} details`}>
+      <div>
+        <p className="section-kicker">{resource.category}</p>
+        <h3>{resource.title}</h3>
+        <strong className="resource-purpose">Helps answer: {stationTitle}</strong>
+      </div>
+      <p>{resource.description}</p>
+      {resource.outcomes.length ? (
+        <section>
+          <h4>Expected outcomes</h4>
+          <ul>{resource.outcomes.map((item) => <li key={item}>{item}</li>)}</ul>
+        </section>
+      ) : null}
+      {resource.steps.length ? (
+        <section>
+          <h4>How to use it</h4>
+          <ol>{resource.steps.map((item) => <li key={item}>{item}</li>)}</ol>
+        </section>
+      ) : null}
+      {resource.contentMarkdown ? (
+        <section>
+          <h4>Source content</h4>
+          <pre>{resource.contentMarkdown}</pre>
+        </section>
+      ) : null}
+      {resource.sourcePath || resource.sourceUrl ? (
+        <p className="helper-text">
+          Source: {resource.sourceUrl ? <a href={resource.sourceUrl}>{resource.sourceUrl}</a> : <code>{resource.sourcePath}</code>}
+        </p>
+      ) : null}
+    </section>
+  );
+}
+
 export default function CatalogExplorer({
   catalog,
   guides,
   canvases,
   prompts,
   exportsData,
+  labels,
+  partners,
   initialLocale,
+  initialCycleId,
+  initialStationId,
 }: {
   catalog: Catalog;
   guides: Guides;
   canvases: CanvasManifest;
   prompts: PromptData;
   exportsData: ExportData;
+  labels: LabelData;
+  partners: PartnerData;
   initialLocale: string;
+  initialCycleId?: string;
+  initialStationId?: string;
 }) {
   const [locale, setLocale] = useState(initialLocale);
   const data = catalog.translations[locale] ?? catalog.translations.en;
@@ -687,11 +844,20 @@ export default function CatalogExplorer({
   const promptData = prompts.translations[locale] ?? prompts.translations.en;
   const templateData = exportsData.translations[locale] ?? exportsData.translations.en;
   const canvasData = canvases.translations[locale] ?? canvases.translations.en;
-  const [roleId, setRoleId] = useState(roleData[0].id);
+  const localizedLabels = { ...fallbackLabels, ...(labels.translations[locale] ?? labels.translations.en) };
+  const initialCycle = data.cycles.find((cycle) => cycle.id === initialCycleId || cycle.slug === initialCycleId) ?? data.cycles.find((cycle) => cycle.stations.some((station) => station.id === initialStationId)) ?? data.cycles[0];
+  const initialStation = initialStationId && initialCycle.stations.some((station) => station.id === initialStationId)
+    ? initialStationId
+    : initialCycle.stations[0]?.id;
+  const initialRole = roleData.find((item) =>
+    item.cycles.some((cycle) => cycle.id === initialCycle.id) &&
+    (!initialStation || item.stations.some((station) => station.id === initialStation)),
+  ) ?? roleData[0];
+  const [roleId, setRoleId] = useState(initialRole.id);
   const role = safeRole(roleId, roleData);
-  const [cycleId, setCycleId] = useState(role.cycles[0]?.id ?? data.cycles[0].id);
+  const [cycleId, setCycleId] = useState(initialCycle.id);
   const selectedCycle = data.cycles.find((cycle) => cycle.id === cycleId) ?? data.cycles[0];
-  const [stationId, setStationId] = useState(role.stations[0]?.id ?? selectedCycle.stations[0].id);
+  const [stationId, setStationId] = useState(initialStation ?? role.stations[0]?.id ?? selectedCycle.stations[0].id);
   const selectedCycleStation = selectedCycle.stations.find((station) => station.id === stationId);
   const stationDetail =
     data.stations.find((station) => station.id === stationId) ??
@@ -711,23 +877,13 @@ export default function CatalogExplorer({
       baseTitle: stationDetail.title,
       resources: selectedStationResources,
     };
-  const [view, setView] = useState<keyof typeof viewLabels>("map");
-  const [query, setQuery] = useState("");
+  const [view, setView] = useState<ViewKey>("map");
   const [canvasId, setCanvasId] = useState(role.canvases[0]?.id ?? Object.keys(canvasData)[0]);
+  const [selectedResourceId, setSelectedResourceId] = useState<string | null>(null);
 
   useEffect(() => {
-    const nextRole = safeRole(roleId, roleData);
-    setCycleId(nextRole.cycles[0]?.id ?? data.cycles[0].id);
-    setStationId(nextRole.stations[0]?.id ?? data.stations[0].id);
-    setCanvasId(nextRole.canvases[0]?.id ?? Object.keys(canvasData)[0]);
-  }, [locale, roleData, data.cycles, data.stations, canvasData, roleId]);
-
-  const filteredResources = useMemo(() => {
-    const needle = query.trim().toLowerCase();
-    return selectedStationResources
-      .filter((resource) => !needle || [resource.title, resource.description, resource.category].join(" ").toLowerCase().includes(needle))
-      .slice(0, 24);
-  }, [query, selectedStationResources]);
+    setSelectedResourceId(null);
+  }, [locale]);
 
   const rolePrompts = promptData.filter((prompt) => prompt.roleId === role.id);
   const roleTemplates = templateData.filter((template) => template.roleId === role.id);
@@ -754,50 +910,165 @@ export default function CatalogExplorer({
       .map((key) => groups.get(key))
       .filter((group): group is NonNullable<typeof group> => Boolean(group));
   }, [roleTemplates]);
-  const selectedCanvas = canvasData[canvasId] ?? canvasData[role.canvases[0]?.id] ?? Object.values(canvasData)[0];
+  const selectedCycleColor = colors[cycleId] ?? "#6d2ba0";
+  const stationTitle = selectedStation.title || stationDetail.title;
+  const stationDescription = selectedStation.description || stationDetail.description;
+  const stationBadge = String(selectedStation.index || stationDetail.lifecycleStage || "-");
+  const stationBadgeIsNumber = /^\d+$/.test(stationBadge);
+  const participantChips = uniqueText([role.title, ...selectedCycle.audiences]).slice(0, 6);
+  const participantSet = new Set(participantChips.map((item) => item.toLowerCase()));
+  const stationQuestions = uniqueText([
+    ...(stationDetail.questions ?? []),
+    ...stationDetail.steps.map((step) => step.text),
+    stationDetail.applyInWork,
+    stationDetail.whyItMatters,
+  ]).slice(0, 5);
+  const selectedCycleStationIndex = selectedCycle.stations.findIndex((station) => station.id === stationId);
+  const previousCycleStation = selectedCycleStationIndex > 0 ? selectedCycle.stations[selectedCycleStationIndex - 1] : null;
+  const previousStationDetail = previousCycleStation ? data.stations.find((station) => station.id === previousCycleStation.id) : null;
+  const beforeCriteria = selectedCycleStationIndex <= 0
+    ? selectedCycle.entryCriteriaDetails
+    : previousStationDetail?.criteriaDetails ?? [];
+  const readyCriteria = stationDetail.criteriaDetails.length ? stationDetail.criteriaDetails : selectedCycle.exitCriteriaDetails;
+  const lineNavigation = data.lines
+    .map((line) => {
+      const index = line.stations.indexOf(stationId);
+      if (index < 0) return null;
+      const adjacent = [
+        { direction: localizedLabels["station.previous"], id: line.stations[index - 1] },
+        { direction: localizedLabels["station.next"], id: line.stations[index + 1] },
+      ].filter((item): item is { direction: string; id: string } => Boolean(item.id));
+      if (!adjacent.length) return null;
+      return {
+        ...line,
+        adjacent: adjacent.map((item) => {
+          const cycleStation = selectedCycle.stations.find((station) => station.id === item.id);
+          const detail = data.stations.find((station) => station.id === item.id);
+          return {
+            ...item,
+            title: cycleStation?.title ?? shortStationName(detail?.title ?? item.id),
+            description: cycleStation?.description ?? detail?.description ?? "",
+            core: Boolean(cycleStation),
+          };
+        }),
+      };
+    })
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const roleGuideRows = [...roleData].sort((a, b) => {
+    const aRelevant = participantSet.has(a.title.toLowerCase()) || a.id === role.id;
+    const bRelevant = participantSet.has(b.title.toLowerCase()) || b.id === role.id;
+    if (aRelevant !== bRelevant) return aRelevant ? -1 : 1;
+    return a.title.localeCompare(b.title);
+  });
+  const canvasResources = selectedStationResources.filter((resource) => resource.canvasId);
+  const otherResources = selectedStationResources.filter((resource) => !resource.canvasId);
+  const selectedResource = selectedStationResources.find((resource) => resource.id === selectedResourceId) ?? null;
+  const activeResource = selectedResource ?? canvasResources[0] ?? otherResources[0] ?? null;
+  const activeCanvasId = activeResource?.canvasId ?? canvasId;
+  const selectedCanvas = canvasData[activeCanvasId] ?? canvasData[role.canvases[0]?.id] ?? Object.values(canvasData)[0];
   const externalCanvasUrl = process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL
     ? `${process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL.replace(/\/$/, "")}/${selectedCanvas.id}`
     : selectedCanvas.canvasCreatorUrl;
-  const participantChips = uniqueText([role.title, ...selectedCycle.audiences]).slice(0, 6);
-  const discussionItems = uniqueText([
-    ...role.decisions,
-    ...stationDetail.steps.map((step) => step.text),
-    stationDetail.whyItMatters,
-  ]).slice(0, 5);
+  const discussionItems = stationQuestions;
   const outputItems = uniqueText([...role.outputs, ...stationDetail.outcomes, ...stationDetail.evidence]).slice(0, 5);
   const nextActions = uniqueText([
-    selectedStationResources[0]?.canvasId ? `Open ${selectedStationResources[0].title}` : selectedStationResources[0]?.title,
-    role.canvases[0]?.title ? `Fill ${role.canvases[0].title}` : undefined,
-    rolePrompts[0]?.title ? `Use AI prompt: ${rolePrompts[0].title}` : undefined,
+    lineNavigation[0]?.adjacent[0]?.title ? `${lineNavigation[0].adjacent[0].direction}: ${lineNavigation[0].adjacent[0].title}` : undefined,
     "Capture decisions, owners, and the next station to visit",
   ]).slice(0, 4);
-  const modeKeys = Object.keys(viewLabels) as Array<keyof typeof viewLabels>;
-  const aiWorkflowLabels = [
-    "Facilitate station discussion",
-    "Fill recommended canvas",
-    "Review outputs",
-    "Decide next action",
-  ];
+  const modeKeys = viewKeys;
+  const primaryAiPrompts = rolePrompts.filter((prompt) => ["facilitate-station", "next-actions"].includes(prompt.mode)).slice(0, 2);
+
+  function bestRoleFor(nextCycleId: string, nextStationId: string) {
+    const roleSupports = (item: RoleGuide) =>
+      item.cycles.some((cycle) => cycle.id === nextCycleId) &&
+      item.stations.some((station) => station.id === nextStationId);
+    if (roleSupports(role)) return role.id;
+    return (
+      roleData.find(roleSupports)?.id ??
+      roleData.find((item) => item.cycles.some((cycle) => cycle.id === nextCycleId))?.id ??
+      role.id
+    );
+  }
+
+  function firstCanvasFor(resources: Resource[], fallbackRole: RoleGuide) {
+    return resources.find((resource) => resource.canvasId)?.canvasId ?? fallbackRole.canvases[0]?.id ?? Object.keys(canvasData)[0];
+  }
+
+  function replaceWorkspaceUrl(kind: "cycle" | "station", id: string) {
+    const prefix = locale === "en" ? "" : `/${locale}`;
+    const path = kind === "cycle" ? `${prefix}/cycles/${id}` : `${prefix}/stations/${id}`;
+    window.history.replaceState(null, "", path);
+  }
 
   function selectRole(nextRoleId: string) {
     const nextRole = safeRole(nextRoleId, roleData);
+    const nextCycleId = nextRole.cycles[0]?.id ?? cycleId;
+    const nextCycle = data.cycles.find((cycle) => cycle.id === nextCycleId) ?? selectedCycle;
+    const nextStationId = nextRole.stations.find((station) => nextCycle.stations.some((cycleStation) => cycleStation.id === station.id))?.id ?? nextCycle.stations[0]?.id ?? stationId;
+    const nextCycleStation = nextCycle.stations.find((station) => station.id === nextStationId);
+    const nextStationDetail = data.stations.find((station) => station.id === nextStationId);
+    const nextStepResourceIds = new Set((nextStationDetail?.steps ?? []).map((step) => step.resourceId).filter(Boolean));
+    const nextResources = nextCycleStation?.resources.length
+      ? nextCycleStation.resources
+      : data.resources.filter((resource) => nextStepResourceIds.has(resource.id));
     setRoleId(nextRoleId);
-    setCycleId(nextRole.cycles[0]?.id ?? cycleId);
-    setStationId(nextRole.stations[0]?.id ?? stationId);
-    setCanvasId(nextRole.canvases[0]?.id ?? canvasId);
+    setCycleId(nextCycleId);
+    setStationId(nextStationId);
+    setCanvasId(firstCanvasFor(nextResources, nextRole));
+    setSelectedResourceId(null);
+  }
+
+  function selectCycle(nextCycleId: string) {
+    const nextCycle = data.cycles.find((cycle) => cycle.id === nextCycleId) ?? selectedCycle;
+    const nextStationId = nextCycle.stations.some((station) => station.id === stationId) ? stationId : nextCycle.stations[0]?.id ?? stationId;
+    const nextRoleId = bestRoleFor(nextCycleId, nextStationId);
+    setCycleId(nextCycleId);
+    setStationId(nextStationId);
+    if (nextRoleId !== roleId) setRoleId(nextRoleId);
+    setSelectedResourceId(null);
+    replaceWorkspaceUrl("cycle", nextCycle.slug || nextCycle.id);
+  }
+
+  function selectStation(nextStationId: string) {
+    const nextRoleId = bestRoleFor(cycleId, nextStationId);
+    setStationId(nextStationId);
+    if (nextRoleId !== roleId) setRoleId(nextRoleId);
+    setSelectedResourceId(null);
+    replaceWorkspaceUrl("station", nextStationId);
   }
 
   async function copyText(text: string) {
     await navigator.clipboard.writeText(text);
   }
 
+  function openCanvas(nextCanvasId: string) {
+    setCanvasId(nextCanvasId);
+    setSelectedResourceId(canvasResources.find((resource) => resource.canvasId === nextCanvasId)?.id ?? null);
+    setView("canvases");
+  }
+
+  function promptFor(prompt: PromptPack) {
+    const resources = selectedStationResources.map((resource) => resource.title).join(", ") || "No station-specific resources listed";
+    const canvasList = canvasResources.map((resource) => resource.title).join(", ") || "No station-specific canvases listed";
+    return `Selected APIOps Cycles context
+Route: ${role.title}
+Cycle: ${selectedCycle.title}
+Station: ${stationTitle}
+Station purpose: ${stationDescription}
+Station resources: ${resources}
+Station canvases: ${canvasList}
+
+${prompt.prompt}`;
+  }
+
   function openResource(resource: Resource) {
     if (resource.canvasId) {
-      setCanvasId(resource.canvasId);
-      setView("canvases");
+      openCanvas(resource.canvasId);
+      setSelectedResourceId(resource.id);
       return;
     }
-    setQuery(resource.title);
+    setSelectedResourceId(resource.id);
+    setView("canvases");
   }
 
   return (
@@ -809,9 +1080,12 @@ export default function CatalogExplorer({
             <span>APIOps Cycles</span>
           </a>
           <div className="topbar__controls">
-            <button type="button" onClick={() => setView("ai")}>Workflows</button>
-            <button type="button" onClick={() => setView("data")}>Data</button>
-            <label className="sr-only" htmlFor="locale">Language</label>
+            <a href="#licensing">{localizedLabels["nav.licensing"]}</a>
+            <a href={catalog.source.repository} target="_blank" rel="noreferrer">{localizedLabels["nav.github"]}</a>
+            <a href="#community">{localizedLabels["nav.community"]}</a>
+            <button type="button" onClick={() => setView("ai")}>{localizedLabels["nav.workflows"]}</button>
+            <button type="button" onClick={() => setView("data")}>{localizedLabels["nav.data"]}</button>
+            <label className="sr-only" htmlFor="locale">{localizedLabels["nav.language"]}</label>
             <select
               id="locale"
               value={locale}
@@ -831,20 +1105,20 @@ export default function CatalogExplorer({
 
       <section className="route-control" aria-label="Route controls">
         <label>
-          <span>Current route</span>
+          <span>{localizedLabels["controls.currentRoute"]}</span>
           <select value={role.id} onChange={(event) => selectRole(event.target.value)}>
             {roleData.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
           </select>
         </label>
         <label>
-          <span>Recommended cycle</span>
-          <select value={cycleId} onChange={(event) => setCycleId(event.target.value)}>
+          <span>{localizedLabels["controls.recommendedCycle"]}</span>
+          <select value={cycleId} onChange={(event) => selectCycle(event.target.value)}>
             {data.cycles.map((cycle) => <option key={cycle.id} value={cycle.id}>{cycle.title}</option>)}
           </select>
         </label>
         <label>
-          <span>Current station</span>
-          <select value={stationId} onChange={(event) => setStationId(event.target.value)}>
+          <span>{localizedLabels["controls.currentStation"]}</span>
+          <select value={stationId} onChange={(event) => selectStation(event.target.value)}>
             {selectedCycle.stations.map((station) => (
               <option key={station.id} value={station.id}>{shortStationName(station.title)}</option>
             ))}
@@ -853,7 +1127,7 @@ export default function CatalogExplorer({
         <div className="mode-buttons" aria-label="Workspace modes">
           {modeKeys.map((key) => (
             <button key={key} type="button" className={view === key ? "is-active" : ""} onClick={() => setView(key)}>
-              {viewLabels[key]}
+              {localizedLabels[`views.${key}`]}
             </button>
           ))}
         </div>
@@ -862,12 +1136,12 @@ export default function CatalogExplorer({
       <section className={view === "map" ? "main-workspace main-workspace--map" : "main-workspace"}>
         <section className="workspace-main">
         {view === "map" ? (
-        <article className="map-card" style={{ "--route-color": colors[cycleId] ?? "#6d2ba0" } as CSSProperties}>
+        <article className="map-card" style={{ "--route-color": selectedCycleColor } as CSSProperties}>
           <div className="panel__head map-head">
             <div>
-              <p className="section-kicker">Your route on the map</p>
+              <p className="section-kicker">{localizedLabels["map.kicker"]}</p>
               <h2>{selectedCycle.title}</h2>
-              <p>Click a station to change the selected workspace. The highlighted route shows the current cycle.</p>
+              <p>{localizedLabels["map.instructions"]}</p>
             </div>
             <div className="cycle-pills" aria-label="Select cycle">
               {data.cycles.map((cycle) => (
@@ -875,7 +1149,7 @@ export default function CatalogExplorer({
                   key={cycle.id}
                   type="button"
                   className={cycle.id === cycleId ? "is-active" : ""}
-                  onClick={() => setCycleId(cycle.id)}
+                  onClick={() => selectCycle(cycle.id)}
                 >
                   <span style={{ backgroundColor: colors[cycle.id] ?? "#164e63" }} />
                   {cycle.title}
@@ -889,43 +1163,107 @@ export default function CatalogExplorer({
             stations={data.stations}
             selectedCycleId={cycleId}
             selectedStationId={stationId}
-            onSelectCycle={setCycleId}
-            onSelectStation={setStationId}
+            onSelectCycle={selectCycle}
+            onSelectStation={selectStation}
           />
+          <section className="line-guide" aria-label={localizedLabels["map.linesTitle"]}>
+            <div>
+              <h3>{localizedLabels["map.linesTitle"]}</h3>
+              <p>{localizedLabels["map.linesDescription"]}</p>
+            </div>
+            <div className="line-guide__items">
+              {data.lines.map((line) => (
+                <span key={line.id} title={line.description}>
+                  <i style={{ backgroundColor: line.color }} />
+                  {line.title}
+                </span>
+              ))}
+            </div>
+          </section>
         </article>
         ) : null}
 
           {view === "guide" ? (
             <article className="workspace-panel">
               <p className="section-kicker">People to involve</p>
-              <h2>Role guide for {shortStationName(stationDetail.title)}</h2>
-              <div className="people-grid">
-                {roleData.slice(0, 6).map((item) => (
-                  <section key={item.id} className="person-card">
-                    <h3>{item.title}</h3>
-                    <p><strong>Why they matter:</strong> {item.summary}</p>
-                    <p><strong>What to ask:</strong> {item.decisions[0] ?? discussionItems[0]}</p>
-                    <p><strong>What they produce:</strong> {item.outputs[0] ?? outputItems[0]}</p>
-                  </section>
+              <h2>Role guide for {stationTitle}</h2>
+              <div className="role-table" role="table" aria-label={`Role guide for ${stationTitle}`}>
+                <div className="role-table__row role-table__row--head" role="row">
+                  <span role="columnheader">Role</span>
+                  <span role="columnheader">Why they matter</span>
+                  <span role="columnheader">What to ask</span>
+                  <span role="columnheader">What they produce</span>
+                </div>
+                {roleGuideRows.slice(0, 8).map((item) => (
+                  <div key={item.id} className={item.id === role.id ? "role-table__row is-active" : "role-table__row"} role="row" id={`role-${item.id}`}>
+                    <strong role="cell">{item.title}</strong>
+                    <span role="cell">{item.summary}</span>
+                    <span role="cell">{stationQuestions[0] ?? item.decisions[0] ?? discussionItems[0]}</span>
+                    <span role="cell">{stationDetail.outcomes[0] ?? stationDetail.evidence[0] ?? item.outputs[0] ?? outputItems[0]}</span>
+                  </div>
                 ))}
               </div>
+            </article>
+          ) : null}
+
+          {view === "canvases" ? (
+            <article className="workspace-panel">
+              <div className="panel__head">
+                <div>
+                  <p className="section-kicker">Resources</p>
+                  <h2>{activeResource?.title ?? `Resources for ${stationTitle}`}</h2>
+                  <p className="helper-text">Select a station resource from the details panel. Canvas resources open the local sticky-note workspace; other resources open guidance, examples, or checklists here.</p>
+                </div>
+                <select value={activeResource?.id ?? ""} onChange={(event) => {
+                  const nextResource = selectedStationResources.find((resource) => resource.id === event.target.value);
+                  if (nextResource) openResource(nextResource);
+                }} aria-label="Select resource">
+                  {!selectedStationResources.length ? <option value="">No station resources</option> : null}
+                  {selectedStationResources.map((resource) => (
+                    <option key={resource.id} value={resource.id}>{resource.title}</option>
+                  ))}
+                </select>
+              </div>
+              {activeResource?.canvasId ? (
+                <>
+              {externalCanvasUrl ? (
+                    <a className="external-link" href={externalCanvasUrl} target="_blank" rel="noreferrer">
+                      {localizedLabels["canvas.openCreator"]}
+                    </a>
+                  ) : (
+                    <p className="helper-text">No external canvas renderer is configured, so this page uses the built-in local workspace.</p>
+                  )}
+                  <CanvasWorkspace canvas={selectedCanvas} role={role} locale={locale} labels={localizedLabels} canvasRendererBaseUrl={process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL} />
+                </>
+              ) : activeResource ? (
+                <ResourceDetail resource={activeResource} stationTitle={stationTitle} />
+              ) : (
+                <p className="helper-text">No resources are directly linked to this station in the selected cycle.</p>
+              )}
             </article>
           ) : null}
 
           {view === "ai" ? (
             <article className="workspace-panel" id="workflows">
               <p className="section-kicker">Use with AI</p>
-              <h2>AI workflow for {shortStationName(stationDetail.title)}</h2>
-              <div className="workflow-grid">
-                {rolePrompts.slice(0, 4).map((prompt, index) => (
+              <h2>AI assistance for {stationTitle}</h2>
+              <p className="helper-text">Use AI to facilitate the station conversation, work through the selected Resources, and turn canvas notes or resource findings into next actions.</p>
+              <div className="workflow-grid workflow-grid--focused">
+                {primaryAiPrompts.map((prompt, index) => (
                   <section key={prompt.id} className="prompt-card">
-                    <span>{index + 1}. {aiWorkflowLabels[index] ?? prompt.mode}</span>
-                    <h3>{prompt.title}</h3>
+                    <span>{index + 1}. {prompt.mode === "facilitate-station" ? "Facilitate station discussion" : "Decide next action"}</span>
+                    <h3>{prompt.mode === "facilitate-station" ? `Facilitate ${stationTitle}` : `Next actions for ${stationTitle}`}</h3>
                     <p><strong>Purpose:</strong> {prompt.mode}</p>
-                    <pre>{prompt.prompt}</pre>
-                    <button type="button" onClick={() => copyText(prompt.prompt)}>Copy prompt</button>
+                    <pre>{promptFor(prompt)}</pre>
+                    <button type="button" onClick={() => copyText(promptFor(prompt))}>Copy prompt</button>
                   </section>
                 ))}
+              </div>
+              <div className="resource-actions resource-actions--inline">
+                <button type="button" onClick={() => setView("canvases")}>
+                  Use station resources with AI
+                  <span>Open Resources, select a canvas or guidance item, then copy its Markdown or JSON into your AI conversation.</span>
+                </button>
               </div>
             </article>
           ) : null}
@@ -971,30 +1309,6 @@ export default function CatalogExplorer({
             </article>
           ) : null}
 
-          {view === "canvases" ? (
-            <article className="workspace-panel">
-              <div className="panel__head">
-                <div>
-                  <p className="section-kicker">Use with canvases</p>
-                  <h2>{selectedCanvas.title || "Capability Value Proposition Canvas"}</h2>
-                </div>
-                <select value={canvasId} onChange={(event) => setCanvasId(event.target.value)} aria-label="Select canvas">
-                  {role.canvases.map((canvas) => (
-                    <option key={canvas.id} value={canvas.id}>{canvas.title}</option>
-                  ))}
-                </select>
-              </div>
-              {externalCanvasUrl ? (
-                <a className="external-link" href={externalCanvasUrl} target="_blank" rel="noreferrer">
-                  Open in CanvasCreator
-                </a>
-              ) : (
-                <p className="helper-text">No external canvas renderer is configured, so this page uses the built-in local workspace.</p>
-              )}
-              <CanvasWorkspace canvas={selectedCanvas} role={role} locale={locale} />
-            </article>
-          ) : null}
-
           {view === "data" ? (
             <article className="workspace-panel workspace-panel--technical" id="method-data">
               <p className="section-kicker">Method data</p>
@@ -1016,280 +1330,166 @@ export default function CatalogExplorer({
           ) : null}
         </section>
 
-        <aside className={view === "map" ? "station-summary" : "context-panel"}>
+        <aside className={view === "map" ? "station-summary" : "context-panel"} style={{ "--route-color": selectedCycleColor } as CSSProperties}>
+          {view === "confluence" ? (
+            <>
+              <div>
+                <p className="section-kicker">Cycle export</p>
+                <h2>{selectedCycle.title}</h2>
+              </div>
+              <p>{selectedCycle.description}</p>
+              <section>
+                <h3>Intended audience</h3>
+                <div className="chips chips--compact">
+                  {uniqueText([role.title, ...selectedCycle.audiences]).map((participant) => <span key={participant}>{participant}</span>)}
+                </div>
+              </section>
+              <section>
+                <h3>Format guidance</h3>
+                <p>Use Markdown for docs repositories and static sites. Use Confluence-wiki for Confluence pages that accept wiki markup.</p>
+              </section>
+            </>
+          ) : view === "data" ? (
+            <>
+              <div>
+                <p className="section-kicker">Method data</p>
+                <h2>Static integration surfaces</h2>
+              </div>
+              <p>All workspace views consume generated JSON under <code>/data</code>. No database or server-side persistence is introduced.</p>
+              <section>
+                <h3>Source dependency</h3>
+                <p><code>{catalog.source.repository}</code></p>
+                <p>Branch: <code>{catalog.source.branch}</code></p>
+              </section>
+              <section>
+                <h3>Locale-safe</h3>
+                <p>Default locale is <code>{catalog.defaultLocale}</code>; published locales are {catalog.locales.join(", ")}.</p>
+              </section>
+            </>
+          ) : (
+            <>
           <div className="station-summary__head">
-            <span className="station-number">{selectedStation.index || stationDetail.lifecycleStage || "•"}</span>
+            <span className={stationBadgeIsNumber || publicIconPath(stationDetail.icon) ? "station-number" : "station-number station-number--text"}>
+              {publicIconPath(stationDetail.icon) ? <img src={publicIconPath(stationDetail.icon)} alt="" /> : selectedStation.index || stationDetail.lifecycleStage || "•"}
+            </span>
             <div>
-              <p className="you-are-here">You are here</p>
-              <h2>{shortStationName(stationDetail.title)}</h2>
+              <p className="you-are-here">{localizedLabels["station.youAreHere"]}</p>
+              <h2>{stationTitle}</h2>
             </div>
           </div>
-          <p>{stationDetail.description}</p>
+          <p>{stationDescription}</p>
           <section>
-            <h3>Key questions</h3>
+            <h3>{localizedLabels["station.keyQuestions"]}</h3>
             <ul>{discussionItems.slice(0, 4).map((item) => <li key={item}>{item}</li>)}</ul>
           </section>
           <section>
-            <h3>Recommended next action</h3>
-            <p>{nextActions[0] ?? "Capture the decision and choose the next station."}</p>
+            <h3>{localizedLabels["station.before"]}</h3>
+            <ul className="criteria-list">
+              {beforeCriteria.slice(0, 4).map((criterion) => (
+                <li key={criterion.id}>
+                  <img src="/icons/check-box-outline.svg" alt="" />
+                  <span>{criterion.title}</span>
+                </li>
+              ))}
+              {!beforeCriteria.length ? <li>{selectedCycle.entryCriteria.join(", ") || "No entry criteria listed."}</li> : null}
+            </ul>
           </section>
           <section>
-            <h3>Related canvases</h3>
-            <div className="related-list">
-              {role.canvases.slice(0, 4).map((canvas) => (
-                <button key={canvas.id} type="button" onClick={() => { setCanvasId(canvas.id); setView("canvases"); }}>
-                  {canvas.title}
+            <h3>{localizedLabels["station.ready"]}</h3>
+            <ul className="criteria-list">
+              {readyCriteria.slice(0, 4).map((criterion) => (
+                <li key={criterion.id}>
+                  <img src="/icons/check-circle.svg" alt="" />
+                  <span>{criterion.title}</span>
+                </li>
+              ))}
+              {!readyCriteria.length ? <li>{selectedCycle.exitCriteria.join(", ") || "No exit criteria listed."}</li> : null}
+            </ul>
+          </section>
+          <section>
+            <h3>{localizedLabels["station.relatedCanvases"]}</h3>
+            <div className="side-resource-grid">
+              {canvasResources.map((resource) => (
+                <button key={resource.id} type="button" className={activeResource?.id === resource.id ? "side-resource-card is-active" : "side-resource-card"} onClick={() => openResource(resource)}>
+                  <span>{categoryLabel(localizedLabels, resource.category)}</span>
+                  <strong>{resource.title}</strong>
+                  <small>{compact(resource.description, 96)}</small>
                 </button>
               ))}
+              {!canvasResources.length ? <p className="helper-text">{localizedLabels["resources.emptyCanvases"]}</p> : null}
             </div>
           </section>
-          {view !== "map" ? (
-            <>
               <section>
-                <h3>{view === "data" ? "Technical notes" : "People to involve"}</h3>
-                {view === "data" ? (
-                  <p>All workspace views consume static JSON under <code>/data</code>. No database or server-side persistence is introduced.</p>
-                ) : (
-                  <div className="chips chips--compact">
-                    {participantChips.map((participant) => <span key={participant}>{participant}</span>)}
-                  </div>
-                )}
+                <h3>{localizedLabels["station.relatedResources"]}</h3>
+                <div className="side-resource-grid">
+                  {otherResources.map((resource) => (
+                    <button key={resource.id} type="button" className={activeResource?.id === resource.id ? "side-resource-card is-active" : "side-resource-card"} onClick={() => openResource(resource)}>
+                      <span>{categoryLabel(localizedLabels, resource.category)}</span>
+                      <strong>{resource.title}</strong>
+                      <small>{compact(resource.description, 96)}</small>
+                    </button>
+                  ))}
+                  {!otherResources.length ? <p className="helper-text">{localizedLabels["resources.emptyOther"]}</p> : null}
+                </div>
               </section>
               <section>
-                <h3>{view === "confluence" ? "Export actions" : view === "canvases" ? "Canvas actions" : "Quick actions"}</h3>
-                <div className="resource-actions">
-                  <button type="button" onClick={() => setView("canvases")}>{view === "canvases" ? "Continue canvas" : "Open canvas"}</button>
-                  <button type="button" onClick={() => setView("ai")}>Use AI prompts</button>
-                  <button type="button" onClick={() => setView("confluence")}>Prepare export</button>
+                <h3>{localizedLabels["station.people"]}</h3>
+                <div className="chips chips--compact chips--buttons">
+                  {participantChips.map((participant) => (
+                    <button key={participant} type="button" onClick={() => setView("guide")}>{participant}</button>
+                  ))}
                 </div>
+              </section>
+              <section className="line-next-section">
+                <h3>{localizedLabels["station.whereNext"]}</h3>
+                <div className="line-next-grid">
+                  {lineNavigation.map((line) => (
+                    <article key={line.id} className="line-next-card">
+                      <strong><i style={{ backgroundColor: line.color }} />{line.title}</strong>
+                      <div>
+                        {line.adjacent.map((item) => (
+                          <button key={`${line.id}-${item.direction}-${item.id}`} type="button" onClick={() => selectStation(item.id)}>
+                            <span>{item.direction} · {item.core ? localizedLabels["station.coreStation"] : localizedLabels["station.subStation"]}</span>
+                            {item.title}
+                          </button>
+                        ))}
+                      </div>
+                    </article>
+                  ))}
+                  {!lineNavigation.length ? <p className="helper-text">No line transitions are listed for this station.</p> : null}
+                </div>
+              </section>
+              <section>
+                <h3>{localizedLabels["station.nextAction"]}</h3>
+                <p>{nextActions[0] ?? "Capture the decision and choose the next station."}</p>
               </section>
             </>
-          ) : null}
+          )}
         </aside>
       </section>
-
-      <section className="station-workspace station-workspace--legacy" hidden>
-        <aside className="workspace-nav">
-          <h2>Station workspace</h2>
-          {modeKeys.map((key) => (
-            <button key={key} type="button" className={view === key ? "is-active" : ""} onClick={() => setView(key)}>
-              {viewLabels[key]}
-            </button>
-          ))}
-          <div className="workspace-route-cards">
-            <p className="section-kicker">Guided paths</p>
-            {roleData.slice(0, 5).map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                className={item.id === role.id ? "role-card is-active" : "role-card"}
-                style={{ "--route-color": colors[item.cycles[0]?.id] ?? "#6d2ba0" } as CSSProperties}
-                onClick={() => selectRole(item.id)}
-              >
-                <strong>{item.title}</strong>
-              </button>
-            ))}
-          </div>
-        </aside>
-
-        <section className="workspace-main">
-          {view === "map" ? (
-            <article className="workspace-panel">
-              <p className="section-kicker">Overview</p>
-              <h2>{shortStationName(stationDetail.title)} workspace</h2>
-              <div className="collaboration-brief" aria-label="Station collaboration brief">
-                <section>
-                  <small>People</small>
-                  <span>Who do I need to involve?</span>
-                  <div className="chips chips--compact">
-                    {participantChips.map((participant) => <span key={participant}>{participant}</span>)}
-                  </div>
-                </section>
-                <section>
-                  <small>Conversation</small>
-                  <span>What should we discuss?</span>
-                  <ul>{discussionItems.map((item) => <li key={item}>{item}</li>)}</ul>
-                </section>
-                <section>
-                  <small>Outputs</small>
-                  <span>What should we produce?</span>
-                  <ul>{outputItems.map((item) => <li key={item}>{item}</li>)}</ul>
-                </section>
-                <section>
-                  <small>Next stop</small>
-                  <span>What do we do next?</span>
-                  <ul>{nextActions.map((item) => <li key={item}>{item}</li>)}</ul>
-                </section>
-              </div>
-            </article>
-          ) : null}
-
-          {view === "guide" ? (
-            <article className="workspace-panel">
-              <p className="section-kicker">People to involve</p>
-              <h2>Role guide for {shortStationName(stationDetail.title)}</h2>
-              <div className="people-grid">
-                {roleData.slice(0, 6).map((item) => (
-                  <section key={item.id} className="person-card">
-                    <h3>{item.title}</h3>
-                    <p><strong>Why they matter:</strong> {item.summary}</p>
-                    <p><strong>What to ask:</strong> {item.decisions[0] ?? discussionItems[0]}</p>
-                    <p><strong>What they produce:</strong> {item.outputs[0] ?? outputItems[0]}</p>
-                  </section>
-                ))}
-              </div>
-            </article>
-          ) : null}
-
-          {view === "ai" ? (
-            <article className="workspace-panel" id="workflows">
-              <p className="section-kicker">Use with AI</p>
-              <h2>AI workflow for {shortStationName(stationDetail.title)}</h2>
-              <div className="workflow-grid">
-                {rolePrompts.slice(0, 4).map((prompt, index) => (
-                  <section key={prompt.id} className="prompt-card">
-                    <span>{index + 1}. {aiWorkflowLabels[index] ?? prompt.mode}</span>
-                    <h3>{prompt.title}</h3>
-                    <p><strong>Purpose:</strong> {prompt.mode}</p>
-                    <pre>{prompt.prompt}</pre>
-                    <button type="button" onClick={() => copyText(prompt.prompt)}>Copy prompt</button>
-                  </section>
-                ))}
-              </div>
-            </article>
-          ) : null}
-
-          {view === "confluence" ? (
-            <article className="workspace-panel">
-              <p className="section-kicker">Confluence export</p>
-              <h2>Publishing templates</h2>
-              <p className="helper-text">
-                Choose the purpose first, then copy the format that matches the destination. Markdown is for docs repositories and static sites. Confluence-wiki is for Confluence pages that accept wiki markup.
-              </p>
-              <div className="template-grid">
-                {templateGroups.map((group) => (
-                    <section key={group.key} className="template-card template-card--grouped">
-                      <div className="template-card__meta">
-                        <span>{group.label}</span>
-                      </div>
-                      <h3>{group.title}</h3>
-                      <p>{group.copy}</p>
-                      <div className="template-formats">
-                        {group.markdown ? (
-                          <section>
-                            <div className="template-format-head">
-                              <strong>Markdown</strong>
-                              <button type="button" onClick={() => copyText(group.markdown?.body ?? "")}>Copy Markdown</button>
-                            </div>
-                            <pre>{group.markdown.body}</pre>
-                          </section>
-                        ) : null}
-                        {group.confluence ? (
-                          <section>
-                            <div className="template-format-head">
-                              <strong>Confluence-wiki</strong>
-                              <button type="button" onClick={() => copyText(group.confluence?.body ?? "")}>Copy Confluence-wiki</button>
-                            </div>
-                            <pre>{group.confluence.body}</pre>
-                          </section>
-                        ) : null}
-                      </div>
-                    </section>
-                ))}
-              </div>
-            </article>
-          ) : null}
-
-          {view === "canvases" ? (
-            <article className="workspace-panel">
-              <div className="panel__head">
-                <div>
-                  <p className="section-kicker">Use with canvases</p>
-                  <h2>{selectedCanvas.title || "Capability Value Proposition Canvas"}</h2>
-                </div>
-                <select value={canvasId} onChange={(event) => setCanvasId(event.target.value)} aria-label="Select canvas">
-                  {role.canvases.map((canvas) => (
-                    <option key={canvas.id} value={canvas.id}>{canvas.title}</option>
-                  ))}
-                </select>
-              </div>
-              {externalCanvasUrl ? (
-                <a className="external-link" href={externalCanvasUrl} target="_blank" rel="noreferrer">
-                  Open in CanvasCreator
-                </a>
-              ) : (
-                <p className="helper-text">No external canvas renderer is configured, so this page uses the built-in local workspace.</p>
-              )}
-              <CanvasWorkspace canvas={selectedCanvas} role={role} locale={locale} />
-            </article>
-          ) : null}
-
-          {view === "data" ? (
-            <article className="workspace-panel workspace-panel--technical" id="method-data">
-              <p className="section-kicker">Method data</p>
-              <h2>Static integration surfaces</h2>
-              <p>These JSON files are published with the site and can be consumed by future MCP tools, documentation generators, or external canvas renderers.</p>
-              <div className="data-links">
-                {[
-                  "method-catalog.json",
-                  "stakeholder-guides.json",
-                  "canvas-manifest.json",
-                  "prompt-packs.json",
-                  "export-templates.json",
-                  "mcp-method-manifest.json",
-                ].map((file) => (
-                  <a key={file} href={`/data/${file}`}>{`/data/${file}`}</a>
-                ))}
-              </div>
-            </article>
-          ) : null}
-        </section>
-
-        <aside className="workspace-utility">
-          <section>
-            <h3>Facilitation tips</h3>
-            <p>Start with outcomes, then confirm evidence, owners, and the next station before choosing templates or canvases.</p>
-          </section>
-          <section>
-            <h3>People to involve</h3>
-            <div className="chips chips--compact">
-              {participantChips.map((participant) => <span key={participant}>{participant}</span>)}
-            </div>
-          </section>
-          <section>
-            <h3>Quick actions</h3>
-            <div className="resource-actions">
-              <button type="button" onClick={() => setView("canvases")}>Open canvas</button>
-              <button type="button" onClick={() => setView("ai")}>Use AI prompts</button>
-              <button type="button" onClick={() => setView("confluence")}>Prepare export</button>
-            </div>
-          </section>
-        </aside>
-      </section>
-
-      <section className="catalog-section">
-        <div className="panel__head">
-          <div>
-            <p className="section-kicker">Resources for this station</p>
-            <h2>{shortStationName(stationDetail.title)}</h2>
-          </div>
-          <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search this station" aria-label="Search station resources" />
+      <section className="partners-section" id="community" aria-label={localizedLabels["partners.title"]}>
+        <div className="partners-section__head">
+          <p className="section-kicker">{localizedLabels["partners.kicker"]}</p>
+          <h2>{localizedLabels["partners.title"]}</h2>
+          <p>{localizedLabels["partners.description"]}</p>
         </div>
-        <div className="resource-grid">
-          {filteredResources.map((resource) => (
-            <article key={resource.id} className="resource-card">
-              <span>{resource.category}</span>
-              <h3>{resource.title}</h3>
-              <strong className="resource-purpose">Helps answer: {shortStationName(stationDetail.title)}</strong>
-              <p>{compact(resource.description, 165)}</p>
-              <button type="button" onClick={() => openResource(resource)}>
-                {resource.canvasId ? "Open canvas" : "Use resource"}
-              </button>
-            </article>
+        <div className="partner-grid">
+          {partners.items.map((partner) => (
+            <a key={partner.title} className="partner-card" href={partner.href} target="_blank" rel="noreferrer">
+              <img src={partner.logo} alt={`${partner.title} logo`} />
+              <div>
+                <h3>{partner.title}</h3>
+                <p>{partner.description}</p>
+              </div>
+            </a>
           ))}
-          {!filteredResources.length ? <p className="helper-text">No resources match this station filter.</p> : null}
         </div>
       </section>
+      <footer className="site-footer" id="licensing">
+        <span>{localizedLabels["footer.license"]}</span>
+        <a href={catalog.source.repository} target="_blank" rel="noreferrer">{localizedLabels["footer.github"]}</a>
+        <a href="https://www.apiops.info" target="_blank" rel="noreferrer">{localizedLabels["footer.community"]}</a>
+      </footer>
     </main>
   );
 }

@@ -11,7 +11,9 @@
     "/data/stakeholder-guides.json",
     "/data/canvas-manifest.json",
     "/data/prompt-packs.json",
-    "/data/export-templates.json"
+    "/data/export-templates.json",
+    "/data/site-labels.json",
+    "/data/partners.json"
   ],
   "tools": [
     "list_cycles",

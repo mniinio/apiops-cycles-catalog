@@ -7,19 +7,33 @@ import {
   readdirSync,
   writeFileSync,
 } from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const root = process.cwd();
-const sourceRoot =
-  process.env.METHOD_DATA_PATH ??
-  path.join(root, "work", "apiops-cycles-method-data");
+const require = createRequire(import.meta.url);
+function resolveSourceRoot() {
+  if (process.env.METHOD_DATA_PATH) return process.env.METHOD_DATA_PATH;
+  try {
+    const enginePath = require.resolve("apiops-cycles-method-data/method-engine");
+    return path.resolve(enginePath, "..", "..", "..");
+  } catch {
+    return path.join(root, "work", "apiops-cycles-method-data");
+  }
+}
+
+const sourceRoot = resolveSourceRoot();
 const methodRoot = path.join(sourceRoot, "src", "data", "method");
 const canvasRoot = path.join(sourceRoot, "src", "data", "canvas");
+const snippetRoot = path.join(sourceRoot, "src", "snippets");
 const assetRoot = path.join(sourceRoot, "src", "assets");
+const partnerRoot = path.join(sourceRoot, "public", "partners");
+const partnerDataFile = path.join(sourceRoot, "src", "data", "partners.json");
 const appDataRoot = path.join(root, "app", "data");
 const publicDataRoot = path.join(root, "public", "data");
 const publicAssetRoot = path.join(root, "public", "assets");
+const publicPartnerRoot = path.join(root, "public", "partners");
 const locales = ["en", "fi", "fr", "de", "pt"];
 const methodEngine = await import(pathToFileURL(path.join(sourceRoot, "src", "lib", "method-engine.js")));
 
@@ -174,6 +188,15 @@ function copyPublicAsset(name) {
   copyFileSync(sourcePath, path.join(publicAssetRoot, name));
 }
 
+function copyPartnerAsset(logo) {
+  if (!logo?.startsWith("/partners/")) return;
+  const name = logo.replace("/partners/", "");
+  const sourcePath = path.join(partnerRoot, name);
+  if (!existsSync(sourcePath)) return;
+  mkdirSync(publicPartnerRoot, { recursive: true });
+  copyFileSync(sourcePath, path.join(publicPartnerRoot, name));
+}
+
 function readLabels(locale) {
   const dir = path.join(methodRoot, locale);
   const labels = {};
@@ -193,10 +216,160 @@ function readLabels(locale) {
   return labels;
 }
 
+function siteLabels(locale) {
+  const shared = {
+    stations: "Stations",
+    why_it_matters: "Why it matters",
+    outcomes: "Outcomes",
+    how_it_works: "How it works",
+    steps: "Steps",
+    apply_in_work: "Apply in your work",
+    entry_criteria: "Entry criteria",
+    exit_criteria: "Exit criteria",
+    related_metrolines: "Related metrolines",
+    cycle_views: "Cycle views",
+    drill_deeper: "Drill deeper",
+    zoom_out: "Zoom out",
+    layer_navigation: "Layer navigation",
+    purpose: "Purpose",
+    audiences: "Audiences",
+    station: "Station",
+    source_station: "Source station",
+    recommended_resources: "Recommended resources",
+    cycle_context: "Cycle context",
+    missing_cycle_description: "Cycle-specific station description is not available yet.",
+    cycle_specific_resources: "Cycle-specific resources",
+    generic_station_context: "Generic station context",
+    see_example: "See example",
+    download: "Download",
+    use_with_ai: "Use with AI",
+    step: "Step",
+    of: "of",
+    previous_step: "Previous step",
+    continue_to: "Continue to",
+    start: "Start",
+    open: "Open",
+    category_canvas: "Canvas",
+    category_guideline: "Guideline",
+  };
+  const localizedShared = {
+    fi: {
+      see_example: "Katso esimerkki",
+      download: "Lataa",
+      use_with_ai: "Käytä tekoälyn kanssa",
+      step: "Vaihe",
+      of: "/",
+      previous_step: "Edellinen vaihe",
+      continue_to: "Jatka:",
+      start: "Aloita",
+      open: "Avaa",
+      category_canvas: "Canvas",
+      category_guideline: "Ohjeistus",
+    },
+    fr: {
+      see_example: "Voir l'exemple",
+      download: "Télécharger",
+      use_with_ai: "Utiliser avec l'IA",
+      step: "Étape",
+      of: "sur",
+      previous_step: "Étape précédente",
+      continue_to: "Continuer vers",
+      start: "Commencer",
+      open: "Ouvrir",
+      category_canvas: "Canvas",
+      category_guideline: "Guide",
+    },
+    de: {
+      see_example: "Beispiel ansehen",
+      download: "Download",
+      use_with_ai: "Mit KI nutzen",
+      step: "Schritt",
+      of: "von",
+      previous_step: "Vorheriger Schritt",
+      continue_to: "Weiter zu",
+      start: "Start",
+      open: "Öffnen",
+      category_canvas: "Canvas",
+      category_guideline: "Leitfaden",
+    },
+    pt: {
+      see_example: "Ver exemplo",
+      download: "Baixar",
+      use_with_ai: "Usar com IA",
+      step: "Etapa",
+      of: "de",
+      previous_step: "Etapa anterior",
+      continue_to: "Continuar para",
+      start: "Iniciar",
+      open: "Abrir",
+      category_canvas: "Canvas",
+      category_guideline: "Guia",
+    },
+  };
+  const english = {
+    ...shared,
+    "nav.workflows": "Workflows",
+    "nav.data": "Data",
+    "nav.language": "Language",
+    "nav.licensing": "Licensing",
+    "nav.github": "GitHub",
+    "nav.community": "Community",
+    "controls.currentRoute": "Current route",
+    "controls.recommendedCycle": "Recommended cycle",
+    "controls.currentStation": "Current station",
+    "views.map": "Metro map",
+    "views.guide": "Role guide",
+    "views.canvases": "Resources",
+    "views.ai": "Use with AI",
+    "views.confluence": "Confluence",
+    "views.data": "Method data",
+    "map.kicker": "Your route on the map",
+    "map.instructions": "Click a station to change the selected workspace. The highlighted route shows the current cycle.",
+    "map.linesTitle": "Metro lines",
+    "map.linesDescription": "Lines show decision tracks across the shared APIOps backbone. Cycles show the journey for a goal.",
+    "station.youAreHere": "You are here",
+    "station.keyQuestions": "Key questions",
+    "station.nextAction": "Recommended next action",
+    "station.whereNext": "Where can I go next?",
+    "station.before": "Before this station",
+    "station.ready": "Ready to leave when",
+    "station.previous": "Previous",
+    "station.next": "Next",
+    "station.coreStation": "Core station",
+    "station.subStation": "Sub-station",
+    "station.relatedCanvases": "Related canvases",
+    "station.relatedResources": "Related resources",
+    "station.people": "People to involve",
+    "resources.emptyCanvases": "No canvas resources are directly linked to this station.",
+    "resources.emptyOther": "No additional resources are directly linked to this station.",
+    "canvas.localWorkspace": "Local canvas workspace",
+    "canvas.exportMarkdown": "Export Markdown",
+    "canvas.exportJson": "Export JSON",
+    "canvas.importJson": "Import JSON",
+    "canvas.exportSvg": "Export SVG",
+    "canvas.exportPng": "Export PNG",
+    "canvas.exportPdf": "Export PDF",
+    "canvas.exportUnavailable": "Configure NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL to export styled SVG, PNG, or PDF with CanvasCreator.",
+    "canvas.openCreator": "Open in CanvasCreator",
+    "canvas.markdownExported": "Canvas Markdown exported.",
+    "canvas.jsonExported": "Canvas JSON exported.",
+    "canvas.jsonImported": "Canvas JSON imported.",
+    "partners.kicker": "Community and partners",
+    "partners.title": "Built with the APIOps Cycles community",
+    "partners.description": "APIOps Cycles is an open method. Partners help develop, use, and teach it with teams around the world.",
+    "footer.license": "Licensed under CC-BY-SA 4.0.",
+    "footer.github": "GitHub repository",
+    "footer.community": "Community events and joining",
+  };
+  const fallback = { ...english, ...(localizedShared[locale] ?? {}) };
+  return Object.fromEntries(Object.entries(fallback).map(([key, value]) => [key, t(locale, `site.${key}`) === `site.${key}` ? value : t(locale, `site.${key}`)]));
+}
+
 const cyclesRaw = readJson(path.join(methodRoot, "cycles.json")).cycles.items;
 const stationsRaw = readJson(path.join(methodRoot, "stations.json"));
 const resourcesRaw = readJson(path.join(methodRoot, "resources.json")).resources;
-const criteriaRaw = readJson(path.join(methodRoot, "criteria.json")).criteria ?? [];
+const criteriaSource = readJson(path.join(methodRoot, "criteria.json"));
+const criteriaRaw = criteriaSource.criteria ?? criteriaSource ?? [];
 const linesRaw = readJson(path.join(methodRoot, "lines.json")).lines.items ?? [];
 const integrationExtension = readJson(path.join(methodRoot, "integration-extension.json"));
 const canvasDataRaw = readJson(path.join(canvasRoot, "canvasData.json"));
@@ -210,6 +383,18 @@ function t(locale, key) {
 
 function translateList(locale, list = []) {
   return list.map((item) => t(locale, item)).filter(Boolean);
+}
+
+function readSnippet(locale, snippet) {
+  if (!snippet) return { sourcePath: null, contentMarkdown: null };
+  const localized = path.join(snippetRoot, locale, snippet);
+  const fallback = path.join(snippetRoot, snippet);
+  const sourcePath = existsSync(localized) ? localized : existsSync(fallback) ? fallback : null;
+  if (!sourcePath) return { sourcePath: `src/snippets/${snippet}`, contentMarkdown: null };
+  return {
+    sourcePath: path.relative(sourceRoot, sourcePath).replaceAll("\\", "/"),
+    contentMarkdown: readFileSync(sourcePath, "utf8"),
+  };
 }
 
 function allStations() {
@@ -228,18 +413,33 @@ const stationsRawList = allStations();
 const resourceById = Object.fromEntries(resourcesRaw.map((item) => [item.id, item]));
 const stationById = Object.fromEntries(stationsRawList.map((item) => [item.id, item]));
 const cycleById = Object.fromEntries(cyclesRaw.map((item) => [item.id, item]));
+const criterionById = Object.fromEntries(criteriaRaw.map((item) => [item.id, item]));
+
+function translateCriterion(locale, id) {
+  const criterion = criterionById[id];
+  return {
+    id,
+    title: t(locale, `criterion.${id}`),
+    description: criterion?.description ? t(locale, criterion.description) : t(locale, `criterion.${id}`),
+  };
+}
 
 function translateResource(locale, resource) {
+  const snippet = readSnippet(locale, resource.snippet);
   return {
     id: resource.id,
     slug: resource.slug,
     title: t(locale, resource.title),
     description: t(locale, resource.description),
     category: resource.category ?? "resource",
+    icon: resource.icon ?? "",
     order: Number(resource.order ?? 999),
     outcomes: translateList(locale, resource.outcomes),
     steps: translateList(locale, resource.how_it_works?.steps),
     canvasId: resource.canvas ?? null,
+    sourcePath: snippet.sourcePath,
+    sourceUrl: resource.url ?? null,
+    contentMarkdown: snippet.contentMarkdown,
     draft: resource.draft === "true" || resource.daft === "true",
   };
 }
@@ -250,6 +450,7 @@ function translateLine(locale, line) {
     slug: line.slug,
     title: t(locale, line.title),
     description: t(locale, line.description),
+    icon: line.icon ?? "",
     color: line.color,
     order: Number(line.order ?? 999),
     stations: line.stations ?? [],
@@ -257,9 +458,15 @@ function translateLine(locale, line) {
 }
 
 function translateStation(locale, station) {
+  const questions = translateList(locale, [
+    ...(station.how_it_works ?? []).map((step) => step.step),
+    station.apply_in_work,
+    station.why_it_matters,
+  ]);
   return {
     id: station.id,
     slug: station.slug,
+    icon: station.icon ?? "",
     title: t(locale, station.title),
     description: t(locale, station.description),
     whyItMatters: t(locale, station.why_it_matters),
@@ -273,7 +480,9 @@ function translateStation(locale, station) {
       resourceTitle: step.resource ? t(locale, resourceById[step.resource]?.title) : "",
       canvasId: step.resource ? resourceById[step.resource]?.canvas ?? null : null,
     })),
+    questions,
     criteria: station.stationCriteria ?? [],
+    criteriaDetails: (station.stationCriteria ?? []).map((id) => translateCriterion(locale, id)),
     evidence: station.expectedEvidenceTags ?? [],
   };
 }
@@ -288,6 +497,8 @@ function translateCycle(locale, cycle) {
     audiences: translateList(locale, cycle.audiences),
     entryCriteria: cycle.entryCriteria ?? [],
     exitCriteria: cycle.exitCriteria ?? [],
+    entryCriteriaDetails: (cycle.entryCriteria ?? []).map((id) => translateCriterion(locale, id)),
+    exitCriteriaDetails: (cycle.exitCriteria ?? []).map((id) => translateCriterion(locale, id)),
     stations: cycle.stations.map((stationId, index) => {
       const station = stationById[stationId];
       const resources = (cycle.recommendedResources?.[stationId] ?? [])
@@ -493,10 +704,8 @@ const catalog = {
           .map((resource) => translateResource(locale, resource))
           .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title)),
         criteria: criteriaRaw.map((criterion) => ({
-          id: criterion.id,
-          title: t(locale, criterion.title),
-          description: t(locale, criterion.description),
-          category: criterion.category,
+          ...translateCriterion(locale, criterion.id),
+          category: criterion.category ?? "",
         })),
       },
     ]),
@@ -544,6 +753,18 @@ const exportsData = {
   translations: Object.fromEntries(locales.map((locale) => [locale, exportTemplates(locale)])),
 };
 
+const siteLabelsData = {
+  source,
+  locales,
+  defaultLocale: "en",
+  translations: Object.fromEntries(locales.map((locale) => [locale, siteLabels(locale)])),
+};
+
+const partners = {
+  source,
+  items: existsSync(partnerDataFile) ? readJson(partnerDataFile) : [],
+};
+
 const mcpManifest = {
   source,
   version: 1,
@@ -554,6 +775,8 @@ const mcpManifest = {
     "/data/canvas-manifest.json",
     "/data/prompt-packs.json",
     "/data/export-templates.json",
+    "/data/site-labels.json",
+    "/data/partners.json",
   ],
   tools: [
     "list_cycles",
@@ -588,11 +811,14 @@ mkdirSync(appDataRoot, { recursive: true });
 mkdirSync(publicDataRoot, { recursive: true });
 copyPublicAsset("apiops-cycles-logo-dark.svg");
 copyPublicAsset("apiops-cycles-logo-white.svg");
+for (const partner of partners.items) copyPartnerAsset(partner.logo);
 writeJson("method-catalog.json", catalog, { publish: true });
 writeJson("stakeholder-guides.json", stakeholderGuides, { publish: true });
 writeJson("canvas-manifest.json", canvasManifest, { publish: true });
 writeJson("prompt-packs.json", prompts, { publish: true });
 writeJson("export-templates.json", exportsData, { publish: true });
+writeJson("site-labels.json", siteLabelsData, { publish: true });
+writeJson("partners.json", partners, { publish: true });
 writeJson("mcp-method-manifest.json", mcpManifest, { publish: true });
 
 const published = readdirSync(publicDataRoot).filter((name) => name.endsWith(".json"));
