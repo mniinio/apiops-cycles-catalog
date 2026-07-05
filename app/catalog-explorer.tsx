@@ -1459,10 +1459,6 @@ ${prompt.prompt}`;
                   {!lineNavigation.length ? <p className="helper-text">No line transitions are listed for this station.</p> : null}
                 </div>
               </section>
-              <section>
-                <h3>{localizedLabels["station.nextAction"]}</h3>
-                <p>{nextActions[0] ?? "Capture the decision and choose the next station."}</p>
-              </section>
             </>
           )}
         </aside>
