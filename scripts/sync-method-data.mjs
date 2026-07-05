@@ -200,6 +200,7 @@ const stationById = Object.fromEntries(stationsRawList.map((item) => [item.id, i
 const cycleById = Object.fromEntries(cyclesRaw.map((item) => [item.id, item]));
 const criterionById = Object.fromEntries(criteriaRaw.map((item) => [item.id, item]));
 const sourceStakeholderById = Object.fromEntries(stakeholdersRaw.map((item) => [item.id, item]));
+const stationStakeholdersByCycle = stationStakeholdersRaw.stationStakeholdersByCycle ?? null;
 
 function normalizeStakeholderId(sourceKey) {
   return sourceKey ?? "";
@@ -232,11 +233,41 @@ function uniqueBy(items, keyFn) {
   });
 }
 
-function stationStakeholders(locale, stationId) {
-  return (stationStakeholdersRaw[stationId] ?? [])
-    .map((item) => translateStakeholder(locale, item.stakeholder, item.involvement))
+function stationStakeholderItems(cycleId, stationId) {
+  if (stationStakeholdersByCycle) return stationStakeholdersByCycle[cycleId]?.[stationId] ?? [];
+  return stationStakeholdersRaw[stationId] ?? [];
+}
+
+function stationStakeholders(locale, cycleId, stationId) {
+  return stationStakeholderItems(cycleId, stationId)
+    .map((item) => ({
+      ...translateStakeholder(locale, item.stakeholder, item.involvement),
+      responsibilities: (item.responsibilities ?? []).map((responsibility) => {
+        const resource = resourceById[responsibility.resource];
+        return {
+          resourceId: responsibility.resource,
+          resourceTitle: resource ? t(locale, resource.title) : responsibility.resource,
+          canvasId: resource?.canvas ?? null,
+          role: responsibility.role,
+        };
+      }),
+    }))
     .filter((item) => item.id)
     .sort((a, b) => (involvementRank[a.involvement] ?? 9) - (involvementRank[b.involvement] ?? 9) || a.title.localeCompare(b.title));
+}
+
+function aggregateStationStakeholders(locale, stationId) {
+  const items = stationStakeholdersByCycle
+    ? Object.keys(stationStakeholdersByCycle).flatMap((cycleId) => stationStakeholders(locale, cycleId, stationId))
+    : stationStakeholders(locale, "", stationId);
+  const byId = new Map();
+  for (const item of items) {
+    const current = byId.get(item.id);
+    if (!current || (involvementRank[item.involvement] ?? 9) < (involvementRank[current.involvement] ?? 9)) {
+      byId.set(item.id, item);
+    }
+  }
+  return [...byId.values()].sort((a, b) => (involvementRank[a.involvement] ?? 9) - (involvementRank[b.involvement] ?? 9) || a.title.localeCompare(b.title));
 }
 
 function translateCriterion(locale, id) {
@@ -308,27 +339,37 @@ function translateStation(locale, station) {
     questions,
     criteria,
     criteriaDetails: criteria.map((id) => translateCriterion(locale, id)),
-    stakeholders: stationStakeholders(locale, station.id),
+    stakeholders: aggregateStationStakeholders(locale, station.id),
     evidence: station.expectedEvidenceTags ?? [],
   };
 }
 
 function translateCycle(locale, cycle) {
   const audienceStakeholders = uniqueBy(
-    (cycle.audiences ?? []).map((sourceKey) => translateStakeholder(locale, sourceKey, "audience")),
+    cycle.stations.flatMap((stationId) =>
+      stationStakeholders(locale, cycle.id, stationId)
+        .filter((item) => item.involvement === "lead" || item.involvement === "core"),
+    ),
     (item) => item.id,
   );
-  const questionnaireResources = (cycle.questionnaireResources ?? [])
+  const questionnaireResources = cycle.stations
+    .flatMap((stationId) =>
+      stationStakeholders(locale, cycle.id, stationId).flatMap((stakeholder) =>
+        (stakeholder.responsibilities ?? [])
+          .filter((responsibility) => responsibility.role === "suggested-answer-owner")
+          .map((responsibility) => ({ stationId, stakeholder, responsibility })),
+      ),
+    )
     .map((item) => {
-      const resource = resourceById[item.resource];
-      const station = stationById[item.station];
+      const resource = resourceById[item.responsibility.resourceId];
+      const station = stationById[item.stationId];
       return {
-        stationId: item.station,
-        stationTitle: station ? t(locale, cycle.stationLabels?.[item.station] ?? station.title) : item.station,
-        resourceId: item.resource,
-        resourceTitle: resource ? t(locale, resource.title) : item.resource,
+        stationId: item.stationId,
+        stationTitle: station ? t(locale, cycle.stationLabels?.[item.stationId] ?? station.title) : item.stationId,
+        resourceId: item.responsibility.resourceId,
+        resourceTitle: resource ? t(locale, resource.title) : item.responsibility.resourceId,
         canvasId: resource?.canvas ?? null,
-        suggestedAnswerOwner: translateStakeholder(locale, item.suggestedAnswerOwner),
+        suggestedAnswerOwner: item.stakeholder,
       };
     })
     .filter((item) => item.resourceId);
@@ -352,7 +393,13 @@ function translateCycle(locale, cycle) {
     })),
     stations: cycle.stations.map((stationId, index) => {
       const station = stationById[stationId];
+      const stakeholders = stationStakeholders(locale, cycle.id, stationId);
+      const responsibilityResourceIds = stakeholders.flatMap((stakeholder) =>
+        (stakeholder.responsibilities ?? []).map((responsibility) => responsibility.resourceId),
+      );
       const resources = (cycle.recommendedResources?.[stationId] ?? [])
+        .concat(responsibilityResourceIds)
+        .filter((id, index, items) => items.indexOf(id) === index)
         .map((id) => resourceById[id])
         .filter(Boolean)
         .map((resource) => translateResource(locale, resource));
@@ -362,6 +409,7 @@ function translateCycle(locale, cycle) {
         title: t(locale, cycle.stationLabels?.[stationId] ?? station?.title),
         description: t(locale, cycle.stationDescriptions?.[stationId] ?? station?.description),
         baseTitle: station ? t(locale, station.title) : stationId,
+        stakeholders,
         resources,
       };
     }),
@@ -414,17 +462,25 @@ function allStakeholders(locale) {
 
 function routeProfiles(locale) {
   const stakeholderIds = new Set(
-    cyclesRaw.flatMap((cycle) => (cycle.audiences ?? []).map((sourceKey) => normalizeStakeholderId(sourceKey))),
+    cyclesRaw.flatMap((cycle) =>
+      cycle.stations.flatMap((stationId) =>
+        stationStakeholders(locale, cycle.id, stationId)
+          .filter((stakeholder) => stakeholder.involvement === "lead" || stakeholder.involvement === "core")
+          .map((stakeholder) => stakeholder.id),
+      ),
+    ),
   );
   return [...stakeholderIds].map((stakeholderId) => {
     const stakeholder = translateStakeholder(locale, stakeholderId);
     const cycles = cyclesRaw.filter((cycle) =>
-      (cycle.audiences ?? []).some((sourceKey) => normalizeStakeholderId(sourceKey) === stakeholderId),
+      cycle.stations.some((stationId) =>
+        stationStakeholders(locale, cycle.id, stationId).some((item) => item.id === stakeholderId),
+      ),
     );
     const stationIds = uniqueBy(
       cycles.flatMap((cycle) =>
         cycle.stations.filter((stationId) =>
-          stationStakeholders(locale, stationId).some((item) => item.id === stakeholderId),
+          stationStakeholders(locale, cycle.id, stationId).some((item) => item.id === stakeholderId),
         ),
       ),
       (id) => id,
@@ -434,9 +490,9 @@ function routeProfiles(locale) {
       cycles.flatMap((cycle) =>
         effectiveStationIds.flatMap((stationId) => [
           ...(cycle.recommendedResources?.[stationId] ?? []),
-          ...(cycle.questionnaireResources ?? [])
-            .filter((item) => item.station === stationId)
-            .map((item) => item.resource),
+          ...stationStakeholders(locale, cycle.id, stationId)
+            .filter((item) => item.id === stakeholderId)
+            .flatMap((item) => (item.responsibilities ?? []).map((responsibility) => responsibility.resourceId)),
         ]),
       ),
       (id) => id,
@@ -525,13 +581,12 @@ function promptPacks(locale) {
 }
 
 function exportTemplates(locale) {
-  return routeProfiles(locale).flatMap((route) => {
-    const cycleId = route.cycles[0]?.id ?? "capability-productization-cycle";
-    const cycle = translateCycle(locale, cycleById[cycleId]);
-    return [
+  return cyclesRaw.flatMap((rawCycle) => {
+    const cycle = translateCycle(locale, rawCycle);
+    const cycleId = rawCycle.id;
+    const templates = [
       {
-        id: `${route.id}:markdown-summary`,
-        routeId: route.id,
+        id: `${cycleId}:markdown-summary`,
         cycleId,
         format: "markdown",
         title: `${cycle.title} Markdown`,
@@ -539,29 +594,30 @@ function exportTemplates(locale) {
         body: methodEngine.renderCycleMarkdown({ cycle: cycleId, locale }),
       },
       {
-        id: `${route.id}:confluence-page`,
-        routeId: route.id,
+        id: `${cycleId}:confluence-page`,
         cycleId,
         format: "confluence-wiki",
         title: `${cycle.title} Confluence wiki`,
         sections: cycle.confluenceTemplateSections,
         body: methodEngine.renderCycleConfluenceWiki({ cycle: cycleId, locale }),
       },
+    ];
+    if (cycleId !== "integration-productization-cycle") return templates;
+    return [
+      ...templates,
       {
-        id: `${route.id}:integration-markdown`,
-        routeId: route.id,
+        id: `${cycleId}:integration-markdown`,
         cycleId,
         format: "markdown",
-        title: `${route.title} integration design Markdown`,
+        title: `${cycle.title} integration design Markdown`,
         sections: cycle.confluenceTemplateSections,
         body: methodEngine.renderIntegrationDesignMarkdown({ locale }),
       },
       {
-        id: `${route.id}:integration-confluence-wiki`,
-        routeId: route.id,
+        id: `${cycleId}:integration-confluence-wiki`,
         cycleId,
         format: "confluence-wiki",
-        title: `${route.title} integration design Confluence wiki`,
+        title: `${cycle.title} integration design Confluence wiki`,
         sections: cycle.confluenceTemplateSections,
         body: methodEngine.renderIntegrationDesignConfluenceWiki({ locale }),
       },
@@ -696,22 +752,19 @@ function validate() {
   for (const cycle of cyclesRaw) {
     if (!cycleIds.has(cycle.id)) throw new Error(`Missing cycle ${cycle.id}`);
     for (const stationId of cycle.stations ?? []) if (!stationIds.has(stationId)) throw new Error(`Missing station ${stationId}`);
-    for (const sourceKey of cycle.audiences ?? []) {
-      const id = normalizeStakeholderId(sourceKey);
-      if (!stakeholderIds.has(id)) throw new Error(`Missing stakeholder ${id} from cycle audience ${sourceKey}`);
-    }
-    for (const item of cycle.questionnaireResources ?? []) {
-      if (!stationIds.has(item.station)) throw new Error(`Missing questionnaire station ${item.station}`);
-      if (!resourceIds.has(item.resource)) throw new Error(`Missing questionnaire resource ${item.resource}`);
-      const id = normalizeStakeholderId(item.suggestedAnswerOwner);
-      if (!stakeholderIds.has(id)) throw new Error(`Missing stakeholder ${id} from owner ${item.suggestedAnswerOwner}`);
-    }
   }
-  for (const [stationId, items] of Object.entries(stationStakeholdersRaw)) {
-    if (!stationIds.has(stationId)) throw new Error(`Missing station stakeholder station ${stationId}`);
-    for (const item of items) {
-      const id = normalizeStakeholderId(item.stakeholder);
-      if (!stakeholderIds.has(id)) throw new Error(`Missing station stakeholder ${id}`);
+  const stakeholderGraph = stationStakeholdersByCycle ?? { default: stationStakeholdersRaw };
+  for (const [cycleId, stations] of Object.entries(stakeholderGraph)) {
+    if (cycleId !== "default" && !cycleIds.has(cycleId)) throw new Error(`Missing station stakeholder cycle ${cycleId}`);
+    for (const [stationId, items] of Object.entries(stations)) {
+      if (!stationIds.has(stationId)) throw new Error(`Missing station stakeholder station ${stationId}`);
+      for (const item of items) {
+        const id = normalizeStakeholderId(item.stakeholder);
+        if (!stakeholderIds.has(id)) throw new Error(`Missing station stakeholder ${id}`);
+        for (const responsibility of item.responsibilities ?? []) {
+          if (!resourceIds.has(responsibility.resource)) throw new Error(`Missing stakeholder responsibility resource ${responsibility.resource}`);
+        }
+      }
     }
   }
   for (const [stationId, criteria] of Object.entries(stationCriteriaRaw)) {

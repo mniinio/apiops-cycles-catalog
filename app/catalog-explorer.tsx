@@ -29,6 +29,7 @@ type CycleStation = {
   title: string;
   description: string;
   baseTitle: string;
+  stakeholders: Stakeholder[];
   resources: Resource[];
 };
 
@@ -92,6 +93,12 @@ type Stakeholder = {
   title: string;
   description: string;
   involvement?: string;
+  responsibilities?: {
+    resourceId: string;
+    resourceTitle: string;
+    canvasId?: string | null;
+    role: string;
+  }[];
 };
 
 type Translation = {
@@ -206,7 +213,7 @@ type PromptData = {
 
 type ExportTemplate = {
   id: string;
-  routeId: string;
+  routeId?: string;
   cycleId?: string;
   format: string;
   title: string;
@@ -904,6 +911,7 @@ export default function CatalogExplorer({
       title: stationDetail.title,
       description: stationDetail.description,
       baseTitle: stationDetail.title,
+      stakeholders: stationDetail.stakeholders ?? [],
       resources: selectedStationResources,
     };
   const [view, setView] = useState<ViewKey>("map");
@@ -915,7 +923,7 @@ export default function CatalogExplorer({
   }, [locale]);
 
   const rolePrompts = promptData.filter((prompt) => prompt.routeId === role.id);
-  const roleTemplates = templateData.filter((template) => template.routeId === role.id);
+  const roleTemplates = templateData.filter((template) => template.routeId === role.id || template.cycleId === cycleId);
   const templateGroups = useMemo(() => {
     const groups = new Map<
       string,
@@ -944,11 +952,7 @@ export default function CatalogExplorer({
   const stationDescription = selectedStation.description || stationDetail.description;
   const stationBadge = String(selectedStation.index || stationDetail.lifecycleStage || "-");
   const stationBadgeIsNumber = /^\d+$/.test(stationBadge);
-  const stakeholderParticipants = uniqueById([
-    role.stakeholder,
-    ...(stationDetail.stakeholders ?? []),
-    ...(selectedCycle.audienceStakeholders ?? []),
-  ]).filter(Boolean);
+  const stakeholderParticipants = uniqueById(selectedStation.stakeholders ?? []).filter(Boolean);
   const participantChips = stakeholderParticipants.map((item) => item.title).slice(0, 8);
   const stationQuestions = uniqueText([
     ...(stationDetail.questions ?? []),
@@ -989,12 +993,23 @@ export default function CatalogExplorer({
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const roleGuideRows = stakeholderParticipants.map((stakeholder) => {
     const profile = roleData.find((item) => item.stakeholderId === stakeholder.id || item.id === stakeholder.id);
+    const ownedResources = (stakeholder.responsibilities ?? [])
+      .filter((responsibility) => responsibility.role === "suggested-answer-owner")
+      .map((responsibility) => responsibility.resourceTitle);
     return {
       id: stakeholder.id,
       title: stakeholder.title,
-      summary: stakeholder.description || profile?.summary || `${stakeholder.title} participates in this station.`,
-      decisions: stationQuestions,
-      outputs: uniqueText([...(stationDetail.outcomes ?? []), ...(stationDetail.evidence ?? []), ...(profile?.outputs ?? [])]),
+      summary: stakeholder.description || profile?.summary || "",
+      decisions: [
+        stakeholder.involvement ? `${stakeholder.title} is ${stakeholder.involvement} for this station.` : "",
+        ...(ownedResources.length ? [`Owns answers for: ${ownedResources.join(", ")}`] : []),
+        ...stationQuestions,
+      ].filter(Boolean),
+      outputs: uniqueText([
+        ...ownedResources,
+        ...(stationDetail.outcomes ?? []),
+        ...(stationDetail.evidence ?? []),
+      ]),
       involvement: stakeholder.involvement,
     };
   });

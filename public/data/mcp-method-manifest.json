@@ -106,17 +106,27 @@
       "operations-specialist"
     ],
     "routeProfiles": [
+      "api-consumer-specialist",
       "api-designer",
+      "governance-specialist",
       "api-architect",
       "api-product-owner",
       "automation-owner",
       "automation-engineer",
       "business-owner",
       "capability-owner",
+      "compliance-specialist",
+      "customer-specialist",
+      "api-engineer",
+      "api-devrel-specialist",
+      "domain-specialist",
+      "partner-specialist",
       "platform-architect",
       "platform-owner",
       "process-owner",
-      "integration-architect"
+      "security-specialist",
+      "integration-architect",
+      "operations-specialist"
     ]
   }
 }
