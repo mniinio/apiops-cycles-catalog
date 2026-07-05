@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 
 type Resource = {
   id: string;
@@ -234,14 +234,13 @@ type StickyNotes = Record<string, StickyNote[]>;
 type CatalogExplorerProps = {
   catalog: Catalog;
   canvases: CanvasManifest;
-  prompts: PromptData;
-  exportsData: ExportData;
   labels: LabelData;
   partners: PartnerData;
   initialLocale: string;
   initialCycleId?: string;
   initialStationId?: string;
   initialRoleId?: string;
+  dataVersion: string;
 };
 
 type CatalogExplorerLoaderProps = {
@@ -252,7 +251,7 @@ type CatalogExplorerLoaderProps = {
   dataVersion: string;
 };
 
-type LoadedWorkspaceData = Omit<CatalogExplorerProps, "initialLocale" | "initialCycleId" | "initialStationId" | "initialRoleId">;
+type LoadedWorkspaceData = Omit<CatalogExplorerProps, "initialLocale" | "initialCycleId" | "initialStationId" | "initialRoleId" | "dataVersion">;
 
 function arrayOrEmpty<T>(value: T[] | undefined | null): T[] {
   return Array.isArray(value) ? value : [];
@@ -273,7 +272,7 @@ const colors: Record<string, string> = {
   "automation-cycle": "#0097a7",
 };
 
-const viewKeys = ["map", "guide", "canvases", "ai", "confluence", "data"] as const;
+const viewKeys = ["map", "guide", "canvases", "data"] as const;
 type ViewKey = (typeof viewKeys)[number];
 
 const fallbackLabels: Record<string, string> = {
@@ -388,6 +387,9 @@ const fallbackLabels: Record<string, string> = {
   "confluence.confluenceWiki": "Confluence-wiki",
   "confluence.copyMarkdown": "Copy Markdown",
   "confluence.copyConfluenceWiki": "Copy Confluence-wiki",
+  "actions.copy": "Copy",
+  "actions.expandAll": "Expand all",
+  "actions.collapseAll": "Collapse all",
   "confluence.cycleExport": "Cycle export",
   "confluence.audience": "Intended audience",
   "confluence.formatGuidance": "Format guidance",
@@ -426,6 +428,30 @@ function templateUse(template: ExportTemplate, labels: Record<string, string>) {
       ? labels["confluence.questionTemplateHelp"]
       : labels["confluence.cycleTemplateHelp"],
   };
+}
+
+function buildTemplateGroups(roleTemplates: ExportTemplate[], labels: Record<string, string>) {
+  const groups = new Map<
+    string,
+    {
+      key: string;
+      label: string;
+      title: string;
+      copy: string;
+      markdown?: ExportTemplate;
+      confluence?: ExportTemplate;
+    }
+  >();
+  for (const template of roleTemplates) {
+    const use = templateUse(template, labels);
+    const group = groups.get(use.key) ?? { ...use };
+    if (template.format === "confluence-wiki") group.confluence = template;
+    else group.markdown = template;
+    groups.set(use.key, group);
+  }
+  return ["cycle", "questions"]
+    .map((key) => groups.get(key))
+    .filter((group): group is NonNullable<typeof group> => Boolean(group));
 }
 
 function shortStationName(title: string) {
@@ -522,7 +548,7 @@ function MetroMap({
   const height = 1000;
   const center = { x: 500, y: 500 };
   const coreRadius = 125;
-  const coreLabelRadius = 156;
+  const coreLabelRadius = 190;
   const coreStations = cycles[0]?.stations ?? [];
   const selectedCycle = cycles.find((cycle) => cycle.id === selectedCycleId) ?? cycles[0];
   const highlightedStations = new Set(highlightedStationIds);
@@ -557,7 +583,7 @@ function MetroMap({
   const labelBoxes = {
     strategic: { x: 420, y: 6, width: 108, height: 34, label: uiLabels["map.zoneStrategic"] },
     governance: { x: 640, y: 296, width: 124, height: 34, label: uiLabels["map.zoneGovernance"] },
-    consumer: { x: 275, y: 386, width: 118, height: 34, label: uiLabels["map.zoneConsumer"] },
+    consumer: { x: 170, y: 410, width: 118, height: 34, label: uiLabels["map.zoneConsumer"] },
     technical: { x: 720, y: 806, width: 110, height: 34, label: uiLabels["map.zoneTechnical"] },
   };
   const lineLegend = lines.map((line, index) => ({ ...line, x: 105, y: 760 + index * 28 }));
@@ -970,14 +996,13 @@ function ResourceDetail({
 function CatalogExplorer({
   catalog,
   canvases,
-  prompts,
-  exportsData,
   labels,
   partners,
   initialLocale,
   initialCycleId,
   initialStationId,
   initialRoleId,
+  dataVersion,
 }: CatalogExplorerProps) {
   const [locale, setLocale] = useState(initialLocale);
   const data = catalog.translations[locale] ?? catalog.translations[catalog.defaultLocale] ?? catalog.translations.en;
@@ -987,8 +1012,6 @@ function CatalogExplorer({
   const stations = arrayOrEmpty(data.stations);
   const resources = arrayOrEmpty(data.resources);
   const lines = arrayOrEmpty(data.lines);
-  const promptData = prompts.translations[locale] ?? prompts.translations[prompts.defaultLocale] ?? prompts.translations.en ?? [];
-  const templateData = exportsData.translations[locale] ?? exportsData.translations[exportsData.defaultLocale] ?? exportsData.translations.en ?? [];
   const canvasData = canvases.translations[locale] ?? canvases.translations[canvases.defaultLocale] ?? canvases.translations.en ?? {};
   const localizedLabels = { ...fallbackLabels, ...(labels.translations[locale] ?? labels.translations[labels.defaultLocale] ?? labels.translations.en) };
   const requestedRole = roleData.find((item) => item.id === initialRoleId || item.stakeholderId === initialRoleId);
@@ -1057,36 +1080,15 @@ function CatalogExplorer({
   const [view, setView] = useState<ViewKey>("map");
   const [canvasId, setCanvasId] = useState(role.canvases[0]?.id ?? Object.keys(canvasData)[0]);
   const [selectedResourceId, setSelectedResourceId] = useState<string | null>(null);
+  const [promptPacks, setPromptPacks] = useState<PromptData | null>(null);
+  const [exportTemplates, setExportTemplates] = useState<ExportData | null>(null);
+  const [actionMenu, setActionMenu] = useState<"ai" | "exports" | null>(null);
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     setSelectedResourceId(null);
   }, [locale]);
 
-  const rolePrompts = promptData.filter((prompt) => prompt.routeId === role.id);
-  const roleTemplates = templateData.filter((template) => template.routeId === role.id || template.cycleId === cycleId);
-  const templateGroups = useMemo(() => {
-    const groups = new Map<
-      string,
-      {
-        key: string;
-        label: string;
-        title: string;
-        copy: string;
-        markdown?: ExportTemplate;
-        confluence?: ExportTemplate;
-      }
-    >();
-    for (const template of roleTemplates) {
-      const use = templateUse(template, localizedLabels);
-      const group = groups.get(use.key) ?? { ...use };
-      if (template.format === "confluence-wiki") group.confluence = template;
-      else group.markdown = template;
-      groups.set(use.key, group);
-    }
-    return ["cycle", "questions"]
-      .map((key) => groups.get(key))
-      .filter((group): group is NonNullable<typeof group> => Boolean(group));
-  }, [roleTemplates]);
   const selectedCycleColor = colors[cycleId] ?? "#6d2ba0";
   const stationTitle = selectedStation.title || stationDetail.title;
   const stationDescription = selectedStation.description || stationDetail.description;
@@ -1157,7 +1159,6 @@ function CatalogExplorer({
     : selectedCanvas.canvasCreatorUrl;
   const discussionItems = stationQuestions;
   const highlightedStationIds = role.stations.map((station) => station.id);
-  const primaryAiPrompts = rolePrompts.filter((prompt) => ["facilitate-station", "next-actions"].includes(prompt.mode)).slice(0, 2);
 
   function bestRoleFor(nextCycleId: string, nextStationId: string) {
     const roleSupports = (item: RouteProfile) =>
@@ -1220,6 +1221,52 @@ function CatalogExplorer({
 
   async function copyText(text: string) {
     await navigator.clipboard.writeText(text);
+  }
+
+  async function loadPromptPacks() {
+    if (promptPacks) return promptPacks;
+    const version = encodeURIComponent(dataVersion);
+    const loaded = await loadJson<PromptData>(`/data/prompt-packs.${locale}.json?v=${version}`);
+    setPromptPacks(loaded);
+    return loaded;
+  }
+
+  async function loadExportTemplates() {
+    if (exportTemplates) return exportTemplates;
+    const version = encodeURIComponent(dataVersion);
+    const loaded = await loadJson<ExportData>(`/data/export-templates.${locale}.json?v=${version}`);
+    setExportTemplates(loaded);
+    return loaded;
+  }
+
+  async function copyAiPrompt(mode: "facilitate-station" | "next-actions") {
+    const loaded = await loadPromptPacks();
+    const promptsForLocale = loaded.translations[locale] ?? loaded.translations[loaded.defaultLocale] ?? loaded.translations.en ?? [];
+    const prompt = promptsForLocale.find((item) => item.routeId === role.id && item.mode === mode)
+      ?? promptsForLocale.find((item) => item.routeId === role.id)
+      ?? promptsForLocale.find((item) => item.mode === mode);
+    if (prompt) await copyText(promptFor(prompt));
+  }
+
+  async function copyExportTemplate(kind: "cycle" | "questions", format: "markdown" | "confluence") {
+    const loaded = await loadExportTemplates();
+    const templatesForLocale = loaded.translations[locale] ?? loaded.translations[loaded.defaultLocale] ?? loaded.translations.en ?? [];
+    const groups = buildTemplateGroups(
+      templatesForLocale.filter((template) => template.routeId === role.id || template.cycleId === cycleId),
+      localizedLabels,
+    );
+    const group = groups.find((item) => item.key === kind);
+    const template = format === "confluence" ? group?.confluence : group?.markdown;
+    if (template) await copyText(template.body);
+  }
+
+  function toggleDecisionSection(section: string) {
+    setExpandedSections((current) => ({ ...current, [section]: !current[section] }));
+  }
+
+  function toggleAllDecisionSections() {
+    const allExpanded = ["canvases", "resources", "people"].every((section) => expandedSections[section]);
+    setExpandedSections({ canvases: !allExpanded, resources: !allExpanded, people: !allExpanded });
   }
 
   function openCanvas(nextCanvasId: string) {
@@ -1297,6 +1344,30 @@ ${prompt.prompt}`;
               </div>
             </div>
             <p>{stationDescription}</p>
+            <section className="journey-criteria">
+              <h3>{localizedLabels["station.before"]}</h3>
+              <ul className="criteria-list">
+                {beforeCriteria.slice(0, 4).map((criterion) => (
+                  <li key={criterion.id}>
+                    <img src="/icons/check-box-outline.svg" alt="" />
+                    <span>{criterion.title}</span>
+                  </li>
+                ))}
+                {!beforeCriteria.length ? <li>{selectedCycle.entryCriteria.join(", ") || localizedLabels["station.noEntryCriteria"]}</li> : null}
+              </ul>
+            </section>
+            <section className="journey-criteria">
+              <h3>{localizedLabels["station.ready"]}</h3>
+              <ul className="criteria-list">
+                {readyCriteria.slice(0, 4).map((criterion) => (
+                  <li key={criterion.id}>
+                    <img src="/icons/check-circle.svg" alt="" />
+                    <span>{criterion.title}</span>
+                  </li>
+                ))}
+                {!readyCriteria.length ? <li>{selectedCycle.exitCriteria.join(", ") || localizedLabels["station.noExitCriteria"]}</li> : null}
+              </ul>
+            </section>
             <section className="line-next-section">
               <h3>{localizedLabels["station.whereNext"]}</h3>
               <div className="line-next-grid">
@@ -1438,72 +1509,6 @@ ${prompt.prompt}`;
             </article>
           ) : null}
 
-          {view === "ai" ? (
-            <article className="workspace-panel" id="workflows">
-              <p className="section-kicker">{localizedLabels["ai.kicker"]}</p>
-              <h2>{localizedLabels["ai.titlePrefix"]} {stationTitle}</h2>
-              <p className="helper-text">{localizedLabels["ai.helper"]}</p>
-              <div className="workflow-grid workflow-grid--focused">
-                {primaryAiPrompts.map((prompt, index) => (
-                  <section key={prompt.id} className="prompt-card">
-                    <span>{index + 1}. {prompt.mode === "facilitate-station" ? localizedLabels["ai.facilitate"] : localizedLabels["ai.nextAction"]}</span>
-                    <h3>{prompt.mode === "facilitate-station" ? `${localizedLabels["ai.facilitateTitlePrefix"]} ${stationTitle}` : `${localizedLabels["ai.nextActionTitlePrefix"]} ${stationTitle}`}</h3>
-                    <p><strong>{localizedLabels["ai.purpose"]}:</strong> {prompt.mode}</p>
-                    <pre>{promptFor(prompt)}</pre>
-                    <button type="button" onClick={() => copyText(promptFor(prompt))}>{localizedLabels["ai.copyPrompt"]}</button>
-                  </section>
-                ))}
-              </div>
-              <div className="resource-actions resource-actions--inline">
-                <button type="button" onClick={() => setView("canvases")}>
-                  {localizedLabels["resources.useWithAi"]}
-                  <span>{localizedLabels["resources.useWithAiHelp"]}</span>
-                </button>
-              </div>
-            </article>
-          ) : null}
-
-          {view === "confluence" ? (
-            <article className="workspace-panel">
-              <p className="section-kicker">{localizedLabels["confluence.kicker"]}</p>
-              <h2>{localizedLabels["confluence.title"]}</h2>
-              <p className="helper-text">
-                {localizedLabels["confluence.helper"]}
-              </p>
-              <div className="template-grid">
-                {templateGroups.map((group) => (
-                    <section key={group.key} className="template-card template-card--grouped">
-                      <div className="template-card__meta">
-                        <span>{group.label}</span>
-                      </div>
-                      <h3>{group.title}</h3>
-                      <p>{group.copy}</p>
-                      <div className="template-formats">
-                        {group.markdown ? (
-                          <section>
-                            <div className="template-format-head">
-                              <strong>{localizedLabels["confluence.markdown"]}</strong>
-                              <button type="button" onClick={() => copyText(group.markdown?.body ?? "")}>{localizedLabels["confluence.copyMarkdown"]}</button>
-                            </div>
-                            <pre>{group.markdown.body}</pre>
-                          </section>
-                        ) : null}
-                        {group.confluence ? (
-                          <section>
-                            <div className="template-format-head">
-                              <strong>{localizedLabels["confluence.confluenceWiki"]}</strong>
-                              <button type="button" onClick={() => copyText(group.confluence?.body ?? "")}>{localizedLabels["confluence.copyConfluenceWiki"]}</button>
-                            </div>
-                            <pre>{group.confluence.body}</pre>
-                          </section>
-                        ) : null}
-                      </div>
-                    </section>
-                ))}
-              </div>
-            </article>
-          ) : null}
-
           {view === "data" ? (
             <article className="workspace-panel workspace-panel--technical" id="method-data">
               <p className="section-kicker">{localizedLabels["data.kicker"]}</p>
@@ -1526,25 +1531,7 @@ ${prompt.prompt}`;
         </section>
 
         <aside className={view === "map" ? "station-summary" : "context-panel"} style={{ "--route-color": selectedCycleColor } as CSSProperties}>
-          {view === "confluence" ? (
-            <>
-              <div>
-                <p className="section-kicker">{localizedLabels["confluence.cycleExport"]}</p>
-                <h2>{selectedCycle.title}</h2>
-              </div>
-              <p>{selectedCycle.description}</p>
-              <section>
-                <h3>{localizedLabels["confluence.audience"]}</h3>
-                <div className="chips chips--compact">
-                  {uniqueText([role.title, ...selectedCycle.audiences]).map((participant) => <span key={participant}>{participant}</span>)}
-                </div>
-              </section>
-              <section>
-                <h3>{localizedLabels["confluence.formatGuidance"]}</h3>
-                <p>{localizedLabels["confluence.formatGuidanceText"]}</p>
-              </section>
-            </>
-          ) : view === "data" ? (
+          {view === "data" ? (
             <>
               <div>
                 <p className="section-kicker">{localizedLabels["data.kicker"]}</p>
@@ -1564,8 +1551,26 @@ ${prompt.prompt}`;
           ) : (
             <>
           <div className="decision-actions">
-            <button type="button" onClick={() => setView("ai")}>{localizedLabels["views.ai"]}</button>
-            <button type="button" onClick={() => setView("confluence")}>{localizedLabels["views.confluence"]}</button>
+            <div className="action-menu">
+              <button type="button" onClick={() => setActionMenu(actionMenu === "ai" ? null : "ai")}>{localizedLabels["views.ai"]}</button>
+              {actionMenu === "ai" ? (
+                <div className="action-menu__items">
+                  <button type="button" onClick={() => copyAiPrompt("facilitate-station")}>{localizedLabels["ai.copyPrompt"]}: {localizedLabels["ai.facilitate"]}</button>
+                  <button type="button" onClick={() => copyAiPrompt("next-actions")}>{localizedLabels["ai.copyPrompt"]}: {localizedLabels["ai.nextAction"]}</button>
+                </div>
+              ) : null}
+            </div>
+            <div className="action-menu">
+              <button type="button" onClick={() => setActionMenu(actionMenu === "exports" ? null : "exports")}>{localizedLabels["views.confluence"]}</button>
+              {actionMenu === "exports" ? (
+                <div className="action-menu__items">
+                  <button type="button" onClick={() => copyExportTemplate("cycle", "markdown")}>{localizedLabels["confluence.copyMarkdown"]}: {localizedLabels["confluence.cycleTemplate"]}</button>
+                  <button type="button" onClick={() => copyExportTemplate("cycle", "confluence")}>{localizedLabels["confluence.copyConfluenceWiki"]}: {localizedLabels["confluence.cycleTemplate"]}</button>
+                  <button type="button" onClick={() => copyExportTemplate("questions", "markdown")}>{localizedLabels["confluence.copyMarkdown"]}: {localizedLabels["confluence.questionTemplate"]}</button>
+                  <button type="button" onClick={() => copyExportTemplate("questions", "confluence")}>{localizedLabels["confluence.copyConfluenceWiki"]}: {localizedLabels["confluence.questionTemplate"]}</button>
+                </div>
+              ) : null}
+            </div>
             <button type="button" onClick={() => setView("map")}>{localizedLabels["views.map"]}</button>
           </div>
           <div className="station-summary__head">
@@ -1582,32 +1587,23 @@ ${prompt.prompt}`;
             <h3>{localizedLabels["station.keyQuestions"]}</h3>
             <ul>{discussionItems.slice(0, 4).map((item) => <li key={item}>{item}</li>)}</ul>
           </section>
+          <button type="button" className="section-toggle-all" onClick={toggleAllDecisionSections}>
+            {["canvases", "resources", "people"].every((section) => expandedSections[section]) ? localizedLabels["actions.collapseAll"] : localizedLabels["actions.expandAll"]}
+          </button>
           <section>
-            <h3>{localizedLabels["station.before"]}</h3>
-            <ul className="criteria-list">
-              {beforeCriteria.slice(0, 4).map((criterion) => (
-                <li key={criterion.id}>
-                  <img src="/icons/check-box-outline.svg" alt="" />
-                  <span>{criterion.title}</span>
-                </li>
+            <div className="compact-section-head">
+              <h3>{localizedLabels["station.relatedCanvases"]}</h3>
+              <button type="button" onClick={() => toggleDecisionSection("canvases")}>
+                {expandedSections.canvases ? localizedLabels["actions.collapseAll"] : localizedLabels["actions.expandAll"]}
+              </button>
+            </div>
+            <div className="pill-list">
+              {canvasResources.map((resource) => (
+                <button key={resource.id} type="button" onClick={() => openResource(resource)}>{resource.title}</button>
               ))}
-              {!beforeCriteria.length ? <li>{selectedCycle.entryCriteria.join(", ") || localizedLabels["station.noEntryCriteria"]}</li> : null}
-            </ul>
-          </section>
-          <section>
-            <h3>{localizedLabels["station.ready"]}</h3>
-            <ul className="criteria-list">
-              {readyCriteria.slice(0, 4).map((criterion) => (
-                <li key={criterion.id}>
-                  <img src="/icons/check-circle.svg" alt="" />
-                  <span>{criterion.title}</span>
-                </li>
-              ))}
-              {!readyCriteria.length ? <li>{selectedCycle.exitCriteria.join(", ") || localizedLabels["station.noExitCriteria"]}</li> : null}
-            </ul>
-          </section>
-          <section>
-            <h3>{localizedLabels["station.relatedCanvases"]}</h3>
+              {!canvasResources.length ? <span>{localizedLabels["resources.emptyCanvases"]}</span> : null}
+            </div>
+            {expandedSections.canvases ? (
             <div className="side-resource-grid">
               {canvasResources.map((resource) => (
                 <button key={resource.id} type="button" className={activeResource?.id === resource.id ? "side-resource-card is-active" : "side-resource-card"} onClick={() => openResource(resource)}>
@@ -1618,9 +1614,22 @@ ${prompt.prompt}`;
               ))}
               {!canvasResources.length ? <p className="helper-text">{localizedLabels["resources.emptyCanvases"]}</p> : null}
             </div>
+            ) : null}
           </section>
               <section>
-                <h3>{localizedLabels["station.relatedResources"]}</h3>
+                <div className="compact-section-head">
+                  <h3>{localizedLabels["station.relatedResources"]}</h3>
+                  <button type="button" onClick={() => toggleDecisionSection("resources")}>
+                    {expandedSections.resources ? localizedLabels["actions.collapseAll"] : localizedLabels["actions.expandAll"]}
+                  </button>
+                </div>
+                <div className="pill-list">
+                  {otherResources.map((resource) => (
+                    <button key={resource.id} type="button" onClick={() => openResource(resource)}>{resource.title}</button>
+                  ))}
+                  {!otherResources.length ? <span>{localizedLabels["resources.emptyOther"]}</span> : null}
+                </div>
+                {expandedSections.resources ? (
                 <div className="side-resource-grid">
                   {otherResources.map((resource) => (
                     <button key={resource.id} type="button" className={activeResource?.id === resource.id ? "side-resource-card is-active" : "side-resource-card"} onClick={() => openResource(resource)}>
@@ -1631,9 +1640,21 @@ ${prompt.prompt}`;
                   ))}
                   {!otherResources.length ? <p className="helper-text">{localizedLabels["resources.emptyOther"]}</p> : null}
                 </div>
+                ) : null}
               </section>
               <section>
-                <h3>{localizedLabels["station.people"]}</h3>
+                <div className="compact-section-head">
+                  <h3>{localizedLabels["station.people"]}</h3>
+                  <button type="button" onClick={() => toggleDecisionSection("people")}>
+                    {expandedSections.people ? localizedLabels["actions.collapseAll"] : localizedLabels["actions.expandAll"]}
+                  </button>
+                </div>
+                <div className="pill-list">
+                  {roleGuideRows.slice(0, 8).map((item) => (
+                    <button key={item.id} type="button" onClick={() => setView("guide")}>{item.title}</button>
+                  ))}
+                </div>
+                {expandedSections.people ? (
                 <div className="stakeholder-cards">
                   {roleGuideRows.slice(0, 6).map((item) => (
                     <button key={item.id} type="button" className={item.id === role.stakeholderId ? "stakeholder-card is-active" : "stakeholder-card"} onClick={() => setView("guide")}>
@@ -1643,6 +1664,7 @@ ${prompt.prompt}`;
                     </button>
                   ))}
                 </div>
+                ) : null}
                 <div className="chips chips--compact chips--buttons">
                   {participantChips.map((participant) => (
                     <button key={participant} type="button" onClick={() => setView("guide")}>{participant}</button>
@@ -1721,13 +1743,11 @@ export default function CatalogExplorerLoader({
     Promise.all([
       loadJson<Catalog>(`/data/method-catalog.${initialLocale}.json?v=${version}`),
       loadJson<CanvasManifest>(`/data/canvas-manifest.${initialLocale}.json?v=${version}`),
-      loadJson<PromptData>(`/data/prompt-packs.${initialLocale}.json?v=${version}`),
-      loadJson<ExportData>(`/data/export-templates.${initialLocale}.json?v=${version}`),
       loadJson<LabelData>(`/data/site-labels.${initialLocale}.json?v=${version}`),
       loadJson<PartnerData>(`/data/partners.json?v=${version}`),
     ])
-      .then(([catalog, canvases, prompts, exportsData, labels, partners]) => {
-        if (!cancelled) setData({ catalog, canvases, prompts, exportsData, labels, partners });
+      .then(([catalog, canvases, labels, partners]) => {
+        if (!cancelled) setData({ catalog, canvases, labels, partners });
       })
       .catch((caught) => {
         if (!cancelled) setError(caught instanceof Error ? caught.message : String(caught));
@@ -1755,7 +1775,7 @@ export default function CatalogExplorerLoader({
         <section className="workspace-panel">
           <p className="section-kicker">APIOps Cycles</p>
           <h1>Loading APIOps Cycles workspace</h1>
-          <p>Preparing the method catalog, canvases, prompts, and export templates.</p>
+          <p>Preparing the method catalog and workspace data.</p>
         </section>
       </main>
     );
@@ -1768,6 +1788,7 @@ export default function CatalogExplorerLoader({
       initialCycleId={initialCycleId}
       initialStationId={initialStationId}
       initialRoleId={initialRoleId}
+      dataVersion={dataVersion}
     />
   );
 }
