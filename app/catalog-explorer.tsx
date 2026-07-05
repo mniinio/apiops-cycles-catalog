@@ -390,6 +390,10 @@ const fallbackLabels: Record<string, string> = {
   "actions.copy": "Copy",
   "actions.expandAll": "Expand all",
   "actions.collapseAll": "Collapse all",
+  "actions.use": "Use",
+  "actions.copied": "Copied successfully",
+  "actions.expand": "+",
+  "actions.collapse": "-",
   "confluence.cycleExport": "Cycle export",
   "confluence.audience": "Intended audience",
   "confluence.formatGuidance": "Format guidance",
@@ -1083,7 +1087,12 @@ function CatalogExplorer({
   const [promptPacks, setPromptPacks] = useState<PromptData | null>(null);
   const [exportTemplates, setExportTemplates] = useState<ExportData | null>(null);
   const [actionMenu, setActionMenu] = useState<"ai" | "exports" | null>(null);
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    questions: true,
+    before: true,
+    ready: true,
+  });
+  const [copyStatus, setCopyStatus] = useState("");
 
   useEffect(() => {
     setSelectedResourceId(null);
@@ -1221,6 +1230,8 @@ function CatalogExplorer({
 
   async function copyText(text: string) {
     await navigator.clipboard.writeText(text);
+    setCopyStatus(localizedLabels["actions.copied"]);
+    window.setTimeout(() => setCopyStatus(""), 2200);
   }
 
   async function loadPromptPacks() {
@@ -1245,7 +1256,10 @@ function CatalogExplorer({
     const prompt = promptsForLocale.find((item) => item.routeId === role.id && item.mode === mode)
       ?? promptsForLocale.find((item) => item.routeId === role.id)
       ?? promptsForLocale.find((item) => item.mode === mode);
-    if (prompt) await copyText(promptFor(prompt));
+    if (prompt) {
+      await copyText(promptFor(prompt));
+      setActionMenu(null);
+    }
   }
 
   async function copyExportTemplate(kind: "cycle" | "questions", format: "markdown" | "confluence") {
@@ -1257,16 +1271,14 @@ function CatalogExplorer({
     );
     const group = groups.find((item) => item.key === kind);
     const template = format === "confluence" ? group?.confluence : group?.markdown;
-    if (template) await copyText(template.body);
+    if (template) {
+      await copyText(template.body);
+      setActionMenu(null);
+    }
   }
 
   function toggleDecisionSection(section: string) {
     setExpandedSections((current) => ({ ...current, [section]: !current[section] }));
-  }
-
-  function toggleAllDecisionSections() {
-    const allExpanded = ["canvases", "resources", "people"].every((section) => expandedSections[section]);
-    setExpandedSections({ canvases: !allExpanded, resources: !allExpanded, people: !allExpanded });
   }
 
   function openCanvas(nextCanvasId: string) {
@@ -1345,8 +1357,13 @@ ${prompt.prompt}`;
             </div>
             <p>{stationDescription}</p>
             <section className="journey-criteria">
-              <h3>{localizedLabels["station.before"]}</h3>
-              <ul className="criteria-list">
+              <div className="compact-section-head">
+                <h3>{localizedLabels["station.before"]}</h3>
+                <button type="button" onClick={() => toggleDecisionSection("before")}>
+                  {expandedSections.before ? localizedLabels["actions.collapse"] : localizedLabels["actions.expand"]}
+                </button>
+              </div>
+              {expandedSections.before ? <ul className="criteria-list">
                 {beforeCriteria.slice(0, 4).map((criterion) => (
                   <li key={criterion.id}>
                     <img src="/icons/check-box-outline.svg" alt="" />
@@ -1354,11 +1371,16 @@ ${prompt.prompt}`;
                   </li>
                 ))}
                 {!beforeCriteria.length ? <li>{selectedCycle.entryCriteria.join(", ") || localizedLabels["station.noEntryCriteria"]}</li> : null}
-              </ul>
+              </ul> : null}
             </section>
             <section className="journey-criteria">
-              <h3>{localizedLabels["station.ready"]}</h3>
-              <ul className="criteria-list">
+              <div className="compact-section-head">
+                <h3>{localizedLabels["station.ready"]}</h3>
+                <button type="button" onClick={() => toggleDecisionSection("ready")}>
+                  {expandedSections.ready ? localizedLabels["actions.collapse"] : localizedLabels["actions.expand"]}
+                </button>
+              </div>
+              {expandedSections.ready ? <ul className="criteria-list">
                 {readyCriteria.slice(0, 4).map((criterion) => (
                   <li key={criterion.id}>
                     <img src="/icons/check-circle.svg" alt="" />
@@ -1366,7 +1388,7 @@ ${prompt.prompt}`;
                   </li>
                 ))}
                 {!readyCriteria.length ? <li>{selectedCycle.exitCriteria.join(", ") || localizedLabels["station.noExitCriteria"]}</li> : null}
-              </ul>
+              </ul> : null}
             </section>
             <section className="line-next-section">
               <h3>{localizedLabels["station.whereNext"]}</h3>
@@ -1474,11 +1496,9 @@ ${prompt.prompt}`;
               <div className="panel__head">
                 <div>
                   <p className="section-kicker">{localizedLabels["resources.kicker"]}</p>
-                  <h2>{activeResource?.title ?? `${localizedLabels["resources.titlePrefix"]} ${stationTitle}`}</h2>
-                  <p className="helper-text">{localizedLabels["resources.helper"]}</p>
+                  {!activeResource?.canvasId ? <h2>{activeResource?.title ?? `${localizedLabels["resources.titlePrefix"]} ${stationTitle}`}</h2> : null}
                 </div>
                 <div className="workspace-actions">
-                  <button type="button" onClick={() => setView("map")}>{localizedLabels["views.map"]}</button>
                   <select value={activeResource?.id ?? ""} onChange={(event) => {
                     const nextResource = selectedStationResources.find((resource) => resource.id === event.target.value);
                     if (nextResource) openResource(nextResource);
@@ -1492,13 +1512,9 @@ ${prompt.prompt}`;
               </div>
               {activeResource?.canvasId ? (
                 <>
-              {externalCanvasUrl ? (
-                    <a className="external-link" href={externalCanvasUrl} target="_blank" rel="noreferrer">
-                      {localizedLabels["canvas.openCreator"]}
-                    </a>
-                  ) : (
+                  {!externalCanvasUrl ? (
                     <p className="helper-text">{localizedLabels["resources.noExternalRenderer"]}</p>
-                  )}
+                  ) : null}
                   <CanvasWorkspace canvas={selectedCanvas} role={role} locale={locale} labels={localizedLabels} canvasRendererBaseUrl={process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL} />
                 </>
               ) : activeResource ? (
@@ -1530,7 +1546,7 @@ ${prompt.prompt}`;
           ) : null}
         </section>
 
-        <aside className={view === "map" ? "station-summary" : "context-panel"} style={{ "--route-color": selectedCycleColor } as CSSProperties}>
+        <aside className={view === "data" ? "context-panel" : "station-summary"} style={{ "--route-color": selectedCycleColor } as CSSProperties}>
           {view === "data" ? (
             <>
               <div>
@@ -1551,8 +1567,10 @@ ${prompt.prompt}`;
           ) : (
             <>
           <div className="decision-actions">
+            <span>{localizedLabels["actions.use"]}</span>
+            <button type="button" onClick={() => setView("map")} disabled={view === "map"}>Map</button>
             <div className="action-menu">
-              <button type="button" onClick={() => setActionMenu(actionMenu === "ai" ? null : "ai")}>{localizedLabels["views.ai"]}</button>
+              <button type="button" onClick={() => setActionMenu(actionMenu === "ai" ? null : "ai")}>AI</button>
               {actionMenu === "ai" ? (
                 <div className="action-menu__items">
                   <button type="button" onClick={() => copyAiPrompt("facilitate-station")}>{localizedLabels["ai.copyPrompt"]}: {localizedLabels["ai.facilitate"]}</button>
@@ -1561,7 +1579,7 @@ ${prompt.prompt}`;
               ) : null}
             </div>
             <div className="action-menu">
-              <button type="button" onClick={() => setActionMenu(actionMenu === "exports" ? null : "exports")}>{localizedLabels["views.confluence"]}</button>
+              <button type="button" onClick={() => setActionMenu(actionMenu === "exports" ? null : "exports")}>Wiki</button>
               {actionMenu === "exports" ? (
                 <div className="action-menu__items">
                   <button type="button" onClick={() => copyExportTemplate("cycle", "markdown")}>{localizedLabels["confluence.copyMarkdown"]}: {localizedLabels["confluence.cycleTemplate"]}</button>
@@ -1571,7 +1589,6 @@ ${prompt.prompt}`;
                 </div>
               ) : null}
             </div>
-            <button type="button" onClick={() => setView("map")}>{localizedLabels["views.map"]}</button>
           </div>
           <div className="station-summary__head">
             <span className={stationBadgeIsNumber || publicIconPath(stationDetail.icon) ? "station-number" : "station-number station-number--text"}>
@@ -1584,18 +1601,17 @@ ${prompt.prompt}`;
           </div>
           <p>{stationDescription}</p>
           <section>
-            <h3>{localizedLabels["station.keyQuestions"]}</h3>
-            <ul>{discussionItems.slice(0, 4).map((item) => <li key={item}>{item}</li>)}</ul>
+            <div className="compact-section-head">
+              <h3>{localizedLabels["station.keyQuestions"]}</h3>
+              <button type="button" onClick={() => toggleDecisionSection("questions")}>
+                {expandedSections.questions ? localizedLabels["actions.collapse"] : localizedLabels["actions.expand"]}
+              </button>
+            </div>
+            {expandedSections.questions ? <ul>{discussionItems.slice(0, 4).map((item) => <li key={item}>{item}</li>)}</ul> : null}
           </section>
-          <button type="button" className="section-toggle-all" onClick={toggleAllDecisionSections}>
-            {["canvases", "resources", "people"].every((section) => expandedSections[section]) ? localizedLabels["actions.collapseAll"] : localizedLabels["actions.expandAll"]}
-          </button>
           <section>
             <div className="compact-section-head">
               <h3>{localizedLabels["station.relatedCanvases"]}</h3>
-              <button type="button" onClick={() => toggleDecisionSection("canvases")}>
-                {expandedSections.canvases ? localizedLabels["actions.collapseAll"] : localizedLabels["actions.expandAll"]}
-              </button>
             </div>
             <div className="pill-list">
               {canvasResources.map((resource) => (
@@ -1603,25 +1619,10 @@ ${prompt.prompt}`;
               ))}
               {!canvasResources.length ? <span>{localizedLabels["resources.emptyCanvases"]}</span> : null}
             </div>
-            {expandedSections.canvases ? (
-            <div className="side-resource-grid">
-              {canvasResources.map((resource) => (
-                <button key={resource.id} type="button" className={activeResource?.id === resource.id ? "side-resource-card is-active" : "side-resource-card"} onClick={() => openResource(resource)}>
-                  <span>{categoryLabel(methodLabels, localizedLabels, resource.category)}</span>
-                  <strong>{resource.title}</strong>
-                  <small>{compact(resource.description, 96)}</small>
-                </button>
-              ))}
-              {!canvasResources.length ? <p className="helper-text">{localizedLabels["resources.emptyCanvases"]}</p> : null}
-            </div>
-            ) : null}
           </section>
               <section>
                 <div className="compact-section-head">
                   <h3>{localizedLabels["station.relatedResources"]}</h3>
-                  <button type="button" onClick={() => toggleDecisionSection("resources")}>
-                    {expandedSections.resources ? localizedLabels["actions.collapseAll"] : localizedLabels["actions.expandAll"]}
-                  </button>
                 </div>
                 <div className="pill-list">
                   {otherResources.map((resource) => (
@@ -1629,42 +1630,16 @@ ${prompt.prompt}`;
                   ))}
                   {!otherResources.length ? <span>{localizedLabels["resources.emptyOther"]}</span> : null}
                 </div>
-                {expandedSections.resources ? (
-                <div className="side-resource-grid">
-                  {otherResources.map((resource) => (
-                    <button key={resource.id} type="button" className={activeResource?.id === resource.id ? "side-resource-card is-active" : "side-resource-card"} onClick={() => openResource(resource)}>
-                      <span>{categoryLabel(methodLabels, localizedLabels, resource.category)}</span>
-                      <strong>{resource.title}</strong>
-                      <small>{compact(resource.description, 96)}</small>
-                    </button>
-                  ))}
-                  {!otherResources.length ? <p className="helper-text">{localizedLabels["resources.emptyOther"]}</p> : null}
-                </div>
-                ) : null}
               </section>
               <section>
                 <div className="compact-section-head">
                   <h3>{localizedLabels["station.people"]}</h3>
-                  <button type="button" onClick={() => toggleDecisionSection("people")}>
-                    {expandedSections.people ? localizedLabels["actions.collapseAll"] : localizedLabels["actions.expandAll"]}
-                  </button>
                 </div>
                 <div className="pill-list">
                   {roleGuideRows.slice(0, 8).map((item) => (
                     <button key={item.id} type="button" onClick={() => setView("guide")}>{item.title}</button>
                   ))}
                 </div>
-                {expandedSections.people ? (
-                <div className="stakeholder-cards">
-                  {roleGuideRows.slice(0, 6).map((item) => (
-                    <button key={item.id} type="button" className={item.id === role.stakeholderId ? "stakeholder-card is-active" : "stakeholder-card"} onClick={() => setView("guide")}>
-                      <strong>{item.title}</strong>
-                      <span>{item.roleLabel}</span>
-                      <small>{item.responsibilityLabel || item.summary}</small>
-                    </button>
-                  ))}
-                </div>
-                ) : null}
                 <div className="chips chips--compact chips--buttons">
                   {participantChips.map((participant) => (
                     <button key={participant} type="button" onClick={() => setView("guide")}>{participant}</button>
@@ -1717,6 +1692,7 @@ ${prompt.prompt}`;
         <a href={catalog.source.repository} target="_blank" rel="noreferrer">{localizedLabels["footer.github"]}</a>
         <a href="https://www.apiops.info" target="_blank" rel="noreferrer">{localizedLabels["footer.community"]}</a>
       </footer>
+      {copyStatus ? <div className="copy-toast" role="status">{copyStatus}</div> : null}
     </main>
   );
 }

@@ -275,9 +275,16 @@ a {
 }
 
 .decision-actions {
+  align-items: center;
   display: grid;
   gap: 8px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+}
+
+.decision-actions > span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
 }
 
 .action-menu {
@@ -309,6 +316,11 @@ a {
   justify-content: start;
   min-height: 34px;
   text-align: left;
+}
+
+.decision-actions button:disabled {
+  cursor: default;
+  opacity: 0.48;
 }
 
 .station-summary > .station-summary__head,
@@ -487,6 +499,21 @@ a {
 .pill-list button:focus-visible {
   border-color: var(--route-color, var(--accent));
   color: var(--route-color, var(--accent));
+}
+
+.copy-toast {
+  background: #071640;
+  border-radius: 999px;
+  bottom: 22px;
+  box-shadow: 0 16px 36px rgba(7, 22, 64, 0.22);
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 850;
+  left: 50%;
+  padding: 10px 16px;
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 50;
 }
 
 .context-panel section {
