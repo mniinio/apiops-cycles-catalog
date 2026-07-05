@@ -37,43 +37,6 @@ const publicPartnerRoot = path.join(root, "public", "partners");
 const locales = ["en", "fi", "fr", "de", "pt"];
 const methodEngine = await import(pathToFileURL(path.join(sourceRoot, "src", "lib", "method-engine.js")));
 
-const stakeholderMap = {
-  "cycle.audience.top-management": "business-owner",
-  "cycle.audience.enterprise-architects": "platform-architect",
-  "cycle.audience.capability-owners": "capability-owner",
-  "cycle.audience.api-product-owners": "api-product-owner",
-  "cycle.audience.api-designers": "api-designer",
-  "cycle.audience.api-platform-teams": "api-architect",
-  "cycle.audience.solution-architects": "integration-architect",
-  "cycle.audience.integration-architects": "integration-architect",
-  "cycle.audience.platform-owners": "platform-owner",
-  "cycle.audience.automation-owners": "automation-owner",
-  "cycle.audience.process-owners": "process-owner",
-  "cycle.audience.automation-teams": "automation-engineer",
-  "cycle.owner.capability-owner": "capability-owner",
-  "cycle.owner.consumer-representative": "api-consumer-specialist",
-  "cycle.owner.enterprise-architect": "platform-architect",
-  "cycle.owner.platform-owner": "platform-owner",
-  "cycle.owner.api-platform-owner": "api-architect",
-  "cycle.owner.integration-architect": "integration-architect",
-  "cycle.owner.solution-architect": "integration-architect",
-  "business-owner": "business-owner",
-  "api-program-owner": "api-program-owner",
-  "api-product-owner": "api-product-owner",
-  "domain-expert": "domain-specialist",
-  "customer-or-partner-representative": "customer-specialist",
-  "api-consumer-representative": "api-consumer-specialist",
-  "platform-architect": "platform-architect",
-  "api-designer": "api-designer",
-  "delivery-engineer": "api-engineer",
-  "security-specialist": "security-specialist",
-  "compliance-legal-specialist": "compliance-specialist",
-  "governance-owner": "governance-specialist",
-  "documentation-devrel-owner": "api-devrel-specialist",
-  "support-operations-owner": "operations-specialist",
-  "partner-vendor-manager": "partner-specialist",
-};
-
 const involvementRank = { lead: 0, core: 1, consulted: 2 };
 
 function readJson(file) {
@@ -238,36 +201,22 @@ const cycleById = Object.fromEntries(cyclesRaw.map((item) => [item.id, item]));
 const criterionById = Object.fromEntries(criteriaRaw.map((item) => [item.id, item]));
 const sourceStakeholderById = Object.fromEntries(stakeholdersRaw.map((item) => [item.id, item]));
 
-function titleFromId(id) {
-  return id
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
-}
-
 function normalizeStakeholderId(sourceKey) {
-  if (!sourceKey) return "";
-  if (stakeholderMap[sourceKey]) return stakeholderMap[sourceKey];
-  if (sourceKey.startsWith("cycle.owner.")) {
-    const ownerId = sourceKey.replace("cycle.owner.", "");
-    return stakeholderMap[ownerId] ?? ownerId;
-  }
-  return stakeholderMap[sourceKey] ?? sourceKey;
+  return sourceKey ?? "";
 }
 
 function translateStakeholder(locale, sourceKey, involvement = "") {
   const id = normalizeStakeholderId(sourceKey);
-  const sourceId = sourceKey?.startsWith("cycle.") ? sourceKey.replace(/^cycle\.(audience|owner)\./, "") : sourceKey;
-  const source = sourceStakeholderById[sourceId] ?? sourceStakeholderById[sourceKey] ?? sourceStakeholderById[id];
-  const titleKey = source?.title ?? (sourceKey?.startsWith("cycle.audience.") ? sourceKey : `stakeholder.${id}.title`);
+  const source = sourceStakeholderById[id];
+  const titleKey = source?.title ?? `stakeholder.${id}.title`;
   const descriptionKey = source?.description ?? `stakeholder.${id}.description`;
   const title = t(locale, titleKey);
   const description = t(locale, descriptionKey);
   return {
     id,
     sourceKey,
-    sourceStakeholderId: source?.id ?? sourceId,
-    title: title === titleKey || title === `stakeholder.${id}.title` ? titleFromId(id) : title,
+    sourceStakeholderId: source?.id ?? id,
+    title: title === titleKey ? id : title,
     description: description === descriptionKey ? "" : description,
     involvement,
   };
@@ -457,16 +406,10 @@ function translateCanvas(locale, canvasId, canvas) {
 }
 
 function allStakeholders(locale) {
-  const sourceKeys = [
-    ...stakeholdersRaw.map((item) => item.id),
-    ...cyclesRaw.flatMap((cycle) => cycle.audiences ?? []),
-    ...cyclesRaw.flatMap((cycle) => (cycle.questionnaireResources ?? []).map((item) => item.suggestedAnswerOwner)),
-    ...Object.values(stationStakeholdersRaw).flatMap((items) => items.map((item) => item.stakeholder)),
-  ];
-  return uniqueBy(
-    sourceKeys.map((sourceKey) => translateStakeholder(locale, sourceKey)).filter((item) => item.id),
-    (item) => item.id,
-  ).sort((a, b) => a.title.localeCompare(b.title));
+  return stakeholdersRaw
+    .map((stakeholder) => translateStakeholder(locale, stakeholder.id))
+    .filter((item) => item.id)
+    .sort((a, b) => a.title.localeCompare(b.title));
 }
 
 function routeProfiles(locale) {
@@ -749,7 +692,7 @@ function validate() {
   const stationIds = new Set(stationsRawList.map((station) => station.id));
   const resourceIds = new Set(resourcesRaw.map((resource) => resource.id));
   const criterionIds = new Set(criteriaRaw.map((criterion) => criterion.id));
-  const stakeholderIds = new Set(allStakeholders("en").map((stakeholder) => stakeholder.id));
+  const stakeholderIds = new Set(stakeholdersRaw.map((stakeholder) => stakeholder.id));
   for (const cycle of cyclesRaw) {
     if (!cycleIds.has(cycle.id)) throw new Error(`Missing cycle ${cycle.id}`);
     for (const stationId of cycle.stations ?? []) if (!stationIds.has(stationId)) throw new Error(`Missing station ${stationId}`);

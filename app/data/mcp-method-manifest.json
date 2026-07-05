@@ -106,17 +106,17 @@
       "operations-specialist"
     ],
     "routeProfiles": [
-      "api-architect",
       "api-designer",
+      "api-architect",
       "api-product-owner",
-      "automation-engineer",
       "automation-owner",
+      "automation-engineer",
       "business-owner",
       "capability-owner",
-      "integration-architect",
       "platform-architect",
       "platform-owner",
-      "process-owner"
+      "process-owner",
+      "integration-architect"
     ]
   }
 }
