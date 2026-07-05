@@ -747,6 +747,45 @@ const catalog = {
   extension: integrationExtension,
 };
 
+const routeIndex = {
+  source,
+  locales,
+  defaultLocale: "en",
+  generatedAt: catalog.generatedAt,
+  translations: Object.fromEntries(
+    locales.map((locale) => {
+      const data = catalog.translations[locale];
+      return [
+        locale,
+        {
+          routeProfiles: data.routeProfiles.map((route) => ({
+            id: route.id,
+            stakeholderId: route.stakeholderId,
+            title: route.title,
+            summary: route.summary,
+          })),
+          cycles: data.cycles.map((cycle) => ({
+            id: cycle.id,
+            slug: cycle.slug,
+            title: cycle.title,
+            description: cycle.description,
+            stations: cycle.stations.map((station) => ({
+              id: station.id,
+              title: station.title,
+              description: station.description,
+            })),
+          })),
+          stations: data.stations.map((station) => ({
+            id: station.id,
+            title: station.title,
+            description: station.description,
+          })),
+        },
+      ];
+    }),
+  ),
+};
+
 const canvasManifest = {
   source,
   locales,
@@ -796,6 +835,7 @@ const mcpManifest = {
   description: "Static APIOps Cycles manifest for a future MCP server.",
   dataFiles: [
     "/data/method-catalog.json",
+    "/data/route-index.json",
     "/data/canvas-manifest.json",
     "/data/prompt-packs.json",
     "/data/export-templates.json",
@@ -857,6 +897,7 @@ copyPublicAsset("apiops-cycles-logo-dark.svg");
 copyPublicAsset("apiops-cycles-logo-white.svg");
 for (const partner of partners.items) copyPartnerAsset(partner.logo);
 writeJson("method-catalog.json", catalog, { publish: true });
+writeJson("route-index.json", routeIndex, { publish: true });
 writeJson("canvas-manifest.json", canvasManifest, { publish: true });
 writeJson("prompt-packs.json", prompts, { publish: true });
 writeJson("export-templates.json", exportsData, { publish: true });

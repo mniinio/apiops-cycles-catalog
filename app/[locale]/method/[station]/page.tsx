@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import CatalogPage, { normalizeLocale } from "../../../catalog-page";
-import catalog from "../../../data/method-catalog.json";
+import routeIndex from "../../../data/route-index.json";
 
 const apiProductizationCycleId = "api-productization-cycle";
 
 export function generateStaticParams() {
-  return catalog.locales.flatMap((locale) => {
-    const cycle = catalog.translations[locale].cycles.find((item) => item.id === apiProductizationCycleId);
+  return routeIndex.locales.flatMap((locale) => {
+    const cycle = routeIndex.translations[locale].cycles.find((item) => item.id === apiProductizationCycleId);
     return (cycle?.stations ?? []).map((station) => ({ locale, station: station.id }));
   });
 }
@@ -17,7 +17,7 @@ export function generateMetadata({
   params: { locale: string; station: string };
 }): Metadata {
   const locale = normalizeLocale(params.locale);
-  const cycle = catalog.translations[locale].cycles.find((item) => item.id === apiProductizationCycleId);
+  const cycle = routeIndex.translations[locale].cycles.find((item) => item.id === apiProductizationCycleId);
   const station = cycle?.stations.find((item) => item.id === params.station);
   return {
     title: station ? `${station.title} | ${cycle?.title}` : "APIOps Cycles Method",

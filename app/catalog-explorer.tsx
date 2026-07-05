@@ -227,6 +227,28 @@ type ExportData = {
 
 type StickyNotes = Record<string, StickyNote[]>;
 
+type CatalogExplorerProps = {
+  catalog: Catalog;
+  canvases: CanvasManifest;
+  prompts: PromptData;
+  exportsData: ExportData;
+  labels: LabelData;
+  partners: PartnerData;
+  initialLocale: string;
+  initialCycleId?: string;
+  initialStationId?: string;
+  initialRoleId?: string;
+};
+
+type CatalogExplorerLoaderProps = {
+  initialLocale: string;
+  initialCycleId?: string;
+  initialStationId?: string;
+  initialRoleId?: string;
+};
+
+type LoadedWorkspaceData = Omit<CatalogExplorerProps, "initialLocale" | "initialCycleId" | "initialStationId" | "initialRoleId">;
+
 const localeNames: Record<string, string> = {
   en: "English",
   fi: "Suomi",
@@ -933,7 +955,7 @@ function ResourceDetail({
   );
 }
 
-export default function CatalogExplorer({
+function CatalogExplorer({
   catalog,
   canvases,
   prompts,
@@ -944,18 +966,7 @@ export default function CatalogExplorer({
   initialCycleId,
   initialStationId,
   initialRoleId,
-}: {
-  catalog: Catalog;
-  canvases: CanvasManifest;
-  prompts: PromptData;
-  exportsData: ExportData;
-  labels: LabelData;
-  partners: PartnerData;
-  initialLocale: string;
-  initialCycleId?: string;
-  initialStationId?: string;
-  initialRoleId?: string;
-}) {
+}: CatalogExplorerProps) {
   const [locale, setLocale] = useState(initialLocale);
   const data = catalog.translations[locale] ?? catalog.translations.en;
   const methodLabels = data.labels ?? {};
@@ -1619,5 +1630,76 @@ ${prompt.prompt}`;
         <a href="https://www.apiops.info" target="_blank" rel="noreferrer">{localizedLabels["footer.community"]}</a>
       </footer>
     </main>
+  );
+}
+
+async function loadJson<T>(path: string): Promise<T> {
+  const response = await fetch(path, { cache: "force-cache" });
+  if (!response.ok) throw new Error(`Failed to load ${path}`);
+  return response.json() as Promise<T>;
+}
+
+export default function CatalogExplorerLoader({
+  initialLocale,
+  initialCycleId,
+  initialStationId,
+  initialRoleId,
+}: CatalogExplorerLoaderProps) {
+  const [data, setData] = useState<LoadedWorkspaceData | null>(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([
+      loadJson<Catalog>("/data/method-catalog.json"),
+      loadJson<CanvasManifest>("/data/canvas-manifest.json"),
+      loadJson<PromptData>("/data/prompt-packs.json"),
+      loadJson<ExportData>("/data/export-templates.json"),
+      loadJson<LabelData>("/data/site-labels.json"),
+      loadJson<PartnerData>("/data/partners.json"),
+    ])
+      .then(([catalog, canvases, prompts, exportsData, labels, partners]) => {
+        if (!cancelled) setData({ catalog, canvases, prompts, exportsData, labels, partners });
+      })
+      .catch((caught) => {
+        if (!cancelled) setError(caught instanceof Error ? caught.message : String(caught));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (error) {
+    return (
+      <main className="site-shell">
+        <section className="workspace-panel">
+          <p className="section-kicker">APIOps Cycles</p>
+          <h1>Unable to load workspace data</h1>
+          <p>{error}</p>
+        </section>
+      </main>
+    );
+  }
+
+  if (!data) {
+    return (
+      <main className="site-shell">
+        <section className="workspace-panel">
+          <p className="section-kicker">APIOps Cycles</p>
+          <h1>Loading APIOps Cycles workspace</h1>
+          <p>Preparing the method catalog, canvases, prompts, and export templates.</p>
+        </section>
+      </main>
+    );
+  }
+
+  return (
+    <CatalogExplorer
+      {...data}
+      initialLocale={initialLocale}
+      initialCycleId={initialCycleId}
+      initialStationId={initialStationId}
+      initialRoleId={initialRoleId}
+    />
   );
 }

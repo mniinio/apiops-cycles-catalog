@@ -1,19 +1,14 @@
-import catalog from "./data/method-catalog.json";
-import canvasManifest from "./data/canvas-manifest.json";
-import exportTemplates from "./data/export-templates.json";
-import promptPacks from "./data/prompt-packs.json";
-import siteLabels from "./data/site-labels.json";
-import partners from "./data/partners.json";
+import routeIndex from "./data/route-index.json";
 import CatalogExplorer from "./catalog-explorer";
 
-const supportedLocales = catalog.locales;
+const supportedLocales = routeIndex.locales;
 
 export function normalizeLocale(locale?: string) {
   return supportedLocales.includes(locale ?? "") ? locale ?? "en" : "en";
 }
 
 export function CatalogJsonLd({ locale }: { locale: string }) {
-  const data = catalog.translations[normalizeLocale(locale)];
+  const data = routeIndex.translations[normalizeLocale(locale)];
   const roles = data.routeProfiles;
   const prefix = locale === "en" ? "" : `/${locale}`;
   const items = [
@@ -37,12 +32,6 @@ export function CatalogJsonLd({ locale }: { locale: string }) {
       name: station.title,
       description: station.description,
       url: `${prefix}/stations/${station.id}`,
-    })),
-    ...data.resources.slice(0, 40).map((resource, index) => ({
-      "@type": "ListItem",
-      position: roles.length + data.cycles.length + data.stations.length + index + 1,
-      name: resource.title,
-      description: resource.description,
     })),
   ];
 
@@ -80,12 +69,6 @@ export default function CatalogPage({
     <>
       <CatalogJsonLd locale={normalized} />
       <CatalogExplorer
-        catalog={catalog}
-        canvases={canvasManifest}
-        prompts={promptPacks}
-        exportsData={exportTemplates}
-        labels={siteLabels}
-        partners={partners}
         initialLocale={normalized}
         initialCycleId={initialCycleId}
         initialStationId={initialStationId}

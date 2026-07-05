@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import CatalogPage, { normalizeLocale } from "../../../catalog-page";
-import catalog from "../../../data/method-catalog.json";
+import routeIndex from "../../../data/route-index.json";
 
 export function generateStaticParams() {
-  return catalog.locales.flatMap((locale) =>
-    catalog.translations[locale].routeProfiles.map((role) => ({ locale, role: role.id })),
+  return routeIndex.locales.flatMap((locale) =>
+    routeIndex.translations[locale].routeProfiles.map((role) => ({ locale, role: role.id })),
   );
 }
 
@@ -14,7 +14,7 @@ export function generateMetadata({
   params: { locale: string; role: string };
 }): Metadata {
   const locale = normalizeLocale(params.locale);
-  const role = catalog.translations[locale].routeProfiles.find((item) => item.id === params.role);
+  const role = routeIndex.translations[locale].routeProfiles.find((item) => item.id === params.role);
   return {
     title: role ? `${role.title} Guide` : "Stakeholder Guide",
     description: role?.summary,

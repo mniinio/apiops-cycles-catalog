@@ -8,6 +8,7 @@
   "description": "Static APIOps Cycles manifest for a future MCP server.",
   "dataFiles": [
     "/data/method-catalog.json",
+    "/data/route-index.json",
     "/data/canvas-manifest.json",
     "/data/prompt-packs.json",
     "/data/export-templates.json",

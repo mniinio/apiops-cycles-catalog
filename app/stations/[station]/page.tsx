@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import CatalogPage from "../../catalog-page";
-import catalog from "../../data/method-catalog.json";
+import routeIndex from "../../data/route-index.json";
 
 export function generateStaticParams() {
-  return catalog.translations.en.stations.map((station) => ({ station: station.id }));
+  return routeIndex.translations.en.stations.map((station) => ({ station: station.id }));
 }
 
 export function generateMetadata({
@@ -11,7 +11,7 @@ export function generateMetadata({
 }: {
   params: { station: string };
 }): Metadata {
-  const station = catalog.translations.en.stations.find((item) => item.id === params.station);
+  const station = routeIndex.translations.en.stations.find((item) => item.id === params.station);
   return {
     title: station ? `${station.title} | APIOps Cycles` : "APIOps Cycles Station",
     description: station?.description,

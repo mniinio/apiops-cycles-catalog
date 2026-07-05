@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import CatalogPage, { normalizeLocale } from "../catalog-page";
-import catalog from "../data/method-catalog.json";
+import routeIndex from "../data/route-index.json";
 
 export function generateStaticParams() {
-  return catalog.locales
+  return routeIndex.locales
     .filter((locale) => locale !== "en")
     .map((locale) => ({ locale }));
 }
