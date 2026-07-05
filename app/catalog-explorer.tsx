@@ -392,8 +392,8 @@ const fallbackLabels: Record<string, string> = {
   "actions.collapseAll": "Collapse all",
   "actions.use": "Use",
   "actions.copied": "Copied successfully",
-  "actions.expand": "+",
-  "actions.collapse": "-",
+  "actions.expand": "▸",
+  "actions.collapse": "▾",
   "confluence.cycleExport": "Cycle export",
   "confluence.audience": "Intended audience",
   "confluence.formatGuidance": "Format guidance",
@@ -1088,9 +1088,9 @@ function CatalogExplorer({
   const [exportTemplates, setExportTemplates] = useState<ExportData | null>(null);
   const [actionMenu, setActionMenu] = useState<"ai" | "exports" | null>(null);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    questions: true,
-    before: true,
-    ready: true,
+    questions: false,
+    before: false,
+    ready: false,
   });
   const [copyStatus, setCopyStatus] = useState("");
 
