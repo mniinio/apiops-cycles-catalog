@@ -75,6 +75,7 @@ type Station = {
 };
 
 type Translation = {
+  labels?: Record<string, string>;
   cycles: Cycle[];
   lines: MetroLine[];
   stations: Station[];
@@ -245,8 +246,6 @@ const fallbackLabels: Record<string, string> = {
   "station.next": "Next",
   "station.coreStation": "Core station",
   "station.subStation": "Sub-station",
-  "category_canvas": "Canvas",
-  "category_guideline": "Guideline",
   "station.relatedCanvases": "Related canvases",
   "station.relatedResources": "Related resources",
   "station.people": "People to involve",
@@ -322,9 +321,9 @@ function publicIconPath(icon?: string) {
   return "";
 }
 
-function categoryLabel(labels: Record<string, string>, category: string) {
+function categoryLabel(methodLabels: Record<string, string>, siteLabels: Record<string, string>, category: string) {
   const key = `category_${category}`;
-  return labels[key] ?? category;
+  return methodLabels[key] ?? siteLabels[key] ?? category;
 }
 
 function normalizeNotes(value: unknown): StickyNotes {
@@ -840,6 +839,7 @@ export default function CatalogExplorer({
 }) {
   const [locale, setLocale] = useState(initialLocale);
   const data = catalog.translations[locale] ?? catalog.translations.en;
+  const methodLabels = data.labels ?? {};
   const roleData = guides.translations[locale] ?? guides.translations.en;
   const promptData = prompts.translations[locale] ?? prompts.translations.en;
   const templateData = exportsData.translations[locale] ?? exportsData.translations.en;
@@ -1411,7 +1411,7 @@ ${prompt.prompt}`;
             <div className="side-resource-grid">
               {canvasResources.map((resource) => (
                 <button key={resource.id} type="button" className={activeResource?.id === resource.id ? "side-resource-card is-active" : "side-resource-card"} onClick={() => openResource(resource)}>
-                  <span>{categoryLabel(localizedLabels, resource.category)}</span>
+                  <span>{categoryLabel(methodLabels, localizedLabels, resource.category)}</span>
                   <strong>{resource.title}</strong>
                   <small>{compact(resource.description, 96)}</small>
                 </button>
@@ -1424,7 +1424,7 @@ ${prompt.prompt}`;
                 <div className="side-resource-grid">
                   {otherResources.map((resource) => (
                     <button key={resource.id} type="button" className={activeResource?.id === resource.id ? "side-resource-card is-active" : "side-resource-card"} onClick={() => openResource(resource)}>
-                      <span>{categoryLabel(localizedLabels, resource.category)}</span>
+                      <span>{categoryLabel(methodLabels, localizedLabels, resource.category)}</span>
                       <strong>{resource.title}</strong>
                       <small>{compact(resource.description, 96)}</small>
                     </button>

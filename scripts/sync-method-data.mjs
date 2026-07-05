@@ -217,97 +217,7 @@ function readLabels(locale) {
 }
 
 function siteLabels(locale) {
-  const shared = {
-    stations: "Stations",
-    why_it_matters: "Why it matters",
-    outcomes: "Outcomes",
-    how_it_works: "How it works",
-    steps: "Steps",
-    apply_in_work: "Apply in your work",
-    entry_criteria: "Entry criteria",
-    exit_criteria: "Exit criteria",
-    related_metrolines: "Related metrolines",
-    cycle_views: "Cycle views",
-    drill_deeper: "Drill deeper",
-    zoom_out: "Zoom out",
-    layer_navigation: "Layer navigation",
-    purpose: "Purpose",
-    audiences: "Audiences",
-    station: "Station",
-    source_station: "Source station",
-    recommended_resources: "Recommended resources",
-    cycle_context: "Cycle context",
-    missing_cycle_description: "Cycle-specific station description is not available yet.",
-    cycle_specific_resources: "Cycle-specific resources",
-    generic_station_context: "Generic station context",
-    see_example: "See example",
-    download: "Download",
-    use_with_ai: "Use with AI",
-    step: "Step",
-    of: "of",
-    previous_step: "Previous step",
-    continue_to: "Continue to",
-    start: "Start",
-    open: "Open",
-    category_canvas: "Canvas",
-    category_guideline: "Guideline",
-  };
-  const localizedShared = {
-    fi: {
-      see_example: "Katso esimerkki",
-      download: "Lataa",
-      use_with_ai: "Käytä tekoälyn kanssa",
-      step: "Vaihe",
-      of: "/",
-      previous_step: "Edellinen vaihe",
-      continue_to: "Jatka:",
-      start: "Aloita",
-      open: "Avaa",
-      category_canvas: "Canvas",
-      category_guideline: "Ohjeistus",
-    },
-    fr: {
-      see_example: "Voir l'exemple",
-      download: "Télécharger",
-      use_with_ai: "Utiliser avec l'IA",
-      step: "Étape",
-      of: "sur",
-      previous_step: "Étape précédente",
-      continue_to: "Continuer vers",
-      start: "Commencer",
-      open: "Ouvrir",
-      category_canvas: "Canvas",
-      category_guideline: "Guide",
-    },
-    de: {
-      see_example: "Beispiel ansehen",
-      download: "Download",
-      use_with_ai: "Mit KI nutzen",
-      step: "Schritt",
-      of: "von",
-      previous_step: "Vorheriger Schritt",
-      continue_to: "Weiter zu",
-      start: "Start",
-      open: "Öffnen",
-      category_canvas: "Canvas",
-      category_guideline: "Leitfaden",
-    },
-    pt: {
-      see_example: "Ver exemplo",
-      download: "Baixar",
-      use_with_ai: "Usar com IA",
-      step: "Etapa",
-      of: "de",
-      previous_step: "Etapa anterior",
-      continue_to: "Continuar para",
-      start: "Iniciar",
-      open: "Abrir",
-      category_canvas: "Canvas",
-      category_guideline: "Guia",
-    },
-  };
   const english = {
-    ...shared,
     "nav.workflows": "Workflows",
     "nav.data": "Data",
     "nav.language": "Language",
@@ -361,8 +271,7 @@ function siteLabels(locale) {
     "footer.github": "GitHub repository",
     "footer.community": "Community events and joining",
   };
-  const fallback = { ...english, ...(localizedShared[locale] ?? {}) };
-  return Object.fromEntries(Object.entries(fallback).map(([key, value]) => [key, t(locale, `site.${key}`) === `site.${key}` ? value : t(locale, `site.${key}`)]));
+  return Object.fromEntries(Object.entries(english).map(([key, value]) => [key, t(locale, `site.${key}`) === `site.${key}` ? value : t(locale, `site.${key}`)]));
 }
 
 const cyclesRaw = readJson(path.join(methodRoot, "cycles.json")).cycles.items;
@@ -695,6 +604,7 @@ const catalog = {
     locales.map((locale) => [
       locale,
       {
+        labels: labelsByLocale[locale] ?? {},
         cycles: cyclesRaw.map((cycle) => translateCycle(locale, cycle)),
         lines: linesRaw
           .map((line) => translateLine(locale, line))
