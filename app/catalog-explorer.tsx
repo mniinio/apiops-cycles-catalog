@@ -119,6 +119,7 @@ type Catalog = {
 };
 
 type LabelData = {
+  defaultLocale: string;
   translations: Record<string, Record<string, string>>;
 };
 
@@ -196,6 +197,7 @@ type CanvasDefinition = {
 };
 
 type CanvasManifest = {
+  defaultLocale: string;
   translations: Record<string, Record<string, CanvasDefinition>>;
 };
 
@@ -208,6 +210,7 @@ type PromptPack = {
 };
 
 type PromptData = {
+  defaultLocale: string;
   translations: Record<string, PromptPack[]>;
 };
 
@@ -222,6 +225,7 @@ type ExportTemplate = {
 };
 
 type ExportData = {
+  defaultLocale: string;
   translations: Record<string, ExportTemplate[]>;
 };
 
@@ -245,9 +249,14 @@ type CatalogExplorerLoaderProps = {
   initialCycleId?: string;
   initialStationId?: string;
   initialRoleId?: string;
+  dataVersion: string;
 };
 
 type LoadedWorkspaceData = Omit<CatalogExplorerProps, "initialLocale" | "initialCycleId" | "initialStationId" | "initialRoleId">;
+
+function arrayOrEmpty<T>(value: T[] | undefined | null): T[] {
+  return Array.isArray(value) ? value : [];
+}
 
 const localeNames: Record<string, string> = {
   en: "English",
@@ -968,19 +977,34 @@ function CatalogExplorer({
   initialRoleId,
 }: CatalogExplorerProps) {
   const [locale, setLocale] = useState(initialLocale);
-  const data = catalog.translations[locale] ?? catalog.translations.en;
+  const data = catalog.translations[locale] ?? catalog.translations[catalog.defaultLocale] ?? catalog.translations.en;
   const methodLabels = data.labels ?? {};
-  const roleData = data.routeProfiles;
-  const promptData = prompts.translations[locale] ?? prompts.translations.en;
-  const templateData = exportsData.translations[locale] ?? exportsData.translations.en;
-  const canvasData = canvases.translations[locale] ?? canvases.translations.en;
-  const localizedLabels = { ...fallbackLabels, ...(labels.translations[locale] ?? labels.translations.en) };
+  const roleData = arrayOrEmpty(data.routeProfiles);
+  const cycles = arrayOrEmpty(data.cycles);
+  const stations = arrayOrEmpty(data.stations);
+  const resources = arrayOrEmpty(data.resources);
+  const lines = arrayOrEmpty(data.lines);
+  const promptData = prompts.translations[locale] ?? prompts.translations[prompts.defaultLocale] ?? prompts.translations.en ?? [];
+  const templateData = exportsData.translations[locale] ?? exportsData.translations[exportsData.defaultLocale] ?? exportsData.translations.en ?? [];
+  const canvasData = canvases.translations[locale] ?? canvases.translations[canvases.defaultLocale] ?? canvases.translations.en ?? {};
+  const localizedLabels = { ...fallbackLabels, ...(labels.translations[locale] ?? labels.translations[labels.defaultLocale] ?? labels.translations.en) };
   const requestedRole = roleData.find((item) => item.id === initialRoleId || item.stakeholderId === initialRoleId);
   const initialCycle =
-    data.cycles.find((cycle) => cycle.id === initialCycleId || cycle.slug === initialCycleId) ??
-    (initialStationId ? data.cycles.find((cycle) => cycle.stations.some((station) => station.id === initialStationId)) : undefined) ??
-    (requestedRole?.cycles[0]?.id ? data.cycles.find((cycle) => cycle.id === requestedRole.cycles[0].id) : undefined) ??
-    data.cycles[0];
+    cycles.find((cycle) => cycle.id === initialCycleId || cycle.slug === initialCycleId) ??
+    (initialStationId ? cycles.find((cycle) => cycle.stations.some((station) => station.id === initialStationId)) : undefined) ??
+    (requestedRole?.cycles[0]?.id ? cycles.find((cycle) => cycle.id === requestedRole.cycles[0].id) : undefined) ??
+    cycles[0];
+  if (!initialCycle) {
+    return (
+      <main className="site-shell">
+        <section className="workspace-panel">
+          <p className="section-kicker">APIOps Cycles</p>
+          <h1>Unable to load method catalog</h1>
+          <p>The method catalog did not contain cycle data for this locale.</p>
+        </section>
+      </main>
+    );
+  }
   const requestedRoleStation = requestedRole?.stations.find((station) =>
     initialCycle.stations.some((cycleStation) => cycleStation.id === station.id),
   )?.id;
@@ -994,18 +1018,29 @@ function CatalogExplorer({
   const [roleId, setRoleId] = useState(initialRole.id);
   const role = safeRole(roleId, roleData);
   const [cycleId, setCycleId] = useState(initialCycle.id);
-  const selectedCycle = data.cycles.find((cycle) => cycle.id === cycleId) ?? data.cycles[0];
+  const selectedCycle = cycles.find((cycle) => cycle.id === cycleId) ?? cycles[0] ?? initialCycle;
   const [stationId, setStationId] = useState(initialStation ?? role.stations[0]?.id ?? selectedCycle.stations[0].id);
   const selectedCycleStation = selectedCycle.stations.find((station) => station.id === stationId);
   const stationDetail =
-    data.stations.find((station) => station.id === stationId) ??
-    data.stations.find((station) => station.id === selectedCycle.stations[0]?.id) ??
-    data.stations[0];
+    stations.find((station) => station.id === stationId) ??
+    stations.find((station) => station.id === selectedCycle.stations[0]?.id) ??
+    stations[0];
+  if (!stationDetail) {
+    return (
+      <main className="site-shell">
+        <section className="workspace-panel">
+          <p className="section-kicker">APIOps Cycles</p>
+          <h1>Unable to load station data</h1>
+          <p>The method catalog did not contain station data for this locale.</p>
+        </section>
+      </main>
+    );
+  }
   const stationStepResourceIds = new Set(stationDetail.steps.map((step) => step.resourceId).filter(Boolean));
   const selectedStationResources =
     selectedCycleStation?.resources.length
       ? selectedCycleStation.resources
-      : data.resources.filter((resource) => stationStepResourceIds.has(resource.id));
+      : resources.filter((resource) => stationStepResourceIds.has(resource.id));
   const selectedStation: CycleStation =
     selectedCycleStation ?? {
       index: 0,
@@ -1064,12 +1099,12 @@ function CatalogExplorer({
   ]).slice(0, 5);
   const selectedCycleStationIndex = selectedCycle.stations.findIndex((station) => station.id === stationId);
   const previousCycleStation = selectedCycleStationIndex > 0 ? selectedCycle.stations[selectedCycleStationIndex - 1] : null;
-  const previousStationDetail = previousCycleStation ? data.stations.find((station) => station.id === previousCycleStation.id) : null;
+  const previousStationDetail = previousCycleStation ? stations.find((station) => station.id === previousCycleStation.id) : null;
   const beforeCriteria = selectedCycleStationIndex <= 0
     ? selectedCycle.entryCriteriaDetails
     : previousStationDetail?.criteriaDetails ?? [];
   const readyCriteria = stationDetail.criteriaDetails.length ? stationDetail.criteriaDetails : selectedCycle.exitCriteriaDetails;
-  const lineNavigation = data.lines
+  const lineNavigation = lines
     .map((line) => {
       const index = line.stations.indexOf(stationId);
       if (index < 0) return null;
@@ -1082,7 +1117,7 @@ function CatalogExplorer({
         ...line,
         adjacent: adjacent.map((item) => {
           const cycleStation = selectedCycle.stations.find((station) => station.id === item.id);
-          const detail = data.stations.find((station) => station.id === item.id);
+          const detail = stations.find((station) => station.id === item.id);
           return {
             ...item,
             title: cycleStation?.title ?? shortStationName(detail?.title ?? item.id),
@@ -1146,14 +1181,14 @@ function CatalogExplorer({
   function selectRole(nextRoleId: string) {
     const nextRole = safeRole(nextRoleId, roleData);
     const nextCycleId = nextRole.cycles[0]?.id ?? cycleId;
-    const nextCycle = data.cycles.find((cycle) => cycle.id === nextCycleId) ?? selectedCycle;
+    const nextCycle = cycles.find((cycle) => cycle.id === nextCycleId) ?? selectedCycle;
     const nextStationId = nextRole.stations.find((station) => nextCycle.stations.some((cycleStation) => cycleStation.id === station.id))?.id ?? nextCycle.stations[0]?.id ?? stationId;
     const nextCycleStation = nextCycle.stations.find((station) => station.id === nextStationId);
-    const nextStationDetail = data.stations.find((station) => station.id === nextStationId);
+    const nextStationDetail = stations.find((station) => station.id === nextStationId);
     const nextStepResourceIds = new Set((nextStationDetail?.steps ?? []).map((step) => step.resourceId).filter(Boolean));
     const nextResources = nextCycleStation?.resources.length
       ? nextCycleStation.resources
-      : data.resources.filter((resource) => nextStepResourceIds.has(resource.id));
+      : resources.filter((resource) => nextStepResourceIds.has(resource.id));
     setRoleId(nextRoleId);
     setCycleId(nextCycleId);
     setStationId(nextStationId);
@@ -1162,7 +1197,7 @@ function CatalogExplorer({
   }
 
   function selectCycle(nextCycleId: string) {
-    const nextCycle = data.cycles.find((cycle) => cycle.id === nextCycleId) ?? selectedCycle;
+    const nextCycle = cycles.find((cycle) => cycle.id === nextCycleId) ?? selectedCycle;
     const nextStationId = nextCycle.stations.some((station) => station.id === stationId) ? stationId : nextCycle.stations[0]?.id ?? stationId;
     const nextRoleId = bestRoleFor(nextCycleId, nextStationId);
     setCycleId(nextCycleId);
@@ -1256,7 +1291,7 @@ ${prompt.prompt}`;
         <label>
           <span>{localizedLabels["controls.recommendedCycle"]}</span>
           <select value={cycleId} onChange={(event) => selectCycle(event.target.value)}>
-            {data.cycles.map((cycle) => <option key={cycle.id} value={cycle.id}>{cycle.title}</option>)}
+            {cycles.map((cycle) => <option key={cycle.id} value={cycle.id}>{cycle.title}</option>)}
           </select>
         </label>
         <label>
@@ -1287,7 +1322,7 @@ ${prompt.prompt}`;
               <p>{localizedLabels["map.instructions"]}</p>
             </div>
             <div className="cycle-pills" aria-label={localizedLabels["controls.selectCycle"]}>
-              {data.cycles.map((cycle) => (
+              {cycles.map((cycle) => (
                 <button
                   key={cycle.id}
                   type="button"
@@ -1301,9 +1336,9 @@ ${prompt.prompt}`;
             </div>
           </div>
           <MetroMap
-            cycles={data.cycles}
-            lines={data.lines}
-            stations={data.stations}
+            cycles={cycles}
+            lines={lines}
+            stations={stations}
             selectedCycleId={cycleId}
             selectedStationId={stationId}
             onSelectCycle={selectCycle}
@@ -1316,7 +1351,7 @@ ${prompt.prompt}`;
               <p>{localizedLabels["map.linesDescription"]}</p>
             </div>
             <div className="line-guide__items">
-              {data.lines.map((line) => (
+              {lines.map((line) => (
                 <span key={line.id} title={line.description}>
                   <i style={{ backgroundColor: line.color }} />
                   {line.title}
@@ -1644,19 +1679,21 @@ export default function CatalogExplorerLoader({
   initialCycleId,
   initialStationId,
   initialRoleId,
+  dataVersion,
 }: CatalogExplorerLoaderProps) {
   const [data, setData] = useState<LoadedWorkspaceData | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
     let cancelled = false;
+    const version = encodeURIComponent(dataVersion);
     Promise.all([
-      loadJson<Catalog>("/data/method-catalog.json"),
-      loadJson<CanvasManifest>("/data/canvas-manifest.json"),
-      loadJson<PromptData>("/data/prompt-packs.json"),
-      loadJson<ExportData>("/data/export-templates.json"),
-      loadJson<LabelData>("/data/site-labels.json"),
-      loadJson<PartnerData>("/data/partners.json"),
+      loadJson<Catalog>(`/data/method-catalog.json?v=${version}`),
+      loadJson<CanvasManifest>(`/data/canvas-manifest.json?v=${version}`),
+      loadJson<PromptData>(`/data/prompt-packs.json?v=${version}`),
+      loadJson<ExportData>(`/data/export-templates.json?v=${version}`),
+      loadJson<LabelData>(`/data/site-labels.json?v=${version}`),
+      loadJson<PartnerData>(`/data/partners.json?v=${version}`),
     ])
       .then(([catalog, canvases, prompts, exportsData, labels, partners]) => {
         if (!cancelled) setData({ catalog, canvases, prompts, exportsData, labels, partners });
@@ -1667,7 +1704,7 @@ export default function CatalogExplorerLoader({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [dataVersion]);
 
   if (error) {
     return (

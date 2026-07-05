@@ -73,6 +73,7 @@ export default function CatalogPage({
         initialCycleId={initialCycleId}
         initialStationId={initialStationId}
         initialRoleId={initialRoleId}
+        dataVersion={`${routeIndex.source.commit}-${routeIndex.generatedAt}`}
       />
     </>
   );
