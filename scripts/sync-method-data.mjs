@@ -841,6 +841,13 @@ const mcpManifest = {
     "/data/export-templates.json",
     "/data/site-labels.json",
     "/data/partners.json",
+    ...locales.flatMap((locale) => [
+      `/data/method-catalog.${locale}.json`,
+      `/data/canvas-manifest.${locale}.json`,
+      `/data/prompt-packs.${locale}.json`,
+      `/data/export-templates.${locale}.json`,
+      `/data/site-labels.${locale}.json`,
+    ]),
   ],
   tools: [
     "list_cycles",
@@ -902,6 +909,28 @@ writeJson("canvas-manifest.json", canvasManifest, { publish: true });
 writeJson("prompt-packs.json", prompts, { publish: true });
 writeJson("export-templates.json", exportsData, { publish: true });
 writeJson("site-labels.json", siteLabelsData, { publish: true });
+for (const locale of locales) {
+  writeJson(`method-catalog.${locale}.json`, {
+    ...catalog,
+    translations: { [locale]: catalog.translations[locale] },
+  }, { publish: true });
+  writeJson(`canvas-manifest.${locale}.json`, {
+    ...canvasManifest,
+    translations: { [locale]: canvasManifest.translations[locale] },
+  }, { publish: true });
+  writeJson(`prompt-packs.${locale}.json`, {
+    ...prompts,
+    translations: { [locale]: prompts.translations[locale] },
+  }, { publish: true });
+  writeJson(`export-templates.${locale}.json`, {
+    ...exportsData,
+    translations: { [locale]: exportsData.translations[locale] },
+  }, { publish: true });
+  writeJson(`site-labels.${locale}.json`, {
+    ...siteLabelsData,
+    translations: { [locale]: siteLabelsData.translations[locale] },
+  }, { publish: true });
+}
 writeJson("partners.json", partners, { publish: true });
 writeJson("mcp-method-manifest.json", mcpManifest, { publish: true });
 

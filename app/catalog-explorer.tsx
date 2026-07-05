@@ -503,6 +503,7 @@ function MetroMap({
   stations,
   selectedCycleId,
   selectedStationId,
+  highlightedStationIds,
   onSelectCycle,
   onSelectStation,
   uiLabels,
@@ -512,6 +513,7 @@ function MetroMap({
   stations: Station[];
   selectedCycleId: string;
   selectedStationId: string;
+  highlightedStationIds: string[];
   onSelectCycle: (id: string) => void;
   onSelectStation: (id: string) => void;
   uiLabels: Record<string, string>;
@@ -523,6 +525,7 @@ function MetroMap({
   const coreLabelRadius = 156;
   const coreStations = cycles[0]?.stations ?? [];
   const selectedCycle = cycles.find((cycle) => cycle.id === selectedCycleId) ?? cycles[0];
+  const highlightedStations = new Set(highlightedStationIds);
   const stationById = new Map(stations.map((station) => [station.id, station]));
   const supportCoordinates: Record<string, { x: number; y: number; dx?: number; dy?: number; anchor?: "start" | "end" }> = {
     "ecosystem-vision": { x: 330, y: 42, dx: 12, dy: 4 },
@@ -646,7 +649,7 @@ function MetroMap({
               key={`${line.id}-${point.id}`}
               role="button"
               tabIndex={0}
-              className="metro-station"
+              className={highlightedStations.has(point.id) ? "metro-station metro-station--highlighted" : "metro-station"}
               onClick={() => onSelectStation(point.id)}
               onKeyDown={(event) => {
                 if (event.key === "Enter" || event.key === " ") onSelectStation(point.id);
@@ -678,7 +681,7 @@ function MetroMap({
           key={point.id}
           role="button"
           tabIndex={0}
-          className="metro-station"
+          className={highlightedStations.has(point.id) ? "metro-station metro-station--highlighted" : "metro-station"}
           onClick={() => onSelectStation(point.id)}
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") onSelectStation(point.id);
@@ -1153,7 +1156,7 @@ function CatalogExplorer({
     ? `${process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL.replace(/\/$/, "")}/${selectedCanvas.id}`
     : selectedCanvas.canvasCreatorUrl;
   const discussionItems = stationQuestions;
-  const modeKeys = viewKeys;
+  const highlightedStationIds = role.stations.map((station) => station.id);
   const primaryAiPrompts = rolePrompts.filter((prompt) => ["facilitate-station", "next-actions"].includes(prompt.mode)).slice(0, 2);
 
   function bestRoleFor(nextCycleId: string, nextStationId: string) {
@@ -1261,7 +1264,6 @@ ${prompt.prompt}`;
             <a href="#licensing">{localizedLabels["nav.licensing"]}</a>
             <a href={catalog.source.repository} target="_blank" rel="noreferrer">{localizedLabels["nav.github"]}</a>
             <a href="#community">{localizedLabels["nav.community"]}</a>
-            <button type="button" onClick={() => setView("ai")}>{localizedLabels["nav.workflows"]}</button>
             <button type="button" onClick={() => setView("data")}>{localizedLabels["nav.data"]}</button>
             <label className="sr-only" htmlFor="locale">{localizedLabels["nav.language"]}</label>
             <select
@@ -1269,8 +1271,7 @@ ${prompt.prompt}`;
               value={locale}
               onChange={(event) => {
                 const next = event.target.value;
-                setLocale(next);
-                window.history.replaceState(null, "", next === "en" ? "/" : `/${next}`);
+                window.location.href = next === "en" ? `/method/${stationId}` : `/${next}/method/${stationId}`;
               }}
             >
               {catalog.locales.map((item) => (
@@ -1281,37 +1282,42 @@ ${prompt.prompt}`;
         </nav>
       </header>
 
-      <section className="route-control" aria-label={localizedLabels["controls.routeControls"]}>
-        <label>
-          <span>{localizedLabels["controls.currentRoute"]}</span>
-          <select value={role.id} onChange={(event) => selectRole(event.target.value)}>
-            {roleData.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
-          </select>
-        </label>
-        <label>
-          <span>{localizedLabels["controls.recommendedCycle"]}</span>
-          <select value={cycleId} onChange={(event) => selectCycle(event.target.value)}>
-            {cycles.map((cycle) => <option key={cycle.id} value={cycle.id}>{cycle.title}</option>)}
-          </select>
-        </label>
-        <label>
-          <span>{localizedLabels["controls.currentStation"]}</span>
-          <select value={stationId} onChange={(event) => selectStation(event.target.value)}>
-            {selectedCycle.stations.map((station) => (
-              <option key={station.id} value={station.id}>{shortStationName(station.title)}</option>
-            ))}
-          </select>
-        </label>
-        <div className="mode-buttons" aria-label={localizedLabels["controls.workspaceModes"]}>
-          {modeKeys.map((key) => (
-            <button key={key} type="button" className={view === key ? "is-active" : ""} onClick={() => setView(key)}>
-              {localizedLabels[`views.${key}`]}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section className={view === "map" ? "main-workspace main-workspace--map" : "main-workspace"}>
+      <section className={view === "data" ? "main-workspace main-workspace--data" : view === "map" ? "main-workspace main-workspace--map" : "main-workspace main-workspace--focus"}>
+        {view !== "data" ? (
+          <aside className="journey-panel" style={{ "--route-color": selectedCycleColor } as CSSProperties}>
+            <p className="section-kicker">{localizedLabels["map.kicker"]}</p>
+            <h2>{selectedCycle.title}</h2>
+            <div className="station-summary__head">
+              <span className={stationBadgeIsNumber || publicIconPath(stationDetail.icon) ? "station-number" : "station-number station-number--text"}>
+                {publicIconPath(stationDetail.icon) ? <img src={publicIconPath(stationDetail.icon)} alt="" /> : selectedStation.index || stationDetail.lifecycleStage || "•"}
+              </span>
+              <div>
+                <p className="you-are-here">{localizedLabels["station.youAreHere"]}</p>
+                <h3>{stationTitle}</h3>
+              </div>
+            </div>
+            <p>{stationDescription}</p>
+            <section className="line-next-section">
+              <h3>{localizedLabels["station.whereNext"]}</h3>
+              <div className="line-next-grid">
+                {lineNavigation.map((line) => (
+                  <article key={line.id} className="line-next-card">
+                    <strong><i style={{ backgroundColor: line.color }} />{line.title}</strong>
+                    <div>
+                      {line.adjacent.map((item) => (
+                        <button key={`${line.id}-${item.direction}-${item.id}`} type="button" onClick={() => selectStation(item.id)}>
+                          <span>{item.direction} · {item.core ? localizedLabels["station.coreStation"] : localizedLabels["station.subStation"]}</span>
+                          {item.title}
+                        </button>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+                {!lineNavigation.length ? <p className="helper-text">{localizedLabels["station.noLineTransitions"]}</p> : null}
+              </div>
+            </section>
+          </aside>
+        ) : null}
         <section className="workspace-main">
         {view === "map" ? (
         <article className="map-card" style={{ "--route-color": selectedCycleColor } as CSSProperties}>
@@ -1321,6 +1327,12 @@ ${prompt.prompt}`;
               <h2>{selectedCycle.title}</h2>
               <p>{localizedLabels["map.instructions"]}</p>
             </div>
+            <label className="stakeholder-selector">
+              <span>{localizedLabels["controls.currentRoute"]}</span>
+              <select value={role.id} onChange={(event) => selectRole(event.target.value)}>
+                {roleData.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
+              </select>
+            </label>
             <div className="cycle-pills" aria-label={localizedLabels["controls.selectCycle"]}>
               {cycles.map((cycle) => (
                 <button
@@ -1341,6 +1353,7 @@ ${prompt.prompt}`;
             stations={stations}
             selectedCycleId={cycleId}
             selectedStationId={stationId}
+            highlightedStationIds={highlightedStationIds}
             onSelectCycle={selectCycle}
             onSelectStation={selectStation}
             uiLabels={localizedLabels}
@@ -1393,15 +1406,18 @@ ${prompt.prompt}`;
                   <h2>{activeResource?.title ?? `${localizedLabels["resources.titlePrefix"]} ${stationTitle}`}</h2>
                   <p className="helper-text">{localizedLabels["resources.helper"]}</p>
                 </div>
-                <select value={activeResource?.id ?? ""} onChange={(event) => {
-                  const nextResource = selectedStationResources.find((resource) => resource.id === event.target.value);
-                  if (nextResource) openResource(nextResource);
-                }} aria-label={localizedLabels["resources.select"]}>
-                  {!selectedStationResources.length ? <option value="">{localizedLabels["resources.emptySelect"]}</option> : null}
-                  {selectedStationResources.map((resource) => (
-                    <option key={resource.id} value={resource.id}>{resource.title}</option>
-                  ))}
-                </select>
+                <div className="workspace-actions">
+                  <button type="button" onClick={() => setView("map")}>{localizedLabels["views.map"]}</button>
+                  <select value={activeResource?.id ?? ""} onChange={(event) => {
+                    const nextResource = selectedStationResources.find((resource) => resource.id === event.target.value);
+                    if (nextResource) openResource(nextResource);
+                  }} aria-label={localizedLabels["resources.select"]}>
+                    {!selectedStationResources.length ? <option value="">{localizedLabels["resources.emptySelect"]}</option> : null}
+                    {selectedStationResources.map((resource) => (
+                      <option key={resource.id} value={resource.id}>{resource.title}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
               {activeResource?.canvasId ? (
                 <>
@@ -1495,10 +1511,11 @@ ${prompt.prompt}`;
               <p>{localizedLabels["data.helper"]}</p>
               <div className="data-links">
                 {[
-                  "method-catalog.json",
-                  "canvas-manifest.json",
-                  "prompt-packs.json",
-                  "export-templates.json",
+                  `method-catalog.${locale}.json`,
+                  `canvas-manifest.${locale}.json`,
+                  `prompt-packs.${locale}.json`,
+                  `export-templates.${locale}.json`,
+                  "route-index.json",
                   "mcp-method-manifest.json",
                 ].map((file) => (
                   <a key={file} href={`/data/${file}`}>{`/data/${file}`}</a>
@@ -1546,6 +1563,11 @@ ${prompt.prompt}`;
             </>
           ) : (
             <>
+          <div className="decision-actions">
+            <button type="button" onClick={() => setView("ai")}>{localizedLabels["views.ai"]}</button>
+            <button type="button" onClick={() => setView("confluence")}>{localizedLabels["views.confluence"]}</button>
+            <button type="button" onClick={() => setView("map")}>{localizedLabels["views.map"]}</button>
+          </div>
           <div className="station-summary__head">
             <span className={stationBadgeIsNumber || publicIconPath(stationDetail.icon) ? "station-number" : "station-number station-number--text"}>
               {publicIconPath(stationDetail.icon) ? <img src={publicIconPath(stationDetail.icon)} alt="" /> : selectedStation.index || stationDetail.lifecycleStage || "•"}
@@ -1612,6 +1634,15 @@ ${prompt.prompt}`;
               </section>
               <section>
                 <h3>{localizedLabels["station.people"]}</h3>
+                <div className="stakeholder-cards">
+                  {roleGuideRows.slice(0, 6).map((item) => (
+                    <button key={item.id} type="button" className={item.id === role.stakeholderId ? "stakeholder-card is-active" : "stakeholder-card"} onClick={() => setView("guide")}>
+                      <strong>{item.title}</strong>
+                      <span>{item.roleLabel}</span>
+                      <small>{item.responsibilityLabel || item.summary}</small>
+                    </button>
+                  ))}
+                </div>
                 <div className="chips chips--compact chips--buttons">
                   {participantChips.map((participant) => (
                     <button key={participant} type="button" onClick={() => setView("guide")}>{participant}</button>
@@ -1688,11 +1719,11 @@ export default function CatalogExplorerLoader({
     let cancelled = false;
     const version = encodeURIComponent(dataVersion);
     Promise.all([
-      loadJson<Catalog>(`/data/method-catalog.json?v=${version}`),
-      loadJson<CanvasManifest>(`/data/canvas-manifest.json?v=${version}`),
-      loadJson<PromptData>(`/data/prompt-packs.json?v=${version}`),
-      loadJson<ExportData>(`/data/export-templates.json?v=${version}`),
-      loadJson<LabelData>(`/data/site-labels.json?v=${version}`),
+      loadJson<Catalog>(`/data/method-catalog.${initialLocale}.json?v=${version}`),
+      loadJson<CanvasManifest>(`/data/canvas-manifest.${initialLocale}.json?v=${version}`),
+      loadJson<PromptData>(`/data/prompt-packs.${initialLocale}.json?v=${version}`),
+      loadJson<ExportData>(`/data/export-templates.${initialLocale}.json?v=${version}`),
+      loadJson<LabelData>(`/data/site-labels.${initialLocale}.json?v=${version}`),
       loadJson<PartnerData>(`/data/partners.json?v=${version}`),
     ])
       .then(([catalog, canvases, prompts, exportsData, labels, partners]) => {
