@@ -284,6 +284,7 @@ const fallbackLabels: Record<string, string> = {
   "nav.github": "GitHub",
   "nav.community": "Community",
   "controls.currentRoute": "Current route",
+  "controls.stakeholderInvolvement": "Stakeholder involvement",
   "controls.recommendedCycle": "Recommended cycle",
   "controls.currentStation": "Current station",
   "controls.routeControls": "Route controls",
@@ -660,9 +661,6 @@ function MetroMap({
           </text>
         </g>
       ))}
-      <text x="32" y="38" className="metro-instructions">
-        {uiLabels["map.instructionsSvg"]}
-      </text>
       {linePoints.map((line) => (
         <g key={line.id}>
           <polyline
@@ -1415,17 +1413,6 @@ ${prompt.prompt}`;
         {view === "map" ? (
         <article className="map-card" style={{ "--route-color": selectedCycleColor } as CSSProperties}>
           <div className="panel__head map-head">
-            <div>
-              <p className="section-kicker">{localizedLabels["map.kicker"]}</p>
-              <h2>{selectedCycle.title}</h2>
-              <p>{localizedLabels["map.instructions"]}</p>
-            </div>
-            <label className="stakeholder-selector">
-              <span>{localizedLabels["controls.currentRoute"]}</span>
-              <select value={role.id} onChange={(event) => selectRole(event.target.value)}>
-                {roleData.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
-              </select>
-            </label>
             <div className="cycle-pills" aria-label={localizedLabels["controls.selectCycle"]}>
               {cycles.map((cycle) => (
                 <button
@@ -1439,6 +1426,12 @@ ${prompt.prompt}`;
                 </button>
               ))}
             </div>
+            <label className="stakeholder-selector">
+              <span>{localizedLabels["controls.stakeholderInvolvement"]}</span>
+              <select value={role.id} onChange={(event) => selectRole(event.target.value)}>
+                {roleData.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
+              </select>
+            </label>
           </div>
           <MetroMap
             cycles={cycles}

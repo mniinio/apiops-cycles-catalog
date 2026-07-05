@@ -1087,7 +1087,11 @@ code {
 }
 
 .map-head {
-  align-items: start;
+  align-items: stretch;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+  margin-bottom: 8px;
 }
 
 .line-guide {
@@ -1137,8 +1141,9 @@ code {
 
 .cycle-pills {
   display: grid;
-  gap: 7px;
-  min-width: 250px;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  min-width: 0;
 }
 
 .cycle-pills button {
