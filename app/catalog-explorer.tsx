@@ -862,6 +862,7 @@ export default function CatalogExplorer({
   initialLocale,
   initialCycleId,
   initialStationId,
+  initialRoleId,
 }: {
   catalog: Catalog;
   canvases: CanvasManifest;
@@ -872,6 +873,7 @@ export default function CatalogExplorer({
   initialLocale: string;
   initialCycleId?: string;
   initialStationId?: string;
+  initialRoleId?: string;
 }) {
   const [locale, setLocale] = useState(initialLocale);
   const data = catalog.translations[locale] ?? catalog.translations.en;
@@ -881,11 +883,19 @@ export default function CatalogExplorer({
   const templateData = exportsData.translations[locale] ?? exportsData.translations.en;
   const canvasData = canvases.translations[locale] ?? canvases.translations.en;
   const localizedLabels = { ...fallbackLabels, ...(labels.translations[locale] ?? labels.translations.en) };
-  const initialCycle = data.cycles.find((cycle) => cycle.id === initialCycleId || cycle.slug === initialCycleId) ?? data.cycles.find((cycle) => cycle.stations.some((station) => station.id === initialStationId)) ?? data.cycles[0];
+  const requestedRole = roleData.find((item) => item.id === initialRoleId || item.stakeholderId === initialRoleId);
+  const initialCycle =
+    data.cycles.find((cycle) => cycle.id === initialCycleId || cycle.slug === initialCycleId) ??
+    (initialStationId ? data.cycles.find((cycle) => cycle.stations.some((station) => station.id === initialStationId)) : undefined) ??
+    (requestedRole?.cycles[0]?.id ? data.cycles.find((cycle) => cycle.id === requestedRole.cycles[0].id) : undefined) ??
+    data.cycles[0];
+  const requestedRoleStation = requestedRole?.stations.find((station) =>
+    initialCycle.stations.some((cycleStation) => cycleStation.id === station.id),
+  )?.id;
   const initialStation = initialStationId && initialCycle.stations.some((station) => station.id === initialStationId)
     ? initialStationId
-    : initialCycle.stations[0]?.id;
-  const initialRole = roleData.find((item) =>
+    : requestedRoleStation ?? initialCycle.stations[0]?.id;
+  const initialRole = requestedRole ?? roleData.find((item) =>
     item.cycles.some((cycle) => cycle.id === initialCycle.id) &&
     (!initialStation || item.stations.some((station) => station.id === initialStation)),
   ) ?? roleData[0];
@@ -1042,7 +1052,7 @@ export default function CatalogExplorer({
 
   function replaceWorkspaceUrl(kind: "cycle" | "station", id: string) {
     const prefix = locale === "en" ? "" : `/${locale}`;
-    const path = kind === "cycle" ? `${prefix}/cycles/${id}` : `${prefix}/stations/${id}`;
+    const path = kind === "cycle" ? `${prefix}/cycles/${id}` : `${prefix}/method/${id}`;
     window.history.replaceState(null, "", path);
   }
 
@@ -1094,8 +1104,8 @@ export default function CatalogExplorer({
   }
 
   function promptFor(prompt: PromptPack) {
-    const resources = selectedStationResources.map((resource) => resource.title).join(", ") || "No station-specific resources listed";
-    const canvasList = canvasResources.map((resource) => resource.title).join(", ") || "No station-specific canvases listed";
+    const resources = selectedStationResources.map((resource) => resource.title).join(", ") || "";
+    const canvasList = canvasResources.map((resource) => resource.title).join(", ") || "";
     return `Selected APIOps Cycles context
 Route: ${role.title}
 Cycle: ${selectedCycle.title}

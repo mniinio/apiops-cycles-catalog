@@ -43,5 +43,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(catalog.generatedAt),
     })),
   );
-  return [...localizedHomes, ...roleEntries, ...cycleEntries, ...stationEntries];
+  const methodEntries = catalog.locales.flatMap((locale) => {
+    const cycle = catalog.translations[locale].cycles.find((item) => item.id === "api-productization-cycle");
+    return (cycle?.stations ?? []).map((station) => ({
+      url:
+        locale === "en"
+          ? `${baseUrl}/method/${station.id}`
+          : `${baseUrl}/${locale}/method/${station.id}`,
+      lastModified: new Date(catalog.generatedAt),
+    }));
+  });
+  return [...localizedHomes, ...roleEntries, ...cycleEntries, ...stationEntries, ...methodEntries];
 }

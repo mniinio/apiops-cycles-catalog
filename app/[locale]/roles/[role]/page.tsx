@@ -24,7 +24,7 @@ export function generateMetadata({
 export default function LocalizedRolePage({
   params,
 }: {
-  params: { locale: string };
+  params: { locale: string; role: string };
 }) {
-  return <CatalogPage locale={params.locale} />;
+  return <CatalogPage locale={params.locale} initialRoleId={params.role} />;
 }

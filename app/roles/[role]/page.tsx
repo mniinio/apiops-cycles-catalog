@@ -18,6 +18,10 @@ export function generateMetadata({
   };
 }
 
-export default function RolePage() {
-  return <CatalogPage locale="en" />;
+export default function RolePage({
+  params,
+}: {
+  params: { role: string };
+}) {
+  return <CatalogPage locale="en" initialRoleId={params.role} />;
 }

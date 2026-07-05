@@ -67,10 +67,12 @@ export default function CatalogPage({
   locale = "en",
   initialCycleId,
   initialStationId,
+  initialRoleId,
 }: {
   locale?: string;
   initialCycleId?: string;
   initialStationId?: string;
+  initialRoleId?: string;
 }) {
   const normalized = normalizeLocale(locale);
 
@@ -87,6 +89,7 @@ export default function CatalogPage({
         initialLocale={normalized}
         initialCycleId={initialCycleId}
         initialStationId={initialStationId}
+        initialRoleId={initialRoleId}
       />
     </>
   );
