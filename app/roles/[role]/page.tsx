@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import CatalogPage from "../../catalog-page";
-import stakeholderGuides from "../../data/stakeholder-guides.json";
+import catalog from "../../data/method-catalog.json";
 
 export function generateStaticParams() {
-  return stakeholderGuides.translations.en.map((role) => ({ role: role.id }));
+  return catalog.translations.en.routeProfiles.map((role) => ({ role: role.id }));
 }
 
 export function generateMetadata({
@@ -11,7 +11,7 @@ export function generateMetadata({
 }: {
   params: { role: string };
 }): Metadata {
-  const role = stakeholderGuides.translations.en.find((item) => item.id === params.role);
+  const role = catalog.translations.en.routeProfiles.find((item) => item.id === params.role);
   return {
     title: role ? `${role.title} Guide` : "Stakeholder Guide",
     description: role?.summary,

@@ -39,10 +39,20 @@ type Cycle = {
   description: string;
   purpose: string;
   audiences: string[];
+  audienceStakeholders: Stakeholder[];
   entryCriteria: string[];
   exitCriteria: string[];
   entryCriteriaDetails: Criterion[];
   exitCriteriaDetails: Criterion[];
+  questionnaireResources: {
+    stationId: string;
+    stationTitle: string;
+    resourceId: string;
+    resourceTitle: string;
+    canvasId?: string | null;
+    suggestedAnswerOwner: Stakeholder;
+  }[];
+  confluenceTemplateSections: { id: string; title: string; description: string }[];
   stations: CycleStation[];
 };
 
@@ -71,7 +81,17 @@ type Station = {
   questions: string[];
   criteria: string[];
   criteriaDetails: Criterion[];
+  stakeholders: Stakeholder[];
   evidence: string[];
+};
+
+type Stakeholder = {
+  id: string;
+  sourceKey?: string;
+  sourceStakeholderId?: string;
+  title: string;
+  description: string;
+  involvement?: string;
 };
 
 type Translation = {
@@ -79,6 +99,8 @@ type Translation = {
   cycles: Cycle[];
   lines: MetroLine[];
   stations: Station[];
+  stakeholders: Stakeholder[];
+  routeProfiles: RouteProfile[];
   resources: Resource[];
 };
 
@@ -104,10 +126,12 @@ type PartnerData = {
   items: Partner[];
 };
 
-type RoleGuide = {
+type RouteProfile = {
   id: string;
+  stakeholderId: string;
   title: string;
   summary: string;
+  stakeholder: Stakeholder;
   cycles: { id: string; title: string; description: string }[];
   stations: { id: string; title: string; description: string }[];
   canvases: { id: string; title: string }[];
@@ -116,10 +140,6 @@ type RoleGuide = {
   recommendedResources: Resource[];
   promptIds: string[];
   exportTemplateIds: string[];
-};
-
-type Guides = {
-  translations: Record<string, RoleGuide[]>;
 };
 
 type CanvasSection = {
@@ -174,7 +194,7 @@ type CanvasManifest = {
 
 type PromptPack = {
   id: string;
-  roleId: string;
+  routeId: string;
   title: string;
   mode: string;
   prompt: string;
@@ -186,9 +206,11 @@ type PromptData = {
 
 type ExportTemplate = {
   id: string;
-  roleId: string;
+  routeId: string;
+  cycleId?: string;
   format: string;
   title: string;
+  sections?: { id: string; title: string; description: string }[];
   body: string;
 };
 
@@ -275,7 +297,7 @@ function compact(text: string, max = 150) {
   return text.length > max ? `${text.slice(0, max - 1).trim()}...` : text;
 }
 
-function safeRole(roleId: string, roles: RoleGuide[]) {
+function safeRole(roleId: string, roles: RouteProfile[]) {
   return roles.find((role) => role.id === roleId) ?? roles[0];
 }
 
@@ -314,6 +336,15 @@ function wrapMapLabel(label: string, maxLength = 18) {
 
 function uniqueText(items: Array<string | undefined | null>) {
   return Array.from(new Set(items.map((item) => item?.trim()).filter((item): item is string => Boolean(item))));
+}
+
+function uniqueById<T extends { id: string }>(items: Array<T | undefined | null>) {
+  const seen = new Set<string>();
+  return items.filter((item): item is T => {
+    if (!item || seen.has(item.id)) return false;
+    seen.add(item.id);
+    return true;
+  });
 }
 
 function publicIconPath(icon?: string) {
@@ -588,7 +619,7 @@ function CanvasWorkspace({
   canvasRendererBaseUrl,
 }: {
   canvas: CanvasDefinition;
-  role: RoleGuide;
+  role: RouteProfile;
   locale: string;
   labels: Record<string, string>;
   canvasRendererBaseUrl?: string;
@@ -816,7 +847,6 @@ function ResourceDetail({
 
 export default function CatalogExplorer({
   catalog,
-  guides,
   canvases,
   prompts,
   exportsData,
@@ -827,7 +857,6 @@ export default function CatalogExplorer({
   initialStationId,
 }: {
   catalog: Catalog;
-  guides: Guides;
   canvases: CanvasManifest;
   prompts: PromptData;
   exportsData: ExportData;
@@ -840,7 +869,7 @@ export default function CatalogExplorer({
   const [locale, setLocale] = useState(initialLocale);
   const data = catalog.translations[locale] ?? catalog.translations.en;
   const methodLabels = data.labels ?? {};
-  const roleData = guides.translations[locale] ?? guides.translations.en;
+  const roleData = data.routeProfiles;
   const promptData = prompts.translations[locale] ?? prompts.translations.en;
   const templateData = exportsData.translations[locale] ?? exportsData.translations.en;
   const canvasData = canvases.translations[locale] ?? canvases.translations.en;
@@ -885,8 +914,8 @@ export default function CatalogExplorer({
     setSelectedResourceId(null);
   }, [locale]);
 
-  const rolePrompts = promptData.filter((prompt) => prompt.roleId === role.id);
-  const roleTemplates = templateData.filter((template) => template.roleId === role.id);
+  const rolePrompts = promptData.filter((prompt) => prompt.routeId === role.id);
+  const roleTemplates = templateData.filter((template) => template.routeId === role.id);
   const templateGroups = useMemo(() => {
     const groups = new Map<
       string,
@@ -915,8 +944,12 @@ export default function CatalogExplorer({
   const stationDescription = selectedStation.description || stationDetail.description;
   const stationBadge = String(selectedStation.index || stationDetail.lifecycleStage || "-");
   const stationBadgeIsNumber = /^\d+$/.test(stationBadge);
-  const participantChips = uniqueText([role.title, ...selectedCycle.audiences]).slice(0, 6);
-  const participantSet = new Set(participantChips.map((item) => item.toLowerCase()));
+  const stakeholderParticipants = uniqueById([
+    role.stakeholder,
+    ...(stationDetail.stakeholders ?? []),
+    ...(selectedCycle.audienceStakeholders ?? []),
+  ]).filter(Boolean);
+  const participantChips = stakeholderParticipants.map((item) => item.title).slice(0, 8);
   const stationQuestions = uniqueText([
     ...(stationDetail.questions ?? []),
     ...stationDetail.steps.map((step) => step.text),
@@ -954,11 +987,16 @@ export default function CatalogExplorer({
       };
     })
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const roleGuideRows = [...roleData].sort((a, b) => {
-    const aRelevant = participantSet.has(a.title.toLowerCase()) || a.id === role.id;
-    const bRelevant = participantSet.has(b.title.toLowerCase()) || b.id === role.id;
-    if (aRelevant !== bRelevant) return aRelevant ? -1 : 1;
-    return a.title.localeCompare(b.title);
+  const roleGuideRows = stakeholderParticipants.map((stakeholder) => {
+    const profile = roleData.find((item) => item.stakeholderId === stakeholder.id || item.id === stakeholder.id);
+    return {
+      id: stakeholder.id,
+      title: stakeholder.title,
+      summary: stakeholder.description || profile?.summary || `${stakeholder.title} participates in this station.`,
+      decisions: stationQuestions,
+      outputs: uniqueText([...(stationDetail.outcomes ?? []), ...(stationDetail.evidence ?? []), ...(profile?.outputs ?? [])]),
+      involvement: stakeholder.involvement,
+    };
   });
   const canvasResources = selectedStationResources.filter((resource) => resource.canvasId);
   const otherResources = selectedStationResources.filter((resource) => !resource.canvasId);
@@ -979,7 +1017,7 @@ export default function CatalogExplorer({
   const primaryAiPrompts = rolePrompts.filter((prompt) => ["facilitate-station", "next-actions"].includes(prompt.mode)).slice(0, 2);
 
   function bestRoleFor(nextCycleId: string, nextStationId: string) {
-    const roleSupports = (item: RoleGuide) =>
+    const roleSupports = (item: RouteProfile) =>
       item.cycles.some((cycle) => cycle.id === nextCycleId) &&
       item.stations.some((station) => station.id === nextStationId);
     if (roleSupports(role)) return role.id;
@@ -990,7 +1028,7 @@ export default function CatalogExplorer({
     );
   }
 
-  function firstCanvasFor(resources: Resource[], fallbackRole: RoleGuide) {
+  function firstCanvasFor(resources: Resource[], fallbackRole: RouteProfile) {
     return resources.find((resource) => resource.canvasId)?.canvasId ?? fallbackRole.canvases[0]?.id ?? Object.keys(canvasData)[0];
   }
 
@@ -1317,7 +1355,6 @@ ${prompt.prompt}`;
               <div className="data-links">
                 {[
                   "method-catalog.json",
-                  "stakeholder-guides.json",
                   "canvas-manifest.json",
                   "prompt-packs.json",
                   "export-templates.json",

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: "%s | APIOps Cycles",
   },
   description:
-    "A static, localizable APIOps Cycles method site with stakeholder guides, AI prompt packs, canvas workspaces, Confluence exports, and method data surfaces.",
+    "A static, localizable APIOps Cycles method site with method-catalog routes, AI prompt packs, canvas workspaces, Confluence exports, and method data surfaces.",
   keywords: [
     "APIOps Cycles",
     "API productization",

@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import catalog from "./data/method-catalog.json";
-import stakeholderGuides from "./data/stakeholder-guides.json";
 
 const baseUrl = "https://apiops-cycles-catalog.osaango-0614.chatgpt-team.site";
 
@@ -18,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   }));
   const roleEntries = catalog.locales.flatMap((locale) =>
-    stakeholderGuides.translations[locale].map((role) => ({
+    catalog.translations[locale].routeProfiles.map((role) => ({
       url:
         locale === "en"
           ? `${baseUrl}/roles/${role.id}`

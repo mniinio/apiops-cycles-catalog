@@ -37,134 +37,44 @@ const publicPartnerRoot = path.join(root, "public", "partners");
 const locales = ["en", "fi", "fr", "de", "pt"];
 const methodEngine = await import(pathToFileURL(path.join(sourceRoot, "src", "lib", "method-engine.js")));
 
-const roleDefinitions = [
-  {
-    id: "executives",
-    title: "Executives and top management",
-    summary: "Decide why reusable capabilities matter and where investment should go.",
-    cycles: ["capability-productization-cycle"],
-    stations: ["api-product-strategy", "api-platform-architecture", "monitoring-and-improving"],
-    canvases: ["capabilityValuePropositionCanvas", "capabilityBusinessModelCanvas", "businessImpactCanvas"],
-    decisions: [
-      "Which reusable capabilities deserve investment?",
-      "What business outcomes, risks, and benefits justify the work?",
-      "Which governance evidence is needed before scaling?",
-    ],
-    outputs: ["Capability investment brief", "Business impact summary", "Executive decision record"],
-  },
-  {
-    id: "enterprise-architects",
-    title: "Enterprise and solution architects",
-    summary: "Choose architecture routes and keep solution choices traceable to evidence.",
-    cycles: ["capability-productization-cycle", "integration-productization-cycle"],
-    stations: ["api-platform-architecture", "api-design", "api-audit"],
-    canvases: ["businessImpactCanvas", "locationsCanvas", "capacityCanvas", "domainCanvas", "interactionCanvas"],
-    decisions: [
-      "Which delivery style fits the capability: API, event, file, stream, data product, or hybrid?",
-      "Which constraints drive platform and integration choices?",
-      "What evidence supports the architecture decision?",
-    ],
-    outputs: ["Architecture decision record", "Integration pattern decision", "Risk and constraint map"],
-  },
-  {
-    id: "capability-owners",
-    title: "Capability owners",
-    summary: "Shape reusable business capabilities before choosing implementation technology.",
-    cycles: ["capability-productization-cycle"],
-    stations: ["api-product-strategy", "api-consumer-experience", "api-publishing"],
-    canvases: ["customerJourneyCanvas", "capabilityValuePropositionCanvas", "capabilityBusinessModelCanvas"],
-    decisions: [
-      "Who consumes this capability and what outcome do they need?",
-      "What should be reusable across teams or partners?",
-      "How will consumers discover, request, and get support?",
-    ],
-    outputs: ["Capability value proposition", "Consumer requirements", "Publishing brief"],
-  },
-  {
-    id: "api-product-owners",
-    title: "API product owners",
-    summary: "Productize APIs with clear consumers, value, onboarding, and lifecycle evidence.",
-    cycles: ["api-productization-cycle"],
-    stations: ["api-product-strategy", "api-consumer-experience", "api-publishing", "monitoring-and-improving"],
-    canvases: ["customerJourneyCanvas", "apiValuePropositionCanvas", "apiBusinessModelCanvas", "consumerExperienceRequirementsCanvas"],
-    decisions: [
-      "Who are the API consumers and what value do they need?",
-      "What onboarding, service, and support promises are realistic?",
-      "How will adoption and value be measured?",
-    ],
-    outputs: ["API product brief", "Consumer onboarding plan", "API value and adoption metrics"],
-  },
-  {
-    id: "api-designers",
-    title: "API designers",
-    summary: "Turn validated needs into consistent contracts, interactions, and schemas.",
-    cycles: ["api-productization-cycle"],
-    stations: ["api-design", "api-audit"],
-    canvases: ["domainCanvas", "interactionCanvas", "restCanvas", "eventCanvas", "graphqlCanvas"],
-    decisions: [
-      "Which interaction style fits each consumer task?",
-      "Which domain objects, operations, events, and schemas are needed?",
-      "Is the contract consistent, secure, and reviewable?",
-    ],
-    outputs: ["Contract-first design pack", "Interaction model", "Design review notes"],
-  },
-  {
-    id: "api-platform-teams",
-    title: "API platform teams",
-    summary: "Provide platform, delivery, governance, security, and publishing enablement.",
-    cycles: ["api-productization-cycle", "integration-productization-cycle"],
-    stations: ["api-platform-architecture", "api-delivery", "api-audit", "api-publishing"],
-    canvases: ["businessImpactCanvas", "locationsCanvas", "capacityCanvas"],
-    decisions: [
-      "Which platform capabilities must be available?",
-      "Which delivery and audit controls are mandatory?",
-      "How should teams publish and operate reusable products?",
-    ],
-    outputs: ["Platform readiness checklist", "Delivery guardrails", "Publishing and operations guidance"],
-  },
-  {
-    id: "integration-architects",
-    title: "Integration architects",
-    summary: "Design reusable integration capabilities across APIs, events, files, streams, and data.",
-    cycles: ["integration-productization-cycle"],
-    stations: ["api-product-strategy", "api-platform-architecture", "api-design", "api-delivery"],
-    canvases: ["consumerExperienceRequirementsCanvas", "locationsCanvas", "capacityCanvas", "eventCanvas", "interactionCanvas"],
-    decisions: [
-      "Which integration pattern fits the consumer and producer constraints?",
-      "How are payloads, timing, ownership, and recovery handled?",
-      "How will the capability be operated and reused?",
-    ],
-    outputs: ["Integration pattern decision", "Capability contract outline", "Operational readiness notes"],
-  },
-  {
-    id: "automation-owners",
-    title: "Automation and process owners",
-    summary: "Identify, design, release, and improve governed automation workflows.",
-    cycles: ["automation-cycle"],
-    stations: ["api-product-strategy", "api-consumer-experience", "api-design", "api-audit"],
-    canvases: ["customerJourneyCanvas", "consumerExperienceRequirementsCanvas", "interactionCanvas", "businessImpactCanvas"],
-    decisions: [
-      "Which process outcomes should be automated?",
-      "Where are exceptions, handoffs, and human approvals needed?",
-      "Which controls prove the automation is ready?",
-    ],
-    outputs: ["Automation opportunity brief", "Workflow design notes", "Human validation checklist"],
-  },
-  {
-    id: "ai-facilitators",
-    title: "AI assistants and method facilitators",
-    summary: "Use structured prompts and exports to guide workshops and method work.",
-    cycles: ["capability-productization-cycle", "api-productization-cycle", "integration-productization-cycle", "automation-cycle"],
-    stations: ["api-product-strategy", "api-consumer-experience", "api-design", "api-audit"],
-    canvases: ["customerJourneyCanvas", "domainCanvas", "interactionCanvas", "consumerExperienceRequirementsCanvas"],
-    decisions: [
-      "Which prompt should guide the next conversation?",
-      "Which canvas captures current evidence best?",
-      "What should be exported for Confluence, Markdown, or MCP use?",
-    ],
-    outputs: ["Workshop prompt pack", "Canvas facilitation notes", "Markdown or Confluence summary"],
-  },
-];
+const stakeholderMap = {
+  "cycle.audience.top-management": "business-owner",
+  "cycle.audience.enterprise-architects": "platform-architect",
+  "cycle.audience.capability-owners": "capability-owner",
+  "cycle.audience.api-product-owners": "api-product-owner",
+  "cycle.audience.api-designers": "api-designer",
+  "cycle.audience.api-platform-teams": "api-architect",
+  "cycle.audience.solution-architects": "integration-architect",
+  "cycle.audience.integration-architects": "integration-architect",
+  "cycle.audience.platform-owners": "platform-owner",
+  "cycle.audience.automation-owners": "automation-owner",
+  "cycle.audience.process-owners": "process-owner",
+  "cycle.audience.automation-teams": "automation-engineer",
+  "cycle.owner.capability-owner": "capability-owner",
+  "cycle.owner.consumer-representative": "api-consumer-specialist",
+  "cycle.owner.enterprise-architect": "platform-architect",
+  "cycle.owner.platform-owner": "platform-owner",
+  "cycle.owner.api-platform-owner": "api-architect",
+  "cycle.owner.integration-architect": "integration-architect",
+  "cycle.owner.solution-architect": "integration-architect",
+  "business-owner": "business-owner",
+  "api-program-owner": "api-program-owner",
+  "api-product-owner": "api-product-owner",
+  "domain-expert": "domain-specialist",
+  "customer-or-partner-representative": "customer-specialist",
+  "api-consumer-representative": "api-consumer-specialist",
+  "platform-architect": "platform-architect",
+  "api-designer": "api-designer",
+  "delivery-engineer": "api-engineer",
+  "security-specialist": "security-specialist",
+  "compliance-legal-specialist": "compliance-specialist",
+  "governance-owner": "governance-specialist",
+  "documentation-devrel-owner": "api-devrel-specialist",
+  "support-operations-owner": "operations-specialist",
+  "partner-vendor-manager": "partner-specialist",
+};
+
+const involvementRank = { lead: 0, core: 1, consulted: 2 };
 
 function readJson(file) {
   return JSON.parse(readFileSync(file, "utf8"));
@@ -280,6 +190,9 @@ const resourcesRaw = readJson(path.join(methodRoot, "resources.json")).resources
 const criteriaSource = readJson(path.join(methodRoot, "criteria.json"));
 const criteriaRaw = criteriaSource.criteria ?? criteriaSource ?? [];
 const linesRaw = readJson(path.join(methodRoot, "lines.json")).lines.items ?? [];
+const stakeholdersRaw = readJson(path.join(methodRoot, "stakeholders.json")).stakeholders ?? [];
+const stationStakeholdersRaw = readJson(path.join(methodRoot, "station-stakeholders.json"));
+const stationCriteriaRaw = readJson(path.join(methodRoot, "station-criteria.json"));
 const integrationExtension = readJson(path.join(methodRoot, "integration-extension.json"));
 const canvasDataRaw = readJson(path.join(canvasRoot, "canvasData.json"));
 const canvasLabelsRaw = readJson(path.join(canvasRoot, "localizedData.json"));
@@ -323,6 +236,59 @@ const resourceById = Object.fromEntries(resourcesRaw.map((item) => [item.id, ite
 const stationById = Object.fromEntries(stationsRawList.map((item) => [item.id, item]));
 const cycleById = Object.fromEntries(cyclesRaw.map((item) => [item.id, item]));
 const criterionById = Object.fromEntries(criteriaRaw.map((item) => [item.id, item]));
+const sourceStakeholderById = Object.fromEntries(stakeholdersRaw.map((item) => [item.id, item]));
+
+function titleFromId(id) {
+  return id
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function normalizeStakeholderId(sourceKey) {
+  if (!sourceKey) return "";
+  if (stakeholderMap[sourceKey]) return stakeholderMap[sourceKey];
+  if (sourceKey.startsWith("cycle.owner.")) {
+    const ownerId = sourceKey.replace("cycle.owner.", "");
+    return stakeholderMap[ownerId] ?? ownerId;
+  }
+  return stakeholderMap[sourceKey] ?? sourceKey;
+}
+
+function translateStakeholder(locale, sourceKey, involvement = "") {
+  const id = normalizeStakeholderId(sourceKey);
+  const sourceId = sourceKey?.startsWith("cycle.") ? sourceKey.replace(/^cycle\.(audience|owner)\./, "") : sourceKey;
+  const source = sourceStakeholderById[sourceId] ?? sourceStakeholderById[sourceKey] ?? sourceStakeholderById[id];
+  const titleKey = source?.title ?? (sourceKey?.startsWith("cycle.audience.") ? sourceKey : `stakeholder.${id}.title`);
+  const descriptionKey = source?.description ?? `stakeholder.${id}.description`;
+  const title = t(locale, titleKey);
+  const description = t(locale, descriptionKey);
+  return {
+    id,
+    sourceKey,
+    sourceStakeholderId: source?.id ?? sourceId,
+    title: title === titleKey || title === `stakeholder.${id}.title` ? titleFromId(id) : title,
+    description: description === descriptionKey ? "" : description,
+    involvement,
+  };
+}
+
+function uniqueBy(items, keyFn) {
+  const seen = new Set();
+  return items.filter((item) => {
+    const key = keyFn(item);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function stationStakeholders(locale, stationId) {
+  return (stationStakeholdersRaw[stationId] ?? [])
+    .map((item) => translateStakeholder(locale, item.stakeholder, item.involvement))
+    .filter((item) => item.id)
+    .sort((a, b) => (involvementRank[a.involvement] ?? 9) - (involvementRank[b.involvement] ?? 9) || a.title.localeCompare(b.title));
+}
 
 function translateCriterion(locale, id) {
   const criterion = criterionById[id];
@@ -372,6 +338,7 @@ function translateStation(locale, station) {
     station.apply_in_work,
     station.why_it_matters,
   ]);
+  const criteria = stationCriteriaRaw[station.id] ?? station.stationCriteria ?? [];
   return {
     id: station.id,
     slug: station.slug,
@@ -390,13 +357,32 @@ function translateStation(locale, station) {
       canvasId: step.resource ? resourceById[step.resource]?.canvas ?? null : null,
     })),
     questions,
-    criteria: station.stationCriteria ?? [],
-    criteriaDetails: (station.stationCriteria ?? []).map((id) => translateCriterion(locale, id)),
+    criteria,
+    criteriaDetails: criteria.map((id) => translateCriterion(locale, id)),
+    stakeholders: stationStakeholders(locale, station.id),
     evidence: station.expectedEvidenceTags ?? [],
   };
 }
 
 function translateCycle(locale, cycle) {
+  const audienceStakeholders = uniqueBy(
+    (cycle.audiences ?? []).map((sourceKey) => translateStakeholder(locale, sourceKey, "audience")),
+    (item) => item.id,
+  );
+  const questionnaireResources = (cycle.questionnaireResources ?? [])
+    .map((item) => {
+      const resource = resourceById[item.resource];
+      const station = stationById[item.station];
+      return {
+        stationId: item.station,
+        stationTitle: station ? t(locale, cycle.stationLabels?.[item.station] ?? station.title) : item.station,
+        resourceId: item.resource,
+        resourceTitle: resource ? t(locale, resource.title) : item.resource,
+        canvasId: resource?.canvas ?? null,
+        suggestedAnswerOwner: translateStakeholder(locale, item.suggestedAnswerOwner),
+      };
+    })
+    .filter((item) => item.resourceId);
   return {
     id: cycle.id,
     slug: cycle.slug,
@@ -404,10 +390,17 @@ function translateCycle(locale, cycle) {
     description: t(locale, cycle.description),
     purpose: t(locale, cycle.purpose),
     audiences: translateList(locale, cycle.audiences),
+    audienceStakeholders,
     entryCriteria: cycle.entryCriteria ?? [],
     exitCriteria: cycle.exitCriteria ?? [],
     entryCriteriaDetails: (cycle.entryCriteria ?? []).map((id) => translateCriterion(locale, id)),
     exitCriteriaDetails: (cycle.exitCriteria ?? []).map((id) => translateCriterion(locale, id)),
+    questionnaireResources,
+    confluenceTemplateSections: (cycle.confluenceTemplateSections ?? []).map((section) => ({
+      id: section.id,
+      title: t(locale, section.title),
+      description: section.description ? t(locale, section.description) : "",
+    })),
     stations: cycle.stations.map((stationId, index) => {
       const station = stationById[stationId];
       const resources = (cycle.recommendedResources?.[stationId] ?? [])
@@ -463,117 +456,170 @@ function translateCanvas(locale, canvasId, canvas) {
   };
 }
 
-function roleGuide(locale, role) {
-  const cycles = role.cycles.map((id) => cycleById[id]).filter(Boolean);
-  const stationIds = role.stations.filter((id) => stationById[id]);
-  const recommendedResources = [
-    ...new Set(
-      cycles.flatMap((cycle) =>
-        stationIds.flatMap((stationId) => cycle.recommendedResources?.[stationId] ?? []),
-      ),
-    ),
-  ]
-    .map((id) => resourceById[id])
-    .filter(Boolean)
-    .slice(0, 10)
-    .map((resource) => translateResource(locale, resource));
+function allStakeholders(locale) {
+  const sourceKeys = [
+    ...stakeholdersRaw.map((item) => item.id),
+    ...cyclesRaw.flatMap((cycle) => cycle.audiences ?? []),
+    ...cyclesRaw.flatMap((cycle) => (cycle.questionnaireResources ?? []).map((item) => item.suggestedAnswerOwner)),
+    ...Object.values(stationStakeholdersRaw).flatMap((items) => items.map((item) => item.stakeholder)),
+  ];
+  return uniqueBy(
+    sourceKeys.map((sourceKey) => translateStakeholder(locale, sourceKey)).filter((item) => item.id),
+    (item) => item.id,
+  ).sort((a, b) => a.title.localeCompare(b.title));
+}
 
-  return {
-    ...role,
-    cycles: role.cycles.map((id) => ({
-      id,
-      title: t(locale, cycleById[id]?.title),
-      description: t(locale, cycleById[id]?.description),
-    })),
-    stations: stationIds.map((id) => ({
-      id,
-      title: t(locale, stationById[id]?.title),
-      description: t(locale, stationById[id]?.description),
-    })),
-    canvases: role.canvases
-      .filter((id) => canvasDataRaw[id])
-      .map((id) => ({ id, title: canvasTitle(locale, id) })),
-    recommendedResources,
-    promptIds: [
-      `${role.id}:facilitate-station`,
-      `${role.id}:fill-canvas`,
-      `${role.id}:review-output`,
-      `${role.id}:next-actions`,
-    ],
-    exportTemplateIds: [`${role.id}:markdown-summary`, `${role.id}:confluence-page`],
-  };
+function routeProfiles(locale) {
+  const stakeholderIds = new Set(
+    cyclesRaw.flatMap((cycle) => (cycle.audiences ?? []).map((sourceKey) => normalizeStakeholderId(sourceKey))),
+  );
+  return [...stakeholderIds].map((stakeholderId) => {
+    const stakeholder = translateStakeholder(locale, stakeholderId);
+    const cycles = cyclesRaw.filter((cycle) =>
+      (cycle.audiences ?? []).some((sourceKey) => normalizeStakeholderId(sourceKey) === stakeholderId),
+    );
+    const stationIds = uniqueBy(
+      cycles.flatMap((cycle) =>
+        cycle.stations.filter((stationId) =>
+          stationStakeholders(locale, stationId).some((item) => item.id === stakeholderId),
+        ),
+      ),
+      (id) => id,
+    );
+    const effectiveStationIds = stationIds.length > 0 ? stationIds : cycles.flatMap((cycle) => cycle.stations.slice(0, 1));
+    const resources = uniqueBy(
+      cycles.flatMap((cycle) =>
+        effectiveStationIds.flatMap((stationId) => [
+          ...(cycle.recommendedResources?.[stationId] ?? []),
+          ...(cycle.questionnaireResources ?? [])
+            .filter((item) => item.station === stationId)
+            .map((item) => item.resource),
+        ]),
+      ),
+      (id) => id,
+    )
+      .map((id) => resourceById[id])
+      .filter(Boolean);
+    const canvases = uniqueBy(
+      resources
+        .filter((resource) => resource.canvas && canvasDataRaw[resource.canvas])
+        .map((resource) => ({ id: resource.canvas, title: canvasTitle(locale, resource.canvas) })),
+      (canvas) => canvas.id,
+    );
+    const stations = effectiveStationIds
+      .filter((id) => stationById[id])
+      .map((id) => ({
+        id,
+        title: t(locale, stationById[id].title),
+        description: t(locale, stationById[id].description),
+      }));
+    const decisions = uniqueBy(
+      effectiveStationIds.flatMap((id) => translateStation(locale, stationById[id])?.questions ?? []),
+      (question) => question,
+    ).slice(0, 6);
+    const outputs = uniqueBy(
+      effectiveStationIds.flatMap((id) => [
+        ...(translateStation(locale, stationById[id])?.outcomes ?? []),
+        ...(translateStation(locale, stationById[id])?.evidence ?? []),
+      ]),
+      (output) => output,
+    ).slice(0, 8);
+    return {
+      id: stakeholderId,
+      stakeholderId,
+      title: stakeholder.title,
+      summary: stakeholder.description || `${stakeholder.title} guided path`,
+      stakeholder,
+      cycles: cycles.map((cycle) => ({
+        id: cycle.id,
+        title: t(locale, cycle.title),
+        description: t(locale, cycle.description),
+      })),
+      stations,
+      canvases,
+      decisions,
+      outputs,
+      recommendedResources: resources.slice(0, 10).map((resource) => translateResource(locale, resource)),
+      promptIds: [
+        `${stakeholderId}:facilitate-station`,
+        `${stakeholderId}:use-resources`,
+        `${stakeholderId}:next-actions`,
+      ],
+      exportTemplateIds: [`${stakeholderId}:markdown-summary`, `${stakeholderId}:confluence-page`],
+    };
+  }).sort((a, b) => a.title.localeCompare(b.title));
 }
 
 function promptPacks(locale) {
-  return roleDefinitions.flatMap((role) => {
-    const guide = roleGuide(locale, role);
-    const stationList = guide.stations.map((station) => station.title).join(", ");
-    const canvasList = guide.canvases.map((canvas) => canvas.title).join(", ");
-    const context = `Role: ${guide.title}\nCycles: ${guide.cycles.map((cycle) => cycle.title).join(", ")}\nStations: ${stationList}\nCanvases: ${canvasList}`;
+  return routeProfiles(locale).flatMap((route) => {
+    const stationList = route.stations.map((station) => station.title).join(", ");
+    const canvasList = route.canvases.map((canvas) => canvas.title).join(", ");
+    const context = `Stakeholder: ${route.title}\nCycles: ${route.cycles.map((cycle) => cycle.title).join(", ")}\nStations: ${stationList}\nResources and canvases: ${canvasList}`;
     return [
       {
-        id: `${role.id}:facilitate-station`,
-        roleId: role.id,
-        title: `Facilitate a station for ${guide.title}`,
+        id: `${route.id}:facilitate-station`,
+        routeId: route.id,
+        title: `Facilitate a station with ${route.title}`,
         mode: "facilitate-station",
-        prompt: `${context}\n\nAct as an APIOps Cycles facilitator. Help the team choose the next station, ask focused questions, identify missing evidence, and produce a concise decision log.`,
+        prompt: `${context}\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps.`,
       },
       {
-        id: `${role.id}:fill-canvas`,
-        roleId: role.id,
-        title: `Fill a recommended canvas for ${guide.title}`,
-        mode: "fill-canvas",
-        prompt: `${context}\n\nHelp fill the selected canvas. For each section, ask for evidence, suggest sticky notes, flag assumptions, and keep unanswered items as open questions.`,
+        id: `${route.id}:use-resources`,
+        routeId: route.id,
+        title: `Use station resources with ${route.title}`,
+        mode: "use-resources",
+        prompt: `${context}\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer.`,
       },
       {
-        id: `${role.id}:review-output`,
-        roleId: role.id,
-        title: `Review method output for ${guide.title}`,
-        mode: "review-output",
-        prompt: `${context}\n\nReview the supplied method output for consistency, traceability, missing stakeholders, risks, and readiness for the next APIOps Cycles station.`,
-      },
-      {
-        id: `${role.id}:next-actions`,
-        roleId: role.id,
-        title: `Generate next actions for ${guide.title}`,
+        id: `${route.id}:next-actions`,
+        routeId: route.id,
+        title: `Generate next actions for ${route.title}`,
         mode: "next-actions",
-        prompt: `${context}\n\nGenerate practical next actions, owners, evidence to collect, and recommended canvases or templates. Keep the output suitable for Markdown or Confluence.`,
+        prompt: `${context}\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence.`,
       },
     ];
   });
 }
 
 function exportTemplates(locale) {
-  return roleDefinitions.flatMap((role) => {
-    const guide = roleGuide(locale, role);
-    const cycleId = guide.cycles[0]?.id ?? "capability-productization-cycle";
+  return routeProfiles(locale).flatMap((route) => {
+    const cycleId = route.cycles[0]?.id ?? "capability-productization-cycle";
+    const cycle = translateCycle(locale, cycleById[cycleId]);
     return [
       {
-        id: `${role.id}:markdown-summary`,
-        roleId: role.id,
+        id: `${route.id}:markdown-summary`,
+        routeId: route.id,
+        cycleId,
         format: "markdown",
-        title: `${guide.title} cycle Markdown`,
+        title: `${cycle.title} Markdown`,
+        sections: cycle.confluenceTemplateSections,
         body: methodEngine.renderCycleMarkdown({ cycle: cycleId, locale }),
       },
       {
-        id: `${role.id}:confluence-page`,
-        roleId: role.id,
+        id: `${route.id}:confluence-page`,
+        routeId: route.id,
+        cycleId,
         format: "confluence-wiki",
-        title: `${guide.title} cycle Confluence wiki`,
+        title: `${cycle.title} Confluence wiki`,
+        sections: cycle.confluenceTemplateSections,
         body: methodEngine.renderCycleConfluenceWiki({ cycle: cycleId, locale }),
       },
       {
-        id: `${role.id}:integration-markdown`,
-        roleId: role.id,
+        id: `${route.id}:integration-markdown`,
+        routeId: route.id,
+        cycleId,
         format: "markdown",
-        title: `${guide.title} integration design Markdown`,
+        title: `${route.title} integration design Markdown`,
+        sections: cycle.confluenceTemplateSections,
         body: methodEngine.renderIntegrationDesignMarkdown({ locale }),
       },
       {
-        id: `${role.id}:integration-confluence-wiki`,
-        roleId: role.id,
+        id: `${route.id}:integration-confluence-wiki`,
+        routeId: route.id,
+        cycleId,
         format: "confluence-wiki",
-        title: `${guide.title} integration design Confluence wiki`,
+        title: `${route.title} integration design Confluence wiki`,
+        sections: cycle.confluenceTemplateSections,
         body: methodEngine.renderIntegrationDesignConfluenceWiki({ locale }),
       },
     ];
@@ -610,6 +656,8 @@ const catalog = {
           .map((line) => translateLine(locale, line))
           .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title)),
         stations: stationsRawList.map((station) => translateStation(locale, station)),
+        stakeholders: allStakeholders(locale),
+        routeProfiles: routeProfiles(locale),
         resources: resourcesRaw
           .map((resource) => translateResource(locale, resource))
           .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title)),
@@ -637,15 +685,6 @@ const canvasManifest = {
         ]),
       ),
     ]),
-  ),
-};
-
-const stakeholderGuides = {
-  source,
-  locales,
-  defaultLocale: "en",
-  translations: Object.fromEntries(
-    locales.map((locale) => [locale, roleDefinitions.map((role) => roleGuide(locale, role))]),
   ),
 };
 
@@ -681,7 +720,6 @@ const mcpManifest = {
   description: "Static APIOps Cycles manifest for a future MCP server.",
   dataFiles: [
     "/data/method-catalog.json",
-    "/data/stakeholder-guides.json",
     "/data/canvas-manifest.json",
     "/data/prompt-packs.json",
     "/data/export-templates.json",
@@ -701,18 +739,41 @@ const mcpManifest = {
     cycles: cyclesRaw.map((cycle) => cycle.id),
     stations: stationsRawList.map((station) => station.id),
     canvases: Object.keys(canvasDataRaw),
-    roles: roleDefinitions.map((role) => role.id),
+    stakeholders: allStakeholders("en").map((stakeholder) => stakeholder.id),
+    routeProfiles: routeProfiles("en").map((route) => route.id),
   },
 };
 
 function validate() {
   const cycleIds = new Set(cyclesRaw.map((cycle) => cycle.id));
   const stationIds = new Set(stationsRawList.map((station) => station.id));
-  const canvasIds = new Set(Object.keys(canvasDataRaw));
-  for (const role of roleDefinitions) {
-    for (const id of role.cycles) if (!cycleIds.has(id)) throw new Error(`Missing cycle ${id}`);
-    for (const id of role.stations) if (!stationIds.has(id)) throw new Error(`Missing station ${id}`);
-    for (const id of role.canvases) if (!canvasIds.has(id)) throw new Error(`Missing canvas ${id}`);
+  const resourceIds = new Set(resourcesRaw.map((resource) => resource.id));
+  const criterionIds = new Set(criteriaRaw.map((criterion) => criterion.id));
+  const stakeholderIds = new Set(allStakeholders("en").map((stakeholder) => stakeholder.id));
+  for (const cycle of cyclesRaw) {
+    if (!cycleIds.has(cycle.id)) throw new Error(`Missing cycle ${cycle.id}`);
+    for (const stationId of cycle.stations ?? []) if (!stationIds.has(stationId)) throw new Error(`Missing station ${stationId}`);
+    for (const sourceKey of cycle.audiences ?? []) {
+      const id = normalizeStakeholderId(sourceKey);
+      if (!stakeholderIds.has(id)) throw new Error(`Missing stakeholder ${id} from cycle audience ${sourceKey}`);
+    }
+    for (const item of cycle.questionnaireResources ?? []) {
+      if (!stationIds.has(item.station)) throw new Error(`Missing questionnaire station ${item.station}`);
+      if (!resourceIds.has(item.resource)) throw new Error(`Missing questionnaire resource ${item.resource}`);
+      const id = normalizeStakeholderId(item.suggestedAnswerOwner);
+      if (!stakeholderIds.has(id)) throw new Error(`Missing stakeholder ${id} from owner ${item.suggestedAnswerOwner}`);
+    }
+  }
+  for (const [stationId, items] of Object.entries(stationStakeholdersRaw)) {
+    if (!stationIds.has(stationId)) throw new Error(`Missing station stakeholder station ${stationId}`);
+    for (const item of items) {
+      const id = normalizeStakeholderId(item.stakeholder);
+      if (!stakeholderIds.has(id)) throw new Error(`Missing station stakeholder ${id}`);
+    }
+  }
+  for (const [stationId, criteria] of Object.entries(stationCriteriaRaw)) {
+    if (!stationIds.has(stationId)) throw new Error(`Missing station criteria station ${stationId}`);
+    for (const id of criteria) if (!criterionIds.has(id)) throw new Error(`Missing criterion ${id}`);
   }
 }
 
@@ -723,7 +784,6 @@ copyPublicAsset("apiops-cycles-logo-dark.svg");
 copyPublicAsset("apiops-cycles-logo-white.svg");
 for (const partner of partners.items) copyPartnerAsset(partner.logo);
 writeJson("method-catalog.json", catalog, { publish: true });
-writeJson("stakeholder-guides.json", stakeholderGuides, { publish: true });
 writeJson("canvas-manifest.json", canvasManifest, { publish: true });
 writeJson("prompt-packs.json", prompts, { publish: true });
 writeJson("export-templates.json", exportsData, { publish: true });

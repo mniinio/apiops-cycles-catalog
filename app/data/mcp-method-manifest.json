@@ -8,7 +8,6 @@
   "description": "Static APIOps Cycles manifest for a future MCP server.",
   "dataFiles": [
     "/data/method-catalog.json",
-    "/data/stakeholder-guides.json",
     "/data/canvas-manifest.json",
     "/data/prompt-packs.json",
     "/data/export-templates.json",
@@ -82,16 +81,42 @@
       "capabilityBusinessModelCanvas",
       "consumerExperienceRequirementsCanvas"
     ],
-    "roles": [
-      "executives",
-      "enterprise-architects",
-      "capability-owners",
-      "api-product-owners",
-      "api-designers",
-      "api-platform-teams",
-      "integration-architects",
-      "automation-owners",
-      "ai-facilitators"
+    "stakeholders": [
+      "api-consumer-specialist",
+      "api-designer",
+      "governance-specialist",
+      "api-architect",
+      "api-product-owner",
+      "api-program-owner",
+      "automation-owner",
+      "automation-engineer",
+      "business-owner",
+      "capability-owner",
+      "compliance-specialist",
+      "customer-specialist",
+      "api-engineer",
+      "api-devrel-specialist",
+      "domain-specialist",
+      "partner-specialist",
+      "platform-architect",
+      "platform-owner",
+      "process-owner",
+      "security-specialist",
+      "integration-architect",
+      "operations-specialist"
+    ],
+    "routeProfiles": [
+      "api-architect",
+      "api-designer",
+      "api-product-owner",
+      "automation-engineer",
+      "automation-owner",
+      "business-owner",
+      "capability-owner",
+      "integration-architect",
+      "platform-architect",
+      "platform-owner",
+      "process-owner"
     ]
   }
 }

@@ -2,7 +2,6 @@ import catalog from "./data/method-catalog.json";
 import canvasManifest from "./data/canvas-manifest.json";
 import exportTemplates from "./data/export-templates.json";
 import promptPacks from "./data/prompt-packs.json";
-import stakeholderGuides from "./data/stakeholder-guides.json";
 import siteLabels from "./data/site-labels.json";
 import partners from "./data/partners.json";
 import CatalogExplorer from "./catalog-explorer";
@@ -15,7 +14,7 @@ export function normalizeLocale(locale?: string) {
 
 export function CatalogJsonLd({ locale }: { locale: string }) {
   const data = catalog.translations[normalizeLocale(locale)];
-  const roles = stakeholderGuides.translations[normalizeLocale(locale)];
+  const roles = data.routeProfiles;
   const prefix = locale === "en" ? "" : `/${locale}`;
   const items = [
     ...roles.map((role, index) => ({
@@ -80,7 +79,6 @@ export default function CatalogPage({
       <CatalogJsonLd locale={normalized} />
       <CatalogExplorer
         catalog={catalog}
-        guides={stakeholderGuides}
         canvases={canvasManifest}
         prompts={promptPacks}
         exportsData={exportTemplates}
