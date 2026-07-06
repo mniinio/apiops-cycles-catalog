@@ -463,7 +463,7 @@ function shortStationName(title: string) {
   return title.split(" - ")[0].split(" – ")[0].trim();
 }
 
-function wrapMapLabel(label: string, maxLength = 18) {
+function wrapMapLabel(label: string, maxLength = 24) {
   const words = label.split(/\s+/);
   const lines: string[] = [];
   let current = "";
@@ -588,20 +588,32 @@ function MetroMap({
   const labelBoxes = {
     strategic: { x: 420, y: 6, width: 108, height: 34, label: uiLabels["map.zoneStrategic"] },
     governance: { x: 640, y: 296, width: 124, height: 34, label: uiLabels["map.zoneGovernance"] },
-    consumer: { x: 170, y: 410, width: 118, height: 34, label: uiLabels["map.zoneConsumer"] },
+    consumer: { x: 95, y: 352, width: 118, height: 34, label: uiLabels["map.zoneConsumer"] },
     technical: { x: 720, y: 806, width: 110, height: 34, label: uiLabels["map.zoneTechnical"] },
+  };
+  const coreLabelPositions: Record<number, { x: number; y: number }> = {
+    1: { x: 500, y: 292 },
+    2: { x: 665, y: 360 },
+    3: { x: 742, y: 500 },
+    4: { x: 660, y: 650 },
+    5: { x: 505, y: 735 },
+    6: { x: 322, y: 655 },
+    7: { x: 242, y: 505 },
+    8: { x: 292, y: 345 },
   };
   const lineLegend = lines.map((line, index) => ({ ...line, x: 105, y: 760 + index * 28 }));
   const corePoints = coreStations.map((station, index) => {
     const selectedCycleStation = selectedCycle?.stations.find((item) => item.id === station.id);
     const angle = -90 + (360 / coreStations.length) * index;
     const radians = (angle * Math.PI) / 180;
+    const indexForLabel = selectedCycleStation?.index ?? station.index;
+    const fixedLabel = coreLabelPositions[indexForLabel];
     return {
       ...station,
       displayTitle: selectedCycleStation?.title ?? station.baseTitle,
       angle,
-      labelX: center.x + coreLabelRadius * Math.cos(radians),
-      labelY: center.y + coreLabelRadius * Math.sin(radians),
+      labelX: fixedLabel?.x ?? center.x + coreLabelRadius * Math.cos(radians),
+      labelY: fixedLabel?.y ?? center.y + coreLabelRadius * Math.sin(radians),
       x: center.x + coreRadius * Math.cos(radians),
       y: center.y + coreRadius * Math.sin(radians),
     };
@@ -722,7 +734,7 @@ function MetroMap({
           </text>
           {(() => {
             const lines = wrapMapLabel(point.displayTitle);
-            const boxWidth = Math.max(92, Math.max(...lines.map((line) => line.length)) * 7 + 24);
+            const boxWidth = Math.max(128, Math.max(...lines.map((line) => line.length)) * 7 + 24);
             const boxHeight = lines.length * 14 + 16;
             const boxX = point.labelX - boxWidth / 2;
             const boxY = point.labelY - boxHeight / 2;

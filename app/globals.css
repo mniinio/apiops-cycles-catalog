@@ -239,7 +239,10 @@ a {
 .stakeholder-selector {
   display: grid;
   gap: 6px;
-  min-width: min(360px, 100%);
+  justify-self: start;
+  max-width: min(520px, 100%);
+  min-width: min(320px, 100%);
+  width: min(520px, 100%);
 }
 
 .stakeholder-selector span {
@@ -248,8 +251,13 @@ a {
   font-weight: 800;
 }
 
-.stakeholder-selector select,
 .workspace-actions select {
+  min-height: 42px;
+  min-width: 0;
+  width: 100%;
+}
+
+.stakeholder-selector select {
   min-height: 42px;
   min-width: 0;
   width: 100%;
@@ -304,6 +312,7 @@ a {
   display: grid;
   gap: 6px;
   left: 0;
+  max-width: calc(100vw - 32px);
   min-width: min(320px, 82vw);
   padding: 8px;
   position: absolute;
@@ -311,11 +320,17 @@ a {
   z-index: 20;
 }
 
+.action-menu:last-of-type .action-menu__items {
+  left: auto;
+  right: 0;
+}
+
 .action-menu__items button {
   font-size: 0.76rem;
   justify-content: start;
   min-height: 34px;
   text-align: left;
+  white-space: normal;
 }
 
 .decision-actions button:disabled {
