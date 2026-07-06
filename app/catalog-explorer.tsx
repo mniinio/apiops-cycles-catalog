@@ -65,7 +65,6 @@ type Cycle = {
     canvasId?: string | null;
     suggestedAnswerOwner: Stakeholder;
   }[];
-  confluenceTemplateSections: { id: string; title: string; description: string }[];
   stations: CycleStation[];
 };
 
@@ -159,7 +158,6 @@ type RouteProfile = {
   outputs: string[];
   recommendedResources: Resource[];
   promptIds: string[];
-  exportTemplateIds: string[];
 };
 
 type CanvasSection = {
@@ -230,6 +228,7 @@ type ExportTemplate = {
   id: string;
   routeId?: string;
   cycleId?: string;
+  kind?: "cycle" | "questions";
   format: string;
   title: string;
   sections?: { id: string; title: string; description: string }[];
@@ -399,12 +398,9 @@ const fallbackLabels: Record<string, string> = {
   "confluence.kicker": "Confluence export",
   "confluence.title": "Publishing templates",
   "confluence.helper": "Choose the purpose first, then copy the format that matches the destination. Markdown is for docs repositories and static sites. Confluence-wiki is for Confluence pages that accept wiki markup.",
-  "confluence.cycleTemplate": "Cycle documentation",
-  "confluence.cycleTemplateTitle": "Cycle reference to publish",
-  "confluence.cycleTemplateHelp": "Use this when you want to document the selected cycle, stations, route, and method guidance.",
   "confluence.questionTemplate": "Question template",
   "confluence.questionTemplateTitle": "Question template to fill in",
-  "confluence.questionTemplateHelp": "Use this when you want to gather answers and evidence before choosing an integration or API design path.",
+  "confluence.questionTemplateHelp": "Use this when you want to gather station answers and evidence with related canvas questions and resources.",
   "confluence.markdown": "Markdown",
   "confluence.confluenceWiki": "Confluence-wiki",
   "confluence.copyMarkdown": "Copy Markdown",
@@ -445,14 +441,11 @@ function safeRole(roleId: string, roles: RouteProfile[]) {
 }
 
 function templateUse(template: ExportTemplate, labels: Record<string, string>) {
-  const isQuestionTemplate = template.id.includes("integration");
   return {
-    key: isQuestionTemplate ? "questions" : "cycle",
-    label: isQuestionTemplate ? labels["confluence.questionTemplate"] : labels["confluence.cycleTemplate"],
-    title: isQuestionTemplate ? labels["confluence.questionTemplateTitle"] : labels["confluence.cycleTemplateTitle"],
-    copy: isQuestionTemplate
-      ? labels["confluence.questionTemplateHelp"]
-      : labels["confluence.cycleTemplateHelp"],
+    key: "questions",
+    label: labels["confluence.questionTemplate"],
+    title: labels["confluence.questionTemplateTitle"],
+    copy: labels["confluence.questionTemplateHelp"],
   };
 }
 
@@ -475,7 +468,7 @@ function buildTemplateGroups(roleTemplates: ExportTemplate[], labels: Record<str
     else group.markdown = template;
     groups.set(use.key, group);
   }
-  return ["cycle", "questions"]
+  return ["questions"]
     .map((key) => groups.get(key))
     .filter((group): group is NonNullable<typeof group> => Boolean(group));
 }
@@ -1448,14 +1441,14 @@ function CatalogExplorer({
     }
   }
 
-  async function copyExportTemplate(kind: "cycle" | "questions", format: "markdown" | "confluence") {
+  async function copyExportTemplate(format: "markdown" | "confluence") {
     const loaded = await loadExportTemplates();
     const templatesForLocale = loaded.translations[locale] ?? loaded.translations[loaded.defaultLocale] ?? loaded.translations.en ?? [];
     const groups = buildTemplateGroups(
       templatesForLocale.filter((template) => template.routeId === role.id || template.cycleId === cycleId),
       localizedLabels,
     );
-    const group = groups.find((item) => item.key === kind);
+    const group = groups.find((item) => item.key === "questions");
     const template = format === "confluence" ? group?.confluence : group?.markdown;
     if (template) {
       await copyText(template.body);
@@ -1797,10 +1790,8 @@ ${prompt.prompt}`;
               <button type="button" onClick={() => setActionMenu(actionMenu === "exports" ? null : "exports")}>Wiki</button>
               {actionMenu === "exports" ? (
                 <div className="action-menu__items">
-                  <button type="button" onClick={() => copyExportTemplate("cycle", "markdown")}>{localizedLabels["confluence.copyMarkdown"]}: {localizedLabels["confluence.cycleTemplate"]}</button>
-                  <button type="button" onClick={() => copyExportTemplate("cycle", "confluence")}>{localizedLabels["confluence.copyConfluenceWiki"]}: {localizedLabels["confluence.cycleTemplate"]}</button>
-                  <button type="button" onClick={() => copyExportTemplate("questions", "markdown")}>{localizedLabels["confluence.copyMarkdown"]}: {localizedLabels["confluence.questionTemplate"]}</button>
-                  <button type="button" onClick={() => copyExportTemplate("questions", "confluence")}>{localizedLabels["confluence.copyConfluenceWiki"]}: {localizedLabels["confluence.questionTemplate"]}</button>
+                  <button type="button" onClick={() => copyExportTemplate("markdown")}>{localizedLabels["confluence.copyMarkdown"]}: {localizedLabels["confluence.questionTemplate"]}</button>
+                  <button type="button" onClick={() => copyExportTemplate("confluence")}>{localizedLabels["confluence.copyConfluenceWiki"]}: {localizedLabels["confluence.questionTemplate"]}</button>
                 </div>
               ) : null}
             </div>

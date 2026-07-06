@@ -1,7 +1,6 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "branch": "codex/integration-design-extension",
     "commit": "8f6a705b5e8a44b51361cec6ceed21d0ef23b1b6"
   },
   "version": 1,

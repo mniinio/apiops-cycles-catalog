@@ -1,7 +1,6 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "branch": "codex/integration-design-extension",
     "commit": "8f6a705b5e8a44b51361cec6ceed21d0ef23b1b6"
   },
   "locales": [
@@ -12,7 +11,7 @@
     "pt"
   ],
   "defaultLocale": "en",
-  "generatedAt": "2026-07-06T14:43:12.562Z",
+  "generatedAt": "2026-07-06T20:25:14.735Z",
   "translations": {
     "en": {
       "routeProfiles": [

@@ -209,12 +209,9 @@ function siteLabels(locale) {
     "confluence.kicker": "Confluence export",
     "confluence.title": "Publishing templates",
     "confluence.helper": "Choose the purpose first, then copy the format that matches the destination. Markdown is for docs repositories and static sites. Confluence-wiki is for Confluence pages that accept wiki markup.",
-    "confluence.cycleTemplate": "Cycle documentation",
-    "confluence.cycleTemplateTitle": "Cycle reference to publish",
-    "confluence.cycleTemplateHelp": "Use this when you want to document the selected cycle, stations, route, and method guidance.",
     "confluence.questionTemplate": "Question template",
     "confluence.questionTemplateTitle": "Question template to fill in",
-    "confluence.questionTemplateHelp": "Use this when you want to gather answers and evidence before choosing an integration or API design path.",
+    "confluence.questionTemplateHelp": "Use this when you want to gather station answers and evidence with related canvas questions and resources.",
     "confluence.markdown": "Markdown",
     "confluence.confluenceWiki": "Confluence-wiki",
     "confluence.copyMarkdown": "Copy Markdown",
@@ -253,6 +250,14 @@ const stationCriteriaRaw = readJson(path.join(methodRoot, "station-criteria.json
 const canvasDataRaw = readJson(path.join(canvasRoot, "canvasData.json"));
 const canvasLabelsRaw = readJson(path.join(canvasRoot, "localizedData.json"));
 const labelsByLocale = Object.fromEntries(locales.map((locale) => [locale, readLabels(locale)]));
+
+function catalogLabels(locale) {
+  return Object.fromEntries(
+    Object.entries(labelsByLocale[locale] ?? {}).filter(([key]) =>
+      !key.startsWith("cycle.template.") && !key.startsWith("integration.template."),
+    ),
+  );
+}
 
 function t(locale, key) {
   if (!key) return "";
@@ -558,11 +563,6 @@ function translateCycle(locale, cycle) {
     entryCriteriaDetails: (cycle.entryCriteria ?? []).map((id) => translateCriterion(locale, id)),
     exitCriteriaDetails: (cycle.exitCriteria ?? []).map((id) => translateCriterion(locale, id)),
     questionnaireResources,
-    confluenceTemplateSections: (cycle.confluenceTemplateSections ?? []).map((section) => ({
-      id: section.id,
-      title: t(locale, section.title),
-      description: section.description ? t(locale, section.description) : "",
-    })),
     stations: cycle.stations.map((stationId, index) => translateCycleStation(locale, cycle, stationId, index)),
   };
 }
@@ -695,7 +695,6 @@ function routeProfiles(locale) {
         `${stakeholderId}:use-resources`,
         `${stakeholderId}:next-actions`,
       ],
-      exportTemplateIds: [`${stakeholderId}:markdown-summary`, `${stakeholderId}:confluence-page`],
     };
   }).sort((a, b) => a.title.localeCompare(b.title));
 }
@@ -731,46 +730,132 @@ function promptPacks(locale) {
   });
 }
 
+function renderCycleQuestionMarkdown(locale, cycle) {
+  const lines = [
+    `# ${cycle.title} question template`,
+    "",
+    cycle.description,
+    "",
+    "Use this template to gather answers and evidence station by station. Canvas section prompts are listed first, followed by other related resources.",
+    "",
+  ];
+  for (const station of cycle.stations) {
+    lines.push(`## ${station.index}. ${station.title}`, "", station.description, "");
+    const canvasResources = (station.resources ?? []).filter((resource) => resource.canvasId && canvasDataRaw[resource.canvasId]);
+    const otherResources = (station.resources ?? []).filter((resource) => !resource.canvasId);
+    if (canvasResources.length) {
+      lines.push("### Canvas questions");
+      for (const resource of canvasResources) {
+        const canvas = translateCanvas(locale, resource.canvasId, canvasDataRaw[resource.canvasId]);
+        lines.push(`#### ${resource.title}`);
+        if (canvas.purpose) lines.push(canvas.purpose);
+        for (const section of canvas.sections ?? []) {
+          const prompt = section.description || section.title;
+          if (prompt) lines.push(`- **${section.title}**: ${prompt}`);
+        }
+        lines.push("");
+      }
+    } else if (station.questions?.length) {
+      lines.push("### Station questions");
+      for (const question of station.questions) lines.push(`- ${question}`);
+      lines.push("");
+    }
+    const entry = station.criteriaDetails?.flatMap((criterion) => criterion.entry ?? []) ?? [];
+    if (entry.length) {
+      lines.push("### Before this station");
+      for (const criterion of entry) lines.push(`- [ ] ${criterion}`);
+      lines.push("");
+    }
+    const exit = station.criteriaDetails?.flatMap((criterion) => criterion.exit ?? []) ?? [];
+    if (exit.length) {
+      lines.push("### Ready to leave when");
+      for (const criterion of exit) lines.push(`- [ ] ${criterion}`);
+      lines.push("");
+    }
+    if (otherResources.length) {
+      lines.push("### Other related resources");
+      for (const resource of otherResources) {
+        lines.push(`- **${resource.title}**${resource.description ? `: ${resource.description}` : ""}`);
+      }
+      lines.push("");
+    }
+  }
+  return lines.join("\n").trim();
+}
+
+function renderCycleQuestionConfluenceWiki(locale, cycle) {
+  const lines = [
+    `h1. ${cycle.title} question template`,
+    "",
+    cycle.description,
+    "",
+    "Use this template to gather answers and evidence station by station. Canvas section prompts are listed first, followed by other related resources.",
+    "",
+  ];
+  for (const station of cycle.stations) {
+    lines.push(`h2. ${station.index}. ${station.title}`, "", station.description, "");
+    const canvasResources = (station.resources ?? []).filter((resource) => resource.canvasId && canvasDataRaw[resource.canvasId]);
+    const otherResources = (station.resources ?? []).filter((resource) => !resource.canvasId);
+    if (canvasResources.length) {
+      lines.push("h3. Canvas questions");
+      for (const resource of canvasResources) {
+        const canvas = translateCanvas(locale, resource.canvasId, canvasDataRaw[resource.canvasId]);
+        lines.push(`h4. ${resource.title}`);
+        if (canvas.purpose) lines.push(canvas.purpose);
+        for (const section of canvas.sections ?? []) {
+          const prompt = section.description || section.title;
+          if (prompt) lines.push(`* *${section.title}*: ${prompt}`);
+        }
+        lines.push("");
+      }
+    } else if (station.questions?.length) {
+      lines.push("h3. Station questions");
+      for (const question of station.questions) lines.push(`* ${question}`);
+      lines.push("");
+    }
+    const entry = station.criteriaDetails?.flatMap((criterion) => criterion.entry ?? []) ?? [];
+    if (entry.length) {
+      lines.push("h3. Before this station");
+      for (const criterion of entry) lines.push(`* [ ] ${criterion}`);
+      lines.push("");
+    }
+    const exit = station.criteriaDetails?.flatMap((criterion) => criterion.exit ?? []) ?? [];
+    if (exit.length) {
+      lines.push("h3. Ready to leave when");
+      for (const criterion of exit) lines.push(`* [ ] ${criterion}`);
+      lines.push("");
+    }
+    if (otherResources.length) {
+      lines.push("h3. Other related resources");
+      for (const resource of otherResources) {
+        lines.push(`* *${resource.title}*${resource.description ? `: ${resource.description}` : ""}`);
+      }
+      lines.push("");
+    }
+  }
+  return lines.join("\n").trim();
+}
+
 function exportTemplates(locale) {
   return cyclesRaw.flatMap((rawCycle) => {
     const cycle = translateCycle(locale, rawCycle);
     const cycleId = rawCycle.id;
-    const templates = [
-      {
-        id: `${cycleId}:markdown-summary`,
-        cycleId,
-        format: "markdown",
-        title: `${cycle.title} Markdown`,
-        sections: cycle.confluenceTemplateSections,
-        body: methodEngine.renderCycleMarkdown({ cycle: cycleId, locale }),
-      },
-      {
-        id: `${cycleId}:confluence-page`,
-        cycleId,
-        format: "confluence-wiki",
-        title: `${cycle.title} Confluence wiki`,
-        sections: cycle.confluenceTemplateSections,
-        body: methodEngine.renderCycleConfluenceWiki({ cycle: cycleId, locale }),
-      },
-    ];
-    if (cycleId !== "integration-productization-cycle") return templates;
     return [
-      ...templates,
       {
-        id: `${cycleId}:integration-markdown`,
+        id: `${cycleId}:question-template-markdown`,
         cycleId,
+        kind: "questions",
         format: "markdown",
-        title: `${cycle.title} integration design Markdown`,
-        sections: cycle.confluenceTemplateSections,
-        body: methodEngine.renderIntegrationDesignMarkdown({ locale }),
+        title: `${cycle.title} question template Markdown`,
+        body: renderCycleQuestionMarkdown(locale, cycle),
       },
       {
-        id: `${cycleId}:integration-confluence-wiki`,
+        id: `${cycleId}:question-template-confluence-wiki`,
         cycleId,
+        kind: "questions",
         format: "confluence-wiki",
-        title: `${cycle.title} integration design Confluence wiki`,
-        sections: cycle.confluenceTemplateSections,
-        body: methodEngine.renderIntegrationDesignConfluenceWiki({ locale }),
+        title: `${cycle.title} question template Confluence wiki`,
+        body: renderCycleQuestionConfluenceWiki(locale, cycle),
       },
     ];
   });
@@ -787,7 +872,6 @@ try {
 
 const source = {
   repository: "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-  branch: "codex/integration-design-extension",
   commit: sourceCommit,
 };
 
@@ -800,7 +884,7 @@ const catalog = {
     locales.map((locale) => [
       locale,
       {
-        labels: labelsByLocale[locale] ?? {},
+        labels: catalogLabels(locale),
         cycles: cyclesRaw.map((cycle) => translateCycle(locale, cycle)),
         lines: linesRaw
           .map((line) => translateLine(locale, line))
@@ -818,7 +902,6 @@ const catalog = {
       },
     ]),
   ),
-  extension: integrationExtension,
 };
 
 const routeIndex = {
