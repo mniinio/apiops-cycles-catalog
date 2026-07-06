@@ -26,11 +26,23 @@ type Criterion = {
 type CycleStation = {
   index: number;
   id: string;
+  slug?: string;
+  icon: string;
   title: string;
   description: string;
+  whyItMatters: string;
+  applyInWork: string;
+  outcomes: string[];
+  steps: { text: string; resourceId?: string; resourceTitle?: string; canvasId?: string | null }[];
+  questions: string[];
+  criteria: string[];
+  criteriaDetails: Criterion[];
   baseTitle: string;
+  group: string;
+  lifecycleStage: string;
   stakeholders: Stakeholder[];
   resources: Resource[];
+  evidence: string[];
 };
 
 type Cycle = {
@@ -1083,7 +1095,7 @@ function CatalogExplorer({
       </main>
     );
   }
-  const stationStepResourceIds = new Set(stationDetail.steps.map((step) => step.resourceId).filter(Boolean));
+  const stationStepResourceIds = new Set((selectedCycleStation?.steps ?? stationDetail.steps).map((step) => step.resourceId).filter(Boolean));
   const selectedStationResources =
     selectedCycleStation?.resources.length
       ? selectedCycleStation.resources
@@ -1092,11 +1104,23 @@ function CatalogExplorer({
     selectedCycleStation ?? {
       index: 0,
       id: stationDetail.id,
+      slug: stationDetail.id,
+      icon: stationDetail.icon,
       title: stationDetail.title,
       description: stationDetail.description,
+      whyItMatters: stationDetail.whyItMatters,
+      applyInWork: stationDetail.applyInWork,
+      outcomes: stationDetail.outcomes,
+      steps: stationDetail.steps,
+      questions: stationDetail.questions,
+      criteria: stationDetail.criteria,
+      criteriaDetails: stationDetail.criteriaDetails,
       baseTitle: stationDetail.title,
+      group: stationDetail.group,
+      lifecycleStage: stationDetail.lifecycleStage,
       stakeholders: stationDetail.stakeholders ?? [],
       resources: selectedStationResources,
+      evidence: stationDetail.evidence,
     };
   const [view, setView] = useState<ViewKey>("map");
   const [canvasId, setCanvasId] = useState(role.canvases[0]?.id ?? Object.keys(canvasData)[0]);
@@ -1123,18 +1147,18 @@ function CatalogExplorer({
   const stakeholderParticipants = uniqueById(selectedStation.stakeholders ?? []).filter(Boolean);
   const participantChips = stakeholderParticipants.map((item) => item.title).slice(0, 8);
   const stationQuestions = uniqueText([
-    ...(stationDetail.questions ?? []),
-    ...stationDetail.steps.map((step) => step.text),
-    stationDetail.applyInWork,
-    stationDetail.whyItMatters,
+    ...(selectedStation.questions ?? []),
+    ...(selectedStation.steps ?? []).map((step) => step.text),
+    selectedStation.applyInWork,
+    selectedStation.whyItMatters,
   ]).slice(0, 5);
   const selectedCycleStationIndex = selectedCycle.stations.findIndex((station) => station.id === stationId);
   const previousCycleStation = selectedCycleStationIndex > 0 ? selectedCycle.stations[selectedCycleStationIndex - 1] : null;
   const previousStationDetail = previousCycleStation ? stations.find((station) => station.id === previousCycleStation.id) : null;
   const beforeCriteria = selectedCycleStationIndex <= 0
     ? selectedCycle.entryCriteriaDetails
-    : previousStationDetail?.criteriaDetails ?? [];
-  const readyCriteria = stationDetail.criteriaDetails.length ? stationDetail.criteriaDetails : selectedCycle.exitCriteriaDetails;
+    : previousCycleStation?.criteriaDetails ?? previousStationDetail?.criteriaDetails ?? [];
+  const readyCriteria = selectedStation.criteriaDetails.length ? selectedStation.criteriaDetails : selectedCycle.exitCriteriaDetails;
   const lineNavigation = lines
     .map((line) => {
       const index = line.stations.indexOf(stationId);

@@ -74,6 +74,13 @@ function readLabels(locale) {
   const dir = path.join(methodRoot, locale);
   const labels = {};
   if (!existsSync(dir)) return labels;
+  const mergeLabels = (value) => {
+    if (Array.isArray(value)) {
+      value.forEach((item) => mergeLabels(item));
+      return;
+    }
+    Object.assign(labels, value);
+  };
   for (const name of [
     "labels.json",
     "labels.cycles.json",
@@ -84,7 +91,7 @@ function readLabels(locale) {
     "labels.lines.json",
   ]) {
     const file = path.join(dir, name);
-    if (existsSync(file)) Object.assign(labels, readJson(file));
+    if (existsSync(file)) mergeLabels(readJson(file));
   }
   return labels;
 }
@@ -243,8 +250,16 @@ function t(locale, key) {
   return labelsByLocale[locale]?.[key] ?? labelsByLocale.en?.[key] ?? key;
 }
 
+function hasLabel(locale, key) {
+  return Boolean(labelsByLocale[locale]?.[key] ?? labelsByLocale.en?.[key]);
+}
+
 function translateList(locale, list = []) {
   return list.map((item) => t(locale, item)).filter(Boolean);
+}
+
+function stationStepItems(station) {
+  return station.how_it_works ?? station["how-it-works"] ?? [];
 }
 
 function readSnippet(locale, snippet) {
@@ -391,7 +406,7 @@ function translateLine(locale, line) {
 
 function translateStation(locale, station) {
   const questions = translateList(locale, [
-    ...(station.how_it_works ?? []).map((step) => step.step),
+    ...stationStepItems(station).map((step) => step.step),
     station.apply_in_work,
     station.why_it_matters,
   ]);
@@ -407,7 +422,7 @@ function translateStation(locale, station) {
     group: t(locale, station.groupTitle),
     lifecycleStage: station.lifecycleStage ?? station.type ?? "supporting",
     outcomes: translateList(locale, station.outcomes),
-    steps: (station.how_it_works ?? []).map((step) => ({
+    steps: stationStepItems(station).map((step) => ({
       text: t(locale, step.step),
       resourceId: step.resource,
       resourceTitle: step.resource ? t(locale, resourceById[step.resource]?.title) : "",
@@ -418,6 +433,77 @@ function translateStation(locale, station) {
     criteriaDetails: criteria.map((id) => translateCriterion(locale, id)),
     stakeholders: aggregateStationStakeholders(locale, station.id),
     evidence: station.expectedEvidenceTags ?? [],
+  };
+}
+
+function cycleStationLabelKey(cycleId, stationId, field) {
+  return `cycle.${cycleId}.station.${stationId}.${field}`;
+}
+
+function translateCycleStation(locale, cycle, stationId, index) {
+  const station = stationById[stationId];
+  const titleKey = cycle.stationLabels?.[stationId] ?? cycleStationLabelKey(cycle.id, stationId, "title");
+  const descriptionKey = cycle.stationDescriptions?.[stationId] ?? cycleStationLabelKey(cycle.id, stationId, "description");
+  const whyKey = cycleStationLabelKey(cycle.id, stationId, "why_it_matters");
+  const applyKey = cycleStationLabelKey(cycle.id, stationId, "apply_in_work");
+  const outcomeKeys = station?.outcomes?.map((key) => key.replace(`station.${stationId}.`, `cycle.${cycle.id}.station.${stationId}.`)) ?? [];
+  const stepItems = stationStepItems(station ?? {}).map((step) => ({
+    ...step,
+    step: step.step?.replace(`station.${stationId}.`, `cycle.${cycle.id}.station.${stationId}.`),
+  }));
+  const steps = stepItems.map((step) => ({
+    text: hasLabel(locale, step.step) ? t(locale, step.step) : t(locale, step.step?.replace(`cycle.${cycle.id}.station.${stationId}.`, `station.${stationId}.`)),
+    resourceId: step.resource,
+    resourceTitle: step.resource ? t(locale, resourceById[step.resource]?.title) : "",
+    canvasId: step.resource ? resourceById[step.resource]?.canvas ?? null : null,
+  })).filter((step) => step.text);
+  const stakeholders = stationStakeholders(locale, cycle.id, stationId);
+  const responsibilityResourceIds = stakeholders.flatMap((stakeholder) =>
+    (stakeholder.responsibilities ?? []).map((responsibility) => responsibility.resourceId),
+  );
+  const resources = (cycle.recommendedResources?.[stationId] ?? [])
+    .concat(responsibilityResourceIds)
+    .filter((id, index, items) => items.indexOf(id) === index)
+    .map((id) => resourceById[id])
+    .filter(Boolean)
+    .map((resource) => translateResource(locale, resource));
+  const stationCriteria = stationCriteriaRaw[stationId] ?? station?.stationCriteria ?? [];
+  const translatedOutcomes = outcomeKeys.map((key, outcomeIndex) => {
+    const fallback = station?.outcomes?.[outcomeIndex];
+    return hasLabel(locale, key) ? t(locale, key) : t(locale, fallback);
+  }).filter(Boolean);
+  const whyItMatters = hasLabel(locale, whyKey) ? t(locale, whyKey) : t(locale, station?.why_it_matters);
+  const applyInWork = hasLabel(locale, applyKey) ? t(locale, applyKey) : t(locale, station?.apply_in_work);
+  const questions = translateList(locale, [
+    ...stepItems.map((step) => step.step),
+    applyKey,
+    whyKey,
+  ]).filter((text) => !text.startsWith(`cycle.${cycle.id}.station.${stationId}.`));
+
+  return {
+    index: index + 1,
+    id: stationId,
+    slug: station?.slug,
+    icon: station?.icon ?? "",
+    title: t(locale, titleKey),
+    description: t(locale, descriptionKey),
+    whyItMatters,
+    applyInWork,
+    outcomes: translatedOutcomes.length ? translatedOutcomes : translateList(locale, station?.outcomes),
+    steps,
+    questions: questions.length ? questions : translateList(locale, [
+      ...stationStepItems(station ?? {}).map((step) => step.step),
+      station?.apply_in_work,
+      station?.why_it_matters,
+    ]),
+    criteria: stationCriteria,
+    criteriaDetails: stationCriteria.map((id) => translateCriterion(locale, id)),
+    baseTitle: station ? t(locale, station.title) : stationId,
+    group: station ? t(locale, station.groupTitle) : "",
+    lifecycleStage: station?.lifecycleStage ?? station?.type ?? "supporting",
+    stakeholders,
+    resources,
+    evidence: station?.expectedEvidenceTags ?? [],
   };
 }
 
@@ -468,28 +554,7 @@ function translateCycle(locale, cycle) {
       title: t(locale, section.title),
       description: section.description ? t(locale, section.description) : "",
     })),
-    stations: cycle.stations.map((stationId, index) => {
-      const station = stationById[stationId];
-      const stakeholders = stationStakeholders(locale, cycle.id, stationId);
-      const responsibilityResourceIds = stakeholders.flatMap((stakeholder) =>
-        (stakeholder.responsibilities ?? []).map((responsibility) => responsibility.resourceId),
-      );
-      const resources = (cycle.recommendedResources?.[stationId] ?? [])
-        .concat(responsibilityResourceIds)
-        .filter((id, index, items) => items.indexOf(id) === index)
-        .map((id) => resourceById[id])
-        .filter(Boolean)
-        .map((resource) => translateResource(locale, resource));
-      return {
-        index: index + 1,
-        id: stationId,
-        title: t(locale, cycle.stationLabels?.[stationId] ?? station?.title),
-        description: t(locale, cycle.stationDescriptions?.[stationId] ?? station?.description),
-        baseTitle: station ? t(locale, station.title) : stationId,
-        stakeholders,
-        resources,
-      };
-    }),
+    stations: cycle.stations.map((stationId, index) => translateCycleStation(locale, cycle, stationId, index)),
   };
 }
 

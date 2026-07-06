@@ -12,7 +12,7 @@
     "pt"
   ],
   "defaultLocale": "en",
-  "generatedAt": "2026-07-05T18:54:57.918Z",
+  "generatedAt": "2026-07-06T06:36:12.679Z",
   "translations": {
     "en": {
       "routeProfiles": [
@@ -153,42 +153,42 @@
             {
               "id": "api-product-strategy",
               "title": "Strategy",
-              "description": "Before building anything, define your API’s value, users, and business goals from day one."
+              "description": "Frame the business need as a reusable capability before choosing the implementation style."
             },
             {
               "id": "api-consumer-experience",
               "title": "Consumer Requirements & Onboarding",
-              "description": "Capture consumer requirements, onboarding needs, constraints, service expectations, and producer responsibilities."
+              "description": "Capture consumer onboarding, standards, non-functional requirements, service expectations, constraints, security needs, allowed protocols, data freshness, SLAs, observability, recovery, adoption requirements, and producer responsibilities."
             },
             {
               "id": "api-platform-architecture",
               "title": "Architecture & Platform Decisions",
-              "description": "Use requirements and constraints to choose architecture and platform capabilities."
+              "description": "Use requirements and constraints to decide the right architecture pattern and enabling platform capabilities."
             },
             {
               "id": "api-design",
               "title": "Solution & Interface Design",
-              "description": "Design the selected solution mechanism and interface contract."
+              "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
             },
             {
               "id": "api-delivery",
               "title": "Delivery & Operations",
-              "description": "Deliver and operate the selected solution mechanism."
+              "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
             },
             {
               "id": "api-audit",
               "title": "Quality & Readiness Assurance",
-              "description": "Assure quality, governance, and readiness before release."
+              "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
             },
             {
               "id": "api-publishing",
               "title": "Publishing & Adoption Enablement",
-              "description": "Publish capability information so consumers can discover, request, onboard, and get support."
+              "description": "Publish reusable capability information so consumers can discover, request, onboard, use, and get support."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Monitoring & Improvement",
-              "description": "Monitor capability health, consumer outcomes, reliability, reuse, and improvement opportunities."
+              "description": "Monitor usage, reliability, data quality, consumer outcomes, operational cost, and reuse opportunities after release."
             }
           ]
         },
@@ -201,42 +201,42 @@
             {
               "id": "api-product-strategy",
               "title": "API Product Strategy",
-              "description": "Frame the API as a product with clear value proposition, consumers, business model, ownership, and lifecycle intent."
+              "description": "Before building anything, define your API's value, users, and business goals from day one."
             },
             {
               "id": "api-consumer-experience",
               "title": "API Consumer Experience",
-              "description": "Define API consumer segments, onboarding paths, expectations, and experience requirements before design decisions are locked."
+              "description": "Ensure your API is discoverable, understandable, and usable — before and after launch."
             },
             {
               "id": "api-platform-architecture",
               "title": "API Platform Architecture",
-              "description": "Choose and validate the API platform, architecture, governance, and operational constraints needed for the product."
+              "description": "Ensure scalability, reuse, and governance across your API and platform components."
             },
             {
               "id": "api-design",
               "title": "API Design",
-              "description": "Design the API contract, interaction model, schemas, policies, and usability details before implementation."
+              "description": "Create API designs that are consistent, reusable, and grounded in business intent and shared standards."
             },
             {
               "id": "api-delivery",
               "title": "API Delivery",
-              "description": "Implement, test, secure, automate, and operate the API product through the delivery pipeline."
+              "description": "Build, test, and release APIs using modern delivery pipelines and engineering best practices."
             },
             {
               "id": "api-audit",
               "title": "API Audit",
-              "description": "Validate API quality, compliance, readiness, evidence, and release criteria before publication."
+              "description": "Validate that APIs meet business, design, and operational standards before publishing and exposure."
             },
             {
               "id": "api-publishing",
               "title": "API Publishing",
-              "description": "Publish the API product so consumers can discover, evaluate, request access, onboard, and get support."
+              "description": "Expose APIs securely and clearly to the right audience with the right documentation and processes."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Monitoring & Improving",
-              "description": "Monitor API health, adoption, consumer outcomes, reliability, and improvement opportunities after release."
+              "description": "Use metrics and feedback to track API performance and drive continuous improvement."
             }
           ]
         },
@@ -692,42 +692,42 @@
             {
               "id": "api-product-strategy",
               "title": "API-tuotestrategia",
-              "description": "Frame the API as a product with clear value proposition, consumers, business model, ownership, and lifecycle intent."
+              "description": "Ennen kuin rakennat mitään, määrittele APIn arvo, käyttäjät ja liiketoiminnalliset tavoitteet heti alusta alkaen."
             },
             {
               "id": "api-consumer-experience",
               "title": "API-hyödyntäjäkokemus",
-              "description": "Define API consumer segments, onboarding paths, expectations, and experience requirements before design decisions are locked."
+              "description": "Varmistetaan, että API on löydettävissä, ymmärrettävissä ja käyttökelpoinen ennen käyttöönottoa ja sen jälkeen."
             },
             {
               "id": "api-platform-architecture",
               "title": "API-alustan arkkitehtuuri",
-              "description": "Choose and validate the API platform, architecture, governance, and operational constraints needed for the product."
+              "description": "Varmistetaan skaalautuvuus, uudelleenkäyttö ja hallinta API- ja alustakomponenttien välillä."
             },
             {
               "id": "api-design",
               "title": "API-suunnittelu",
-              "description": "Design the API contract, interaction model, schemas, policies, and usability details before implementation."
+              "description": "Luo API-suunnitelmia, jotka ovat johdonmukaisia, uudelleenkäytettäviä ja perustuvat liiketoiminnallisiin tavoitteisiin sekä yhteisiin standardeihin."
             },
             {
               "id": "api-delivery",
               "title": "API-toteutus",
-              "description": "Implement, test, secure, automate, and operate the API product through the delivery pipeline."
+              "description": "Rakenna, testaa ja julkaise rajapintoja käyttämällä nykyaikaisia jakeluputkia ja parhaita teknisiä käytäntöjä."
             },
             {
               "id": "api-audit",
               "title": "API-auditointi",
-              "description": "Validate API quality, compliance, readiness, evidence, and release criteria before publication."
+              "description": "Varmista, että APIt täyttävät liiketoiminta-, suunnittelu- ja toimintastandardit ennen julkaisua ja käyttöönottoa."
             },
             {
               "id": "api-publishing",
               "title": "API-julkaisu",
-              "description": "Publish the API product so consumers can discover, evaluate, request access, onboard, and get support."
+              "description": "Esittele APIt turvallisesti ja selkeästi oikealle yleisölle oikean dokumentaation ja prosessien avulla."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Seuranta & parantaminen",
-              "description": "Monitor API health, adoption, consumer outcomes, reliability, and improvement opportunities after release."
+              "description": "Käytä mittareita ja palautetta API-suorituskyvyn seuraamiseen ja jatkuvan parantamisen edistämiseen."
             }
           ]
         },
@@ -1135,42 +1135,42 @@
             {
               "id": "api-product-strategy",
               "title": "Strategy",
-              "description": "Before building anything, define your API’s value, users, and business goals from day one."
+              "description": "Frame the business need as a reusable capability before choosing the implementation style."
             },
             {
               "id": "api-consumer-experience",
               "title": "Consumer Requirements & Onboarding",
-              "description": "Capture consumer requirements, onboarding needs, constraints, service expectations, and producer responsibilities."
+              "description": "Capture consumer onboarding, standards, non-functional requirements, service expectations, constraints, security needs, allowed protocols, data freshness, SLAs, observability, recovery, adoption requirements, and producer responsibilities."
             },
             {
               "id": "api-platform-architecture",
               "title": "Architecture & Platform Decisions",
-              "description": "Use requirements and constraints to choose architecture and platform capabilities."
+              "description": "Use requirements and constraints to decide the right architecture pattern and enabling platform capabilities."
             },
             {
               "id": "api-design",
               "title": "Solution & Interface Design",
-              "description": "Design the selected solution mechanism and interface contract."
+              "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
             },
             {
               "id": "api-delivery",
               "title": "Delivery & Operations",
-              "description": "Deliver and operate the selected solution mechanism."
+              "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
             },
             {
               "id": "api-audit",
               "title": "Quality & Readiness Assurance",
-              "description": "Assure quality, governance, and readiness before release."
+              "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
             },
             {
               "id": "api-publishing",
               "title": "Publishing & Adoption Enablement",
-              "description": "Publish capability information so consumers can discover, request, onboard, and get support."
+              "description": "Publish reusable capability information so consumers can discover, request, onboard, use, and get support."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Monitoring & Improvement",
-              "description": "Monitor capability health, consumer outcomes, reliability, reuse, and improvement opportunities."
+              "description": "Monitor usage, reliability, data quality, consumer outcomes, operational cost, and reuse opportunities after release."
             }
           ]
         },
@@ -1183,42 +1183,42 @@
             {
               "id": "api-product-strategy",
               "title": "API Product Strategy",
-              "description": "Frame the API as a product with clear value proposition, consumers, business model, ownership, and lifecycle intent."
+              "description": "Avant de construire quoi que ce soit, définissez dès le départ la valeur de votre API, ses utilisateurs et ses objectifs commerciaux."
             },
             {
               "id": "api-consumer-experience",
               "title": "API Consumer Experience",
-              "description": "Define API consumer segments, onboarding paths, expectations, and experience requirements before design decisions are locked."
+              "description": "Veillez à ce que votre API soit découvrable, compréhensible et utilisable - avant et après le lancement."
             },
             {
               "id": "api-platform-architecture",
               "title": "API Platform Architecture",
-              "description": "Choose and validate the API platform, architecture, governance, and operational constraints needed for the product."
+              "description": "Assurez l'évolutivité, la réutilisation et la gouvernance de vos composants d'API et de plateforme."
             },
             {
               "id": "api-design",
               "title": "API Design",
-              "description": "Design the API contract, interaction model, schemas, policies, and usability details before implementation."
+              "description": "Créer des architectures d'API cohérentes, réutilisables et fondées sur les objectifs métier et des normes communes."
             },
             {
               "id": "api-delivery",
               "title": "API Delivery",
-              "description": "Implement, test, secure, automate, and operate the API product through the delivery pipeline."
+              "description": "Construire, tester et publier des API en utilisant des pipelines de livraison modernes et les meilleures pratiques d'ingénierie."
             },
             {
               "id": "api-audit",
               "title": "API Audit",
-              "description": "Validate API quality, compliance, readiness, evidence, and release criteria before publication."
+              "description": "Vérifiez que les API répondent aux normes métier, de conception et opérationnelles avant leur publication et leur mise à disposition."
             },
             {
               "id": "api-publishing",
               "title": "API Publishing",
-              "description": "Publish the API product so consumers can discover, evaluate, request access, onboard, and get support."
+              "description": "Exposer les API de manière sûre et claire au bon public avec la bonne documentation et les bons processus."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Monitoring & Improving",
-              "description": "Monitor API health, adoption, consumer outcomes, reliability, and improvement opportunities after release."
+              "description": "Utiliser les mesures et le retour d'information pour suivre les performances de l'API et favoriser l'amélioration continue."
             }
           ]
         },
@@ -1626,42 +1626,42 @@
             {
               "id": "api-product-strategy",
               "title": "Strategy",
-              "description": "Before building anything, define your API’s value, users, and business goals from day one."
+              "description": "Frame the business need as a reusable capability before choosing the implementation style."
             },
             {
               "id": "api-consumer-experience",
               "title": "Consumer Requirements & Onboarding",
-              "description": "Capture consumer requirements, onboarding needs, constraints, service expectations, and producer responsibilities."
+              "description": "Capture consumer onboarding, standards, non-functional requirements, service expectations, constraints, security needs, allowed protocols, data freshness, SLAs, observability, recovery, adoption requirements, and producer responsibilities."
             },
             {
               "id": "api-platform-architecture",
               "title": "Architecture & Platform Decisions",
-              "description": "Use requirements and constraints to choose architecture and platform capabilities."
+              "description": "Use requirements and constraints to decide the right architecture pattern and enabling platform capabilities."
             },
             {
               "id": "api-design",
               "title": "Solution & Interface Design",
-              "description": "Design the selected solution mechanism and interface contract."
+              "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
             },
             {
               "id": "api-delivery",
               "title": "Delivery & Operations",
-              "description": "Deliver and operate the selected solution mechanism."
+              "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
             },
             {
               "id": "api-audit",
               "title": "Quality & Readiness Assurance",
-              "description": "Assure quality, governance, and readiness before release."
+              "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
             },
             {
               "id": "api-publishing",
               "title": "Publishing & Adoption Enablement",
-              "description": "Publish capability information so consumers can discover, request, onboard, and get support."
+              "description": "Publish reusable capability information so consumers can discover, request, onboard, use, and get support."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Monitoring & Improvement",
-              "description": "Monitor capability health, consumer outcomes, reliability, reuse, and improvement opportunities."
+              "description": "Monitor usage, reliability, data quality, consumer outcomes, operational cost, and reuse opportunities after release."
             }
           ]
         },
@@ -1674,42 +1674,42 @@
             {
               "id": "api-product-strategy",
               "title": "API Product Strategy",
-              "description": "Frame the API as a product with clear value proposition, consumers, business model, ownership, and lifecycle intent."
+              "description": "Bevor Sie etwas bauen, sollten Sie von Anfang an den Wert, die Benutzer und die Geschäftsziele Ihrer API definieren."
             },
             {
               "id": "api-consumer-experience",
               "title": "API Consumer Experience",
-              "description": "Define API consumer segments, onboarding paths, expectations, and experience requirements before design decisions are locked."
+              "description": "Stellen Sie sicher, dass Ihre API auffindbar, verständlich und nutzbar ist - vor und nach der Einführung."
             },
             {
               "id": "api-platform-architecture",
               "title": "API Platform Architecture",
-              "description": "Choose and validate the API platform, architecture, governance, and operational constraints needed for the product."
+              "description": "Gewährleisten Sie Skalierbarkeit, Wiederverwendung und Governance für Ihre API- und Plattformkomponenten."
             },
             {
               "id": "api-design",
               "title": "API Design",
-              "description": "Design the API contract, interaction model, schemas, policies, and usability details before implementation."
+              "description": "Erstellen Sie API-Designs, die konsistent, wiederverwendbar und auf Geschäftszielen und gemeinsamen Standards basieren."
             },
             {
               "id": "api-delivery",
               "title": "API Delivery",
-              "description": "Implement, test, secure, automate, and operate the API product through the delivery pipeline."
+              "description": "Erstellen, Testen und Freigeben von APIs unter Verwendung moderner Bereitstellungspipelines und bewährter technischer Verfahren."
             },
             {
               "id": "api-audit",
               "title": "API Audit",
-              "description": "Validate API quality, compliance, readiness, evidence, and release criteria before publication."
+              "description": "Stellen Sie sicher, dass APIs vor der Veröffentlichung und Bereitstellung den geschäftlichen, gestalterischen und betrieblichen Standards entsprechen."
             },
             {
               "id": "api-publishing",
               "title": "API Publishing",
-              "description": "Publish the API product so consumers can discover, evaluate, request access, onboard, and get support."
+              "description": "Stellen Sie APIs mit der richtigen Dokumentation und den richtigen Prozessen sicher und klar für die richtige Zielgruppe bereit."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Monitoring & Improving",
-              "description": "Monitor API health, adoption, consumer outcomes, reliability, and improvement opportunities after release."
+              "description": "Nutzen Sie Messgrößen und Feedback, um die API-Leistung zu verfolgen und kontinuierliche Verbesserungen voranzutreiben."
             }
           ]
         },
@@ -2117,42 +2117,42 @@
             {
               "id": "api-product-strategy",
               "title": "Strategy",
-              "description": "Before building anything, define your API’s value, users, and business goals from day one."
+              "description": "Frame the business need as a reusable capability before choosing the implementation style."
             },
             {
               "id": "api-consumer-experience",
               "title": "Consumer Requirements & Onboarding",
-              "description": "Capture consumer requirements, onboarding needs, constraints, service expectations, and producer responsibilities."
+              "description": "Capture consumer onboarding, standards, non-functional requirements, service expectations, constraints, security needs, allowed protocols, data freshness, SLAs, observability, recovery, adoption requirements, and producer responsibilities."
             },
             {
               "id": "api-platform-architecture",
               "title": "Architecture & Platform Decisions",
-              "description": "Use requirements and constraints to choose architecture and platform capabilities."
+              "description": "Use requirements and constraints to decide the right architecture pattern and enabling platform capabilities."
             },
             {
               "id": "api-design",
               "title": "Solution & Interface Design",
-              "description": "Design the selected solution mechanism and interface contract."
+              "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
             },
             {
               "id": "api-delivery",
               "title": "Delivery & Operations",
-              "description": "Deliver and operate the selected solution mechanism."
+              "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
             },
             {
               "id": "api-audit",
               "title": "Quality & Readiness Assurance",
-              "description": "Assure quality, governance, and readiness before release."
+              "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
             },
             {
               "id": "api-publishing",
               "title": "Publishing & Adoption Enablement",
-              "description": "Publish capability information so consumers can discover, request, onboard, and get support."
+              "description": "Publish reusable capability information so consumers can discover, request, onboard, use, and get support."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Monitoring & Improvement",
-              "description": "Monitor capability health, consumer outcomes, reliability, reuse, and improvement opportunities."
+              "description": "Monitor usage, reliability, data quality, consumer outcomes, operational cost, and reuse opportunities after release."
             }
           ]
         },
@@ -2165,42 +2165,42 @@
             {
               "id": "api-product-strategy",
               "title": "API Product Strategy",
-              "description": "Frame the API as a product with clear value proposition, consumers, business model, ownership, and lifecycle intent."
+              "description": "Antes de construir qualquer coisa, defina o valor da sua API, os utilizadores e os objectivos comerciais desde o primeiro dia."
             },
             {
               "id": "api-consumer-experience",
               "title": "API Consumer Experience",
-              "description": "Define API consumer segments, onboarding paths, expectations, and experience requirements before design decisions are locked."
+              "description": "Certifique-se de que a sua API é detetável, compreensível e utilizável - antes e depois do lançamento."
             },
             {
               "id": "api-platform-architecture",
               "title": "API Platform Architecture",
-              "description": "Choose and validate the API platform, architecture, governance, and operational constraints needed for the product."
+              "description": "Garanta a escalabilidade, a reutilização e a governação da sua API e dos componentes da plataforma."
             },
             {
               "id": "api-design",
               "title": "API Design",
-              "description": "Design the API contract, interaction model, schemas, policies, and usability details before implementation."
+              "description": "Criar projetos de API que sejam consistentes, reutilizáveis e baseados na intenção de negócios e em padrões compartilhados."
             },
             {
               "id": "api-delivery",
               "title": "API Delivery",
-              "description": "Implement, test, secure, automate, and operate the API product through the delivery pipeline."
+              "description": "Criar, testar e lançar APIs usando pipelines de entrega modernos e práticas recomendadas de engenharia."
             },
             {
               "id": "api-audit",
               "title": "API Audit",
-              "description": "Validate API quality, compliance, readiness, evidence, and release criteria before publication."
+              "description": "Valide se as APIs atendem aos padrões de negócios, design e operacionais antes da publicação e exposição."
             },
             {
               "id": "api-publishing",
               "title": "API Publishing",
-              "description": "Publish the API product so consumers can discover, evaluate, request access, onboard, and get support."
+              "description": "Exponha as APIs de forma segura e clara ao público certo com a documentação e os processos corretos."
             },
             {
               "id": "monitoring-and-improving",
               "title": "Monitoring & Improving",
-              "description": "Monitor API health, adoption, consumer outcomes, reliability, and improvement opportunities after release."
+              "description": "Utilizar métricas e feedback para acompanhar o desempenho da API e promover a melhoria contínua."
             }
           ]
         },
