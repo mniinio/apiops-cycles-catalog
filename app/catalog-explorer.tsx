@@ -661,6 +661,12 @@ function MetroMap({
 
   return (
     <svg className="metro-map" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={uiLabels["map.ariaLabel"]}>
+      <defs>
+        <clipPath id="metro-map-circle-clip">
+          <circle cx="500" cy="500" r="445" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#metro-map-circle-clip)">
       <circle cx="500" cy="500" r="445" className="metro-zone metro-zone--governance" />
       <ellipse cx="390" cy="112" rx="205" ry="150" className="metro-zone metro-zone--strategic" />
       <ellipse cx="275" cy="430" rx="285" ry="112" className="metro-zone metro-zone--consumer" />
@@ -766,6 +772,7 @@ function MetroMap({
             <text x="30" y="2">{line.title}</text>
           </g>
         ))}
+      </g>
       </g>
     </svg>
   );
