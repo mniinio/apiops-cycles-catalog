@@ -296,6 +296,7 @@ const fallbackLabels: Record<string, string> = {
   "nav.licensing": "Licensing",
   "nav.github": "GitHub",
   "nav.community": "Community",
+  "nav.menu": "Menu",
   "announcement.message": "Version 2.0 is live with faster loading times!",
   "announcement.link": "See what's new",
   "announcement.dismiss": "Dismiss announcement",
@@ -1171,7 +1172,9 @@ function CatalogExplorer({
   });
   const [copyStatus, setCopyStatus] = useState("");
   const [showAnnouncement, setShowAnnouncement] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
   const metroMapRef = useRef<SVGSVGElement>(null);
+  const workspaceTopRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setSelectedResourceId(null);
@@ -1427,10 +1430,19 @@ function CatalogExplorer({
     setExpandedSections((current) => ({ ...current, [section]: !current[section] }));
   }
 
+  function showView(nextView: ViewKey) {
+    setView(nextView);
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 1180px)").matches) {
+      window.setTimeout(() => {
+        workspaceTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 0);
+    }
+  }
+
   function openCanvas(nextCanvasId: string) {
     setCanvasId(nextCanvasId);
     setSelectedResourceId(canvasResources.find((resource) => resource.canvasId === nextCanvasId)?.id ?? null);
-    setView("canvases");
+    showView("canvases");
   }
 
   function promptFor(prompt: PromptPack) {
@@ -1454,7 +1466,7 @@ ${prompt.prompt}`;
       return;
     }
     setSelectedResourceId(resource.id);
-    setView("canvases");
+    showView("canvases");
   }
 
   return (
@@ -1465,17 +1477,30 @@ ${prompt.prompt}`;
             <img className="brand__logo" src="/assets/apiops-cycles-logo-dark.svg" alt="" />
             <span>APIOps Cycles</span>
           </a>
-          <div className="topbar__controls">
-            <a href="#licensing">{localizedLabels["nav.licensing"]}</a>
-            <a href={catalog.source.repository} target="_blank" rel="noreferrer">{localizedLabels["nav.github"]}</a>
-            <a href="#community">{localizedLabels["nav.community"]}</a>
-            <button type="button" onClick={() => setView("data")}>{localizedLabels["nav.data"]}</button>
+          <button
+            className="topbar__menu"
+            type="button"
+            aria-expanded={navOpen}
+            aria-controls="primary-navigation"
+            onClick={() => setNavOpen((open) => !open)}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span className="sr-only">{localizedLabels["nav.menu"]}</span>
+          </button>
+          <div id="primary-navigation" className={navOpen ? "topbar__controls is-open" : "topbar__controls"}>
+            <a href="#licensing" onClick={() => setNavOpen(false)}>{localizedLabels["nav.licensing"]}</a>
+            <a href={catalog.source.repository} target="_blank" rel="noreferrer" onClick={() => setNavOpen(false)}>{localizedLabels["nav.github"]}</a>
+            <a href="#community" onClick={() => setNavOpen(false)}>{localizedLabels["nav.community"]}</a>
+            <button type="button" onClick={() => { showView("data"); setNavOpen(false); }}>{localizedLabels["nav.data"]}</button>
             <label className="sr-only" htmlFor="locale">{localizedLabels["nav.language"]}</label>
             <select
               id="locale"
               value={locale}
               onChange={(event) => {
                 const next = event.target.value;
+                setNavOpen(false);
                 window.location.href = next === "en" ? `/method/${stationId}` : `/${next}/method/${stationId}`;
               }}
             >
@@ -1557,7 +1582,7 @@ ${prompt.prompt}`;
             </section>
           </aside>
         ) : null}
-        <section className="workspace-main">
+        <section className="workspace-main" ref={workspaceTopRef}>
         {view === "map" ? (
         <article className="map-card" style={{ "--route-color": selectedCycleColor } as CSSProperties}>
           <div className="panel__head map-head">
@@ -1715,7 +1740,7 @@ ${prompt.prompt}`;
             <>
           <div className="decision-actions">
             <span>{localizedLabels["actions.use"]}</span>
-            <button type="button" onClick={() => setView("map")} disabled={view === "map"}>Map</button>
+            <button type="button" onClick={() => showView("map")} disabled={view === "map"}>Map</button>
             <div className="action-menu">
               <button type="button" onClick={() => setActionMenu(actionMenu === "ai" ? null : "ai")}>AI</button>
               {actionMenu === "ai" ? (
@@ -1784,12 +1809,12 @@ ${prompt.prompt}`;
                 </div>
                 <div className="pill-list">
                   {roleGuideRows.slice(0, 8).map((item) => (
-                    <button key={item.id} type="button" onClick={() => setView("guide")}>{item.title}</button>
+                    <button key={item.id} type="button" onClick={() => showView("guide")}>{item.title}</button>
                   ))}
                 </div>
                 <div className="chips chips--compact chips--buttons">
                   {participantChips.map((participant) => (
-                    <button key={participant} type="button" onClick={() => setView("guide")}>{participant}</button>
+                    <button key={participant} type="button" onClick={() => showView("guide")}>{participant}</button>
                   ))}
                 </div>
               </section>

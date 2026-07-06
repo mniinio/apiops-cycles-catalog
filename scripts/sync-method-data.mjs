@@ -105,6 +105,7 @@ function siteLabels(locale) {
     "nav.licensing": "Licensing",
     "nav.github": "GitHub",
     "nav.community": "Community",
+    "nav.menu": "Menu",
     "announcement.message": "Version 2.0 is live with faster loading times!",
     "announcement.link": "See what's new",
     "announcement.dismiss": "Dismiss announcement",
