@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { type CSSProperties, type RefObject, useEffect, useRef, useState } from "react";
 
 type Resource = {
   id: string;
@@ -492,6 +492,36 @@ function wrapMapLabel(label: string, maxLength = 24) {
   return lines.slice(0, 3);
 }
 
+function metroMapSvgStyles(activeColor: string) {
+  return `
+    .metro-zone { opacity: 0.28; stroke: none; }
+    .metro-zone--governance { fill: #a8d7ef; }
+    .metro-zone--strategic { fill: #ffd75e; }
+    .metro-zone--consumer { fill: #8ee6a4; }
+    .metro-zone--technical { fill: #f6b16f; }
+    .metro-zone-label,
+    .metro-support-label,
+    .metro-label,
+    .metro-legend text,
+    .metro-line-legend text { fill: #071640; font-family: Arial, sans-serif; font-size: 13px; font-weight: 800; }
+    .metro-label { font-size: 10px; }
+    .metro-support-label { font-size: 11px; font-weight: 650; }
+    .metro-zone-title-bg { fill: rgba(255, 255, 255, 0.88); }
+    .metro-route { fill: none; }
+    .metro-support-node,
+    .metro-node { fill: #ffffff; stroke: #071640; stroke-width: 3; }
+    .metro-support-node { opacity: 0.9; stroke-width: 2; }
+    .metro-support-node--active,
+    .metro-node--active { fill: ${activeColor}; stroke: ${activeColor}; }
+    .metro-node-number { fill: #071640; font-family: Arial, sans-serif; font-size: 10px; font-weight: 900; pointer-events: none; }
+    .metro-node-number--active { fill: #ffffff; }
+    .metro-brand { opacity: 0.45; }
+    .metro-core-label rect { fill: rgba(255, 255, 255, 0.95); stroke: currentColor; stroke-width: 2; }
+    .metro-core-label text { fill: currentColor; font-family: Arial, sans-serif; font-size: 12px; font-weight: 850; pointer-events: none; }
+    .metro-line-legend text { font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; }
+  `;
+}
+
 function uniqueText(items: Array<string | undefined | null>) {
   return Array.from(new Set(items.map((item) => item?.trim()).filter((item): item is string => Boolean(item))));
 }
@@ -550,6 +580,7 @@ function MetroMap({
   onSelectCycle,
   onSelectStation,
   uiLabels,
+  svgRef,
 }: {
   cycles: Cycle[];
   lines: MetroLine[];
@@ -560,6 +591,7 @@ function MetroMap({
   onSelectCycle: (id: string) => void;
   onSelectStation: (id: string) => void;
   uiLabels: Record<string, string>;
+  svgRef?: RefObject<SVGSVGElement | null>;
 }) {
   const width = 1000;
   const height = 1000;
@@ -672,7 +704,7 @@ function MetroMap({
   });
 
   return (
-    <svg className="metro-map" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={uiLabels["map.ariaLabel"]}>
+    <svg ref={svgRef} className="metro-map" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={uiLabels["map.ariaLabel"]}>
       <defs>
         <clipPath id="metro-map-circle-clip">
           <circle cx="500" cy="500" r="445" />
@@ -1134,6 +1166,7 @@ function CatalogExplorer({
     ready: false,
   });
   const [copyStatus, setCopyStatus] = useState("");
+  const metroMapRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     setSelectedResourceId(null);
@@ -1272,6 +1305,32 @@ function CatalogExplorer({
   async function copyText(text: string) {
     await navigator.clipboard.writeText(text);
     setCopyStatus(localizedLabels["actions.copied"]);
+    window.setTimeout(() => setCopyStatus(""), 2200);
+  }
+
+  function exportMetroMapSvg() {
+    const svg = metroMapRef.current;
+    if (!svg) return;
+    const clone = svg.cloneNode(true) as SVGSVGElement;
+    clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    clone.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+    clone.setAttribute("width", "1000");
+    clone.setAttribute("height", "1000");
+    clone.querySelectorAll("image").forEach((image) => {
+      const href = image.getAttribute("href");
+      if (href?.startsWith("/")) image.setAttribute("href", `${window.location.origin}${href}`);
+    });
+    const style = document.createElementNS("http://www.w3.org/2000/svg", "style");
+    style.textContent = metroMapSvgStyles(selectedCycleColor);
+    clone.insertBefore(style, clone.firstChild);
+    const source = `<?xml version="1.0" encoding="UTF-8"?>\n${new XMLSerializer().serializeToString(clone)}\n`;
+    const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `apiops-cycles-${selectedCycle.slug || selectedCycle.id}-${stationId}.svg`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    setCopyStatus(localizedLabels["map.svgExported"]);
     window.setTimeout(() => setCopyStatus(""), 2200);
   }
 
@@ -1475,6 +1534,11 @@ ${prompt.prompt}`;
                 {roleData.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
               </select>
             </label>
+            <div className="map-head-actions">
+              <button type="button" onClick={exportMetroMapSvg}>
+                {localizedLabels["map.exportSvg"]}
+              </button>
+            </div>
           </div>
           <MetroMap
             cycles={cycles}
@@ -1486,6 +1550,7 @@ ${prompt.prompt}`;
             onSelectCycle={selectCycle}
             onSelectStation={selectStation}
             uiLabels={localizedLabels}
+            svgRef={metroMapRef}
           />
           <section className="line-guide" aria-label={localizedLabels["map.linesTitle"]}>
             <div>

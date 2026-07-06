@@ -121,6 +121,8 @@ function siteLabels(locale) {
     "map.instructions": "Click a station to change the selected workspace. The highlighted route shows the current cycle.",
     "map.linesTitle": "Metro lines",
     "map.linesDescription": "Lines show decision tracks across the shared APIOps backbone. Cycles show the journey for a goal.",
+    "map.exportSvg": "Export SVG",
+    "map.svgExported": "Metro map SVG exported.",
     "map.instructionsSvg": "Click any station dot to navigate. Use the cycle selector to switch route.",
     "map.ariaLabel": "APIOps Cycles metro map",
     "map.zoneStrategic": "Strategic",
