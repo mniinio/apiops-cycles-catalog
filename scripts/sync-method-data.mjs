@@ -250,7 +250,6 @@ const linesRaw = readJson(path.join(methodRoot, "lines.json")).lines.items ?? []
 const stakeholdersRaw = readJson(path.join(methodRoot, "stakeholders.json")).stakeholders ?? [];
 const stationStakeholdersRaw = readJson(path.join(methodRoot, "station-stakeholders.json"));
 const stationCriteriaRaw = readJson(path.join(methodRoot, "station-criteria.json"));
-const integrationExtension = readJson(path.join(methodRoot, "integration-extension.json"));
 const canvasDataRaw = readJson(path.join(canvasRoot, "canvasData.json"));
 const canvasLabelsRaw = readJson(path.join(canvasRoot, "localizedData.json"));
 const labelsByLocale = Object.fromEntries(locales.map((locale) => [locale, readLabels(locale)]));
