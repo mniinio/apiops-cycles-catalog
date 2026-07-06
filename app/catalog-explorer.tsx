@@ -286,6 +286,7 @@ const colors: Record<string, string> = {
 
 const viewKeys = ["map", "guide", "canvases", "data"] as const;
 type ViewKey = (typeof viewKeys)[number];
+const announcementId = "announcement_v2_live_2026_07";
 
 const fallbackLabels: Record<string, string> = {
   "nav.workflows": "Workflows",
@@ -295,6 +296,9 @@ const fallbackLabels: Record<string, string> = {
   "nav.licensing": "Licensing",
   "nav.github": "GitHub",
   "nav.community": "Community",
+  "announcement.message": "Version 2.0 is live with faster loading times!",
+  "announcement.link": "See what's new",
+  "announcement.dismiss": "Dismiss announcement",
   "controls.currentRoute": "Current route",
   "controls.stakeholderInvolvement": "Stakeholder involvement",
   "controls.recommendedCycle": "Recommended cycle",
@@ -1166,11 +1170,26 @@ function CatalogExplorer({
     ready: false,
   });
   const [copyStatus, setCopyStatus] = useState("");
+  const [showAnnouncement, setShowAnnouncement] = useState(false);
   const metroMapRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     setSelectedResourceId(null);
   }, [locale]);
+
+  useEffect(() => {
+    let timer: number | undefined;
+    try {
+      if (window.localStorage.getItem(announcementId) !== "dismissed") {
+        timer = window.setTimeout(() => setShowAnnouncement(true), 3000);
+      }
+    } catch {
+      timer = window.setTimeout(() => setShowAnnouncement(true), 3000);
+    }
+    return () => {
+      if (timer) window.clearTimeout(timer);
+    };
+  }, []);
 
   const selectedCycleColor = colors[cycleId] ?? "#6d2ba0";
   const stationTitle = selectedStation.title || stationDetail.title;
@@ -1306,6 +1325,15 @@ function CatalogExplorer({
     await navigator.clipboard.writeText(text);
     setCopyStatus(localizedLabels["actions.copied"]);
     window.setTimeout(() => setCopyStatus(""), 2200);
+  }
+
+  function dismissAnnouncement() {
+    try {
+      window.localStorage.setItem(announcementId, "dismissed");
+    } catch {
+      // Local storage can be unavailable in strict privacy modes; dismiss for this session anyway.
+    }
+    setShowAnnouncement(false);
   }
 
   async function exportMetroMapSvg() {
@@ -1811,6 +1839,17 @@ ${prompt.prompt}`;
         <a href={catalog.source.repository} target="_blank" rel="noreferrer">{localizedLabels["footer.github"]}</a>
         <a href="https://www.apiops.info" target="_blank" rel="noreferrer">{localizedLabels["footer.community"]}</a>
       </footer>
+      {showAnnouncement ? (
+        <aside className="announcement-toast" role="status" aria-live="polite">
+          <p>
+            <span>{localizedLabels["announcement.message"]}</span>
+            <a href="#community">{localizedLabels["announcement.link"]} &rarr;</a>
+          </p>
+          <button type="button" onClick={dismissAnnouncement} aria-label={localizedLabels["announcement.dismiss"]}>
+            &times;
+          </button>
+        </aside>
+      ) : null}
       {copyStatus ? <div className="copy-toast" role="status">{copyStatus}</div> : null}
     </main>
   );
