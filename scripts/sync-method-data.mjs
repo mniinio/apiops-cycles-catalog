@@ -991,19 +991,14 @@ const mcpManifest = {
   version: 1,
   description: "Static APIOps Cycles manifest for a future MCP server.",
   dataFiles: [
-    "/data/method-catalog.json",
     "/data/route-index.json",
-    "/data/canvas-manifest.json",
-    "/data/prompt-packs.json",
-    "/data/export-templates.json",
-    "/data/site-labels.json",
+    "/data/site-labels.en.json",
     "/data/partners.json",
     ...locales.flatMap((locale) => [
       `/data/method-catalog.${locale}.json`,
       `/data/canvas-manifest.${locale}.json`,
       `/data/prompt-packs.${locale}.json`,
       `/data/export-templates.${locale}.json`,
-      `/data/site-labels.${locale}.json`,
     ]),
   ],
   tools: [
@@ -1060,12 +1055,11 @@ mkdirSync(publicDataRoot, { recursive: true });
 copyPublicAsset("apiops-cycles-logo-dark.svg");
 copyPublicAsset("apiops-cycles-logo-white.svg");
 for (const partner of partners.items) copyPartnerAsset(partner.logo);
-writeJson("method-catalog.json", catalog, { publish: true });
 writeJson("route-index.json", routeIndex, { publish: true });
-writeJson("canvas-manifest.json", canvasManifest, { publish: true });
-writeJson("prompt-packs.json", prompts, { publish: true });
-writeJson("export-templates.json", exportsData, { publish: true });
-writeJson("site-labels.json", siteLabelsData, { publish: true });
+writeJson("site-labels.en.json", {
+  ...siteLabelsData,
+  translations: { en: siteLabelsData.translations.en },
+}, { publish: true });
 for (const locale of locales) {
   writeJson(`method-catalog.${locale}.json`, {
     ...catalog,
@@ -1082,10 +1076,6 @@ for (const locale of locales) {
   writeJson(`export-templates.${locale}.json`, {
     ...exportsData,
     translations: { [locale]: exportsData.translations[locale] },
-  }, { publish: true });
-  writeJson(`site-labels.${locale}.json`, {
-    ...siteLabelsData,
-    translations: { [locale]: siteLabelsData.translations[locale] },
   }, { publish: true });
 }
 writeJson("partners.json", partners, { publish: true });

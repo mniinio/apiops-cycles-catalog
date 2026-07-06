@@ -1936,7 +1936,7 @@ export default function CatalogExplorerLoader({
     Promise.all([
       loadJson<Catalog>(`/data/method-catalog.${initialLocale}.json?v=${version}`),
       loadJson<CanvasManifest>(`/data/canvas-manifest.${initialLocale}.json?v=${version}`),
-      loadJson<LabelData>(`/data/site-labels.${initialLocale}.json?v=${version}`),
+      loadJson<LabelData>(`/data/site-labels.en.json?v=${version}`),
       loadJson<PartnerData>(`/data/partners.json?v=${version}`),
     ])
       .then(([catalog, canvases, labels, partners]) => {
