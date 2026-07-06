@@ -307,6 +307,10 @@ const fallbackLabels: Record<string, string> = {
   "controls.routeControls": "Route controls",
   "controls.workspaceModes": "Workspace modes",
   "controls.selectCycle": "Select cycle",
+  "controls.selectStakeholder": "Select stakeholder",
+  "involvement.lead": "Lead",
+  "involvement.core": "Core",
+  "involvement.consulted": "Consulted",
   "views.map": "Metro map",
   "views.guide": "Role guide",
   "views.canvases": "Resources",
@@ -514,8 +518,21 @@ function metroMapSvgStyles(activeColor: string) {
     .metro-zone-title-bg { fill: rgba(255, 255, 255, 0.88); }
     .metro-route { fill: none; }
     .metro-support-node,
-    .metro-node { fill: #ffffff; stroke: #071640; stroke-width: 3; }
+    .metro-node { fill: #ffffff; stroke: #ffffff; stroke-width: 3; }
     .metro-support-node { opacity: 0.9; stroke-width: 2; }
+    .metro-station--highlighted .metro-node,
+    .metro-station--highlighted .metro-support-node { stroke: ${activeColor}; }
+    .metro-station--involvement-lead .metro-node,
+    .metro-station--involvement-lead .metro-support-node { fill: #dcc6ee; stroke-width: 5; }
+    .metro-station--involvement-core .metro-node,
+    .metro-station--involvement-core .metro-support-node { fill: #ffffff; stroke-width: 4; }
+    .metro-station--involvement-consulted .metro-node,
+    .metro-station--involvement-consulted .metro-support-node { fill: #f3eef9; stroke-dasharray: 4 3; stroke-width: 3; }
+    .metro-involvement-ring { fill: none; pointer-events: none; stroke: ${activeColor}; }
+    .metro-involvement-ring--lead { stroke-width: 5; }
+    .metro-involvement-ring--core { stroke-width: 3; }
+    .metro-involvement-ring--consulted { stroke-dasharray: 5 4; stroke-width: 3; }
+    .metro-selection-ring { fill: none; pointer-events: none; stroke: ${activeColor}; stroke-width: 4; }
     .metro-support-node--active,
     .metro-node--active { fill: ${activeColor}; stroke: ${activeColor}; }
     .metro-node-number { fill: #071640; font-family: Arial, sans-serif; font-size: 10px; font-weight: 900; pointer-events: none; }
@@ -581,7 +598,7 @@ function MetroMap({
   stations,
   selectedCycleId,
   selectedStationId,
-  highlightedStationIds,
+  stakeholderInvolvementByStation,
   onSelectCycle,
   onSelectStation,
   uiLabels,
@@ -592,7 +609,7 @@ function MetroMap({
   stations: Station[];
   selectedCycleId: string;
   selectedStationId: string;
-  highlightedStationIds: string[];
+  stakeholderInvolvementByStation: Record<string, string>;
   onSelectCycle: (id: string) => void;
   onSelectStation: (id: string) => void;
   uiLabels: Record<string, string>;
@@ -605,7 +622,6 @@ function MetroMap({
   const coreLabelRadius = 190;
   const coreStations = cycles[0]?.stations ?? [];
   const selectedCycle = cycles.find((cycle) => cycle.id === selectedCycleId) ?? cycles[0];
-  const highlightedStations = new Set(highlightedStationIds);
   const stationById = new Map(stations.map((station) => [station.id, station]));
   const supportCoordinates: Record<string, { x: number; y: number; dx?: number; dy?: number; anchor?: "start" | "end" }> = {
     "ecosystem-vision": { x: 330, y: 100, dx: 12, dy: 4 },
@@ -651,6 +667,15 @@ function MetroMap({
     8: { x: 320, y: 370 },
   };
   const lineLegend = lines.map((line, index) => ({ ...line, x: 180, y: 665 + index * 28 }));
+  const stationClassName = (id: string) => {
+    const involvement = stakeholderInvolvementByStation[id];
+    return [
+      "metro-station",
+      involvement ? "metro-station--highlighted" : "",
+      involvement ? `metro-station--involvement-${involvement}` : "",
+    ].filter(Boolean).join(" ");
+  };
+  const involvementFor = (id: string) => stakeholderInvolvementByStation[id];
   const corePoints = coreStations.map((station, index) => {
     const selectedCycleStation = selectedCycle?.stations.find((item) => item.id === station.id);
     const angle = -90 + (360 / coreStations.length) * index;
@@ -744,14 +769,20 @@ function MetroMap({
               key={`${line.id}-${point.id}`}
               role="button"
               tabIndex={0}
-              className={highlightedStations.has(point.id) ? "metro-station metro-station--highlighted" : "metro-station"}
+              className={stationClassName(point.id)}
               onClick={() => onSelectStation(point.id)}
               onKeyDown={(event) => {
                 if (event.key === "Enter" || event.key === " ") onSelectStation(point.id);
               }}
             >
               <title>{point.baseTitle}</title>
-              <circle cx={point.x} cy={point.y} r="6" className={point.id === selectedStationId ? "metro-support-node metro-support-node--active" : "metro-support-node"} />
+              {point.id === selectedStationId ? (
+                <circle cx={point.x} cy={point.y} r="13" className="metro-selection-ring" />
+              ) : null}
+              {involvementFor(point.id) ? (
+                <circle cx={point.x} cy={point.y} r="10" className={`metro-involvement-ring metro-involvement-ring--${involvementFor(point.id)}`} />
+              ) : null}
+              <circle cx={point.x} cy={point.y} r="6" className="metro-support-node" />
               <text x={point.x + point.dx} y={point.y + point.dy} textAnchor={point.anchor} dominantBaseline="middle" className="metro-support-label">{point.baseTitle}</text>
             </g>
           ))}
@@ -776,15 +807,21 @@ function MetroMap({
           key={point.id}
           role="button"
           tabIndex={0}
-          className={highlightedStations.has(point.id) ? "metro-station metro-station--highlighted" : "metro-station"}
+          className={stationClassName(point.id)}
           onClick={() => onSelectStation(point.id)}
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") onSelectStation(point.id);
           }}
         >
           <title>{point.baseTitle}</title>
-          <circle cx={point.x} cy={point.y} r="14" className={point.id === selectedStationId ? "metro-node metro-node--active" : "metro-node"} />
-          <text x={point.x} y={point.y + 4} textAnchor="middle" className={point.id === selectedStationId ? "metro-node-number metro-node-number--active" : "metro-node-number"}>
+          {point.id === selectedStationId ? (
+            <circle cx={point.x} cy={point.y} r="25" className="metro-selection-ring" />
+          ) : null}
+          {involvementFor(point.id) ? (
+            <circle cx={point.x} cy={point.y} r="20" className={`metro-involvement-ring metro-involvement-ring--${involvementFor(point.id)}`} />
+          ) : null}
+          <circle cx={point.x} cy={point.y} r="14" className="metro-node" />
+          <text x={point.x} y={point.y + 4} textAnchor="middle" className="metro-node-number">
             {point.index}
           </text>
           {(() => {
@@ -1111,8 +1148,8 @@ function CatalogExplorer({
     item.cycles.some((cycle) => cycle.id === initialCycle.id) &&
     (!initialStation || item.stations.some((station) => station.id === initialStation)),
   ) ?? roleData[0];
-  const [roleId, setRoleId] = useState(initialRole.id);
-  const role = safeRole(roleId, roleData);
+  const [roleId, setRoleId] = useState(requestedRole?.id ?? "");
+  const role = roleId ? safeRole(roleId, roleData) : initialRole;
   const [cycleId, setCycleId] = useState(initialCycle.id);
   const selectedCycle = cycles.find((cycle) => cycle.id === cycleId) ?? cycles[0] ?? initialCycle;
   const [stationId, setStationId] = useState(initialStation ?? role.stations[0]?.id ?? selectedCycle.stations[0].id);
@@ -1263,7 +1300,17 @@ function CatalogExplorer({
     ? `${process.env.NEXT_PUBLIC_CANVAS_RENDERER_BASE_URL.replace(/\/$/, "")}/${selectedCanvas.id}`
     : selectedCanvas.canvasCreatorUrl;
   const discussionItems = stationQuestions;
-  const highlightedStationIds = role.stations.map((station) => station.id);
+  const selectedStakeholderId = roleId ? role.stakeholderId ?? role.id : "";
+  const stakeholderInvolvementByStation = selectedStakeholderId
+    ? Object.fromEntries(
+        selectedCycle.stations
+          .map((station) => {
+            const involvement = station.stakeholders?.find((stakeholder) => stakeholder.id === selectedStakeholderId)?.involvement;
+            return involvement ? [station.id, involvement] : null;
+          })
+          .filter((item): item is [string, string] => Boolean(item)),
+      )
+    : {};
 
   function bestRoleFor(nextCycleId: string, nextStationId: string) {
     const roleSupports = (item: RouteProfile) =>
@@ -1288,38 +1335,28 @@ function CatalogExplorer({
   }
 
   function selectRole(nextRoleId: string) {
+    if (!nextRoleId) {
+      setRoleId("");
+      setSelectedResourceId(null);
+      return;
+    }
     const nextRole = safeRole(nextRoleId, roleData);
-    const nextCycleId = nextRole.cycles[0]?.id ?? cycleId;
-    const nextCycle = cycles.find((cycle) => cycle.id === nextCycleId) ?? selectedCycle;
-    const nextStationId = nextRole.stations.find((station) => nextCycle.stations.some((cycleStation) => cycleStation.id === station.id))?.id ?? nextCycle.stations[0]?.id ?? stationId;
-    const nextCycleStation = nextCycle.stations.find((station) => station.id === nextStationId);
-    const nextStationDetail = stations.find((station) => station.id === nextStationId);
-    const nextStepResourceIds = new Set((nextStationDetail?.steps ?? []).map((step) => step.resourceId).filter(Boolean));
-    const nextResources = nextCycleStation?.resources.length
-      ? nextCycleStation.resources
-      : resources.filter((resource) => nextStepResourceIds.has(resource.id));
     setRoleId(nextRoleId);
-    setCycleId(nextCycleId);
-    setStationId(nextStationId);
-    setCanvasId(firstCanvasFor(nextResources, nextRole));
+    setCanvasId(firstCanvasFor(selectedStationResources, nextRole));
     setSelectedResourceId(null);
   }
 
   function selectCycle(nextCycleId: string) {
     const nextCycle = cycles.find((cycle) => cycle.id === nextCycleId) ?? selectedCycle;
     const nextStationId = nextCycle.stations.some((station) => station.id === stationId) ? stationId : nextCycle.stations[0]?.id ?? stationId;
-    const nextRoleId = bestRoleFor(nextCycleId, nextStationId);
     setCycleId(nextCycleId);
     setStationId(nextStationId);
-    if (nextRoleId !== roleId) setRoleId(nextRoleId);
     setSelectedResourceId(null);
     replaceWorkspaceUrl("cycle", nextCycle.slug || nextCycle.id);
   }
 
   function selectStation(nextStationId: string) {
-    const nextRoleId = bestRoleFor(cycleId, nextStationId);
     setStationId(nextStationId);
-    if (nextRoleId !== roleId) setRoleId(nextRoleId);
     setSelectedResourceId(null);
     replaceWorkspaceUrl("station", nextStationId);
   }
@@ -1601,9 +1638,15 @@ ${prompt.prompt}`;
             </div>
             <label className="stakeholder-selector">
               <span>{localizedLabels["controls.stakeholderInvolvement"]}</span>
-              <select value={role.id} onChange={(event) => selectRole(event.target.value)}>
+              <select value={roleId} onChange={(event) => selectRole(event.target.value)}>
+                <option value="">{localizedLabels["controls.selectStakeholder"]}</option>
                 {roleData.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
               </select>
+              <span className="stakeholder-legend" aria-label={localizedLabels["controls.stakeholderInvolvement"]}>
+                <i className="stakeholder-legend__marker stakeholder-legend__marker--lead" />{localizedLabels["involvement.lead"]}
+                <i className="stakeholder-legend__marker stakeholder-legend__marker--core" />{localizedLabels["involvement.core"]}
+                <i className="stakeholder-legend__marker stakeholder-legend__marker--consulted" />{localizedLabels["involvement.consulted"]}
+              </span>
             </label>
             <div className="map-head-actions">
               <button type="button" onClick={exportMetroMapSvg}>
@@ -1617,7 +1660,7 @@ ${prompt.prompt}`;
             stations={stations}
             selectedCycleId={cycleId}
             selectedStationId={stationId}
-            highlightedStationIds={highlightedStationIds}
+            stakeholderInvolvementByStation={stakeholderInvolvementByStation}
             onSelectCycle={selectCycle}
             onSelectStation={selectStation}
             uiLabels={localizedLabels}
