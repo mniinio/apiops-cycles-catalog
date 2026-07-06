@@ -1308,7 +1308,7 @@ function CatalogExplorer({
     window.setTimeout(() => setCopyStatus(""), 2200);
   }
 
-  function exportMetroMapSvg() {
+  async function exportMetroMapSvg() {
     const svg = metroMapRef.current;
     if (!svg) return;
     const clone = svg.cloneNode(true) as SVGSVGElement;
@@ -1316,10 +1316,28 @@ function CatalogExplorer({
     clone.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
     clone.setAttribute("width", "1000");
     clone.setAttribute("height", "1000");
-    clone.querySelectorAll("image").forEach((image) => {
+    for (const image of Array.from(clone.querySelectorAll("image"))) {
       const href = image.getAttribute("href");
-      if (href?.startsWith("/")) image.setAttribute("href", `${window.location.origin}${href}`);
-    });
+      if (href === "/assets/apiops-cycles-logo-dark.svg") {
+        const response = await fetch(href);
+        const logoText = await response.text();
+        const logo = new DOMParser().parseFromString(logoText, "image/svg+xml").documentElement;
+        const inlineLogo = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        inlineLogo.setAttribute("x", image.getAttribute("x") ?? "0");
+        inlineLogo.setAttribute("y", image.getAttribute("y") ?? "0");
+        inlineLogo.setAttribute("width", image.getAttribute("width") ?? "60");
+        inlineLogo.setAttribute("height", image.getAttribute("height") ?? "60");
+        inlineLogo.setAttribute("viewBox", logo.getAttribute("viewBox") ?? "0 0 567 567");
+        inlineLogo.setAttribute("preserveAspectRatio", logo.getAttribute("preserveAspectRatio") ?? "xMidYMid meet");
+        inlineLogo.setAttribute("class", image.getAttribute("class") ?? "");
+        Array.from(logo.children).filter((child) => child.localName !== "namedview").forEach((child) => {
+          inlineLogo.appendChild(document.importNode(child, true));
+        });
+        image.replaceWith(inlineLogo);
+      } else if (href?.startsWith("/")) {
+        image.setAttribute("href", `${window.location.origin}${href}`);
+      }
+    }
     const style = document.createElementNS("http://www.w3.org/2000/svg", "style");
     style.textContent = metroMapSvgStyles(selectedCycleColor);
     clone.insertBefore(style, clone.firstChild);
