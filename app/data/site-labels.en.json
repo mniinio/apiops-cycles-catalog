@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "commit": "8f6a705b5e8a44b51361cec6ceed21d0ef23b1b6"
+    "commit": "3615701d4b9fe4bc30668d7353d9cd8180c8e89f"
   },
   "locales": [
     "en",
@@ -21,10 +21,11 @@
       "nav.github": "GitHub",
       "nav.community": "Community",
       "nav.menu": "Menu",
-      "announcement.message": "Version 2.0 is live with faster loading times!",
-      "announcement.link": "See what's new",
+      "announcement.message": "New map based navigation, role guides and more cycles. Check out the new cycles and updated resources.",
+      "announcement.link": "Join the community to learn more about the new features.",
       "announcement.dismiss": "Dismiss announcement",
       "controls.currentRoute": "Current route",
+      "controls.stakeholderInvolvement": "Stakeholder involvement",
       "controls.recommendedCycle": "Recommended cycle",
       "controls.currentStation": "Current station",
       "controls.routeControls": "Route controls",
@@ -131,6 +132,13 @@
       "confluence.confluenceWiki": "Confluence-wiki",
       "confluence.copyMarkdown": "Copy Markdown",
       "confluence.copyConfluenceWiki": "Copy Confluence-wiki",
+      "actions.copy": "Copy",
+      "actions.expandAll": "Expand all",
+      "actions.collapseAll": "Collapse all",
+      "actions.use": "Use",
+      "actions.copied": "Copied successfully",
+      "actions.expand": "▸",
+      "actions.collapse": "▾",
       "confluence.cycleExport": "Cycle export",
       "confluence.audience": "Intended audience",
       "confluence.formatGuidance": "Format guidance",

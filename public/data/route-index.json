@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "commit": "8f6a705b5e8a44b51361cec6ceed21d0ef23b1b6"
+    "commit": "3615701d4b9fe4bc30668d7353d9cd8180c8e89f"
   },
   "locales": [
     "en",
@@ -11,7 +11,7 @@
     "pt"
   ],
   "defaultLocale": "en",
-  "generatedAt": "2026-07-06T22:13:56.585Z",
+  "generatedAt": "2026-07-08T08:05:51.147Z",
   "translations": {
     "en": {
       "routeProfiles": [
@@ -152,7 +152,7 @@
             {
               "id": "api-product-strategy",
               "title": "Strategy",
-              "description": "Frame the business need as a reusable capability before choosing the implementation style."
+              "description": "Before building anything, define the capability’s value, consumers, ownership, and business goals."
             },
             {
               "id": "api-consumer-experience",
@@ -167,17 +167,17 @@
             {
               "id": "api-design",
               "title": "Solution & Interface Design",
-              "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
+              "description": "Design the interface contract and interaction model for the selected delivery style."
             },
             {
               "id": "api-delivery",
               "title": "Delivery & Operations",
-              "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
+              "description": "Build, test, deploy, and operate the capability using the selected delivery style and validated interface contract."
             },
             {
               "id": "api-audit",
               "title": "Quality & Readiness Assurance",
-              "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
+              "description": "Audit the capability interface contract, controls, support model, observability, documentation, and lifecycle readiness before release."
             },
             {
               "id": "api-publishing",
@@ -263,12 +263,12 @@
             {
               "id": "api-design",
               "title": "Integration Solution Design",
-              "description": "Design the integration solution, contracts, payloads, events, APIs, files, or interaction patterns selected for the capability."
+              "description": "Design the interface contract, payloads, events, APIs, files, or interaction patterns selected for the integration capability."
             },
             {
               "id": "api-delivery",
               "title": "Integration Delivery & Operations",
-              "description": "Build, test, automate, deploy, and operate the integration capability across its selected delivery pattern."
+              "description": "Build, test, automate, deploy, and operate the integration capability using its selected delivery pattern and validated interface contract."
             },
             {
               "id": "api-audit",
@@ -311,12 +311,12 @@
             {
               "id": "api-design",
               "title": "Automation Workflow Design",
-              "description": "Design the automation workflow, triggers, decision points, integrations, data handling, and exception paths."
+              "description": "Design the automation workflow, triggers, decision points, integrations, data handling, interface contracts, and exception paths."
             },
             {
               "id": "api-delivery",
               "title": "Automation Delivery",
-              "description": "Build, test, deploy, document, and operate the automation with clear ownership and rollback paths."
+              "description": "Build, test, deploy, document, and operate the automation using clear ownership, controls, and rollback paths."
             },
             {
               "id": "api-audit",
@@ -370,7 +370,7 @@
         {
           "id": "api-design",
           "title": "Solution & Interface Design",
-          "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
+          "description": "Design the interface contract and interaction model after the architecture choice is justified."
         },
         {
           "id": "competitive-analysis",
@@ -380,7 +380,7 @@
         {
           "id": "api-delivery",
           "title": "Delivery & Operations",
-          "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
+          "description": "Deliver the selected delivery style with appropriate engineering, testing, security, automation, and operational practices."
         },
         {
           "id": "ecosystem-vision",
@@ -390,7 +390,7 @@
         {
           "id": "api-audit",
           "title": "Quality & Readiness Assurance",
-          "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
+          "description": "Audit the capability interface contract, controls, support model, observability, documentation, and lifecycle readiness before release."
         },
         {
           "id": "scalable-infrastructure",
@@ -513,10 +513,16 @@
           "summary": "Ohjaa alustan, integraation, skaalautuvuuden ja arkkitehtuurin päätöksiä, jotka määrittelevät, miten API on rakennettu ja toimii."
         },
         {
+          "id": "platform-owner",
+          "stakeholderId": "platform-owner",
+          "title": "Alustan omistaja",
+          "summary": "Vastaa alustan kyvykkyyksistä, kehittämisestä ja operatiivisesta toiminnasta."
+        },
+        {
           "id": "api-architect",
           "stakeholderId": "api-architect",
-          "title": "API Architect",
-          "summary": "API Architect guided path"
+          "title": "API-arkkitehti",
+          "summary": "Vastaa API-arkkitehtuurista, suunnitteluperiaatteista ja rajapintasopimusten laadusta."
         },
         {
           "id": "governance-specialist",
@@ -534,7 +540,7 @@
           "id": "api-designer",
           "stakeholderId": "api-designer",
           "title": "API-suunnittelija",
-          "summary": "Muokkaa API-sopimusta, vuorovaikutusmallia, johdonmukaisuutta ja käytettävyyttä exponoituja kykyjä."
+          "summary": "Suunnittelee rajapintasopimukset, vuorovaikutusmallit, johdonmukaisuuden, käytettävyyden ja tarjottavat kyvykkyydet."
         },
         {
           "id": "api-product-owner",
@@ -551,20 +557,14 @@
         {
           "id": "automation-engineer",
           "stakeholderId": "automation-engineer",
-          "title": "Automation Engineer",
-          "summary": "Automation Engineer guided path"
+          "title": "Automaatiokehittäjä",
+          "summary": "Toteuttaa, testaa ja ylläpitää automaatioratkaisuja sekä niiden integraatioita."
         },
         {
           "id": "automation-owner",
           "stakeholderId": "automation-owner",
-          "title": "Automation Owner",
-          "summary": "Automation Owner guided path"
-        },
-        {
-          "id": "capability-owner",
-          "stakeholderId": "capability-owner",
-          "title": "Capability Owner",
-          "summary": "Capability Owner guided path"
+          "title": "Automaation omistaja",
+          "summary": "Vastaa automaatiokyvykkyyksien tavoitteista, priorisoinnista ja liiketoiminta-arvosta."
         },
         {
           "id": "api-devrel-specialist",
@@ -575,14 +575,20 @@
         {
           "id": "integration-architect",
           "stakeholderId": "integration-architect",
-          "title": "Integration Architect",
-          "summary": "Integration Architect guided path"
+          "title": "Integraatioarkkitehti",
+          "summary": "Suunnittelee integraatioratkaisut, integraatiomallit ja niiden yhteensopivuuden kokonaisarkkitehtuurin kanssa."
         },
         {
           "id": "partner-specialist",
           "stakeholderId": "partner-specialist",
           "title": "Kumppani- ja toimittajavastaava",
-          "summary": "Koordinoi ulkoisia kumppanisuhde, toimittajasuhteita ja vendor-suhteita, jotka vaikuttavat API-strategiaan ja -kehitykseen."
+          "summary": "Koordinoi kumppani- ja toimittajasuhteita, jotka vaikuttavat kyvykkyyden suunnitteluun ja kehittämiseen."
+        },
+        {
+          "id": "capability-owner",
+          "stakeholderId": "capability-owner",
+          "title": "Kyvykkyyden omistaja",
+          "summary": "Vastaa kyvykkyyden visiosta, tavoitteista, priorisoinnista ja elinkaaren aikaisesta kehittämisestä."
         },
         {
           "id": "business-owner",
@@ -603,22 +609,16 @@
           "summary": "Omistaa toteutuksen, automaation, testauksen ja julkaisun kulkuun liittyvät kysymykset, jotka ovat tarpeen toimittaa API luotettavasti."
         },
         {
-          "id": "platform-owner",
-          "stakeholderId": "platform-owner",
-          "title": "Platform Owner",
-          "summary": "Platform Owner guided path"
-        },
-        {
           "id": "process-owner",
           "stakeholderId": "process-owner",
-          "title": "Process Owner",
-          "summary": "Process Owner guided path"
+          "title": "Prosessin omistaja",
+          "summary": "Vastaa automatisoitavan liiketoimintaprosessin tavoitteista, kehittämisestä ja tuloksista."
         },
         {
           "id": "operations-specialist",
           "stakeholderId": "operations-specialist",
           "title": "Tuki- ja operaatioiden omistaja",
-          "summary": " Vastaa API-tuen, valvonnan, vianmäärityksen ja jatkuvan parantamisen prosesseista, jotka varmistavat APIn luotettavuuden ja hyödyntäjien tyytyväisyyden."
+          "summary": "Vastaa tuesta, valvonnasta, vianmäärityksestä ja jatkuvasta parantamisesta, jotka varmistavat ratkaisun luotettavuuden ja hyödyntäjien tyytyväisyyden."
         },
         {
           "id": "security-specialist",
@@ -630,68 +630,68 @@
           "id": "compliance-specialist",
           "stakeholderId": "compliance-specialist",
           "title": "Vaatimuksenmukaisuuden ja oikeudellinen asiantuntija",
-          "summary": "Selventää oikeudellisia, tietosuojaa koskevia, sääntelyä ja sopimusvaatimuksia, jotka vaikuttavat APIin."
+          "summary": "Selventää juridiset, tietosuojaan liittyvät ja muut vaatimustenmukaisuusvaatimukset, jotka vaikuttavat kyvykkyyteen tai rajapintaan."
         }
       ],
       "cycles": [
         {
           "id": "capability-productization-cycle",
           "slug": "capability-productization-cycle",
-          "title": "Kyvykkyyksien tuotteistamisen sykli",
-          "description": "Tuotteista uudelleenkäytettäviä digitaalisia kyvykkyyksiä ennen kuin päätetään, tulisiko toteutuksen olla APIt, tapahtumat, tiedostot, virrat, datatuotteet, tekoälypohjaiset palvelut, suora integrointi vai hybridimalli.",
+          "title": "Kyvykkyyden tuotteistamisen sykli",
+          "description": "Sykli liiketoiminnan kyvykkyyksien muuttamiseen uudelleenkäytettäviksi digitaalisiksi kyvykkyyksiksi ennen toteutustavan valintaa.",
           "stations": [
             {
               "id": "api-product-strategy",
               "title": "Strategia",
-              "description": "Frame the business need as a reusable capability strategy before choosing the implementation style."
+              "description": "Määrittele kyvykkyyden arvo, hyödyntäjät, omistajuus ja liiketoimintatavoitteet ennen kuin mitään rakennetaan."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Hyödyntäjien vaatimukset ja käyttöönottoprosessi",
-              "description": "Capture consumer requirements, onboarding needs, constraints, service expectations, and producer responsibilities."
+              "title": "Hyödyntäjien vaatimukset ja käyttöönotto",
+              "description": "Kokoa hyödyntäjien vaatimukset, käyttöönoton tarpeet, rajoitteet, palveluodotukset ja tuottajan vastuut."
             },
             {
               "id": "api-platform-architecture",
               "title": "Arkkitehtuuri ja alustaratkaisut",
-              "description": "Use requirements and constraints to choose architecture and platform capabilities."
+              "description": "Käytä vaatimuksia ja rajoitteita arkkitehtuurin ja alustakyvykkyyksien valintaan."
             },
             {
               "id": "api-design",
               "title": "Ratkaisu- ja rajapintasuunnittelu",
-              "description": "Design the selected solution mechanism and interface contract."
+              "description": "Suunnittele rajapintasopimus ja vuorovaikutusmalli valitulle toteutustavalle."
             },
             {
               "id": "api-delivery",
-              "title": "Toteutus ja ylläpito",
-              "description": "Deliver and operate the selected solution mechanism."
+              "title": "Toimitus ja operointi",
+              "description": "Rakenna, testaa, julkaise ja operoi kyvykkyyttä valitulla toteutustavalla ja validoidulla rajapintasopimuksella."
             },
             {
               "id": "api-audit",
               "title": "Laadun ja valmiuden varmistus",
-              "description": "Assure quality, governance, and readiness before release."
+              "description": "Varmista laatu, hallintamalli ja julkaisukelpoisuus ennen julkaisua."
             },
             {
               "id": "api-publishing",
-              "title": "Julkaisu ja käyttöönoton tuki",
-              "description": "Publish capability information so consumers can discover, request, onboard, and get support."
+              "title": "Julkaisu ja käyttöönoton mahdollistaminen",
+              "description": "Julkaise kyvykkyyden tiedot, jotta hyödyntäjät voivat löytää sen, pyytää käyttöoikeutta, ottaa sen käyttöön ja saada tukea."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Seuranta & parantaminen",
-              "description": "Monitor capability health, consumer outcomes, reliability, reuse, and improvement opportunities."
+              "title": "Seuranta ja parantaminen",
+              "description": "Seuraa kyvykkyyden tilaa, hyödyntäjien tuloksia, luotettavuutta, uudelleenkäyttöä ja parannusmahdollisuuksia."
             }
           ]
         },
         {
           "id": "api-productization-cycle",
           "slug": "api-productization-cycle",
-          "title": "API tuotteistamisen sykli",
-          "description": " Apeihin keskittynyt APIOps Cycles reitti APIen tuotteistukseen, suunnitteluun, toteutukseen, julkaisuun ja parantamiseen.",
+          "title": "API-tuotteistamisen sykli",
+          "description": "API-keskeinen APIOps Cycles -polku APIen tuotteistamiseen, suunnitteluun, toimittamiseen, julkaisuun ja parantamiseen.",
           "stations": [
             {
               "id": "api-product-strategy",
               "title": "API-tuotestrategia",
-              "description": "Ennen kuin rakennat mitään, määrittele APIn arvo, käyttäjät ja liiketoiminnalliset tavoitteet heti alusta alkaen."
+              "description": "Ennen kuin rakennat mitään, määrittele APIn arvo, hyödyntäjät ja liiketoiminnalliset tavoitteet heti alusta alkaen."
             },
             {
               "id": "api-consumer-experience",
@@ -733,96 +733,96 @@
         {
           "id": "integration-productization-cycle",
           "slug": "integration-productization-cycle",
-          "title": "Integraation tuotteistamisen sykli",
-          "description": "Sykli uudelleenkäytettävien integraatiokykyjen tuotteistukseen ennen kuin valitaan konkreettinen integraatiomalli.",
+          "title": "Integraatiokyvykkyyden tuotteistamisen sykli",
+          "description": "Sykli uudelleenkäytettävien integraatiokyvykkyyksien tuotteistamiseen ennen konkreettisen integraatiomallin valintaa.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Integraatiokyvykkyyksien strategia",
-              "description": "Frame the reusable integration capability, business need, ownership, and expected reuse before selecting a pattern."
+              "title": "Integraatiokyvykkyyden strategia",
+              "description": "Rajaa uudelleenkäytettävä integraatiokyvykkyys, liiketoimintatarve, omistajuus ja odotettu uudelleenkäyttö ennen mallin valintaa."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Integraatiohyödyntäjien vaatimukset ja käyttöönottoprosessi",
-              "description": "Capture integration consumers, provider responsibilities, onboarding needs, service expectations, and operational constraints."
+              "title": "Integraation hyödyntäjien vaatimukset ja käyttöönotto",
+              "description": "Kokoa integraation hyödyntäjät, tuottajan vastuut, käyttöönoton tarpeet, palveluodotukset ja operatiiviset rajoitteet."
             },
             {
               "id": "api-platform-architecture",
               "title": "Integraatioarkkitehtuuriratkaisu",
-              "description": "Decide the integration architecture, platform capabilities, constraints, and governance model for the capability."
+              "description": "Päätä integraatioarkkitehtuuri, alustakyvykkyydet, rajoitteet ja kyvykkyyden hallintamalli."
             },
             {
               "id": "api-design",
               "title": "Integraation ratkaisusuunnittelu",
-              "description": "Design the integration solution, contracts, payloads, events, APIs, files, or interaction patterns selected for the capability."
+              "description": "Suunnittele integraatiokyvykkyydelle valittu rajapintasopimus, tietosisällöt, tapahtumat, APIt, tiedostot tai vuorovaikutusmallit."
             },
             {
               "id": "api-delivery",
-              "title": "Integraation toteutus ja toiminta",
-              "description": "Build, test, automate, deploy, and operate the integration capability across its selected delivery pattern."
+              "title": "Integraation toimitus ja operointi",
+              "description": "Rakenna, testaa, automatisoi, julkaise ja operoi integraatiokyvykkyyttä sen valitulla toteutustavalla ja validoidulla rajapintasopimuksella."
             },
             {
               "id": "api-audit",
-              "title": "Integraatioiden laadunvarmistus",
-              "description": "Assure integration readiness, governance, quality, security, compliance, and operational evidence before release."
+              "title": "Integraation valmiuden varmistus",
+              "description": "Varmista integraation valmius, hallintamalli, laatu, tietoturva, vaatimustenmukaisuus ja operatiivinen näyttö ennen julkaisua."
             },
             {
               "id": "api-publishing",
               "title": "Kyvykkyyksien julkaisu",
-              "description": "Publish the integration capability so teams can discover, request, reuse, onboard, and get support."
+              "description": "Julkaise integraatiokyvykkyys, jotta tiimit voivat löytää sen, pyytää käyttöoikeutta, käyttää sitä uudelleen, ottaa sen käyttöön ja saada tukea."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Integraatioden seuranta & parantaminen",
-              "description": "Monitor integration reliability, reuse, incidents, performance, consumer outcomes, and improvement needs."
+              "title": "Integraation seuranta ja parantaminen",
+              "description": "Seuraa integraation luotettavuutta, uudelleenkäyttöä, häiriöitä, suorituskykyä, hyödyntäjien tuloksia ja parannustarpeita."
             }
           ]
         },
         {
           "id": "automation-cycle",
           "slug": "automation-cycle",
-          "title": "Automation Cycle",
-          "description": "A cycle for identifying, designing, delivering, enabling, and improving automation opportunities.",
+          "title": "Automaatiosykli",
+          "description": "Sykli automaatiomahdollisuuksien tunnistamiseen, suunnitteluun, toimittamiseen, käyttöönoton mahdollistamiseen ja parantamiseen.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Automation Opportunity Strategy",
-              "description": "Identify and prioritize automation opportunities by value, feasibility, risk, ownership, and expected process impact."
+              "title": "Automaatiomahdollisuuden strategia",
+              "description": "Tunnista ja priorisoi automaatiomahdollisuudet arvon, toteutettavuuden, riskin, omistajuuden ja odotetun prosessivaikutuksen perusteella."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Process/User Requirements",
-              "description": "Capture process users, roles, handoffs, exceptions, constraints, and service expectations before designing the automation."
+              "title": "Prosessin ja käyttäjien vaatimukset",
+              "description": "Kokoa prosessin käyttäjät, roolit, luovutukset, poikkeukset, rajoitteet ja palveluodotukset ennen automaation suunnittelua."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Automation Platform Decision",
-              "description": "Choose the automation platform, runtime, integration model, governance controls, and operational constraints."
+              "title": "Automaatioalustan päätös",
+              "description": "Valitse automaatioalusta, ajoympäristö, integraatiomalli, hallintakontrollit ja operatiiviset rajoitteet."
             },
             {
               "id": "api-design",
-              "title": "Automation Workflow Design",
-              "description": "Design the automation workflow, triggers, decision points, integrations, data handling, and exception paths."
+              "title": "Automaatiotyönkulun suunnittelu",
+              "description": "Suunnittele automaation työnkulku, käynnistimet, päätöspisteet, integraatiot, datankäsittely, rajapintasopimukset ja poikkeuspolut."
             },
             {
               "id": "api-delivery",
-              "title": "Automation Delivery",
-              "description": "Build, test, deploy, document, and operate the automation with clear ownership and rollback paths."
+              "title": "Automaation toimitus",
+              "description": "Rakenna, testaa, julkaise, dokumentoi ja operoi automaatiota selkeällä omistajuudella, kontrolleilla ja palautuspoluilla."
             },
             {
               "id": "api-audit",
-              "title": "Automation Readiness Review",
-              "description": "Review automation readiness, quality, risk, compliance, human oversight, evidence, and release criteria."
+              "title": "Automaation valmiuskatselmointi",
+              "description": "Katselmoi automaation valmius, laatu, riski, vaatimustenmukaisuus, ihmisen valvonta, näyttö ja julkaisukriteerit."
             },
             {
               "id": "api-publishing",
-              "title": "Automation Enablement",
-              "description": "Enable users and operators with discovery, onboarding, operating instructions, support paths, and change communication."
+              "title": "Automaation käyttöönoton mahdollistaminen",
+              "description": "Mahdollista käyttäjien ja operaattorien työ löydettävyyden, käyttöönoton, käyttöohjeiden, tukipolkujen ja muutosviestinnän avulla."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Automation Monitoring & Improvement",
-              "description": "Monitor automation performance, exceptions, reliability, user outcomes, operational impact, and improvement opportunities."
+              "title": "Automaation seuranta ja parantaminen",
+              "description": "Seuraa automaation suorituskykyä, poikkeuksia, luotettavuutta, käyttäjien tuloksia, operatiivista vaikutusta ja parannusmahdollisuuksia."
             }
           ]
         }
@@ -830,8 +830,8 @@
       "stations": [
         {
           "id": "api-product-strategy",
-          "title": "API-tuotestrategia - Tee rajapinnoista strategisia tuotteita",
-          "description": "Ennen kuin rakennat mitään, määrittele APIn arvo, käyttäjät ja liiketoiminnalliset tavoitteet heti alusta alkaen."
+          "title": "Strategia",
+          "description": "Kehystä liiketoimintatarve uudelleenkäytettävänä kyvykkyytenä ennen toteutustavan valintaa."
         },
         {
           "id": "user-experience",
@@ -840,8 +840,8 @@
         },
         {
           "id": "api-consumer-experience",
-          "title": "API-hyödyntäjäkokemus - Suunnittele APIn todellisia käyttäjiä varten.",
-          "description": "Varmistetaan, että API on löydettävissä, ymmärrettävissä ja käyttökelpoinen ennen käyttöönottoa ja sen jälkeen."
+          "title": "Hyödyntäjien vaatimukset ja käyttöönotto",
+          "description": "Kokoa hyödyntäjien käyttöönotto, standardit, ei-toiminnalliset vaatimukset, palveluodotukset, rajoitteet, tietoturvatarpeet, sallitut protokollat, datan tuoreus, palvelutasot, havainnoitavuus, palautuminen, käyttöönoton vaatimukset ja tuottajan vastuut."
         },
         {
           "id": "market-insights",
@@ -850,8 +850,8 @@
         },
         {
           "id": "api-platform-architecture",
-          "title": "API-alustan arkkitehtuuri",
-          "description": "Varmistetaan skaalautuvuus, uudelleenkäyttö ja hallinta API- ja alustakomponenttien välillä."
+          "title": "Arkkitehtuuri- ja alustapäätökset",
+          "description": "Käytä vaatimuksia ja rajoitteita oikean arkkitehtuurimallin ja tarvittavien alustakyvykkyyksien valintaan."
         },
         {
           "id": "business-goals",
@@ -860,8 +860,8 @@
         },
         {
           "id": "api-design",
-          "title": "API-design - Suunnittele arvoa tuottavia rajapintoja",
-          "description": "Luo API-suunnitelmia, jotka ovat johdonmukaisia, uudelleenkäytettäviä ja perustuvat liiketoiminnallisiin tavoitteisiin sekä yhteisiin standardeihin."
+          "title": "Ratkaisu- ja rajapintasuunnittelu",
+          "description": "Suunnittele rajapintasopimus ja vuorovaikutusmalli sen jälkeen, kun arkkitehtuurivalinta on perusteltu."
         },
         {
           "id": "competitive-analysis",
@@ -870,8 +870,8 @@
         },
         {
           "id": "api-delivery",
-          "title": "API-kehitys - Kehitä turvalliset ja luotettavat rajapinnat",
-          "description": "Rakenna, testaa ja julkaise rajapintoja käyttämällä nykyaikaisia jakeluputkia ja parhaita teknisiä käytäntöjä."
+          "title": "Toimitus ja operointi",
+          "description": "Toimita valittu toteutustapa asianmukaisilla suunnittelu-, testaus-, tietoturva-, automaatio- ja operointikäytännöillä."
         },
         {
           "id": "ecosystem-vision",
@@ -880,8 +880,8 @@
         },
         {
           "id": "api-audit",
-          "title": "API-auditointi - API-rajapintojen tarkastus vaatimustenmukaisuuden ja laadun varmistamiseksi",
-          "description": "Varmista, että APIt täyttävät liiketoiminta-, suunnittelu- ja toimintastandardit ennen julkaisua ja käyttöönottoa."
+          "title": "Laadun ja valmiuden varmistus",
+          "description": "Auditoi kyvykkyyden rajapintasopimus, kontrollit, tukimalli, havainnoitavuus, dokumentaatio ja elinkaarivalmius ennen julkaisua."
         },
         {
           "id": "scalable-infrastructure",
@@ -890,8 +890,8 @@
         },
         {
           "id": "api-publishing",
-          "title": "API-julkaiseminen - Julkaise APIt luotettavasti",
-          "description": "Esittele APIt turvallisesti ja selkeästi oikealle yleisölle oikean dokumentaation ja prosessien avulla."
+          "title": "Julkaisu ja käyttöönoton mahdollistaminen",
+          "description": "Julkaise uudelleenkäytettävän kyvykkyyden tiedot, jotta hyödyntäjät voivat löytää sen, pyytää käyttöä, ottaa sen käyttöön, käyttää sitä ja saada tukea."
         },
         {
           "id": "legal-and-compliance",
@@ -900,8 +900,8 @@
         },
         {
           "id": "monitoring-and-improving",
-          "title": "Seuranta ja parantaminen - API-arvoa varten",
-          "description": "Käytä mittareita ja palautetta API-suorituskyvyn seuraamiseen ja jatkuvan parantamisen edistämiseen."
+          "title": "Seuranta ja parantaminen",
+          "description": "Seuraa käyttöä, luotettavuutta, datan laatua, hyödyntäjien tuloksia, operatiivisia kustannuksia ja uudelleenkäytön mahdollisuuksia julkaisun jälkeen."
         },
         {
           "id": "security-and-privacy",
@@ -946,12 +946,12 @@
         {
           "id": "service-agreements",
           "title": "Palvelusopimukset - määrittele API-palvelutasot",
-          "description": "Laadi palvelusopimukset, joissa määritellään API-toimittajien ja kuluttajien odotukset, palvelutasot ja vastuut."
+          "description": "Laadi palvelusopimukset, joissa määritellään API-toimittajien ja hyödyntäjien odotukset, palvelutasot ja vastuut."
         },
         {
           "id": "api-consumer-adoption",
           "title": "APIn käyttöönotto - APIn käytön edistäminen",
-          "description": "Toteutat strategioita, joilla edistetään API-käyttäjien hyväksyntää ja sitoutumista ja varmistetaan, että API-rajapintoja käytetään tehokkaasti."
+          "description": "Toteuta strategioita, joilla edistetään API-hyödyntäjien käyttöönottoa ja sitoutumista sekä varmistetaan, että API-rajapintoja käytetään tehokkaasti."
         },
         {
           "id": "api-promotion",
@@ -1000,32 +1000,20 @@
         {
           "id": "api-architect",
           "stakeholderId": "api-architect",
-          "title": "API Architect",
-          "summary": "API Architect guided path"
+          "title": "Architecte API",
+          "summary": "Responsable de l'architecture API, des principes de conception et de la qualité des contrats d'interface."
+        },
+        {
+          "id": "integration-architect",
+          "stakeholderId": "integration-architect",
+          "title": "Architecte d'intégration",
+          "summary": "Conçoit les solutions et modèles d'intégration en cohérence avec l'architecture d'entreprise."
         },
         {
           "id": "platform-architect",
           "stakeholderId": "platform-architect",
           "title": "Architecte de la plateforme",
-          "summary": "Orienté les décisions sur la plateforme, l'intégration, l'évolutivité et l'architecture qui façonnent la construction et l'exploitation de l'API."
-        },
-        {
-          "id": "automation-engineer",
-          "stakeholderId": "automation-engineer",
-          "title": "Automation Engineer",
-          "summary": "Automation Engineer guided path"
-        },
-        {
-          "id": "automation-owner",
-          "stakeholderId": "automation-owner",
-          "title": "Automation Owner",
-          "summary": "Automation Owner guided path"
-        },
-        {
-          "id": "capability-owner",
-          "stakeholderId": "capability-owner",
-          "title": "Capability Owner",
-          "summary": "Capability Owner guided path"
+          "summary": "Oriente les décisions relatives à la plateforme, aux intégrations, à l'évolutivité et à l'architecture."
         },
         {
           "id": "api-designer",
@@ -1043,43 +1031,19 @@
           "id": "partner-specialist",
           "stakeholderId": "partner-specialist",
           "title": "Gestionnaire de partenaires ou de fournisseurs",
-          "summary": "Coordonne les relations avec les partenaires externes, les fournisseurs ou les vendeurs qui influencent la stratégie et la livraison de l'API."
+          "summary": "Coordonne les relations avec les partenaires et fournisseurs qui influencent la stratégie et la mise en œuvre de la capacité."
+        },
+        {
+          "id": "automation-engineer",
+          "stakeholderId": "automation-engineer",
+          "title": "Ingénieur automatisation",
+          "summary": "Met en œuvre, teste et exploite les solutions d'automatisation et leurs intégrations."
         },
         {
           "id": "api-engineer",
           "stakeholderId": "api-engineer",
           "title": "Ingénieur de livraison",
           "summary": "Assume la responsabilité de l'implémentation, de l'automatisation, des tests et du flux de publication nécessaires pour livrer l'API de manière fiable."
-        },
-        {
-          "id": "integration-architect",
-          "stakeholderId": "integration-architect",
-          "title": "Integration Architect",
-          "summary": "Integration Architect guided path"
-        },
-        {
-          "id": "platform-owner",
-          "stakeholderId": "platform-owner",
-          "title": "Platform Owner",
-          "summary": "Platform Owner guided path"
-        },
-        {
-          "id": "process-owner",
-          "stakeholderId": "process-owner",
-          "title": "Process Owner",
-          "summary": "Process Owner guided path"
-        },
-        {
-          "id": "api-devrel-specialist",
-          "stakeholderId": "api-devrel-specialist",
-          "title": "Propriétaire de la documentation et du développement communautaire",
-          "summary": "Possède le contenu d'intégration, la communication avec les développeurs et la qualité de la documentation pour les utilisateurs d'API."
-        },
-        {
-          "id": "governance-specialist",
-          "stakeholderId": "governance-specialist",
-          "title": "Propriétaire de la gouvernance",
-          "summary": "Représente les pratiques de revue, d'audit et de gouvernance à l'échelle de l'organisation pour la qualité et la conformité des API."
         },
         {
           "id": "api-product-owner",
@@ -1106,16 +1070,52 @@
           "summary": "Représente les besoins des développeurs, intégrateurs ou autres utilisateurs d'API qui utilisent l'API directement."
         },
         {
+          "id": "capability-owner",
+          "stakeholderId": "capability-owner",
+          "title": "Responsable de capacité",
+          "summary": "Responsable de la vision, des objectifs, de la priorisation et de l'évolution de la capacité tout au long de son cycle de vie."
+        },
+        {
+          "id": "automation-owner",
+          "stakeholderId": "automation-owner",
+          "title": "Responsable de l'automatisation",
+          "summary": "Responsable des objectifs, de la priorisation et de la valeur métier des capacités d'automatisation."
+        },
+        {
+          "id": "platform-owner",
+          "stakeholderId": "platform-owner",
+          "title": "Responsable de plateforme",
+          "summary": "Responsable des capacités de la plateforme, de son évolution et de son exploitation."
+        },
+        {
+          "id": "process-owner",
+          "stakeholderId": "process-owner",
+          "title": "Responsable de processus",
+          "summary": "Responsable des objectifs, de l'évolution et des résultats du processus métier."
+        },
+        {
+          "id": "api-devrel-specialist",
+          "stakeholderId": "api-devrel-specialist",
+          "title": "Responsable Documentation & DevRel",
+          "summary": "Responsable des contenus d'onboarding, de la communication avec les développeurs et de la qualité de la documentation API."
+        },
+        {
+          "id": "governance-specialist",
+          "stakeholderId": "governance-specialist",
+          "title": "Responsable gouvernance",
+          "summary": "Représente les pratiques de revue, d'audit et de gouvernance à l'échelle de l'organisation pour la qualité et la conformité des API."
+        },
+        {
           "id": "business-owner",
           "stakeholderId": "business-owner",
           "title": "Responsable métier",
-          "summary": "Représente les objectifs commerciaux, le financement et les résultats attendus pour l'initiative API."
+          "summary": "Représente les objectifs métier, le financement et les résultats attendus de l'initiative de capacité."
         },
         {
           "id": "compliance-specialist",
           "stakeholderId": "compliance-specialist",
           "title": "Spécialiste en conformité et juridique",
-          "summary": "Clarifie les exigences légales, de confidentialité, réglementaires et contractuelles qui affectent l'API."
+          "summary": "Clarifie les exigences juridiques, de confidentialité et de conformité qui affectent la capacité ou l'interface."
         },
         {
           "id": "security-specialist",
@@ -1128,95 +1128,95 @@
         {
           "id": "capability-productization-cycle",
           "slug": "capability-productization-cycle",
-          "title": "Capability Productization Cycle",
-          "description": "A cycle for turning business capabilities into reusable digital capabilities before selecting the implementation style.",
+          "title": "Cycle de productisation des capacités",
+          "description": "Productisez des capacités numériques réutilisables avant de décider si la mise en œuvre doit prendre la forme d’API, d’événements, de fichiers, de flux, de produits de données, de services basés sur l’IA, d’intégration directe ou d’un modèle hybride.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Strategy",
-              "description": "Frame the business need as a reusable capability before choosing the implementation style."
+              "title": "Stratégie de capacité",
+              "description": "Décrivez le besoin métier comme une stratégie de capacité réutilisable avant de choisir le mode de mise en œuvre."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Consumer Requirements & Onboarding",
-              "description": "Capture consumer onboarding, standards, non-functional requirements, service expectations, constraints, security needs, allowed protocols, data freshness, SLAs, observability, recovery, adoption requirements, and producer responsibilities."
+              "title": "Exigences utilisateurs & onboarding",
+              "description": "Capturez les exigences des utilisateurs, les besoins d’onboarding, les contraintes, les attentes de service et les responsabilités des fournisseurs."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Architecture & Platform Decisions",
-              "description": "Use requirements and constraints to decide the right architecture pattern and enabling platform capabilities."
+              "title": "Architecture & décisions de plateforme",
+              "description": "Utilisez les exigences et contraintes pour choisir l’architecture et les capacités de plateforme."
             },
             {
               "id": "api-design",
-              "title": "Solution & Interface Design",
-              "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
+              "title": "Conception de solution & d’interface",
+              "description": "Concevez le mode de mise en œuvre choisi et le contrat d’interface."
             },
             {
               "id": "api-delivery",
-              "title": "Delivery & Operations",
-              "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
+              "title": "Mise à disposition & opérations",
+              "description": "Livrez et exploitez le mode de mise en œuvre choisi."
             },
             {
               "id": "api-audit",
-              "title": "Quality & Readiness Assurance",
-              "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
+              "title": "Assurance qualité & préparation",
+              "description": "Assurez la qualité, la gouvernance et la préparation avant publication."
             },
             {
               "id": "api-publishing",
-              "title": "Publishing & Adoption Enablement",
-              "description": "Publish reusable capability information so consumers can discover, request, onboard, use, and get support."
+              "title": "Publication & enablement",
+              "description": "Publiez les informations de capacité afin que les utilisateurs puissent la découvrir, demander l’accès, s’onboarder et obtenir du support."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Monitoring & Improvement",
-              "description": "Monitor usage, reliability, data quality, consumer outcomes, operational cost, and reuse opportunities after release."
+              "title": "Suivi & amélioration",
+              "description": "Suivez la santé de la capacité, les résultats utilisateurs, la fiabilité, la réutilisation et les opportunités d’amélioration."
             }
           ]
         },
         {
           "id": "api-productization-cycle",
           "slug": "api-productization-cycle",
-          "title": "API Productization Cycle",
-          "description": "The API-focused APIOps Cycles journey for productizing, designing, delivering, publishing, and improving APIs.",
+          "title": "Cycle de productisation des API",
+          "description": "Parcours APIOps Cycles centré sur les API pour productiser, concevoir, livrer, publier et améliorer des produits API.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "API Product Strategy",
-              "description": "Avant de construire quoi que ce soit, définissez dès le départ la valeur de votre API, ses utilisateurs et ses objectifs commerciaux."
+              "title": "Stratégie produit API",
+              "description": "Avant de construire quoi que ce soit, définissez dès le départ la valeur de votre API, ses utilisateurs et ses objectifs métier."
             },
             {
               "id": "api-consumer-experience",
-              "title": "API Consumer Experience",
+              "title": "Expérience utilisateur API",
               "description": "Veillez à ce que votre API soit découvrable, compréhensible et utilisable - avant et après le lancement."
             },
             {
               "id": "api-platform-architecture",
-              "title": "API Platform Architecture",
+              "title": "Architecture de plateforme API",
               "description": "Assurez l'évolutivité, la réutilisation et la gouvernance de vos composants d'API et de plateforme."
             },
             {
               "id": "api-design",
-              "title": "API Design",
+              "title": "Conception d’API",
               "description": "Créer des architectures d'API cohérentes, réutilisables et fondées sur les objectifs métier et des normes communes."
             },
             {
               "id": "api-delivery",
-              "title": "API Delivery",
+              "title": "Livraison d’API",
               "description": "Construire, tester et publier des API en utilisant des pipelines de livraison modernes et les meilleures pratiques d'ingénierie."
             },
             {
               "id": "api-audit",
-              "title": "API Audit",
+              "title": "Audit API",
               "description": "Vérifiez que les API répondent aux normes métier, de conception et opérationnelles avant leur publication et leur mise à disposition."
             },
             {
               "id": "api-publishing",
-              "title": "API Publishing",
+              "title": "Publication d’API",
               "description": "Exposer les API de manière sûre et claire au bon public avec la bonne documentation et les bons processus."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Monitoring & Improving",
+              "title": "Suivi & amélioration",
               "description": "Utiliser les mesures et le retour d'information pour suivre les performances de l'API et favoriser l'amélioration continue."
             }
           ]
@@ -1224,96 +1224,96 @@
         {
           "id": "integration-productization-cycle",
           "slug": "integration-productization-cycle",
-          "title": "Integration Productization Cycle",
-          "description": "A cycle for productizing reusable integration capabilities before selecting a concrete integration pattern.",
+          "title": "Cycle de productisation des capacités d’intégration",
+          "description": "Cycle pour productiser des capacités d’intégration réutilisables avant de choisir le modèle d’intégration concret.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Integration Capability Strategy",
-              "description": "Frame the reusable integration capability, business need, ownership, and expected reuse before selecting a pattern."
+              "title": "Stratégie de capacité d’intégration",
+              "description": "Cadrez la capacité d’intégration réutilisable, le besoin métier, la responsabilité et la réutilisation attendue avant de choisir un modèle."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Integration Consumer Requirements & Onboarding",
-              "description": "Capture integration consumers, provider responsibilities, onboarding needs, service expectations, and operational constraints."
+              "title": "Exigences des utilisateurs d’intégration & onboarding",
+              "description": "Capturez les utilisateurs d’intégration, les responsabilités des fournisseurs, les besoins d’onboarding, les attentes de service et les contraintes opérationnelles."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Integration Architecture Decision",
-              "description": "Decide the integration architecture, platform capabilities, constraints, and governance model for the capability."
+              "title": "Décision d’architecture d’intégration",
+              "description": "Décidez de l’architecture d’intégration, des capacités de plateforme, des contraintes et du modèle de gouvernance de la capacité."
             },
             {
               "id": "api-design",
-              "title": "Integration Solution Design",
-              "description": "Design the integration solution, contracts, payloads, events, APIs, files, or interaction patterns selected for the capability."
+              "title": "Conception de solution d’intégration",
+              "description": "Concevez la solution d’intégration, les contrats, les payloads, les événements, les API, les fichiers ou les modèles d’interaction choisis pour la capacité."
             },
             {
               "id": "api-delivery",
-              "title": "Integration Delivery & Operations",
-              "description": "Build, test, automate, deploy, and operate the integration capability across its selected delivery pattern."
+              "title": "Livraison & opérations d’intégration",
+              "description": "Construisez, testez, automatisez, déployez et exploitez la capacité d’intégration selon son modèle de livraison choisi."
             },
             {
               "id": "api-audit",
-              "title": "Integration Readiness Assurance",
-              "description": "Assure integration readiness, governance, quality, security, compliance, and operational evidence before release."
+              "title": "Assurance qualité des intégrations",
+              "description": "Assurez la préparation, la gouvernance, la qualité, la sécurité, la conformité et les preuves opérationnelles de l’intégration avant publication."
             },
             {
               "id": "api-publishing",
-              "title": "Capability Publishing",
-              "description": "Publish the integration capability so teams can discover, request, reuse, onboard, and get support."
+              "title": "Publication de capacité",
+              "description": "Publiez la capacité d’intégration afin que les équipes puissent la découvrir, la demander, la réutiliser, s’onboarder et obtenir du support."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Integration Monitoring & Improvement",
-              "description": "Monitor integration reliability, reuse, incidents, performance, consumer outcomes, and improvement needs."
+              "title": "Suivi & amélioration des intégrations",
+              "description": "Suivez la fiabilité, la réutilisation, les incidents, la performance, les résultats utilisateurs et les besoins d’amélioration de l’intégration."
             }
           ]
         },
         {
           "id": "automation-cycle",
           "slug": "automation-cycle",
-          "title": "Automation Cycle",
-          "description": "A cycle for identifying, designing, delivering, enabling, and improving automation opportunities.",
+          "title": "Cycle d’automatisation",
+          "description": "Cycle pour identifier, concevoir, livrer, enable et améliorer des opportunités d’automatisation.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Automation Opportunity Strategy",
-              "description": "Identify and prioritize automation opportunities by value, feasibility, risk, ownership, and expected process impact."
+              "title": "Stratégie d’opportunité d’automatisation",
+              "description": "Identifiez et priorisez les opportunités d’automatisation selon la valeur, la faisabilité, le risque, la responsabilité et l’impact attendu sur le processus."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Process/User Requirements",
-              "description": "Capture process users, roles, handoffs, exceptions, constraints, and service expectations before designing the automation."
+              "title": "Exigences processus/utilisateur",
+              "description": "Capturez les utilisateurs du processus, les rôles, les transferts, les exceptions, les contraintes et les attentes de service avant de concevoir l’automatisation."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Automation Platform Decision",
-              "description": "Choose the automation platform, runtime, integration model, governance controls, and operational constraints."
+              "title": "Décision de plateforme d’automatisation",
+              "description": "Choisissez la plateforme d’automatisation, le runtime, le modèle d’intégration, les contrôles de gouvernance et les contraintes opérationnelles."
             },
             {
               "id": "api-design",
-              "title": "Automation Workflow Design",
-              "description": "Design the automation workflow, triggers, decision points, integrations, data handling, and exception paths."
+              "title": "Conception de workflow d’automatisation",
+              "description": "Concevez le workflow d’automatisation, les déclencheurs, les points de décision, les intégrations, le traitement des données et les chemins d’exception."
             },
             {
               "id": "api-delivery",
-              "title": "Automation Delivery",
-              "description": "Build, test, deploy, document, and operate the automation with clear ownership and rollback paths."
+              "title": "Livraison de l’automatisation",
+              "description": "Construisez, testez, déployez, documentez et exploitez l’automatisation avec une responsabilité et des chemins de rollback clairs."
             },
             {
               "id": "api-audit",
-              "title": "Automation Readiness Review",
-              "description": "Review automation readiness, quality, risk, compliance, human oversight, evidence, and release criteria."
+              "title": "Revue de préparation de l’automatisation",
+              "description": "Revoyez la préparation, la qualité, les risques, la conformité, la supervision humaine, les preuves et les critères de publication de l’automatisation."
             },
             {
               "id": "api-publishing",
-              "title": "Automation Enablement",
-              "description": "Enable users and operators with discovery, onboarding, operating instructions, support paths, and change communication."
+              "title": "Enablement de l’automatisation",
+              "description": "Enablez les utilisateurs et opérateurs avec découverte, onboarding, instructions d’exploitation, chemins de support et communication de changement."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Automation Monitoring & Improvement",
-              "description": "Monitor automation performance, exceptions, reliability, user outcomes, operational impact, and improvement opportunities."
+              "title": "Suivi & amélioration de l’automatisation",
+              "description": "Suivez la performance de l’automatisation, les exceptions, la fiabilité, les résultats utilisateurs, l’impact opérationnel et les opportunités d’amélioration."
             }
           ]
         }
@@ -1321,8 +1321,8 @@
       "stations": [
         {
           "id": "api-product-strategy",
-          "title": "Stratégie produit API - Transformer les API en produits stratégiques",
-          "description": "Avant de construire quoi que ce soit, définissez dès le départ la valeur de votre API, ses utilisateurs et ses objectifs commerciaux."
+          "title": "Stratégie de capacité",
+          "description": "Décrivez le besoin métier comme une capacité réutilisable avant de choisir le mode de mise en œuvre."
         },
         {
           "id": "user-experience",
@@ -1331,8 +1331,8 @@
         },
         {
           "id": "api-consumer-experience",
-          "title": "API Consumer Experience - Concevoir pour les vrais utilisateurs de votre API",
-          "description": "Veillez à ce que votre API soit découvrable, compréhensible et utilisable - avant et après le lancement."
+          "title": "Exigences utilisateurs & onboarding",
+          "description": "Capturez les exigences des utilisateurs, l'onboarding, les standards, les exigences non fonctionnelles, les attentes de service, les contraintes, la sécurité, les protocoles, la fraîcheur des données, les SLA, l'observabilité, la reprise, l'adoption et les responsabilités des fournisseurs."
         },
         {
           "id": "market-insights",
@@ -1341,8 +1341,8 @@
         },
         {
           "id": "api-platform-architecture",
-          "title": "Architecture de la plateforme API - Architecturer les API pour l'évolutivité et la réutilisation",
-          "description": "Assurez l'évolutivité, la réutilisation et la gouvernance de vos composants d'API et de plateforme."
+          "title": "Architecture & décisions de plateforme",
+          "description": "Utilisez les exigences et contraintes pour choisir l'architecture, les capacités de plateforme, la gouvernance et le modèle opérationnel."
         },
         {
           "id": "business-goals",
@@ -1351,8 +1351,8 @@
         },
         {
           "id": "api-design",
-          "title": "Conception d'API - Concevoir des API qui apportent de la valeur",
-          "description": "Créer des architectures d'API cohérentes, réutilisables et fondées sur les objectifs métier et des normes communes."
+          "title": "Conception de solution & d'interface",
+          "description": "Concevez le mode de mise en œuvre choisi, le contrat d'interface, les modèles d'interaction, les structures de données et les détails d'utilisation avant l'implémentation."
         },
         {
           "id": "competitive-analysis",
@@ -1361,8 +1361,8 @@
         },
         {
           "id": "api-delivery",
-          "title": "Livraison d'API - Fournir des API sécurisées et fiables",
-          "description": "Construire, tester et publier des API en utilisant des pipelines de livraison modernes et les meilleures pratiques d'ingénierie."
+          "title": "Mise à disposition & opérations",
+          "description": "Mettez en œuvre le mode choisi avec des pratiques adaptées d'ingénierie, de test, de sécurité, d'automatisation et d'exploitation."
         },
         {
           "id": "ecosystem-vision",
@@ -1371,8 +1371,8 @@
         },
         {
           "id": "api-audit",
-          "title": "Audit API - Audit de conformité et de qualité des API",
-          "description": "Vérifiez que les API répondent aux normes métier, de conception et opérationnelles avant leur publication et leur mise à disposition."
+          "title": "Assurance qualité & préparation",
+          "description": "Vérifiez le contrat d'interface, les contrôles, le modèle de support, l'observabilité, la documentation et la préparation du cycle de vie avant publication."
         },
         {
           "id": "scalable-infrastructure",
@@ -1381,8 +1381,8 @@
         },
         {
           "id": "api-publishing",
-          "title": "Publication d'API - Publier des API en toute confiance",
-          "description": "Exposer les API de manière sûre et claire au bon public avec la bonne documentation et les bons processus."
+          "title": "Publication & enablement",
+          "description": "Publiez les informations de capacité afin que les utilisateurs puissent la trouver, l'évaluer, demander l'accès, s'onboarder, l'utiliser et obtenir du support."
         },
         {
           "id": "legal-and-compliance",
@@ -1391,8 +1391,8 @@
         },
         {
           "id": "monitoring-and-improving",
-          "title": "Suivi et amélioration - pour la valeur de l'API",
-          "description": "Utiliser les mesures et le retour d'information pour suivre les performances de l'API et favoriser l'amélioration continue."
+          "title": "Suivi & amélioration",
+          "description": "Suivez l'utilisation, la fiabilité, la qualité des données, les résultats utilisateurs, les coûts opérationnels et les opportunités de réutilisation après publication."
         },
         {
           "id": "security-and-privacy",
@@ -1412,7 +1412,7 @@
         {
           "id": "contract-design",
           "title": "Conception des contrats - Définir des contrats API clairs",
-          "description": "Créer des contrats d'API clairs et bien définis qui décrivent les attentes, les responsabilités et les directives d'utilisation."
+          "description": "Créer des contrats d'interface clairs et bien définis qui décrivent les attentes, les responsabilités et les directives d'utilisation."
         },
         {
           "id": "development",
@@ -1437,11 +1437,11 @@
         {
           "id": "service-agreements",
           "title": "Accords de service - Définir les niveaux de service de l'API",
-          "description": "Établir des accords de service qui définissent les attentes, les niveaux de service et les responsabilités des fournisseurs et des consommateurs d'API."
+          "description": "Établir des accords de service qui définissent les attentes, les niveaux de service et les responsabilités des fournisseurs et des utilisateurs."
         },
         {
           "id": "api-consumer-adoption",
-          "title": "Adoption de l'API par les consommateurs - Favoriser l'utilisation de l'API",
+          "title": "Adoption de l'API par les utilisateurs - Favoriser l'utilisation de l'API",
           "description": "Mettre en œuvre des stratégies visant à favoriser l'adoption et l'engagement des utilisateurs d'API, en veillant à ce que les API soient utilisées efficacement."
         },
         {
@@ -1489,58 +1489,58 @@
     "de": {
       "routeProfiles": [
         {
-          "id": "api-architect",
-          "stakeholderId": "api-architect",
-          "title": "API Architect",
-          "summary": "API Architect guided path"
-        },
-        {
           "id": "api-product-owner",
           "stakeholderId": "api-product-owner",
           "title": "API Product Owner",
           "summary": "Führt die API-Möglichkeit, Priorisierung und produktniveaubezogene Entscheidungen über den gesamten Lebenszyklus hinweg durch."
         },
         {
+          "id": "api-architect",
+          "stakeholderId": "api-architect",
+          "title": "API-Architekt",
+          "summary": "Verantwortet API-Architektur, Entwurfsprinzipien und die Qualität der Schnittstellenverträge."
+        },
+        {
           "id": "api-designer",
           "stakeholderId": "api-designer",
           "title": "API-Designer",
-          "summary": "Formt den API-Vertrag, das Interaktionsmodell, die Konsistenz und die Benutzbarkeit der exponierten Fähigkeiten."
+          "summary": "Gestaltet Schnittstellenvertrag, Interaktionsmodell, Konsistenz, Benutzerfreundlichkeit und bereitgestellte Capabilities."
         },
         {
-          "id": "api-consumer-specialist",
-          "stakeholderId": "api-consumer-specialist",
-          "title": "API-Verbrauchervertreter",
-          "summary": "Repräsentiert die Bedürfnisse von Entwicklern, Integratoren oder anderen API-Verbrauchern, die die API direkt verwenden."
+          "id": "api-engineer",
+          "stakeholderId": "api-engineer",
+          "title": "API-Entwickler",
+          "summary": "Verantwortet Implementierung, Automatisierung, Tests und Release-Prozesse für eine zuverlässige Bereitstellung."
         },
         {
           "id": "automation-engineer",
           "stakeholderId": "automation-engineer",
-          "title": "Automation Engineer",
-          "summary": "Automation Engineer guided path"
+          "title": "Automatisierungsingenieur",
+          "summary": "Implementiert, testet und betreibt Automatisierungslösungen und deren Integrationen."
         },
         {
           "id": "automation-owner",
           "stakeholderId": "automation-owner",
-          "title": "Automation Owner",
-          "summary": "Automation Owner guided path"
+          "title": "Automatisierungsverantwortlicher",
+          "summary": "Verantwortet Ziele, Priorisierung und Geschäftswert der Automatisierung."
+        },
+        {
+          "id": "business-owner",
+          "stakeholderId": "business-owner",
+          "title": "Business Owner",
+          "summary": "Vertritt Geschäftsziele, Finanzierung und erwartete Ergebnisse der Capability-Initiative."
         },
         {
           "id": "capability-owner",
           "stakeholderId": "capability-owner",
           "title": "Capability Owner",
-          "summary": "Capability Owner guided path"
+          "summary": "Verantwortet Vision, Ziele, Priorisierung und Weiterentwicklung der Capability über ihren gesamten Lebenszyklus."
         },
         {
           "id": "compliance-specialist",
           "stakeholderId": "compliance-specialist",
-          "title": "Compliance and Legal Specialist",
-          "summary": "Klärt rechtliche, datenschutzrechtliche, regulatorische und vertragliche Anforderungen auf, die die API beeinflussen."
-        },
-        {
-          "id": "api-devrel-specialist",
-          "stakeholderId": "api-devrel-specialist",
-          "title": "Documentation and DevRel Owner",
-          "summary": "Verantwortlich für Onboarding-Inhalte, Entwickler-Kommunikation und Dokumentationsqualität für API-Verbraucher."
+          "title": "Compliance- und Rechtsexperte",
+          "summary": "Klärt rechtliche, Datenschutz- und Compliance-Anforderungen, die die Capability oder Schnittstelle betreffen."
         },
         {
           "id": "domain-specialist",
@@ -1549,40 +1549,28 @@
           "summary": "Bringt tiefe Kenntnisse des Geschäftsbereichs, Konzepte, Regeln und Einschränkungen mit, die die API widerspiegeln muss."
         },
         {
-          "id": "business-owner",
-          "stakeholderId": "business-owner",
-          "title": "Geschäftsinhaber",
-          "summary": "Repräsentiert Geschäftsziele, Finanzierung und erwartete Ergebnisse für das API-Initiative."
-        },
-        {
           "id": "governance-specialist",
           "stakeholderId": "governance-specialist",
-          "title": "Governance Owner",
+          "title": "Governance-Verantwortlicher",
           "summary": "Repräsentiert Überprüfung, Auditierung und organisationsweite Governance-Praktiken für API-Qualität und Konformität."
         },
         {
           "id": "integration-architect",
           "stakeholderId": "integration-architect",
-          "title": "Integration Architect",
-          "summary": "Integration Architect guided path"
+          "title": "Integrationsarchitekt",
+          "summary": "Entwirft Integrationslösungen und Integrationsmuster im Einklang mit der Gesamtarchitektur."
         },
         {
           "id": "customer-specialist",
           "stakeholderId": "customer-specialist",
           "title": "Kunden- oder Partnervertreter",
-          "summary": "Repräsentiert die Perspektive von Kunden oder Partnern für den Reise, Wert und Zusammenarbeitsmodell."
+          "summary": "Vertritt die Perspektive von Kunden oder Partnern hinsichtlich Journey, Wert und Zusammenarbeitsmodell."
         },
         {
           "id": "partner-specialist",
           "stakeholderId": "partner-specialist",
-          "title": "Partner- oder Vendor-Manager",
-          "summary": "Koordiniert externe Partner-, Lieferanten- oder Vendor-Beziehungen, die die API-Strategie und -Lieferung beeinflussen."
-        },
-        {
-          "id": "platform-owner",
-          "stakeholderId": "platform-owner",
-          "title": "Platform Owner",
-          "summary": "Platform Owner guided path"
+          "title": "Partner- und Lieferantenmanager",
+          "summary": "Koordiniert Partner- und Lieferantenbeziehungen, die die Capability-Strategie und Umsetzung beeinflussen."
         },
         {
           "id": "platform-architect",
@@ -1591,16 +1579,16 @@
           "summary": "Leitet Entscheidungen über Plattform, Integration, Skalierbarkeit und Architektur, die beeinflussen, wie die API erstellt und betrieben wird."
         },
         {
-          "id": "process-owner",
-          "stakeholderId": "process-owner",
-          "title": "Process Owner",
-          "summary": "Process Owner guided path"
+          "id": "platform-owner",
+          "stakeholderId": "platform-owner",
+          "title": "Plattformverantwortlicher",
+          "summary": "Verantwortet Plattformfähigkeiten, Weiterentwicklung und Betrieb."
         },
         {
-          "id": "api-engineer",
-          "stakeholderId": "api-engineer",
-          "title": "Programmierer",
-          "summary": "Verantwortlich für Implementierung, Automatisierung, Testing und Release-Flussbedürfnisse, die für die zuverlässige Lieferung der API erforderlich sind."
+          "id": "process-owner",
+          "stakeholderId": "process-owner",
+          "title": "Prozessverantwortlicher",
+          "summary": "Verantwortet Ziele, Weiterentwicklung und Ergebnisse des Geschäftsprozesses."
         },
         {
           "id": "security-specialist",
@@ -1609,70 +1597,82 @@
           "summary": "Stellt sicher, dass Sicherheitsrisiken, Kontrollen und Vertrauensgrenzen im gesamten API-Lifecycle berücksichtigt werden."
         },
         {
+          "id": "api-devrel-specialist",
+          "stakeholderId": "api-devrel-specialist",
+          "title": "Verantwortlicher für Dokumentation und DevRel",
+          "summary": "Verantwortet Onboarding-Inhalte, Entwicklerkommunikation und Dokumentationsqualität für API-Nutzer."
+        },
+        {
           "id": "operations-specialist",
           "stakeholderId": "operations-specialist",
-          "title": "Support and Operations Owner",
+          "title": "Verantwortlicher für Support und Betrieb",
           "summary": "Repräsentiert Runtime-Support, Vorfallbehandlung, Beobachtbarkeit und operative Bereitschaft."
+        },
+        {
+          "id": "api-consumer-specialist",
+          "stakeholderId": "api-consumer-specialist",
+          "title": "Vertreter der API-Nutzer",
+          "summary": "Vertritt die Anforderungen von Entwicklern, Integratoren und anderen Nutzern der API."
         }
       ],
       "cycles": [
         {
           "id": "capability-productization-cycle",
           "slug": "capability-productization-cycle",
-          "title": "Capability Productization Cycle",
-          "description": "A cycle for turning business capabilities into reusable digital capabilities before selecting the implementation style.",
+          "title": "Capability-Produktisierungszyklus",
+          "description": "Ein Zyklus, um Geschäftsfähigkeiten in wiederverwendbare digitale Capabilities zu überführen, bevor die Umsetzungsweise gewählt wird.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Strategy",
-              "description": "Frame the business need as a reusable capability before choosing the implementation style."
+              "title": "Strategie",
+              "description": "Definieren Sie Wert, Nutzer, Ownership und Geschäftsziele der Capability, bevor etwas gebaut wird."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Consumer Requirements & Onboarding",
-              "description": "Capture consumer onboarding, standards, non-functional requirements, service expectations, constraints, security needs, allowed protocols, data freshness, SLAs, observability, recovery, adoption requirements, and producer responsibilities."
+              "title": "Nutzeranforderungen & Onboarding",
+              "description": "Erfassen Sie Nutzeranforderungen, Onboarding-Bedarf, Einschränkungen, Serviceerwartungen und Verantwortlichkeiten der Anbieter."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Architecture & Platform Decisions",
-              "description": "Use requirements and constraints to decide the right architecture pattern and enabling platform capabilities."
+              "title": "Architektur & Plattformentscheidungen",
+              "description": "Nutzen Sie Anforderungen und Einschränkungen, um Architektur und Plattformfähigkeiten auszuwählen."
             },
             {
               "id": "api-design",
-              "title": "Solution & Interface Design",
-              "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
+              "title": "Lösungs- & Schnittstellendesign",
+              "description": "Entwerfen Sie den Schnittstellenvertrag und das Interaktionsmodell für die gewählte Umsetzungsweise."
             },
             {
               "id": "api-delivery",
-              "title": "Delivery & Operations",
-              "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
+              "title": "Bereitstellung & Betrieb",
+              "description": "Bauen, testen, veröffentlichen und betreiben Sie die Capability mit der gewählten Umsetzungsweise und dem validierten Schnittstellenvertrag."
             },
             {
               "id": "api-audit",
-              "title": "Quality & Readiness Assurance",
-              "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
+              "title": "Qualitäts- & Bereitschaftssicherung",
+              "description": "Sichern Sie Qualität, Governance und Bereitschaft vor der Veröffentlichung ab."
             },
             {
               "id": "api-publishing",
-              "title": "Publishing & Adoption Enablement",
-              "description": "Publish reusable capability information so consumers can discover, request, onboard, use, and get support."
+              "title": "Veröffentlichung & Adoption Enablement",
+              "description": "Veröffentlichen Sie Capability-Informationen so, dass Nutzer sie finden, Zugriff beantragen, onboarden und Support erhalten können."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Monitoring & Improvement",
-              "description": "Monitor usage, reliability, data quality, consumer outcomes, operational cost, and reuse opportunities after release."
+              "title": "Monitoring & Verbesserung",
+              "description": "Überwachen Sie Capability-Gesundheit, Nutzerergebnisse, Zuverlässigkeit, Wiederverwendung und Verbesserungsmöglichkeiten."
             }
           ]
         },
         {
           "id": "api-productization-cycle",
           "slug": "api-productization-cycle",
-          "title": "API Productization Cycle",
-          "description": "The API-focused APIOps Cycles journey for productizing, designing, delivering, publishing, and improving APIs.",
+          "title": "API-Produktisierungszyklus",
+          "description": "Die API-fokussierte APIOps-Cycles-Journey für Produktisierung, Design, Bereitstellung, Veröffentlichung und Verbesserung von APIs.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "API Product Strategy",
+              "title": "API-Produktstrategie",
               "description": "Bevor Sie etwas bauen, sollten Sie von Anfang an den Wert, die Benutzer und die Geschäftsziele Ihrer API definieren."
             },
             {
@@ -1682,32 +1682,32 @@
             },
             {
               "id": "api-platform-architecture",
-              "title": "API Platform Architecture",
+              "title": "API-Plattformarchitektur",
               "description": "Gewährleisten Sie Skalierbarkeit, Wiederverwendung und Governance für Ihre API- und Plattformkomponenten."
             },
             {
               "id": "api-design",
-              "title": "API Design",
+              "title": "API-Design",
               "description": "Erstellen Sie API-Designs, die konsistent, wiederverwendbar und auf Geschäftszielen und gemeinsamen Standards basieren."
             },
             {
               "id": "api-delivery",
-              "title": "API Delivery",
+              "title": "API-Bereitstellung",
               "description": "Erstellen, Testen und Freigeben von APIs unter Verwendung moderner Bereitstellungspipelines und bewährter technischer Verfahren."
             },
             {
               "id": "api-audit",
-              "title": "API Audit",
+              "title": "API-Audit",
               "description": "Stellen Sie sicher, dass APIs vor der Veröffentlichung und Bereitstellung den geschäftlichen, gestalterischen und betrieblichen Standards entsprechen."
             },
             {
               "id": "api-publishing",
-              "title": "API Publishing",
+              "title": "API-Veröffentlichung",
               "description": "Stellen Sie APIs mit der richtigen Dokumentation und den richtigen Prozessen sicher und klar für die richtige Zielgruppe bereit."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Monitoring & Improving",
+              "title": "Monitoring & Verbesserung",
               "description": "Nutzen Sie Messgrößen und Feedback, um die API-Leistung zu verfolgen und kontinuierliche Verbesserungen voranzutreiben."
             }
           ]
@@ -1715,96 +1715,96 @@
         {
           "id": "integration-productization-cycle",
           "slug": "integration-productization-cycle",
-          "title": "Integration Productization Cycle",
-          "description": "A cycle for productizing reusable integration capabilities before selecting a concrete integration pattern.",
+          "title": "Integrationszyklus",
+          "description": "Ein Zyklus zur Produktisierung wiederverwendbarer Integrations-Capabilities, bevor ein konkretes Integrationsmuster gewählt wird.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Integration Capability Strategy",
-              "description": "Frame the reusable integration capability, business need, ownership, and expected reuse before selecting a pattern."
+              "title": "Integrations-Capability-Strategie",
+              "description": "Rahmen Sie die wiederverwendbare Integrations-Capability, den Geschäftsbedarf, Ownership und erwartete Wiederverwendung, bevor ein Muster gewählt wird."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Integration Consumer Requirements & Onboarding",
-              "description": "Capture integration consumers, provider responsibilities, onboarding needs, service expectations, and operational constraints."
+              "title": "Integrationsnutzeranforderungen & Onboarding",
+              "description": "Erfassen Sie Integrationsnutzer, Anbieter-Verantwortlichkeiten, Onboarding-Bedarf, Serviceerwartungen und operative Einschränkungen."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Integration Architecture Decision",
-              "description": "Decide the integration architecture, platform capabilities, constraints, and governance model for the capability."
+              "title": "Integrationsarchitekturentscheidung",
+              "description": "Entscheiden Sie Integrationsarchitektur, Plattformfähigkeiten, Einschränkungen und Governance-Modell für die Capability."
             },
             {
               "id": "api-design",
-              "title": "Integration Solution Design",
-              "description": "Design the integration solution, contracts, payloads, events, APIs, files, or interaction patterns selected for the capability."
+              "title": "Integrationsdesign",
+              "description": "Entwerfen Sie Schnittstellenvertrag, Payloads, Events, APIs, Dateien oder Interaktionsmuster, die für die Integrations-Capability gewählt wurden."
             },
             {
               "id": "api-delivery",
-              "title": "Integration Delivery & Operations",
-              "description": "Build, test, automate, deploy, and operate the integration capability across its selected delivery pattern."
+              "title": "Integrationsbereitstellung & Betrieb",
+              "description": "Bauen, testen, automatisieren, veröffentlichen und betreiben Sie die Integrations-Capability mit dem gewählten Bereitstellungsmuster und dem validierten Schnittstellenvertrag."
             },
             {
               "id": "api-audit",
-              "title": "Integration Readiness Assurance",
-              "description": "Assure integration readiness, governance, quality, security, compliance, and operational evidence before release."
+              "title": "Integrationsbereitschaftssicherung",
+              "description": "Sichern Sie Integrationsbereitschaft, Governance, Qualität, Sicherheit, Compliance und operative Nachweise vor der Veröffentlichung ab."
             },
             {
               "id": "api-publishing",
-              "title": "Capability Publishing",
-              "description": "Publish the integration capability so teams can discover, request, reuse, onboard, and get support."
+              "title": "Capability-Veröffentlichung",
+              "description": "Veröffentlichen Sie die Integrations-Capability so, dass Teams sie finden, anfragen, wiederverwenden, onboarden und Support erhalten können."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Integration Monitoring & Improvement",
-              "description": "Monitor integration reliability, reuse, incidents, performance, consumer outcomes, and improvement needs."
+              "title": "Integrationsmonitoring & Verbesserung",
+              "description": "Überwachen Sie Integrationszuverlässigkeit, Wiederverwendung, Incidents, Performance, Nutzerergebnisse und Verbesserungsbedarf."
             }
           ]
         },
         {
           "id": "automation-cycle",
           "slug": "automation-cycle",
-          "title": "Automation Cycle",
-          "description": "A cycle for identifying, designing, delivering, enabling, and improving automation opportunities.",
+          "title": "Automatisierungszyklus",
+          "description": "Ein Zyklus zum Identifizieren, Entwerfen, Bereitstellen, Enablement und Verbessern von Automatisierungsmöglichkeiten.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Automation Opportunity Strategy",
-              "description": "Identify and prioritize automation opportunities by value, feasibility, risk, ownership, and expected process impact."
+              "title": "Automatisierungschance & Strategie",
+              "description": "Identifizieren und priorisieren Sie Automatisierungsmöglichkeiten nach Wert, Machbarkeit, Risiko, Ownership und erwarteter Prozesswirkung."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Process/User Requirements",
-              "description": "Capture process users, roles, handoffs, exceptions, constraints, and service expectations before designing the automation."
+              "title": "Prozess-/Nutzeranforderungen",
+              "description": "Erfassen Sie Prozessnutzer, Rollen, Übergaben, Ausnahmen, Einschränkungen und Serviceerwartungen, bevor die Automatisierung entworfen wird."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Automation Platform Decision",
-              "description": "Choose the automation platform, runtime, integration model, governance controls, and operational constraints."
+              "title": "Automatisierungsplattformentscheidung",
+              "description": "Wählen Sie Automatisierungsplattform, Runtime, Integrationsmodell, Governance-Kontrollen und operative Einschränkungen."
             },
             {
               "id": "api-design",
-              "title": "Automation Workflow Design",
-              "description": "Design the automation workflow, triggers, decision points, integrations, data handling, and exception paths."
+              "title": "Automatisierungs-Workflow-Design",
+              "description": "Entwerfen Sie Automatisierungsworkflow, Trigger, Entscheidungspunkte, Integrationen, Datenverarbeitung, Schnittstellenverträge und Ausnahmefälle."
             },
             {
               "id": "api-delivery",
-              "title": "Automation Delivery",
-              "description": "Build, test, deploy, document, and operate the automation with clear ownership and rollback paths."
+              "title": "Automatisierungsbereitstellung",
+              "description": "Bauen, testen, deployen, dokumentieren und betreiben Sie die Automatisierung mit klarer Ownership, Kontrollen und Rollback-Pfaden."
             },
             {
               "id": "api-audit",
-              "title": "Automation Readiness Review",
-              "description": "Review automation readiness, quality, risk, compliance, human oversight, evidence, and release criteria."
+              "title": "Automatisierungsbereitschaftsprüfung",
+              "description": "Prüfen Sie Automatisierungsbereitschaft, Qualität, Risiko, Compliance, menschliche Aufsicht, Nachweise und Freigabekriterien."
             },
             {
               "id": "api-publishing",
-              "title": "Automation Enablement",
-              "description": "Enable users and operators with discovery, onboarding, operating instructions, support paths, and change communication."
+              "title": "Automatisierungs-Enablement",
+              "description": "Befähigen Sie Nutzer und Betreiber mit Auffindbarkeit, Onboarding, Betriebsanweisungen, Supportpfaden und Änderungs kommunikation."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Automation Monitoring & Improvement",
-              "description": "Monitor automation performance, exceptions, reliability, user outcomes, operational impact, and improvement opportunities."
+              "title": "Automatisierungsmonitoring & Verbesserung",
+              "description": "Überwachen Sie Automatisierungsleistung, Ausnahmen, Zuverlässigkeit, Nutzerergebnisse, operative Auswirkungen und Verbesserungsmöglichkeiten."
             }
           ]
         }
@@ -1812,8 +1812,8 @@
       "stations": [
         {
           "id": "api-product-strategy",
-          "title": "API-Produktstrategie - APIs in strategische Produkte verwandeln",
-          "description": "Bevor Sie etwas bauen, sollten Sie von Anfang an den Wert, die Benutzer und die Geschäftsziele Ihrer API definieren."
+          "title": "Strategie",
+          "description": "Beschreiben Sie den Geschäftsbedarf als wiederverwendbare Capability, bevor Sie die Umsetzungsweise festlegen."
         },
         {
           "id": "user-experience",
@@ -1822,8 +1822,8 @@
         },
         {
           "id": "api-consumer-experience",
-          "title": "API Consumer Experience - Design für die echten Benutzer Ihrer API",
-          "description": "Stellen Sie sicher, dass Ihre API auffindbar, verständlich und nutzbar ist - vor und nach der Einführung."
+          "title": "Nutzeranforderungen & Onboarding",
+          "description": "Erfassen Sie Nutzeranforderungen, Onboarding, Standards, nicht-funktionale Anforderungen, Serviceerwartungen, Einschränkungen, Sicherheitsbedarf, Protokolle, Datenaktualität, SLAs, Observability, Wiederherstellung, Adoption und Verantwortlichkeiten der Anbieter."
         },
         {
           "id": "market-insights",
@@ -1832,8 +1832,8 @@
         },
         {
           "id": "api-platform-architecture",
-          "title": "API-Plattformarchitektur - Architektur von APIs für Skalierbarkeit und Wiederverwendung",
-          "description": "Gewährleisten Sie Skalierbarkeit, Wiederverwendung und Governance für Ihre API- und Plattformkomponenten."
+          "title": "Architektur & Plattformentscheidungen",
+          "description": "Nutzen Sie Anforderungen und Einschränkungen, um Architektur, Plattformfähigkeiten, Governance und Betriebsmodell zu wählen."
         },
         {
           "id": "business-goals",
@@ -1842,8 +1842,8 @@
         },
         {
           "id": "api-design",
-          "title": "API-Design - Entwerfen Sie APIs, die Wert liefern",
-          "description": "Erstellen Sie API-Designs, die konsistent, wiederverwendbar und auf Geschäftszielen und gemeinsamen Standards basieren."
+          "title": "Lösungs- & Schnittstellendesign",
+          "description": "Entwerfen Sie die gewählte Umsetzungsweise, den Schnittstellenvertrag, Interaktionsmuster, Datenstrukturen und Nutzungsdetails vor der Implementierung."
         },
         {
           "id": "competitive-analysis",
@@ -1852,8 +1852,8 @@
         },
         {
           "id": "api-delivery",
-          "title": "API-Bereitstellung - Bereitstellung sicherer und zuverlässiger APIs",
-          "description": "Erstellen, Testen und Freigeben von APIs unter Verwendung moderner Bereitstellungspipelines und bewährter technischer Verfahren."
+          "title": "Bereitstellung & Betrieb",
+          "description": "Setzen Sie die gewählte Umsetzungsweise mit geeigneten Engineering-, Test-, Sicherheits-, Automatisierungs- und Betriebspraktiken um."
         },
         {
           "id": "ecosystem-vision",
@@ -1862,8 +1862,8 @@
         },
         {
           "id": "api-audit",
-          "title": "API-Audit - Prüfung von APIs auf Konformität und Qualität",
-          "description": "Stellen Sie sicher, dass APIs vor der Veröffentlichung und Bereitstellung den geschäftlichen, gestalterischen und betrieblichen Standards entsprechen."
+          "title": "Qualitäts- & Bereitschaftssicherung",
+          "description": "Prüfen Sie Schnittstellenvertrag, Kontrollen, Supportmodell, Observability, Dokumentation und Lifecycle-Bereitschaft vor der Veröffentlichung."
         },
         {
           "id": "scalable-infrastructure",
@@ -1872,8 +1872,8 @@
         },
         {
           "id": "api-publishing",
-          "title": "API-Veröffentlichung - Veröffentlichen Sie APIs mit Zuversicht",
-          "description": "Stellen Sie APIs mit der richtigen Dokumentation und den richtigen Prozessen sicher und klar für die richtige Zielgruppe bereit."
+          "title": "Veröffentlichung & Enablement",
+          "description": "Veröffentlichen Sie Capability-Informationen so, dass Nutzer sie finden, bewerten, Zugriff beantragen, onboarden, nutzen und Support erhalten können."
         },
         {
           "id": "legal-and-compliance",
@@ -1882,8 +1882,8 @@
         },
         {
           "id": "monitoring-and-improving",
-          "title": "Überwachen und Verbessern - für den API-Wert",
-          "description": "Nutzen Sie Messgrößen und Feedback, um die API-Leistung zu verfolgen und kontinuierliche Verbesserungen voranzutreiben."
+          "title": "Monitoring & Verbesserung",
+          "description": "Überwachen Sie Nutzung, Zuverlässigkeit, Datenqualität, Nutzerergebnisse, Betriebskosten und Wiederverwendungsmöglichkeiten nach der Veröffentlichung."
         },
         {
           "id": "security-and-privacy",
@@ -1898,12 +1898,12 @@
         {
           "id": "vendor-management",
           "title": "Vendor Management - Verwalten von API-Integrationen von Drittanbietern",
-          "description": "Effiziente Verwaltung von Drittanbieter-APIs und Integrationen zur Gewährleistung von Zuverlässigkeit und Konformität."
+          "description": "Effiziente Verwaltung von Drittanbieter-APIs und Integrationen zur Gewährleistung von Zuverlässigkeit und Compliance."
         },
         {
           "id": "contract-design",
-          "title": "Vertragsgestaltung - Definieren Sie klare API-Verträge",
-          "description": "Erstellen Sie klare und genau definierte API-Verträge, die Erwartungen, Verantwortlichkeiten und Nutzungsrichtlinien umreißen."
+          "title": "Vertragsgestaltung - Definieren Sie klare Schnittstellenverträge",
+          "description": "Erstellen Sie klare und genau definierte Schnittstellenverträge, die Erwartungen, Verantwortlichkeiten und Nutzungsrichtlinien umreißen."
         },
         {
           "id": "development",
@@ -1932,8 +1932,8 @@
         },
         {
           "id": "api-consumer-adoption",
-          "title": "API-Verbraucherakzeptanz - Förderung der API-Nutzung",
-          "description": "Implementierung von Strategien zur Förderung der Akzeptanz und des Engagements von API-Kunden, um sicherzustellen, dass APIs effektiv genutzt werden."
+          "title": "Nutzerakzeptanz - Förderung der API-Nutzung",
+          "description": "Implementierung von Strategien zur Förderung der Akzeptanz und des Engagements von Nutzer, um sicherzustellen, dass APIs effektiv genutzt werden."
         },
         {
           "id": "api-promotion",
@@ -1992,18 +1992,6 @@
           "summary": "Orienta decisões sobre a plataforma, integração, escalabilidade e arquitetura que moldam como a API é construída e operada."
         },
         {
-          "id": "automation-engineer",
-          "stakeholderId": "automation-engineer",
-          "title": "Automation Engineer",
-          "summary": "Automation Engineer guided path"
-        },
-        {
-          "id": "automation-owner",
-          "stakeholderId": "automation-owner",
-          "title": "Automation Owner",
-          "summary": "Automation Owner guided path"
-        },
-        {
           "id": "capability-owner",
           "stakeholderId": "capability-owner",
           "title": "Capability Owner",
@@ -2012,20 +2000,26 @@
         {
           "id": "api-designer",
           "stakeholderId": "api-designer",
-          "title": "Designer API",
-          "summary": "Modela o contrato API, o modelo de interação, a consistência e a usabilidade das capacidades expostas."
+          "title": "Designer de API",
+          "summary": "Modela o contrato de interface da API, o modelo de interação, a consistência e a usabilidade das capacidades expostas."
+        },
+        {
+          "id": "automation-engineer",
+          "stakeholderId": "automation-engineer",
+          "title": "Engenheiro de automação",
+          "summary": "Engenheiro de automação guided path"
         },
         {
           "id": "api-engineer",
           "stakeholderId": "api-engineer",
           "title": "Engenheiro de Entrega",
-          "summary": "Responsável por implementação, automação, testes e preocupações de fluxo de lançamento necessárias para entregar a API de forma confiável."
+          "summary": "Responsável pela implementação, automação, testes e preocupações do fluxo de lançamento necessárias para entregar a API de forma fiável."
         },
         {
           "id": "compliance-specialist",
           "stakeholderId": "compliance-specialist",
           "title": "Especialista em Conformidade e Legal",
-          "summary": "Esclarece os requisitos legais, de privacidade, regulatórios e contratuais que afetam a API."
+          "summary": "Esclarece os requisitos legais, de privacidade, regulamentares e contratuais que afetam a API."
         },
         {
           "id": "domain-specialist",
@@ -2037,12 +2031,12 @@
           "id": "security-specialist",
           "stakeholderId": "security-specialist",
           "title": "Especialista em Segurança",
-          "summary": "Garante que os riscos de segurança, controles e limites de confiança sejam abordados ao longo do ciclo de vida da API."
+          "summary": "Garante que os riscos de segurança, controlos e fronteiras de confiança são tratados ao longo do ciclo de vida da API."
         },
         {
           "id": "partner-specialist",
           "stakeholderId": "partner-specialist",
-          "title": "Gerente de Parceiros ou Fornecedores",
+          "title": "Gestor de parceiros ou fornecedores",
           "summary": "Coordena as relações com parceiros externos, fornecedores ou vendedores que influenciam a estratégia e a entrega da API."
         },
         {
@@ -2052,40 +2046,16 @@
           "summary": "Integration Architect guided path"
         },
         {
-          "id": "platform-owner",
-          "stakeholderId": "platform-owner",
-          "title": "Platform Owner",
-          "summary": "Platform Owner guided path"
-        },
-        {
           "id": "process-owner",
           "stakeholderId": "process-owner",
           "title": "Process Owner",
           "summary": "Process Owner guided path"
         },
         {
-          "id": "api-devrel-specialist",
-          "stakeholderId": "api-devrel-specialist",
-          "title": "Proprietário da Documentação e Desenvolvimento Comunitário",
-          "summary": "Possui o conteúdo de integração, a comunicação com os desenvolvedores e a qualidade da documentação para os usuários da API."
-        },
-        {
-          "id": "governance-specialist",
-          "stakeholderId": "governance-specialist",
-          "title": "Proprietário da Governança",
-          "summary": "Representa práticas de revisão, auditoria e governança em toda a organização para qualidade e conformidade das APIs."
-        },
-        {
           "id": "api-product-owner",
           "stakeholderId": "api-product-owner",
           "title": "Proprietário do Produto API",
           "summary": "Impulsiona a oportunidade API, priorização e decisões de nível de produto ao longo do ciclo de vida."
-        },
-        {
-          "id": "operations-specialist",
-          "stakeholderId": "operations-specialist",
-          "title": "Proprietário do Suporte e Operações",
-          "summary": "Representa o suporte em tempo de execução, o tratamento de incidentes, a observabilidade e a prontidão operacional."
         },
         {
           "id": "customer-specialist",
@@ -2104,101 +2074,131 @@
           "stakeholderId": "business-owner",
           "title": "Responsável de Negócios",
           "summary": "Representa os objetivos de negócios, financiamento e resultados esperados para a iniciativa API."
+        },
+        {
+          "id": "automation-owner",
+          "stakeholderId": "automation-owner",
+          "title": "Responsável pela automação",
+          "summary": "Responsável pela automação guided path"
+        },
+        {
+          "id": "api-devrel-specialist",
+          "stakeholderId": "api-devrel-specialist",
+          "title": "Responsável pela documentação e desenvolvimento da comunidade",
+          "summary": "É responsável pelo conteúdo de integração, pela comunicação com programadores e pela qualidade da documentação para os utilizadores da API."
+        },
+        {
+          "id": "governance-specialist",
+          "stakeholderId": "governance-specialist",
+          "title": "Responsável pela governação",
+          "summary": "Representa práticas de revisão, auditoria e governação em toda a organização para qualidade e conformidade das APIs."
+        },
+        {
+          "id": "platform-owner",
+          "stakeholderId": "platform-owner",
+          "title": "Responsável pela plataforma",
+          "summary": "Responsável pela plataforma guided path"
+        },
+        {
+          "id": "operations-specialist",
+          "stakeholderId": "operations-specialist",
+          "title": "Responsável pelo suporte e operações",
+          "summary": "Representa o suporte em tempo de execução, o tratamento de incidentes, a observabilidade e a prontidão operacional."
         }
       ],
       "cycles": [
         {
           "id": "capability-productization-cycle",
           "slug": "capability-productization-cycle",
-          "title": "Capability Productization Cycle",
-          "description": "A cycle for turning business capabilities into reusable digital capabilities before selecting the implementation style.",
+          "title": "Ciclo de Produto de Capacidades",
+          "description": "Um ciclo para transformar capacidades de negócio em capacidades digitais reutilizáveis antes de selecionar o estilo de implementação.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Strategy",
-              "description": "Frame the business need as a reusable capability before choosing the implementation style."
+              "title": "Estratégia",
+              "description": "Antes de construir qualquer coisa, defina o valor, os consumidores, a propriedade e os objetivos de negócio da capacidade."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Consumer Requirements & Onboarding",
-              "description": "Capture consumer onboarding, standards, non-functional requirements, service expectations, constraints, security needs, allowed protocols, data freshness, SLAs, observability, recovery, adoption requirements, and producer responsibilities."
+              "title": "Requisitos e integração de consumidores",
+              "description": "Recolha requisitos de integração dos consumidores, normas, requisitos não funcionais, expectativas de serviço, restrições, necessidades de segurança, protocolos permitidos, atualidade dos dados, SLAs, observabilidade, recuperação, requisitos de adoção e responsabilidades dos produtores."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Architecture & Platform Decisions",
-              "description": "Use requirements and constraints to decide the right architecture pattern and enabling platform capabilities."
+              "title": "Decisões de arquitetura e plataforma",
+              "description": "Utilize requisitos e restrições para decidir o padrão de arquitetura certo e as capacidades de plataforma de suporte."
             },
             {
               "id": "api-design",
-              "title": "Solution & Interface Design",
-              "description": "Design the selected solution mechanism and interface contract after the architecture choice is justified."
+              "title": "Conceção da solução e da interface",
+              "description": "Conceba o contrato de interface e o modelo de interação para o estilo de disponibilização selecionado."
             },
             {
               "id": "api-delivery",
-              "title": "Delivery & Operations",
-              "description": "Deliver the selected solution mechanism with appropriate engineering, testing, security, automation, and operational practices."
+              "title": "Entrega e operações",
+              "description": "Construa, teste, disponibilize e opere a capacidade usando o estilo de disponibilização selecionado e o contrato de interface validado."
             },
             {
               "id": "api-audit",
-              "title": "Quality & Readiness Assurance",
-              "description": "Audit the capability contract, controls, support model, observability, documentation, and lifecycle readiness before release."
+              "title": "Garantia de qualidade e prontidão",
+              "description": "Audite o contrato de interface, os controlos, o modelo de suporte, a observabilidade, a documentação e a prontidão de ciclo de vida da capacidade antes da disponibilização."
             },
             {
               "id": "api-publishing",
-              "title": "Publishing & Adoption Enablement",
-              "description": "Publish reusable capability information so consumers can discover, request, onboard, use, and get support."
+              "title": "Publicação e promoção da adoção",
+              "description": "Publique informação sobre a capacidade reutilizável para que os consumidores a possam descobrir, solicitar, integrar, utilizar e obter suporte."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Monitoring & Improvement",
-              "description": "Monitor usage, reliability, data quality, consumer outcomes, operational cost, and reuse opportunities after release."
+              "title": "Monitorização e melhoria",
+              "description": "Monitorize a utilização, fiabilidade, qualidade dos dados, resultados dos consumidores, custo operacional e oportunidades de reutilização após a disponibilização."
             }
           ]
         },
         {
           "id": "api-productization-cycle",
           "slug": "api-productization-cycle",
-          "title": "API Productization Cycle",
-          "description": "The API-focused APIOps Cycles journey for productizing, designing, delivering, publishing, and improving APIs.",
+          "title": "Ciclo de Produto de API",
+          "description": "A jornada APIOps Cycles focada em API para transformar APIs em produto, concebê-las, entregá-las, publicá-las e melhorá-las.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "API Product Strategy",
-              "description": "Antes de construir qualquer coisa, defina o valor da sua API, os utilizadores e os objectivos comerciais desde o primeiro dia."
+              "title": "Estratégia de produto API",
+              "description": "Antes de construir qualquer coisa, defina o valor da sua API, os utilizadores e os objetivos de negócio desde o primeiro dia."
             },
             {
               "id": "api-consumer-experience",
-              "title": "API Consumer Experience",
+              "title": "Experiência do consumidor da API",
               "description": "Certifique-se de que a sua API é detetável, compreensível e utilizável - antes e depois do lançamento."
             },
             {
               "id": "api-platform-architecture",
-              "title": "API Platform Architecture",
+              "title": "Arquitetura da plataforma API",
               "description": "Garanta a escalabilidade, a reutilização e a governação da sua API e dos componentes da plataforma."
             },
             {
               "id": "api-design",
-              "title": "API Design",
-              "description": "Criar projetos de API que sejam consistentes, reutilizáveis e baseados na intenção de negócios e em padrões compartilhados."
+              "title": "Conceção da API",
+              "description": "Criar conceções de API que sejam consistentes, reutilizáveis e baseados na intenção de negócios e em padrões compartilhados."
             },
             {
               "id": "api-delivery",
-              "title": "API Delivery",
-              "description": "Criar, testar e lançar APIs usando pipelines de entrega modernos e práticas recomendadas de engenharia."
+              "title": "Entrega da API",
+              "description": "Criar, testar e lançar APIs usando pipelines de entrega modernos e boas práticas de engenharia."
             },
             {
               "id": "api-audit",
-              "title": "API Audit",
-              "description": "Valide se as APIs atendem aos padrões de negócios, design e operacionais antes da publicação e exposição."
+              "title": "Auditoria da API",
+              "description": "Valide se as APIs satisfazemos padrões de negócio, conceção e operacionais antes da publicação e exposição."
             },
             {
               "id": "api-publishing",
-              "title": "API Publishing",
+              "title": "Publicação da API",
               "description": "Exponha as APIs de forma segura e clara ao público certo com a documentação e os processos corretos."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Monitoring & Improving",
+              "title": "Monitorização e melhoria",
               "description": "Utilizar métricas e feedback para acompanhar o desempenho da API e promover a melhoria contínua."
             }
           ]
@@ -2206,96 +2206,96 @@
         {
           "id": "integration-productization-cycle",
           "slug": "integration-productization-cycle",
-          "title": "Integration Productization Cycle",
-          "description": "A cycle for productizing reusable integration capabilities before selecting a concrete integration pattern.",
+          "title": "Ciclo de Produto de Integração",
+          "description": "Um ciclo para transformar capacidades de integração reutilizáveis em produto antes de selecionar um padrão de integração concreto.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Integration Capability Strategy",
-              "description": "Frame the reusable integration capability, business need, ownership, and expected reuse before selecting a pattern."
+              "title": "Estratégia da capacidade de integração",
+              "description": "Enquadre a capacidade de integração reutilizável, a necessidade de negócio, a propriedade e a reutilização esperada antes de selecionar um padrão."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Integration Consumer Requirements & Onboarding",
-              "description": "Capture integration consumers, provider responsibilities, onboarding needs, service expectations, and operational constraints."
+              "title": "Requisitos e integração de consumidores da integração",
+              "description": "Recolha consumidores da integração, responsabilidades dos fornecedores, necessidades de integração, expectativas de serviço e restrições operacionais."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Integration Architecture Decision",
-              "description": "Decide the integration architecture, platform capabilities, constraints, and governance model for the capability."
+              "title": "Decisão de arquitetura da integração",
+              "description": "Decida a arquitetura de integração, as capacidades de plataforma, as restrições e o modelo de governação da capacidade."
             },
             {
               "id": "api-design",
-              "title": "Integration Solution Design",
-              "description": "Design the integration solution, contracts, payloads, events, APIs, files, or interaction patterns selected for the capability."
+              "title": "Conceção da solução de integração",
+              "description": "Conceba o contrato de interface, payloads, eventos, APIs, ficheiros ou padrões de interação selecionados para a capacidade de integração."
             },
             {
               "id": "api-delivery",
-              "title": "Integration Delivery & Operations",
-              "description": "Build, test, automate, deploy, and operate the integration capability across its selected delivery pattern."
+              "title": "Entrega e operações da integração",
+              "description": "Construa, teste, automatize, disponibilize e opere a capacidade de integração usando o padrão de disponibilização selecionado e o contrato de interface validado."
             },
             {
               "id": "api-audit",
-              "title": "Integration Readiness Assurance",
-              "description": "Assure integration readiness, governance, quality, security, compliance, and operational evidence before release."
+              "title": "Garantia de prontidão da integração",
+              "description": "Assegure a prontidão, a governação, a qualidade, a segurança, a conformidade e as evidências operacionais da integração antes da disponibilização."
             },
             {
               "id": "api-publishing",
-              "title": "Capability Publishing",
-              "description": "Publish the integration capability so teams can discover, request, reuse, onboard, and get support."
+              "title": "Publicação da capacidade",
+              "description": "Publique a capacidade de integração para que as equipas a possam descobrir, solicitar, reutilizar, integrar e obter suporte."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Integration Monitoring & Improvement",
-              "description": "Monitor integration reliability, reuse, incidents, performance, consumer outcomes, and improvement needs."
+              "title": "Monitorização e melhoria da integração",
+              "description": "Monitorize a fiabilidade da integração, a reutilização, os incidentes, o desempenho, os resultados dos consumidores e as necessidades de melhoria."
             }
           ]
         },
         {
           "id": "automation-cycle",
           "slug": "automation-cycle",
-          "title": "Automation Cycle",
-          "description": "A cycle for identifying, designing, delivering, enabling, and improving automation opportunities.",
+          "title": "Ciclo de Automação",
+          "description": "Um ciclo para identificar, conceber, entregar, capacitar e melhorar oportunidades de automação.",
           "stations": [
             {
               "id": "api-product-strategy",
-              "title": "Automation Opportunity Strategy",
-              "description": "Identify and prioritize automation opportunities by value, feasibility, risk, ownership, and expected process impact."
+              "title": "Estratégia da oportunidade de automação",
+              "description": "Identifique e priorize oportunidades de automação por valor, viabilidade, risco, propriedade e impacto esperado no processo."
             },
             {
               "id": "api-consumer-experience",
-              "title": "Process/User Requirements",
-              "description": "Capture process users, roles, handoffs, exceptions, constraints, and service expectations before designing the automation."
+              "title": "Requisitos do processo/utilizador",
+              "description": "Recolha utilizadores do processo, funções, transferências, exceções, restrições e expectativas de serviço antes de conceber a automação."
             },
             {
               "id": "api-platform-architecture",
-              "title": "Automation Platform Decision",
-              "description": "Choose the automation platform, runtime, integration model, governance controls, and operational constraints."
+              "title": "Decisão de plataforma de automação",
+              "description": "Escolha a plataforma de automação, o runtime, o modelo de integração, os controlos de governação e as restrições operacionais."
             },
             {
               "id": "api-design",
-              "title": "Automation Workflow Design",
-              "description": "Design the automation workflow, triggers, decision points, integrations, data handling, and exception paths."
+              "title": "Conceção do fluxo de trabalho de automação",
+              "description": "Conceba o fluxo de trabalho de automação, gatilhos, pontos de decisão, integrações, tratamento de dados, contratos de interface e caminhos de exceção."
             },
             {
               "id": "api-delivery",
-              "title": "Automation Delivery",
-              "description": "Build, test, deploy, document, and operate the automation with clear ownership and rollback paths."
+              "title": "Entrega da automação",
+              "description": "Construa, teste, disponibilize, documente e opere a automação com propriedade, controlos e caminhos de reversão claros."
             },
             {
               "id": "api-audit",
-              "title": "Automation Readiness Review",
-              "description": "Review automation readiness, quality, risk, compliance, human oversight, evidence, and release criteria."
+              "title": "Revisão de prontidão da automação",
+              "description": "Reveja a prontidão, a qualidade, o risco, a conformidade, a supervisão humana, as evidências e os critérios de disponibilização da automação."
             },
             {
               "id": "api-publishing",
-              "title": "Automation Enablement",
-              "description": "Enable users and operators with discovery, onboarding, operating instructions, support paths, and change communication."
+              "title": "Capacitação da automação",
+              "description": "Capacite utilizadores e operadores com descoberta, integração, instruções operacionais, caminhos de suporte e comunicação de alterações."
             },
             {
               "id": "monitoring-and-improving",
-              "title": "Automation Monitoring & Improvement",
-              "description": "Monitor automation performance, exceptions, reliability, user outcomes, operational impact, and improvement opportunities."
+              "title": "Monitorização e melhoria da automação",
+              "description": "Monitorize o desempenho da automação, exceções, fiabilidade, resultados dos utilizadores, impacto operacional e oportunidades de melhoria."
             }
           ]
         }
@@ -2304,22 +2304,22 @@
         {
           "id": "api-product-strategy",
           "title": "Estratégia de produtos API - Transforme APIs em produtos estratégicos",
-          "description": "Antes de construir qualquer coisa, defina o valor da sua API, os utilizadores e os objectivos comerciais desde o primeiro dia."
+          "description": "Antes de construir qualquer coisa, defina o valor da sua API, os utilizadores e os objetivos de negócio desde o primeiro dia."
         },
         {
           "id": "user-experience",
           "title": "Experiência do utilizador - Conceber APIs com o utilizador em mente",
-          "description": "Assegurar que as API são concebidas tendo em mente o utilizador final, proporcionando uma experiência intuitiva e sem descontinuidades."
+          "description": "Assegurar que as APIs são concebidas tendo em mente o utilizador final, proporcionando uma experiência intuitiva e sem descontinuidades."
         },
         {
           "id": "api-consumer-experience",
-          "title": "Experiência do consumidor da API - Design para os utilizadores reais da sua API",
+          "title": "Experiência do consumidor da API - Conceção para os utilizadores reais da sua API",
           "description": "Certifique-se de que a sua API é detetável, compreensível e utilizável - antes e depois do lançamento."
         },
         {
           "id": "market-insights",
           "title": "Informações sobre o mercado - Compreender o cenário das API",
-          "description": "Analisar as tendências do mercado, as API da concorrência e as normas da indústria para informar a estratégia de API."
+          "description": "Analisar as tendências do mercado, as APIs da concorrência e as normas da indústria para informar a estratégia de API."
         },
         {
           "id": "api-platform-architecture",
@@ -2328,13 +2328,13 @@
         },
         {
           "id": "business-goals",
-          "title": "Objectivos comerciais - Alinhar as APIs com os objectivos comerciais",
-          "description": "Assegurar que as API estão alinhadas com os objectivos comerciais e contribuem para os objectivos organizacionais globais."
+          "title": "Objectivos comerciais - Alinhar as APIs com os objetivos de negócio",
+          "description": "Assegurar que as APIs estão alinhadas com os objetivos de negócio e contribuem para os objetivos organizacionais globais."
         },
         {
           "id": "api-design",
           "title": "Conceção da API - Conceber APIs que proporcionem valor",
-          "description": "Criar projetos de API que sejam consistentes, reutilizáveis e baseados na intenção de negócios e em padrões compartilhados."
+          "description": "Criar conceções de API que sejam consistentes, reutilizáveis e baseados na intenção de negócios e em padrões compartilhados."
         },
         {
           "id": "competitive-analysis",
@@ -2344,7 +2344,7 @@
         {
           "id": "api-delivery",
           "title": "Entrega da API - Fornecer APIs seguras e fiáveis",
-          "description": "Criar, testar e lançar APIs usando pipelines de entrega modernos e práticas recomendadas de engenharia."
+          "description": "Criar, testar e lançar APIs usando pipelines de entrega modernos e boas práticas de engenharia."
         },
         {
           "id": "ecosystem-vision",
@@ -2354,7 +2354,7 @@
         {
           "id": "api-audit",
           "title": "Auditoria de API - Auditoria de APIs para conformidade e qualidade",
-          "description": "Valide se as APIs atendem aos padrões de negócios, design e operacionais antes da publicação e exposição."
+          "description": "Valide se as APIs satisfazemos padrões de negócio, conceção e operacionais antes da publicação e exposição."
         },
         {
           "id": "scalable-infrastructure",
@@ -2368,7 +2368,7 @@
         },
         {
           "id": "legal-and-compliance",
-          "title": "Legal e Conformidade - Garantir que as APIs cumprem as normas regulamentares",
+          "title": "Legal e Conformidade - Garantir que as APIs cumprems normas regulamentares",
           "description": "Garanta que as APIs cumprem os requisitos legais e regulamentares, protegendo a sua organização e os seus utilizadores."
         },
         {
@@ -2379,7 +2379,7 @@
         {
           "id": "security-and-privacy",
           "title": "Segurança e privacidade - Proteja as suas APIs e os seus utilizadores",
-          "description": "Implementar medidas de segurança e privacidade para proteger as API e os dados dos utilizadores contra ameaças e violações."
+          "description": "Implementar medidas de segurança e privacidade para proteger as APIs e os dados dos utilizadores contra ameaças e violações."
         },
         {
           "id": "design-standards",
@@ -2393,13 +2393,13 @@
         },
         {
           "id": "contract-design",
-          "title": "Conceção de contratos - Definir contratos API claros",
-          "description": "Criar contratos de API claros e bem definidos que descrevam as expectativas, responsabilidades e diretrizes de utilização."
+          "title": "Conceção de contratos - Definir contratos de interface da API claros",
+          "description": "Criar contratos de interface da API claros e bem definidos que descrevam as expectativas, responsabilidades e diretrizes de utilização."
         },
         {
           "id": "development",
-          "title": "Desenvolvimento - Criar APIs com as melhores práticas",
-          "description": "Implementar APIs utilizando as melhores práticas e estruturas para garantir a qualidade, a capacidade de manutenção e a escalabilidade."
+          "title": "Desenvolvimento - Criar APIs com as boas práticas",
+          "description": "Implementar APIs utilizando as boas práticas e estruturas para garantir a qualidade, a capacidade de manutenção e a escalabilidade."
         },
         {
           "id": "ci-cd",
@@ -2424,12 +2424,12 @@
         {
           "id": "api-consumer-adoption",
           "title": "Adoção pelo consumidor da API - Impulsionar a utilização da API",
-          "description": "Implementar estratégias para promover a adoção e o envolvimento dos consumidores de API, assegurando que as API são utilizadas eficazmente."
+          "description": "Implementar estratégias para promover a adoção e o envolvimento dos consumidores de API, assegurando que as APIs são utilizadas eficazmente."
         },
         {
           "id": "api-promotion",
           "title": "Promoção da API - Aumente a visibilidade e a utilização da API",
-          "description": "Promover as API para aumentar a visibilidade, a utilização e a adoção entre os públicos-alvo."
+          "description": "Promover as APIs para aumentar a visibilidade, a utilização e a adoção entre os públicos-alvo."
         },
         {
           "id": "partner-integration",
@@ -2459,7 +2459,7 @@
         {
           "id": "portfolio-management",
           "title": "Gestão de portfólio - Gerir eficazmente o portfólio de API",
-          "description": "Gerir eficazmente a carteira de API para garantir o alinhamento com os objectivos comerciais e as iniciativas estratégicas."
+          "description": "Gerir eficazmente a carteira de API para garantir o alinhamento com os objetivos de negócio e as iniciativas estratégicas."
         },
         {
           "id": "budget-and-resource-management",

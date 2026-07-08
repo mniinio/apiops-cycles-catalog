@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "commit": "8f6a705b5e8a44b51361cec6ceed21d0ef23b1b6"
+    "commit": "3615701d4b9fe4bc30668d7353d9cd8180c8e89f"
   },
   "locales": [
     "en",
@@ -16,8 +16,8 @@
       "apiBusinessModelCanvas": {
         "id": "apiBusinessModelCanvas",
         "title": "API Business Model Canvas",
-        "purpose": "Dans quelle mesure cette API sera-t-elle viable et réutilisable ? Avons-nous un cas commercial du point de vue coût-bénéfice ?",
-        "howToUse": "Résumez la proposition de valeur d'une API à partir du Canvas de proposition de valeur API, puis suivez la séquence numérotée.",
+        "purpose": "Quelle sera la viabilité et la réutilisabilité de cette API ? Existe-t-il un modèle métier justifié du point de vue coût-bénéfice ?",
+        "howToUse": "Résumer la proposition de valeur d’une API à partir de l’API Value Proposition Canvas, puis suivre la séquence numérotée.",
         "layout": {
           "columns": 5,
           "rows": 3
@@ -43,7 +43,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.295Z"
+            "date": "2026-07-08T08:05:51.360Z"
           },
           "sections": [
             {
@@ -87,8 +87,8 @@
         "sections": [
           {
             "id": "apiValueProposition",
-            "title": "Proposition de valeur de l'API",
-            "description": "Commencez par une note adhésive indiquant le nom de l'API ou de la famille d'API, puis notez la valeur ajoutée que l'API offre aux consommateurs d'API.",
+            "title": "Proposition de valeur de l’API",
+            "description": "Commencez par une note adhésive indiquant le nom de l’API ou de la famille d’API, puis notez la valeur ajoutée que l’API offre aux utilisateurs API.",
             "gridPosition": {
               "column": 2,
               "row": 0,
@@ -103,8 +103,8 @@
           },
           {
             "id": "apiConsumerSegments",
-            "title": "Segments de consommateurs de l'API",
-            "description": "Quelles sont les audiences cibles pour l'API?",
+            "title": "Segments d’utilisateurs API",
+            "description": "Quelles sont les audiences cibles pour l’API?",
             "gridPosition": {
               "column": 4,
               "row": 0,
@@ -120,7 +120,7 @@
           {
             "id": "developerRelations",
             "title": "Relations développeurs",
-            "description": "Comment le fournisseur d'API atteint-il et soutient-il les consommateurs d'API?",
+            "description": "Comment le fournisseur d’API atteint-il et soutient-il les utilisateurs API?",
             "gridPosition": {
               "column": 3,
               "row": 0,
@@ -136,7 +136,7 @@
           {
             "id": "channels",
             "title": "Canaux",
-            "description": "Par quels mécanismes les consommateurs d'API interagissent-ils avec l'API?",
+            "description": "Par quels mécanismes les utilisateurs API interagissent-ils avec l’API?",
             "gridPosition": {
               "column": 3,
               "row": 1,
@@ -152,7 +152,7 @@
           {
             "id": "keyResources",
             "title": "Ressources clés",
-            "description": "Quels actifs stratégiques uniques le fournisseur d'API doit-il acquérir ou développer?",
+            "description": "Quels actifs stratégiques uniques le fournisseur d’API doit-il acquérir ou développer?",
             "gridPosition": {
               "column": 1,
               "row": 1,
@@ -168,7 +168,7 @@
           {
             "id": "keyActivities",
             "title": "Activités clés",
-            "description": "Quelles sont les actions les plus importantes que le fournisseur d'API doit entreprendre pour réussir?",
+            "description": "Quelles sont les actions les plus importantes que le fournisseur d’API doit entreprendre pour réussir?",
             "gridPosition": {
               "column": 1,
               "row": 0,
@@ -200,7 +200,7 @@
           {
             "id": "benefits",
             "title": "Avantages",
-            "description": "Quels sont les avantages significatifs ou les sources de revenus générés par l'API?",
+            "description": "Quels sont les avantages significatifs ou les sources de revenus générés par l’API?",
             "gridPosition": {
               "column": 2.5,
               "row": 2,
@@ -216,7 +216,7 @@
           {
             "id": "costs",
             "title": "Coûts",
-            "description": "Quels sont les coûts importants liés à la création, au déploiement et à l'exploitation de l'API?",
+            "description": "Quels sont les coûts importants liés à la création, au déploiement et à l'exploitation de l’API?",
             "gridPosition": {
               "column": 0,
               "row": 2,
@@ -234,8 +234,8 @@
       "apiValuePropositionCanvas": {
         "id": "apiValuePropositionCanvas",
         "title": "API Value Proposition Canvas",
-        "purpose": "Comment le parcours client s'articule-t-il avec les API ? Quels sont les problèmes et les avantages rencontrés par les utilisateurs finaux et les consommateurs d'API ?",
-        "howToUse": "Décrire le point de vue des utilisateurs finaux, en commençant par leurs tâches, puis leurs problèmes et avantages ainsi que ceux des consommateurs d'API, et enfin les produits et fonctionnalités de l'API.",
+        "purpose": "Comment le parcours client est-il lié aux API ? Quels irritants et gains des utilisateurs finaux et des utilisateurs API doivent être traités ?",
+        "howToUse": "Décrire la perspective des utilisateurs finaux, en commençant par leurs tâches, puis leurs irritants et gains ainsi que ceux des utilisateurs API, et enfin les produits et fonctionnalités API.",
         "layout": {
           "columns": 4,
           "rows": 3
@@ -261,7 +261,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.296Z"
+            "date": "2026-07-08T08:05:51.361Z"
           },
           "sections": [
             {
@@ -286,7 +286,7 @@
           {
             "id": "tasks",
             "title": "Tâches",
-            "description": "Qu'est-ce que les clients (utilisateurs finaux) cherchent à réaliser ?",
+            "description": "Que cherchent à accomplir les clients ou utilisateurs finaux ?",
             "gridPosition": {
               "column": 0,
               "row": 0,
@@ -302,7 +302,7 @@
           {
             "id": "gainEnablingFeatures",
             "title": "Fonctionnalités génératrices de gains",
-            "description": "Quelles fonctionnalités permettent aux utilisateurs finaux et aux consommateurs d'API de réaliser des gains ?",
+            "description": "Quelles fonctionnalités aident les utilisateurs finaux et les utilisateurs API à obtenir les gains attendus ?",
             "gridPosition": {
               "column": 0,
               "row": 1,
@@ -317,8 +317,8 @@
           },
           {
             "id": "painRelievingFeatures",
-            "title": "Fonctionnalités soulageant les peines",
-            "description": "Quelles fonctionnalités aident les utilisateurs finaux et les consommateurs d'API à surmonter les difficultés ?",
+            "title": "Fonctionnalités qui réduisent les irritants",
+            "description": "Quelles fonctionnalités aident les utilisateurs finaux et les utilisateurs API à réduire les irritants ?",
             "gridPosition": {
               "column": 2,
               "row": 1,
@@ -352,8 +352,8 @@
       "businessImpactCanvas": {
         "id": "businessImpactCanvas",
         "title": "Business Impact Canvas",
-        "purpose": "Quels sont les impacts commerciaux potentiels d'une défaillance de l'API?",
-        "howToUse": "Considérez l'impact potentiel sur la disponibilité, la sécurité et les données pour chaque API.",
+        "purpose": "Quels impacts métier une défaillance ou un mauvais comportement de la capacité ou de l’interface peut-il avoir ?",
+        "howToUse": "Évaluer les impacts potentiels sur la disponibilité, la sécurité, les données et les opérations avant de figer le mode de mise en œuvre.",
         "layout": {
           "columns": 3,
           "rows": 2
@@ -377,7 +377,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.298Z"
+            "date": "2026-07-08T08:05:51.362Z"
           },
           "sections": [
             {
@@ -410,7 +410,7 @@
           {
             "id": "availabilityRisks",
             "title": "Risques de disponibilité",
-            "description": "Quels sont les risques potentiels pour la disponibilité de l'API?",
+            "description": "Quels sont les risques potentiels pour la disponibilité de l’API?",
             "gridPosition": {
               "column": 0,
               "row": 0,
@@ -426,7 +426,7 @@
           {
             "id": "mitigateAvailabilityRisks",
             "title": "Atténuer les risques de disponibilité",
-            "description": "Comment le fournisseur d'API peut-il atténuer les risques de disponibilité?",
+            "description": "Comment le fournisseur d’API peut-il atténuer les risques de disponibilité?",
             "gridPosition": {
               "column": 0,
               "row": 1,
@@ -442,7 +442,7 @@
           {
             "id": "securityRisks",
             "title": "Risques de sécurité",
-            "description": "Quels sont les risques de sécurité potentiels associés à l'API?",
+            "description": "Quels sont les risques de sécurité potentiels associés à l’API?",
             "gridPosition": {
               "column": 1,
               "row": 0,
@@ -458,7 +458,7 @@
           {
             "id": "mitigateSecurityRisks",
             "title": "Atténuer les risques de sécurité",
-            "description": "Comment le fournisseur d'API peut-il atténuer les risques de sécurité?",
+            "description": "Comment le fournisseur d’API peut-il atténuer les risques de sécurité?",
             "gridPosition": {
               "column": 1,
               "row": 1,
@@ -474,7 +474,7 @@
           {
             "id": "dataRisks",
             "title": "Risques liés aux données",
-            "description": "Quels sont les risques potententiels pour l'intégrité ou la confidentialité des données?",
+            "description": "Quels sont les risques potententiels pour l'intégrité ou la protection des données?",
             "gridPosition": {
               "column": 2,
               "row": 0,
@@ -490,7 +490,7 @@
           {
             "id": "mitigateDataRisks",
             "title": "Atténuer les risques liés aux données",
-            "description": "Comment le fournisseur d'API peut-il atténuer les risques liés aux données?",
+            "description": "Comment le fournisseur d’API peut-il atténuer les risques liés aux données?",
             "gridPosition": {
               "column": 2,
               "row": 1,
@@ -508,8 +508,8 @@
       "capacityCanvas": {
         "id": "capacityCanvas",
         "title": "Capacity Canvas",
-        "purpose": "Quelle capacité est nécessaire pour soutenir la consommation de l'API?",
-        "howToUse": "Analysez les besoins de capacité actuels et futurs pour chaque API.",
+        "purpose": "Quelle capacité est nécessaire pour soutenir l’usage de la capacité ou de l’interface ?",
+        "howToUse": "Analyser les exigences de capacité actuelles et futures pour la capacité ou l’interface.",
         "layout": {
           "columns": 3,
           "rows": 3
@@ -533,7 +533,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.299Z"
+            "date": "2026-07-08T08:05:51.363Z"
           },
           "sections": [
             {
@@ -664,8 +664,8 @@
       "customerJourneyCanvas": {
         "id": "customerJourneyCanvas",
         "title": "Customer Journey Canvas",
-        "purpose": "Quel est le parcours client ou partenaire que l'API est censée soutenir?",
-        "howToUse": "Décrivez un parcours client ou utilisateur réel — pas l'utilisation de l'API — afin de révéler les points de douleur, les objectifs et le contexte. Ces informations aident à définir le type de support API réellement nécessaire plus tard.",
+        "purpose": "Quel parcours client ou partenaire crée le besoin de capacité ou d’interface ?",
+        "howToUse": "Décrire un parcours réel de client, partenaire ou utilisateur, et non l’usage de l’API elle-même. Ce parcours révèle les irritants, objectifs et contextes qui aident à définir les exigences de capacité et d’interface.",
         "layout": {
           "columns": 5,
           "rows": 4
@@ -689,7 +689,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.300Z"
+            "date": "2026-07-08T08:05:51.364Z"
           },
           "sections": [
             {
@@ -794,7 +794,7 @@
           {
             "id": "pains",
             "title": "Douleurs",
-            "description": "Quels sont les points de douleur ou défis du client?",
+            "description": "Quels sont les irritants ou défis du client?",
             "gridPosition": {
               "column": 0,
               "row": 1,
@@ -860,8 +860,8 @@
       "domainCanvas": {
         "id": "domainCanvas",
         "title": "Domain Canvas",
-        "purpose": "Quelles sont les entités principales et les règles métier liées à l'API?",
-        "howToUse": "Définissez le modèle de domaine pour chaque API, incluant entités, attributs et relations.",
+        "purpose": "Quels concepts, entités et règles de domaine métier la capacité ou l’interface doit-elle respecter ?",
+        "howToUse": "Définir le modèle de domaine métier pour la capacité ou l’interface, y compris entités, attributs et relations.",
         "layout": {
           "columns": 2,
           "rows": 4
@@ -885,7 +885,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.301Z"
+            "date": "2026-07-08T08:05:51.365Z"
           },
           "sections": [
             {
@@ -1016,8 +1016,8 @@
       "eventCanvas": {
         "id": "eventCanvas",
         "title": "Event Canvas",
-        "purpose": "Quels événements sont pertinents pour l'API et comment sont-ils traités?",
-        "howToUse": "Définissez les événements, leurs déclencheurs et la logique de traitement pour chaque API.",
+        "purpose": "Quels événements sont pertinents pour la capacité ou l’interface, et comment sont-ils traités ?",
+        "howToUse": "Définir les événements, leurs déclencheurs et la logique de traitement pour la capacité ou l’interface.",
         "layout": {
           "columns": 4,
           "rows": 3
@@ -1041,7 +1041,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.302Z"
+            "date": "2026-07-08T08:05:51.366Z"
           },
           "sections": [
             {
@@ -1098,7 +1098,7 @@
           {
             "id": "processingLogic",
             "title": "Traitement / Logique",
-            "description": "Décrivez la logique de traitement backend, y compris les validations, transformations ou décisions de routage.",
+            "description": "Décrivez la logique de traitement systèmes backend, y compris les validations, transformations ou décisions de routage.",
             "gridPosition": {
               "column": 1,
               "row": 1,
@@ -1132,8 +1132,8 @@
       "interactionCanvas": {
         "id": "interactionCanvas",
         "title": "Interaction Canvas",
-        "purpose": "Quels types d'interactions cette API doit-elle prendre en charge avant de choisir une conception spécifique à un protocole ?",
-        "howToUse": "Identifiez les styles d'interaction réellement nécessaires pour cette API et ceux qui ne relèvent pas de son champ d'application. Utilisez ce canevas pour clarifier l'intention avant de mapper le résultat vers REST, des événements ou GraphQL.",
+        "purpose": "Quels types d’interactions cette capacité ou interface doit-elle prendre en charge avant de choisir une conception propre au protocole ?",
+        "howToUse": "Identifier les styles d’interaction réellement nécessaires et ceux qui sont hors périmètre. Utiliser ce canvas pour clarifier l’intention avant de mapper le résultat vers REST, événements ou GraphQL.",
         "layout": {
           "columns": 4,
           "rows": 3
@@ -1157,7 +1157,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.304Z"
+            "date": "2026-07-08T08:05:51.367Z"
           },
           "sections": [
             {
@@ -1408,8 +1408,8 @@
       "locationsCanvas": {
         "id": "locationsCanvas",
         "title": "Locations Canvas",
-        "purpose": "Quelles sont les frontières géopolitiques, réglementaires, réseau et de confiance qui affectent cette API ?",
-        "howToUse": "Identifiez où les consommateurs, les fournisseurs et les systèmes dépendants de l'API opèrent sur les réseaux internes, les réseaux partenaires, l'Internet public et les régions réglementées. Décrivez les implications en termes de latence, de confiance, de conformité et de connectivité entre eux.",
+        "purpose": "Quelles frontières géopolitiques, réglementaires, réseau et de confiance affectent cette capacité ou interface ?",
+        "howToUse": "Identifier où les utilisateurs, fournisseurs et systèmes dépendants opèrent dans les réseaux internes, réseaux partenaires, Internet public et régions réglementées. Décrire les implications sur la latence, la confiance, la conformité et la connectivité.",
         "layout": {
           "columns": 4,
           "rows": 2
@@ -1433,7 +1433,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.306Z"
+            "date": "2026-07-08T08:05:51.368Z"
           },
           "sections": [
             {
@@ -1604,8 +1604,8 @@
       "restCanvas": {
         "id": "restCanvas",
         "title": "REST Canvas",
-        "purpose": "Comment l'API peut-elle être conçue selon les principes REST?",
-        "howToUse": "Définissez les ressources de l'API, les verbes et les exemples de requêtes et réponses.",
+        "purpose": "Comment concevoir l’API selon les principes RESTful ?",
+        "howToUse": "Définissez les ressources de l’API, les verbes et les exemples de requêtes et réponses.",
         "layout": {
           "columns": 4,
           "rows": 3
@@ -1629,7 +1629,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.308Z"
+            "date": "2026-07-08T08:05:51.368Z"
           },
           "sections": [
             {
@@ -1654,7 +1654,7 @@
           {
             "id": "apiResources",
             "title": "Ressources API",
-            "description": "Quelles sont les ressources clés exposées par l'API?",
+            "description": "Quelles sont les ressources clés exposées par l’API?",
             "gridPosition": {
               "column": 0,
               "row": 0,
@@ -1670,7 +1670,7 @@
           {
             "id": "apiResourceModel",
             "title": "Modèle de ressource API",
-            "description": "Quelle est la structure du modèle de ressources de l'API?",
+            "description": "Quelle est la structure du modèle de ressources de l’API?",
             "gridPosition": {
               "column": 0,
               "row": 1,
@@ -1686,7 +1686,7 @@
           {
             "id": "apiVerbs",
             "title": "Verbes API",
-            "description": "Quels verbes HTTP sont utilisés pour interagir avec les ressources de l'API?",
+            "description": "Quels verbes HTTP sont utilisés pour interagir avec les ressources de l’API?",
             "gridPosition": {
               "column": 1,
               "row": 0,
@@ -1720,8 +1720,8 @@
       "graphqlCanvas": {
         "id": "graphqlCanvas",
         "title": "GraphQL Canvas",
-        "purpose": "Comment l'API peut-elle être conçue selon les principes GraphQL ?",
-        "howToUse": "Définissez les principaux types, requêtes, mutations et contraintes pour votre API GraphQL.",
+        "purpose": "Comment concevoir l’API selon les principes GraphQL ?",
+        "howToUse": "Définir les types clés, requêtes, mutations et contraintes pour l’API GraphQL.",
         "layout": {
           "columns": 4,
           "rows": 3
@@ -1745,7 +1745,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.309Z"
+            "date": "2026-07-08T08:05:51.369Z"
           },
           "sections": [
             {
@@ -1793,8 +1793,8 @@
         "sections": [
           {
             "id": "apiName",
-            "title": "Nom de l'API",
-            "description": "Quel est le nom de l'API GraphQL ou du point de terminaison ?",
+            "title": "Nom de l’API",
+            "description": "Quel est le nom de l’API GraphQL ou du point de terminaison ?",
             "gridPosition": {
               "column": 0,
               "row": 0,
@@ -1809,8 +1809,8 @@
           },
           {
             "id": "consumerGoals",
-            "title": "Objectifs des consommateurs",
-            "description": "Quels problèmes les consommateurs de l'API cherchent-ils à résoudre ? Quelles données leur sont nécessaires ?",
+            "title": "Objectifs des utilisateurs",
+            "description": "Quels problèmes les utilisateurs de l’API cherchent-ils à résoudre ? Quelles données leur sont nécessaires ?",
             "gridPosition": {
               "column": 2,
               "row": 0,
@@ -1890,7 +1890,7 @@
           {
             "id": "subscriptions",
             "title": "Abonnements",
-            "description": "Existe-t-il des mises à jour en temps réel ou des événements auxquels les consommateurs peuvent s'abonner ?",
+            "description": "Existe-t-il des mises à jour en temps réel ou des événements auxquels les utilisateurs peuvent s'abonner ?",
             "gridPosition": {
               "column": 0,
               "row": 2,
@@ -1921,7 +1921,7 @@
           },
           {
             "id": "consumerConstraints",
-            "title": "Contraintes des consommateurs",
+            "title": "Contraintes des utilisateurs",
             "description": "Y a-t-il des contraintes de pagination, de filtrage ou de limitation du débit ?",
             "gridPosition": {
               "column": 2,
@@ -1938,7 +1938,7 @@
           {
             "id": "openQuestions",
             "title": "Notes / Questions ouvertes",
-            "description": "Y a-t-il des décisions en attente ou des considérations d'intégration ?",
+            "description": "Y a-t-il des décisions en attente ou des considérations d’intégration ?",
             "gridPosition": {
               "column": 3,
               "row": 2,
@@ -1956,8 +1956,8 @@
       "capabilityValuePropositionCanvas": {
         "id": "capabilityValuePropositionCanvas",
         "title": "Capability Value Proposition Canvas",
-        "purpose": "Which reusable capability would create value for consumers without deciding yet whether it should be delivered as an API, event, file, stream, data product, or another integration style?",
-        "howToUse": "Start from consumer tasks and outcomes. Capture gain-enabling and pain-relieving capability features, then describe candidate reusable capabilities without naming the technology too early.",
+        "purpose": "Quelle capacité réutilisable créerait de la valeur pour les utilisateurs sans décider encore si elle doit être mise à disposition sous forme d’API, d’événement, de fichier, de flux, de produit de données ou d’un autre style d’intégration ?",
+        "howToUse": "Partir des tâches et résultats attendus des utilisateurs. Capturer les fonctionnalités de capacité qui créent des gains et réduisent les irritants, puis décrire les capacités réutilisables candidates sans nommer la technologie trop tôt.",
         "layout": {
           "columns": 4,
           "rows": 3
@@ -1981,7 +1981,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.311Z"
+            "date": "2026-07-08T08:05:51.370Z"
           },
           "sections": [
             {
@@ -2005,8 +2005,8 @@
         "sections": [
           {
             "id": "consumerTasks",
-            "title": "Consumer tasks and outcomes",
-            "description": "What are consumers, partners, users, systems, or teams trying to achieve?",
+            "title": "Tâches et résultats des utilisateurs",
+            "description": "Que cherchent à accomplir les utilisateurs, partenaires, systèmes ou équipes ?",
             "gridPosition": {
               "column": 0,
               "row": 0,
@@ -2021,8 +2021,8 @@
           },
           {
             "id": "gainEnablingCapabilities",
-            "title": "Gain-enabling capability features",
-            "description": "What capability features would help consumers achieve better outcomes, speed, automation, insight, reach, or compliance?",
+            "title": "Fonctionnalités de capacité génératrices de gains",
+            "description": "Quelles fonctionnalités de capacité aideraient les utilisateurs à obtenir de meilleurs résultats, plus de rapidité, d’automatisation, d’insights, de portée ou de conformité ?",
             "gridPosition": {
               "column": 0,
               "row": 1,
@@ -2037,8 +2037,8 @@
           },
           {
             "id": "painRelievingCapabilities",
-            "title": "Pain-relieving capability features",
-            "description": "What capability features would remove friction, manual work, errors, delays, risk, or uncertainty for consumers?",
+            "title": "Fonctionnalités de capacité qui réduisent les irritants",
+            "description": "Quelles fonctionnalités de capacité supprimeraient les frictions, le travail manuel, les erreurs, les retards, les risques ou l’incertitude pour les utilisateurs ?",
             "gridPosition": {
               "column": 2,
               "row": 1,
@@ -2053,8 +2053,8 @@
           },
           {
             "id": "reusableCapabilities",
-            "title": "Reusable capabilities",
-            "description": "What reusable business or data capabilities could serve these tasks, gains, and pains across more than one consumer or use case?",
+            "title": "Capacités réutilisables",
+            "description": "Quelles capacités métier ou données réutilisables pourraient répondre à ces tâches, gains et irritants pour plusieurs utilisateurs ou cas d’usage ?",
             "gridPosition": {
               "column": 0,
               "row": 2,
@@ -2072,8 +2072,8 @@
       "capabilityBusinessModelCanvas": {
         "id": "capabilityBusinessModelCanvas",
         "title": "Capability Business Model Canvas",
-        "purpose": "How viable, reusable, funded, owned, supported, and discoverable should this integration capability be?",
-        "howToUse": "Summarize the capability value proposition, identify consumers and engagement channels, then map ownership, activities, resources, partners, benefits, and costs.",
+        "purpose": "Dans quelle mesure cette capacité d’intégration doit-elle être viable, réutilisable, financée, possédée, accompagnée et découvrable ?",
+        "howToUse": "Résumer la proposition de valeur de la capacité, identifier les utilisateurs et canaux d’engagement, puis cartographier propriété, activités, ressources, partenaires, bénéfices et coûts.",
         "layout": {
           "columns": 5,
           "rows": 3
@@ -2097,7 +2097,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.315Z"
+            "date": "2026-07-08T08:05:51.372Z"
           },
           "sections": [
             {
@@ -2141,8 +2141,8 @@
         "sections": [
           {
             "id": "capabilityValueProposition",
-            "title": "Capability value proposition",
-            "description": "What value does this reusable capability provide to consumers and to the organization or ecosystem?",
+            "title": "Proposition de valeur de la capacité",
+            "description": "Quelle valeur cette capacité réutilisable apporte-t-elle aux utilisateurs et à l’organisation ou à l’écosystème ?",
             "gridPosition": {
               "column": 2,
               "row": 0,
@@ -2157,8 +2157,8 @@
           },
           {
             "id": "capabilityConsumerSegments",
-            "title": "Capability consumer segments",
-            "description": "Who are the current and potential consumers of the capability, including teams, partners, systems, products, or data users?",
+            "title": "Segments d’utilisateurs de la capacité",
+            "description": "Qui sont les utilisateurs actuels et potentiels de la capacité, y compris équipes, partenaires, systèmes, produits ou utilisateurs de données ?",
             "gridPosition": {
               "column": 4,
               "row": 0,
@@ -2173,8 +2173,8 @@
           },
           {
             "id": "consumerEngagement",
-            "title": "Consumer engagement",
-            "description": "How will consumers discover, evaluate, request, onboard, get support for, and provide feedback on the capability?",
+            "title": "Engagement des utilisateurs",
+            "description": "Comment les utilisateurs découvriront-ils, évalueront-ils, demanderont-ils, onboarderont-ils, obtiendront-ils du support et donneront-ils du feedback sur la capacité ?",
             "gridPosition": {
               "column": 3,
               "row": 0,
@@ -2189,8 +2189,8 @@
           },
           {
             "id": "channels",
-            "title": "Channels",
-            "description": "Through which catalogs, portals, marketplaces, documentation sites, support paths, or governance processes will consumers interact with the capability?",
+            "title": "Canaux",
+            "description": "Par quels catalogues, portails, marketplaces, sites de documentation, parcours de support ou processus de gouvernance les utilisateurs interagiront-ils avec la capacité ?",
             "gridPosition": {
               "column": 3,
               "row": 1,
@@ -2205,8 +2205,8 @@
           },
           {
             "id": "keyResources",
-            "title": "Key resources",
-            "description": "Which systems, data assets, platforms, people, standards, funding, and operational capabilities are required?",
+            "title": "Ressources clés",
+            "description": "Quels systèmes, actifs de données, plateformes, personnes, standards, financements et capacités opérationnelles sont nécessaires ?",
             "gridPosition": {
               "column": 1,
               "row": 1,
@@ -2221,8 +2221,8 @@
           },
           {
             "id": "keyActivities",
-            "title": "Key activities",
-            "description": "What must the capability owner and producers do to design, deliver, govern, support, and improve the capability?",
+            "title": "Activités clés",
+            "description": "Que doivent faire le responsable de la capacité et les producteurs pour concevoir, mettre à disposition, gouverner, accompagner et améliorer la capacité ?",
             "gridPosition": {
               "column": 1,
               "row": 0,
@@ -2237,8 +2237,8 @@
           },
           {
             "id": "keyPartners",
-            "title": "Key partners",
-            "description": "Which business, technology, data, security, legal, platform, or external partners are needed to make the capability work?",
+            "title": "Partenaires clés",
+            "description": "Quels partenaires métier, technologie, données, sécurité, juridique, plateforme ou externes sont nécessaires pour faire fonctionner la capacité ?",
             "gridPosition": {
               "column": 0,
               "row": 0,
@@ -2253,8 +2253,8 @@
           },
           {
             "id": "benefits",
-            "title": "Benefits",
-            "description": "What business, operational, ecosystem, reuse, compliance, or cost benefits justify the capability?",
+            "title": "Bénéfices",
+            "description": "Quels bénéfices métier, opérationnels, écosystémiques, de réutilisation, de conformité ou de coût justifient la capacité ?",
             "gridPosition": {
               "column": 2.5,
               "row": 2,
@@ -2269,8 +2269,8 @@
           },
           {
             "id": "costs",
-            "title": "Costs",
-            "description": "What are the significant costs of building, operating, governing, supporting, and evolving the capability?",
+            "title": "Coûts",
+            "description": "Quels sont les coûts significatifs de construction, d’exploitation, de gouvernance, de support et d’évolution de la capacité ?",
             "gridPosition": {
               "column": 0,
               "row": 2,
@@ -2288,8 +2288,8 @@
       "consumerExperienceRequirementsCanvas": {
         "id": "consumerExperienceRequirementsCanvas",
         "title": "Consumer Experience Requirements Canvas",
-        "purpose": "What experience and non-functional requirements do consumers need before deciding the best integration architecture?",
-        "howToUse": "Use this as a technology-agnostic requirements table. Capture consumer expectations and constraints, then use the architecture implications to choose APIs, events, files, streams, data products, or another pattern.",
+        "purpose": "Quelles exigences d’expérience et non fonctionnelles les utilisateurs doivent-ils préciser avant de décider de la meilleure architecture d’intégration ?",
+        "howToUse": "Utiliser ce canvas comme tableau d’exigences indépendant de la technologie. Capturer les attentes et contraintes des utilisateurs, puis utiliser les implications d’architecture pour choisir API, événements, fichiers, flux, produits de données ou un autre pattern.",
         "layout": {
           "columns": 4,
           "rows": 3
@@ -2313,7 +2313,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-06T22:13:57.316Z"
+            "date": "2026-07-08T08:05:51.373Z"
           },
           "sections": [
             {
@@ -2361,8 +2361,8 @@
         "sections": [
           {
             "id": "consumerGoals",
-            "title": "Consumer goals",
-            "description": "What are the consumer's business goals, workflow goals, decision goals, automation goals, or data usage goals?",
+            "title": "Objectifs des utilisateurs",
+            "description": "Quels sont les objectifs métier, de workflow, de décision, d’automatisation ou d’usage des données des utilisateurs ?",
             "gridPosition": {
               "column": 0,
               "row": 0,
@@ -2377,8 +2377,8 @@
           },
           {
             "id": "availabilityAndTimeliness",
-            "title": "Availability and timeliness",
-            "description": "When must the capability be available, how fresh must information be, and what latency or delivery windows matter?",
+            "title": "Disponibilité et fraîcheur",
+            "description": "Quand la capacité doit-elle être disponible, quelle fraîcheur d’information est nécessaire et quelles fenêtres de latence ou de mise à disposition comptent ?",
             "gridPosition": {
               "column": 1,
               "row": 0,
@@ -2393,8 +2393,8 @@
           },
           {
             "id": "volumeAndPerformance",
-            "title": "Volume and performance",
-            "description": "What request, event, record, file, batch, user, or transaction volumes must the capability support now and later?",
+            "title": "Volume et performance",
+            "description": "Quels volumes de requêtes, événements, enregistrements, fichiers, lots, utilisateurs ou transactions la capacité doit-elle supporter aujourd’hui et demain ?",
             "gridPosition": {
               "column": 2,
               "row": 0,
@@ -2409,8 +2409,8 @@
           },
           {
             "id": "dataQualityAndConsistency",
-            "title": "Data quality and consistency",
-            "description": "What accuracy, completeness, consistency, ordering, deduplication, reconciliation, or validation expectations do consumers have?",
+            "title": "Qualité et cohérence des données",
+            "description": "Quelles attentes les utilisateurs ont-ils en matière d’exactitude, complétude, cohérence, ordre, déduplication, rapprochement ou validation ?",
             "gridPosition": {
               "column": 3,
               "row": 0,
@@ -2425,8 +2425,8 @@
           },
           {
             "id": "securityPrivacyAndCompliance",
-            "title": "Security, privacy, and compliance",
-            "description": "What identity, authorization, confidentiality, residency, consent, retention, audit, or regulatory constraints apply?",
+            "title": "Sécurité, protection des données et conformité",
+            "description": "Quelles contraintes d’identité, d’autorisation, de confidentialité, de résidence, de consentement, de conservation, d’audit ou de réglementation s’appliquent ?",
             "gridPosition": {
               "column": 0,
               "row": 1,
@@ -2441,8 +2441,8 @@
           },
           {
             "id": "onboardingAndAccess",
-            "title": "Onboarding and access",
-            "description": "How should consumers find, request, test, get approved for, and start using the capability?",
+            "title": "Onboarding et accès",
+            "description": "Comment les utilisateurs doivent-ils trouver, demander, tester, obtenir l’approbation et commencer à utiliser la capacité ?",
             "gridPosition": {
               "column": 1,
               "row": 1,
@@ -2457,8 +2457,8 @@
           },
           {
             "id": "changeAndVersioning",
-            "title": "Change and versioning",
-            "description": "How much change tolerance do consumers have, and what notice, compatibility, migration, or versioning expectations apply?",
+            "title": "Changement et versionnement",
+            "description": "Quelle tolérance au changement les utilisateurs ont-ils, et quelles attentes de préavis, compatibilité, migration ou versionnement s’appliquent ?",
             "gridPosition": {
               "column": 2,
               "row": 1,
@@ -2473,8 +2473,8 @@
           },
           {
             "id": "observabilityAndSupport",
-            "title": "Observability and support",
-            "description": "What monitoring, status, traceability, data quality visibility, support, ownership, and incident communication do consumers need?",
+            "title": "Observabilité et support",
+            "description": "De quelle surveillance, information de statut, traçabilité, visibilité sur la qualité des données, support, propriété et communication d’incident les utilisateurs ont-ils besoin ?",
             "gridPosition": {
               "column": 3,
               "row": 1,
@@ -2489,8 +2489,8 @@
           },
           {
             "id": "recoveryAndContinuity",
-            "title": "Recovery and continuity",
-            "description": "What replay, retry, reconciliation, backup, fallback, continuity, or manual recovery expectations must be supported?",
+            "title": "Reprise et continuité",
+            "description": "Quelles attentes de replay, retry, rapprochement, sauvegarde, fallback, continuité ou reprise manuelle doivent être prises en charge ?",
             "gridPosition": {
               "column": 0,
               "row": 2,
@@ -2505,8 +2505,8 @@
           },
           {
             "id": "architectureImplications",
-            "title": "Architecture implications",
-            "description": "What do these requirements imply for possible architecture styles, such as APIs, events, files, streams, data products, or direct integration?",
+            "title": "Implications d’architecture",
+            "description": "Que signifient ces exigences pour les styles d’architecture possibles, tels que API, événements, fichiers, flux, produits de données ou intégration directe ?",
             "gridPosition": {
               "column": 2,
               "row": 2,

@@ -285,7 +285,7 @@ const colors: Record<string, string> = {
 
 const viewKeys = ["map", "guide", "canvases", "data"] as const;
 type ViewKey = (typeof viewKeys)[number];
-const announcementId = "announcement_v2_live_2026_07";
+const announcementId = "announcement_v3_newcycles";
 
 const fallbackLabels: Record<string, string> = {
   "nav.workflows": "Workflows",
@@ -296,7 +296,7 @@ const fallbackLabels: Record<string, string> = {
   "nav.github": "GitHub",
   "nav.community": "Community",
   "nav.menu": "Menu",
-  "announcement.message": "Version 2.0 is live with faster loading times!",
+  "announcement.message": "We've got more Cycles, and navigatable map",
   "announcement.link": "See what's new",
   "announcement.dismiss": "Dismiss announcement",
   "controls.currentRoute": "Current route",
@@ -1936,7 +1936,7 @@ export default function CatalogExplorerLoader({
     Promise.all([
       loadJson<Catalog>(`/data/method-catalog.${initialLocale}.json?v=${version}`),
       loadJson<CanvasManifest>(`/data/canvas-manifest.${initialLocale}.json?v=${version}`),
-      loadJson<LabelData>(`/data/site-labels.en.json?v=${version}`),
+      loadJson<LabelData>(`/data/site-labels.${initialLocale}.json?v=${version}`),
       loadJson<PartnerData>(`/data/partners.json?v=${version}`),
     ])
       .then(([catalog, canvases, labels, partners]) => {
