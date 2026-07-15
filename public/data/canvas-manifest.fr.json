@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "commit": "3615701d4b9fe4bc30668d7353d9cd8180c8e89f"
+    "commit": "088d9f60165d483c875aab4b343f4e2687d5d197"
   },
   "locales": [
     "en",
@@ -43,7 +43,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.596Z"
+            "date": "2026-07-15T08:33:20.036Z"
           },
           "sections": [
             {
@@ -261,7 +261,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.597Z"
+            "date": "2026-07-15T08:33:20.037Z"
           },
           "sections": [
             {
@@ -377,7 +377,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.599Z"
+            "date": "2026-07-15T08:33:20.037Z"
           },
           "sections": [
             {
@@ -533,7 +533,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.602Z"
+            "date": "2026-07-15T08:33:20.038Z"
           },
           "sections": [
             {
@@ -689,7 +689,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.603Z"
+            "date": "2026-07-15T08:33:20.038Z"
           },
           "sections": [
             {
@@ -885,7 +885,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.605Z"
+            "date": "2026-07-15T08:33:20.039Z"
           },
           "sections": [
             {
@@ -1041,7 +1041,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.606Z"
+            "date": "2026-07-15T08:33:20.040Z"
           },
           "sections": [
             {
@@ -1157,7 +1157,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.607Z"
+            "date": "2026-07-15T08:33:20.040Z"
           },
           "sections": [
             {
@@ -1433,7 +1433,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.608Z"
+            "date": "2026-07-15T08:33:20.041Z"
           },
           "sections": [
             {
@@ -1629,7 +1629,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.610Z"
+            "date": "2026-07-15T08:33:20.041Z"
           },
           "sections": [
             {
@@ -1745,7 +1745,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.611Z"
+            "date": "2026-07-15T08:33:20.042Z"
           },
           "sections": [
             {
@@ -1956,7 +1956,7 @@
       "capabilityValuePropositionCanvas": {
         "id": "capabilityValuePropositionCanvas",
         "title": "Capability Value Proposition Canvas",
-        "purpose": "Quelle capacité réutilisable créerait de la valeur pour les utilisateurs sans décider encore si elle doit être mise à disposition sous forme d’API, d’événement, de fichier, de flux, de produit de données ou d’un autre style d’intégration ?",
+        "purpose": "Quelle capacité réutilisable créerait de la valeur pour les utilisateurs sans décider encore si elle doit être mise à disposition sous forme d’API, d’événement, de fichier, de flux, de produit de données ou d’un autre mode de mise en œuvre ?",
         "howToUse": "Partir des tâches et résultats attendus des utilisateurs. Capturer les fonctionnalités de capacité qui créent des gains et réduisent les irritants, puis décrire les capacités réutilisables candidates sans nommer la technologie trop tôt.",
         "layout": {
           "columns": 4,
@@ -1981,7 +1981,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.612Z"
+            "date": "2026-07-15T08:33:20.042Z"
           },
           "sections": [
             {
@@ -2097,7 +2097,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.616Z"
+            "date": "2026-07-15T08:33:20.043Z"
           },
           "sections": [
             {
@@ -2289,7 +2289,7 @@
         "id": "consumerExperienceRequirementsCanvas",
         "title": "Consumer Experience Requirements Canvas",
         "purpose": "Quelles exigences d’expérience et non fonctionnelles les utilisateurs doivent-ils préciser avant de décider de la meilleure architecture d’intégration ?",
-        "howToUse": "Utiliser ce canvas comme tableau d’exigences indépendant de la technologie. Capturer les attentes et contraintes des utilisateurs, puis utiliser les implications d’architecture pour choisir API, événements, fichiers, flux, produits de données ou un autre pattern.",
+        "howToUse": "Utiliser ce canvas comme tableau d’exigences indépendant de la technologie. Capturer les attentes et contraintes des utilisateurs, puis utiliser les implications d’architecture pour choisir API, événements, fichiers, flux, produits de données ou un autre mode de mise en œuvre.",
         "layout": {
           "columns": 4,
           "rows": 3
@@ -2313,7 +2313,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.617Z"
+            "date": "2026-07-15T08:33:20.043Z"
           },
           "sections": [
             {

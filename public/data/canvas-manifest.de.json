@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "commit": "3615701d4b9fe4bc30668d7353d9cd8180c8e89f"
+    "commit": "088d9f60165d483c875aab4b343f4e2687d5d197"
   },
   "locales": [
     "en",
@@ -43,7 +43,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.617Z"
+            "date": "2026-07-15T08:33:20.044Z"
           },
           "sections": [
             {
@@ -261,7 +261,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.618Z"
+            "date": "2026-07-15T08:33:20.044Z"
           },
           "sections": [
             {
@@ -353,7 +353,7 @@
         "id": "businessImpactCanvas",
         "title": "Business Impact Canvas",
         "purpose": "Welche geschäftlichen Auswirkungen kann ein Ausfall oder Fehlverhalten der Capability oder Schnittstelle haben?",
-        "howToUse": "Bewerten Sie mögliche Auswirkungen auf Verfügbarkeit, Sicherheit und Daten, bevor der Umsetzungsstil endgültig festgelegt wird.",
+        "howToUse": "Bewerten Sie mögliche Auswirkungen auf Verfügbarkeit, Sicherheit und Daten, bevor der Implementierungsstil endgültig festgelegt wird.",
         "layout": {
           "columns": 3,
           "rows": 2
@@ -377,7 +377,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.619Z"
+            "date": "2026-07-15T08:33:20.045Z"
           },
           "sections": [
             {
@@ -533,7 +533,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.620Z"
+            "date": "2026-07-15T08:33:20.045Z"
           },
           "sections": [
             {
@@ -689,7 +689,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.621Z"
+            "date": "2026-07-15T08:33:20.046Z"
           },
           "sections": [
             {
@@ -885,7 +885,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.621Z"
+            "date": "2026-07-15T08:33:20.046Z"
           },
           "sections": [
             {
@@ -1041,7 +1041,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.622Z"
+            "date": "2026-07-15T08:33:20.047Z"
           },
           "sections": [
             {
@@ -1157,7 +1157,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.623Z"
+            "date": "2026-07-15T08:33:20.047Z"
           },
           "sections": [
             {
@@ -1433,7 +1433,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.623Z"
+            "date": "2026-07-15T08:33:20.048Z"
           },
           "sections": [
             {
@@ -1629,7 +1629,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.624Z"
+            "date": "2026-07-15T08:33:20.048Z"
           },
           "sections": [
             {
@@ -1745,7 +1745,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.625Z"
+            "date": "2026-07-15T08:33:20.049Z"
           },
           "sections": [
             {
@@ -1956,7 +1956,7 @@
       "capabilityValuePropositionCanvas": {
         "id": "capabilityValuePropositionCanvas",
         "title": "Capability Value Proposition Canvas",
-        "purpose": "Welche wiederverwendbare Capability würde Nutzern Wert liefern, ohne bereits zu entscheiden, ob sie als API, Event, Datei, Stream, Datenprodukt oder ein anderer Integrationsstil bereitgestellt werden soll?",
+        "purpose": "Welche wiederverwendbare Capability würde Nutzern Wert liefern, ohne bereits zu entscheiden, ob sie als API, Event, Datei, Stream, Datenprodukt oder ein anderer Implementierungsstil bereitgestellt werden soll?",
         "howToUse": "Starten Sie mit Nutzeraufgaben und Ergebnissen. Erfassen Sie nutzenstiftende und Pain-Point-reduzierende Capability-Funktionen und beschreiben Sie mögliche wiederverwendbare Capabilities, ohne die Technologie zu früh festzulegen.",
         "layout": {
           "columns": 4,
@@ -1981,7 +1981,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.627Z"
+            "date": "2026-07-15T08:33:20.049Z"
           },
           "sections": [
             {
@@ -2097,7 +2097,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.628Z"
+            "date": "2026-07-15T08:33:20.050Z"
           },
           "sections": [
             {
@@ -2313,7 +2313,7 @@
               "Osaango Ltd"
             ],
             "website": "www.apiopscycles.com",
-            "date": "2026-07-08T08:56:25.629Z"
+            "date": "2026-07-15T08:33:20.050Z"
           },
           "sections": [
             {

@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "commit": "3615701d4b9fe4bc30668d7353d9cd8180c8e89f"
+    "commit": "088d9f60165d483c875aab4b343f4e2687d5d197"
   },
   "version": 1,
   "description": "Static APIOps Cycles manifest for a future MCP server.",
@@ -102,14 +102,14 @@
       "consumerExperienceRequirementsCanvas"
     ],
     "stakeholders": [
+      "api-architect",
       "api-consumer-specialist",
       "api-designer",
       "governance-specialist",
-      "api-architect",
       "api-product-owner",
       "api-program-owner",
-      "automation-owner",
       "automation-engineer",
+      "automation-owner",
       "business-owner",
       "capability-owner",
       "compliance-specialist",
@@ -117,22 +117,22 @@
       "api-engineer",
       "api-devrel-specialist",
       "domain-specialist",
+      "integration-architect",
       "partner-specialist",
       "platform-architect",
       "platform-owner",
       "process-owner",
       "security-specialist",
-      "integration-architect",
       "operations-specialist"
     ],
     "routeProfiles": [
+      "api-architect",
       "api-consumer-specialist",
       "api-designer",
       "governance-specialist",
-      "api-architect",
       "api-product-owner",
-      "automation-owner",
       "automation-engineer",
+      "automation-owner",
       "business-owner",
       "capability-owner",
       "compliance-specialist",
@@ -140,12 +140,12 @@
       "api-engineer",
       "api-devrel-specialist",
       "domain-specialist",
+      "integration-architect",
       "partner-specialist",
       "platform-architect",
       "platform-owner",
       "process-owner",
       "security-specialist",
-      "integration-architect",
       "operations-specialist"
     ]
   }

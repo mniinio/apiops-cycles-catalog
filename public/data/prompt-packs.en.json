@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "commit": "3615701d4b9fe4bc30668d7353d9cd8180c8e89f"
+    "commit": "088d9f60165d483c875aab4b343f4e2687d5d197"
   },
   "locales": [
     "en",
@@ -13,6 +13,27 @@
   "defaultLocale": "en",
   "translations": {
     "en": [
+      {
+        "id": "api-architect:facilitate-station",
+        "routeId": "api-architect",
+        "title": "Facilitate a station with API Architect",
+        "mode": "facilitate-station",
+        "prompt": "Stakeholder: API Architect\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+      },
+      {
+        "id": "api-architect:use-resources",
+        "routeId": "api-architect",
+        "title": "Use station resources with API Architect",
+        "mode": "use-resources",
+        "prompt": "Stakeholder: API Architect\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+      },
+      {
+        "id": "api-architect:next-actions",
+        "routeId": "api-architect",
+        "title": "Generate next actions for API Architect",
+        "mode": "next-actions",
+        "prompt": "Stakeholder: API Architect\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+      },
       {
         "id": "api-consumer-specialist:facilitate-station",
         "routeId": "api-consumer-specialist",
@@ -77,27 +98,6 @@
         "prompt": "Stakeholder: API Governance Owner\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Quality & Readiness Assurance\nResources and canvases: \n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
-        "id": "api-architect:facilitate-station",
-        "routeId": "api-architect",
-        "title": "Facilitate a station with API platform teams",
-        "mode": "facilitate-station",
-        "prompt": "Stakeholder: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
-      },
-      {
-        "id": "api-architect:use-resources",
-        "routeId": "api-architect",
-        "title": "Use station resources with API platform teams",
-        "mode": "use-resources",
-        "prompt": "Stakeholder: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
-      },
-      {
-        "id": "api-architect:next-actions",
-        "routeId": "api-architect",
-        "title": "Generate next actions for API platform teams",
-        "mode": "next-actions",
-        "prompt": "Stakeholder: API platform teams\nCycles: API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
-      },
-      {
         "id": "api-product-owner:facilitate-station",
         "routeId": "api-product-owner",
         "title": "Facilitate a station with API Product Owner",
@@ -119,46 +119,46 @@
         "prompt": "Stakeholder: API Product Owner\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Strategy, Consumer Requirements & Onboarding, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas, Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, REST Canvas, Event Canvas, GraphQL Canvas, API Value Proposition Canvas, API Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
-        "id": "automation-owner:facilitate-station",
-        "routeId": "automation-owner",
-        "title": "Facilitate a station with Automation owners",
-        "mode": "facilitate-station",
-        "prompt": "Stakeholder: Automation owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
-      },
-      {
-        "id": "automation-owner:use-resources",
-        "routeId": "automation-owner",
-        "title": "Use station resources with Automation owners",
-        "mode": "use-resources",
-        "prompt": "Stakeholder: Automation owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
-      },
-      {
-        "id": "automation-owner:next-actions",
-        "routeId": "automation-owner",
-        "title": "Generate next actions for Automation owners",
-        "mode": "next-actions",
-        "prompt": "Stakeholder: Automation owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
-      },
-      {
         "id": "automation-engineer:facilitate-station",
         "routeId": "automation-engineer",
-        "title": "Facilitate a station with Automation teams",
+        "title": "Facilitate a station with Automation Engineer",
         "mode": "facilitate-station",
-        "prompt": "Stakeholder: Automation teams\nCycles: Automation Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+        "prompt": "Stakeholder: Automation Engineer\nCycles: Automation Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
       },
       {
         "id": "automation-engineer:use-resources",
         "routeId": "automation-engineer",
-        "title": "Use station resources with Automation teams",
+        "title": "Use station resources with Automation Engineer",
         "mode": "use-resources",
-        "prompt": "Stakeholder: Automation teams\nCycles: Automation Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+        "prompt": "Stakeholder: Automation Engineer\nCycles: Automation Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
       },
       {
         "id": "automation-engineer:next-actions",
         "routeId": "automation-engineer",
-        "title": "Generate next actions for Automation teams",
+        "title": "Generate next actions for Automation Engineer",
         "mode": "next-actions",
-        "prompt": "Stakeholder: Automation teams\nCycles: Automation Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+        "prompt": "Stakeholder: Automation Engineer\nCycles: Automation Cycle\nStations: Strategy, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+      },
+      {
+        "id": "automation-owner:facilitate-station",
+        "routeId": "automation-owner",
+        "title": "Facilitate a station with Automation Owner",
+        "mode": "facilitate-station",
+        "prompt": "Stakeholder: Automation Owner\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+      },
+      {
+        "id": "automation-owner:use-resources",
+        "routeId": "automation-owner",
+        "title": "Use station resources with Automation Owner",
+        "mode": "use-resources",
+        "prompt": "Stakeholder: Automation Owner\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+      },
+      {
+        "id": "automation-owner:next-actions",
+        "routeId": "automation-owner",
+        "title": "Generate next actions for Automation Owner",
+        "mode": "next-actions",
+        "prompt": "Stakeholder: Automation Owner\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
         "id": "business-owner:facilitate-station",
@@ -184,23 +184,23 @@
       {
         "id": "capability-owner:facilitate-station",
         "routeId": "capability-owner",
-        "title": "Facilitate a station with Capability owners",
+        "title": "Facilitate a station with Capability Owner",
         "mode": "facilitate-station",
-        "prompt": "Stakeholder: Capability owners\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+        "prompt": "Stakeholder: Capability Owner\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
       },
       {
         "id": "capability-owner:use-resources",
         "routeId": "capability-owner",
-        "title": "Use station resources with Capability owners",
+        "title": "Use station resources with Capability Owner",
         "mode": "use-resources",
-        "prompt": "Stakeholder: Capability owners\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+        "prompt": "Stakeholder: Capability Owner\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
       },
       {
         "id": "capability-owner:next-actions",
         "routeId": "capability-owner",
-        "title": "Generate next actions for Capability owners",
+        "title": "Generate next actions for Capability Owner",
         "mode": "next-actions",
-        "prompt": "Stakeholder: Capability owners\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+        "prompt": "Stakeholder: Capability Owner\nCycles: Capability Productization Cycle, Integration Productization Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
         "id": "compliance-specialist:facilitate-station",
@@ -308,6 +308,27 @@
         "prompt": "Stakeholder: Domain Expert\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Architecture & Platform Decisions, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, API Value Proposition Canvas, API Business Model Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
+        "id": "integration-architect:facilitate-station",
+        "routeId": "integration-architect",
+        "title": "Facilitate a station with Integration Architect",
+        "mode": "facilitate-station",
+        "prompt": "Stakeholder: Integration Architect\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Strategy, Consumer Requirements & Onboarding, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas, Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+      },
+      {
+        "id": "integration-architect:use-resources",
+        "routeId": "integration-architect",
+        "title": "Use station resources with Integration Architect",
+        "mode": "use-resources",
+        "prompt": "Stakeholder: Integration Architect\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Strategy, Consumer Requirements & Onboarding, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas, Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+      },
+      {
+        "id": "integration-architect:next-actions",
+        "routeId": "integration-architect",
+        "title": "Generate next actions for Integration Architect",
+        "mode": "next-actions",
+        "prompt": "Stakeholder: Integration Architect\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Strategy, Consumer Requirements & Onboarding, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas, Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+      },
+      {
         "id": "partner-specialist:facilitate-station",
         "routeId": "partner-specialist",
         "title": "Facilitate a station with Partner or Vendor Manager",
@@ -352,44 +373,44 @@
       {
         "id": "platform-owner:facilitate-station",
         "routeId": "platform-owner",
-        "title": "Facilitate a station with Platform owners",
+        "title": "Facilitate a station with Platform Owner",
         "mode": "facilitate-station",
-        "prompt": "Stakeholder: Platform owners\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Strategy, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+        "prompt": "Stakeholder: Platform Owner\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Strategy, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
       },
       {
         "id": "platform-owner:use-resources",
         "routeId": "platform-owner",
-        "title": "Use station resources with Platform owners",
+        "title": "Use station resources with Platform Owner",
         "mode": "use-resources",
-        "prompt": "Stakeholder: Platform owners\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Strategy, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+        "prompt": "Stakeholder: Platform Owner\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Strategy, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
       },
       {
         "id": "platform-owner:next-actions",
         "routeId": "platform-owner",
-        "title": "Generate next actions for Platform owners",
+        "title": "Generate next actions for Platform Owner",
         "mode": "next-actions",
-        "prompt": "Stakeholder: Platform owners\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Strategy, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+        "prompt": "Stakeholder: Platform Owner\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Strategy, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
         "id": "process-owner:facilitate-station",
         "routeId": "process-owner",
-        "title": "Facilitate a station with Process owners",
+        "title": "Facilitate a station with Process Owner",
         "mode": "facilitate-station",
-        "prompt": "Stakeholder: Process owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+        "prompt": "Stakeholder: Process Owner\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
       },
       {
         "id": "process-owner:use-resources",
         "routeId": "process-owner",
-        "title": "Use station resources with Process owners",
+        "title": "Use station resources with Process Owner",
         "mode": "use-resources",
-        "prompt": "Stakeholder: Process owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+        "prompt": "Stakeholder: Process Owner\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
       },
       {
         "id": "process-owner:next-actions",
         "routeId": "process-owner",
-        "title": "Generate next actions for Process owners",
+        "title": "Generate next actions for Process Owner",
         "mode": "next-actions",
-        "prompt": "Stakeholder: Process owners\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+        "prompt": "Stakeholder: Process Owner\nCycles: Automation Cycle\nStations: Strategy, Consumer Requirements & Onboarding, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
         "id": "security-specialist:facilitate-station",
@@ -411,27 +432,6 @@
         "title": "Generate next actions for Security Specialist",
         "mode": "next-actions",
         "prompt": "Stakeholder: Security Specialist\nCycles: Capability Productization Cycle, API Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement, Strategy\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas, Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, REST Canvas, Event Canvas, GraphQL Canvas, API Value Proposition Canvas, API Business Model Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
-      },
-      {
-        "id": "integration-architect:facilitate-station",
-        "routeId": "integration-architect",
-        "title": "Facilitate a station with Solution architects",
-        "mode": "facilitate-station",
-        "prompt": "Stakeholder: Solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Strategy, Consumer Requirements & Onboarding, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas, Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
-      },
-      {
-        "id": "integration-architect:use-resources",
-        "routeId": "integration-architect",
-        "title": "Use station resources with Solution architects",
-        "mode": "use-resources",
-        "prompt": "Stakeholder: Solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Strategy, Consumer Requirements & Onboarding, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas, Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
-      },
-      {
-        "id": "integration-architect:next-actions",
-        "routeId": "integration-architect",
-        "title": "Generate next actions for Solution architects",
-        "mode": "next-actions",
-        "prompt": "Stakeholder: Solution architects\nCycles: Capability Productization Cycle, Integration Productization Cycle, Automation Cycle\nStations: Architecture & Platform Decisions, Solution & Interface Design, Strategy, Consumer Requirements & Onboarding, Delivery & Operations, Quality & Readiness Assurance, Publishing & Enablement, Monitoring & Improvement\nResources and canvases: Business Impact Canvas, Locations Canvas, Capacity Canvas, Domain Canvas, Interaction Canvas, Customer Journey Canvas, Capability Value Proposition Canvas, Capability Business Model Canvas, Consumer Experience Requirements Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
         "id": "operations-specialist:facilitate-station",

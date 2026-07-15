@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "https://github.com/APIOpsCycles/apiops-cycles-method-data",
-    "commit": "3615701d4b9fe4bc30668d7353d9cd8180c8e89f"
+    "commit": "088d9f60165d483c875aab4b343f4e2687d5d197"
   },
   "locales": [
     "en",
@@ -102,42 +102,42 @@
         "routeId": "automation-engineer",
         "title": "Facilitate a station with Automatisierungsingenieur",
         "mode": "facilitate-station",
-        "prompt": "Stakeholder: Automatisierungsingenieur\nCycles: Automatisierungszyklus\nStations: Strategie, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+        "prompt": "Stakeholder: Automatisierungsingenieur\nCycles: Automatisierungszyklus\nStations: Strategie, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
       },
       {
         "id": "automation-engineer:use-resources",
         "routeId": "automation-engineer",
         "title": "Use station resources with Automatisierungsingenieur",
         "mode": "use-resources",
-        "prompt": "Stakeholder: Automatisierungsingenieur\nCycles: Automatisierungszyklus\nStations: Strategie, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+        "prompt": "Stakeholder: Automatisierungsingenieur\nCycles: Automatisierungszyklus\nStations: Strategie, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
       },
       {
         "id": "automation-engineer:next-actions",
         "routeId": "automation-engineer",
         "title": "Generate next actions for Automatisierungsingenieur",
         "mode": "next-actions",
-        "prompt": "Stakeholder: Automatisierungsingenieur\nCycles: Automatisierungszyklus\nStations: Strategie, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+        "prompt": "Stakeholder: Automatisierungsingenieur\nCycles: Automatisierungszyklus\nStations: Strategie, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
         "id": "automation-owner:facilitate-station",
         "routeId": "automation-owner",
         "title": "Facilitate a station with Automatisierungsverantwortlicher",
         "mode": "facilitate-station",
-        "prompt": "Stakeholder: Automatisierungsverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+        "prompt": "Stakeholder: Automatisierungsverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
       },
       {
         "id": "automation-owner:use-resources",
         "routeId": "automation-owner",
         "title": "Use station resources with Automatisierungsverantwortlicher",
         "mode": "use-resources",
-        "prompt": "Stakeholder: Automatisierungsverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+        "prompt": "Stakeholder: Automatisierungsverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
       },
       {
         "id": "automation-owner:next-actions",
         "routeId": "automation-owner",
         "title": "Generate next actions for Automatisierungsverantwortlicher",
         "mode": "next-actions",
-        "prompt": "Stakeholder: Automatisierungsverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+        "prompt": "Stakeholder: Automatisierungsverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Architektur & Plattformentscheidungen, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Business Impact Canvas, Locations Canvas, Capacity Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
         "id": "business-owner:facilitate-station",
@@ -354,21 +354,21 @@
         "routeId": "process-owner",
         "title": "Facilitate a station with Prozessverantwortlicher",
         "mode": "facilitate-station",
-        "prompt": "Stakeholder: Prozessverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
+        "prompt": "Stakeholder: Prozessverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas\n\nAct as an APIOps Cycles facilitator. Use the selected station questions, entry criteria, exit criteria, stakeholders, and related resources to guide the discussion. Produce decisions, evidence gaps, and next steps."
       },
       {
         "id": "process-owner:use-resources",
         "routeId": "process-owner",
         "title": "Use station resources with Prozessverantwortlicher",
         "mode": "use-resources",
-        "prompt": "Stakeholder: Prozessverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
+        "prompt": "Stakeholder: Prozessverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas\n\nHelp the team use the recommended APIOps Cycles resources. For canvases, ask for evidence section by section and propose sticky notes. For checklists or guidelines, summarize what to review, what evidence is missing, and who should answer."
       },
       {
         "id": "process-owner:next-actions",
         "routeId": "process-owner",
         "title": "Generate next actions for Prozessverantwortlicher",
         "mode": "next-actions",
-        "prompt": "Stakeholder: Prozessverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas, REST Canvas, Event Canvas, GraphQL Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
+        "prompt": "Stakeholder: Prozessverantwortlicher\nCycles: Automatisierungszyklus\nStations: Strategie, Nutzeranforderungen & Onboarding, Lösungs- & Schnittstellendesign, Bereitstellung & Betrieb, Qualitäts- & Bereitschaftssicherung, Veröffentlichung & Enablement, Monitoring & Verbesserung\nResources and canvases: Customer Journey Canvas, Domain Canvas, Capability Value Proposition Canvas, Consumer Experience Requirements Canvas, Interaction Canvas\n\nGenerate practical next actions, owners, evidence to collect, related resources to use, and suggested next stations. Keep the output suitable for Markdown or Confluence."
       },
       {
         "id": "security-specialist:facilitate-station",
